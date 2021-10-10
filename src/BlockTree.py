@@ -40,7 +40,7 @@ class VoteInfo:
         self.parent_id=parent_id
         self.parent_round=parent_round
 
-class LedgerCommtInfo:
+class LedgerCommitInfo:
     def __init__(self,commit_state_id,vote_info_hash):
         self.commit_state_id=commit_state_id
         self.vote_info_hash=vote_info_hash
