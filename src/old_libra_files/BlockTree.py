@@ -1,8 +1,7 @@
-import src.libra.Ledger as Ledger
-from src.libra.Ledger import Ledger
+from Ledger import Ledger
 
 class BlockTree:
-    def __init__(self,pending_block_tree = None,pending_votes= None,high_qc= None,high_commit_qc= None):
+    def __init__(self,pending_block_tree,pending_votes,high_qc,high_commit_qc):
         self.ledger=Ledger()
         self.pending_block_tree=pending_block_tree
         self.pending_votes=pending_votes
@@ -101,3 +100,10 @@ class ProposalMsg:
         self.last_round_qc=last_round_qc
         self.high_commit_qc=high_commit_qc
         self.signature=signature
+
+
+
+
+
+
+

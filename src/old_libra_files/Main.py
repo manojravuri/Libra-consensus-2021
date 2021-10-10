@@ -15,7 +15,7 @@ class Proposal(Message):
 
 
 class Main:
-    def __init__(self, id):
+    def __init__(self,id):
         self.id=id
         self.pacemaker=PaceMaker()
         self.block_tree=BlockTree()
@@ -81,10 +81,10 @@ class Main:
             self.process_new_round_event(tc)
 
     def process_new_round_event(self,last_tc):
-        u= self.leader_election.get_leader(self.pacemaker.current_round)
-        b=self.block_tree.generate_block(self.mempool.get_transactions(),self.pacemaker.current_round)
-        p =ProposalMsg(b,last_tc,self.block_tree.high_commit_qc)
-        return p
+        if u == self.leader_election.get_leader(self.pacemaker.current_round):
+            b = self.block_tree.generate_block(self.mempool.get_transactions(),self.pacemaker.current_round)
+            p = ProposalMsg(b,last_tc,self.block_tree.high_commit_qc)
+            # broadcast p
 
     def process_vote_msg(self,M):
         qc=self.block_tree.process_vote(M)

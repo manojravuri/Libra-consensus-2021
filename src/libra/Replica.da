@@ -1,56 +1,23 @@
-main_module=import_da('Main')
-import sys, os
+import os
+import random
+import string
+import sys
+import logging
+import time
+from src.libra.Main import Main
 class Replica(process):
-    def setup(replica_id:int,validators:set,f:int,number_of_requests:int):
-        self.main=main_module.Main(replica_id)
+    def setup(replica_id,validators,f,number_of_requests):
+        self.main = Main(replica_id)
         self.validators = validators
+        self.f = f
+        self.number_of_requests = number_of_requests
 
     def run():
-        while(number_of_requests>0 ):
+        #while(number_of_requests>0 ):
             #while(sync()):
-            if(self.main.current_leader()):
-                p=self.main.process_new_round_event(None)
-                broadcast(p)
-
-
-
-
-
-    def receive(msg=('vote',m)):
-        #message=Message()
-        #message.type='vote message'
-        self.main.start_event_processing(m)
-
-    def recieve(msg=('proposal',m)):
-        #message=Message()
-        #message.type='proposal message'
-        self.main.start_event_processing(m)
-
-
-    def recieve(msg=('timeout',m)):
-        #message=Message()
-        #message.type='timeout message'
-        self.main.start_event_processing(m)
-
-    def broadcast(proposal):
-        #message= Message()
-        #message.proposal=proposal
-        send(('proposal',proposal), to=self.validators)
-
-
-#    def sync():
-#        round_number=self.main.get_round_number()
-#        send(('round number',round_number),to=self.validators)
-#        --l
-#        if(await(len(setof(recieved('round number',round_number_from_others)))==2*f+1)):
-#            self.main.sync(round_number_from_others)
-#            return True
-#        return False
-
-
-
-
-
+        if(self.main.current_leader()):
+          p=self.main.process_new_round_event(None)
+          broadcast(p)
 
 def main():
     #number_of_procs = int(sys.argv[1]) if len(sys.argv) > 1 else 10
@@ -61,8 +28,9 @@ def main():
     ps = new(Replica, num= number_of_procs)
     i=0
     for p in ps:
-        #main=Main()
+        #main=Main(id = 1)
         setup(p, (i,ps-{p},f,number_of_reqs))
+        #setup(p, (1, 2, 3, 4))
         i=i+1
 
     start(ps)

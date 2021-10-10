@@ -1,8 +1,17 @@
-import BlockTree,LeaderElection,PaceMaker,Safety,MemPool
-from BlockTree import ProposalMsg
+import src.libra.BlockTree as BlockTree
+from src.libra.BlockTree import BlockTree
+import src.libra.LeaderElection as LeaderElection
+from src.libra.LeaderElection import LeaderElection
+import src.libra.PaceMaker as PaceMaker
+from src.libra.PaceMaker import PaceMaker
+import src.libra.Safety as Safety
+from src.libra.Safety import Safety
+import src.libra.MemPool as MemPool
+from src.libra.MemPool import MemPool
+from src.libra.BlockTree import ProposalMsg
 
 class Message:
-    def __init__(self,type,block,high_commit_qc,last_round_tc,tmo_info):
+    def __init__(self,type = None,block = None,high_commit_qc = None,last_round_tc = None,tmo_info = None):
         self.type=type
         self.block=block
         self.high_commit_qc=high_commit_qc
@@ -14,8 +23,8 @@ class Proposal(Message):
         pass
 
 
-class Main():
-    def __init__(self,id):
+class Main:
+    def __init__(self, id = None):
         self.id=id
         self.pacemaker=PaceMaker()
         self.block_tree=BlockTree()
@@ -91,5 +100,3 @@ class Main():
         if(qc is not None):
             self.process_certificate_qc(qc)
             self.process_new_round_event(None)
-
-

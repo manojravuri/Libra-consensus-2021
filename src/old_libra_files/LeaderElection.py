@@ -1,12 +1,9 @@
 import random
 
-import src.libra.Ledger as Ledger
-from src.libra.Ledger import Ledger
-import src.libra.PaceMaker as PaceMaker
-from src.libra.PaceMaker import PaceMaker
+import Ledger,PaceMaker
 
 class LeaderElection:
-    def __init__(self,validators= None,window_size= None,exclude_size= None,reputation_of_leaders = None):
+    def __init__(self,validators,window_size,exclude_size,reputation_of_leaders:map):
         self.validators=validators
         self.window_size=window_size
         self.exclude_size=exclude_size
