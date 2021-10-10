@@ -1,8 +1,7 @@
-import src.libra.Ledger as Ledger
-from src.libra.Ledger import Ledger
-from src.libra.BlockTree import VoteMsg,VoteInfo,TimeoutInfo
+import Ledger
+from BlockTree import VoteMsg,VoteInfo,TimeoutInfo
 class Safety:
-    def __init__(self,private_key = None,highest_vote_round = None,highest_qc_round = None):
+    def __init__(self,private_key,highest_vote_round,highest_qc_round):
         self.private_key=private_key
         self.highest_vote_round=highest_vote_round
         self.highest_qc_round=highest_qc_round
@@ -49,3 +48,5 @@ class Safety:
         if(self.valid_signatures(high_qc,last_tc) and self.safe_to_timeout(round,qc_round,last_tc)):
             return TimeoutInfo(round,high_qc)
         return None
+
+

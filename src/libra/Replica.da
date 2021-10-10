@@ -1,9 +1,16 @@
-from libra.Main import Main
-import sys, os
+import os
+import random
+import string
+import sys
+import logging
+import time
+from src.libra.Main import Main
 class Replica(process):
-    def setup(replica_id:int,validators:set,f:int,number_of_requests:int):
-        self.main=Main(replica_id)
+    def setup(replica_id,validators,f,number_of_requests):
+        self.main = Main(replica_id)
         self.validators = validators
+        self.f = f
+        self.number_of_requests = number_of_requests
 
     def run():
         #while(number_of_requests>0 ):
@@ -21,8 +28,9 @@ def main():
     ps = new(Replica, num= number_of_procs)
     i=0
     for p in ps:
-        #main=Main()
+        #main=Main(id = 1)
         setup(p, (i,ps-{p},f,number_of_reqs))
+        #setup(p, (1, 2, 3, 4))
         i=i+1
 
     start(ps)
