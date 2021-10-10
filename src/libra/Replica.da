@@ -18,6 +18,37 @@ class Replica(process):
         if(self.main.current_leader()):
           p=self.main.process_new_round_event(None)
           broadcast(p)
+          
+    def receive(msg=('vote',m)):
+        #message=Message()
+        #message.type='vote message'
+        self.main.start_event_processing(m)
+
+    def recieve(msg=('proposal',m)):
+        #message=Message()
+        #message.type='proposal message'
+        self.main.start_event_processing(m)
+
+
+    def recieve(msg=('timeout',m)):
+        #message=Message()
+        #message.type='timeout message'
+        self.main.start_event_processing(m)
+
+    def broadcast(proposal):
+        #message= Message()
+        #message.proposal=proposal
+        send(('proposal',proposal), to=self.validators)
+
+
+    #    def sync():
+    #        round_number=self.main.get_round_number()
+    #        send(('round number',round_number),to=self.validators)
+    #        --l
+    #        if(await(len(setof(recieved('round number',round_number_from_others)))==2*f+1)):
+    #            self.main.sync(round_number_from_others)
+    #            return True
+    #        return False
 
 def main():
     #number_of_procs = int(sys.argv[1]) if len(sys.argv) > 1 else 10
