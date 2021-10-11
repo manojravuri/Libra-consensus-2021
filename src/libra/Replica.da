@@ -5,8 +5,15 @@ import sys
 import logging
 import time
 from libra.Main import Main
+
+config(clock = 'Lamport')
+config(handling = 'all')
+
+TIMEOUT=1
+
 class Replica(process):
     def setup(replica_id:int,nodes:dict,ps:set,f:int,number_of_requests:int):
+        output("creating replica ", replica_id)
         self.main = Main(replica_id,nodes)
         self.nodes = nodes
         self.f = f
@@ -14,16 +21,28 @@ class Replica(process):
         self.proposals=set()
         self.number_of_requests = number_of_requests
 
-    def receive(msg=('proposal',p)):
+    def receive(msg=('proposal',p1,c1)):
+        c2=logical_clock()
         output("recieved message in",replica_id)
-        self.main.process_proposal_message(p)
+        send(('proposal ack',c2), to=ps)
+        p=self.main.process_proposal_message(p1,'proposal_message')
+        send(('proposal',p,logical_clock()),to=ps)
+
+    def receive(msg=('vote',vote_info,c1)):
+        c2=logical_clock()
+        output("recieved vote in leader ",replica_id)
+        vote_info,leader=self.main.process_proposal_message(p1,'vote_message')
+        send(('proposal',vote_info,logical_clock()),to=leader)
 
     def run():
-        for i in range(number_of_requests):
+        if(self.main.workload_exists()):
             if(self.main.can_send()):
                 p=self.main.process_new_round_event()
                 output("sending messages to all processes from replica",replica_id)
-                send(('proposal',p),to=self.ps)
+                c=logical_clock()
+                send(('proposal',p,c),to=ps)
+                -- l
+                await(len(setof(a,received(('proposal ack',c3), from_=a)))>2*f+1)
 
 
 def main():
@@ -42,3 +61,4 @@ def main():
         i=i+1
 
     start(ps)
+    await(len(setof(a,received(('done'), from_=a)))>2*f+1)
