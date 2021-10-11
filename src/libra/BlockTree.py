@@ -5,7 +5,7 @@ class BlockTree:
     def __init__(self,pending_block_tree = None,pending_votes= None,high_qc= None,high_commit_qc= None):
         self.ledger=Ledger()
         self.pending_block_tree=pending_block_tree
-        self.pending_votes=pending_votes
+        self.pending_votes=pending_votes or {}
         self.high_qc=high_qc
         self.high_commit_qc=high_commit_qc
 
@@ -24,9 +24,15 @@ class BlockTree:
 
     def process_vote(self,v):
         self.process_qc(self,v.high_commit_qc)
+        vote_idx=hash(v.ledger_commit_info)
+        pending_votes[vote_idx]=pending_votes[idx].add(v.signature)
+        if(len(pending_votes[idx])==2*f+1):
+            qc=QC(vote_info=v.vote_info,state_id=v.state_id,votes=pending_votes[vote_idx])
+            return qc
+        return None
 
-    def generate_block(self,txns,current_round):
-        return Block()
+    def generate_block(self,u,txns,current_round,high_qc):
+        return Block(author=u,round=current_round,payload=txns,qc=high_qc)
 
 
 
@@ -65,12 +71,12 @@ class QC:
         self.author_signature=author_signature
 
 class Block:
-    def __init__(self,author,round,payload,qc,id):
+    def __init__(self,author,round,payload,qc):
         self.author=author
         self.round=round
         self.payload=payload
         self.qc=qc
-        self.id=id
+        self.id=str(author)+str(round)+str(payload)+str(qc)
 
 
 class TimeoutInfo:

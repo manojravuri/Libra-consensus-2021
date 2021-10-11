@@ -10,6 +10,8 @@ import libra.MemPool as MemPool
 from libra.MemPool import MemPool
 from libra.BlockTree import ProposalMsg
 
+import pickle
+
 class Message:
     def __init__(self,type = None,block = None,high_commit_qc = None,last_round_tc = None,tmo_info = None):
         self.type=type
@@ -45,15 +47,16 @@ class Main:
             return False
 
 
-    def start_event_processing(self,M:Message):
-        if(M.type=='local timeout'):
+    def start_event_processing(self,M,type):
+        message=pickle.loads(M)
+        if(type=='local timeout'):
             self.pacemaker.local_timeout_round()
-        if(M.type=='proposal_message'):
-            self.process_proposal_msg(M)
-        if(M.type == 'vote message'):
-            self.process_vote_msg(M)
-        if(M.type == 'timeout mesaage'):
-            self.process_timeout_message(M)
+        if(type=='proposal_message'):
+            self.process_proposal_msg(message)
+        if(type == 'vote message'):
+            self.process_vote_msg(message)
+        if(type == 'timeout mesaage'):
+            self.process_timeout_message(message)
 
 
     def process_certificate_qc(self,qc):
@@ -72,7 +75,7 @@ class Main:
         self.block_tree.execute_and_insert(P)
         vote_msg=self.safety.make_vote(P.block,P.last_round_tc)
         if(vote_msg is not None):
-            pass
+            return vote_msg,LeaderElection.get_leader(round+1)
             #send vote_msg to LeaderElection.get_leader(current_round+1)
 
     def process_timeout_message(self,M):
@@ -87,9 +90,10 @@ class Main:
     def process_new_round_event(self,last_tc=None):
         print("pacemaker round",self.pacemaker.current_round)
         u= self.leader_election.get_leader(self.pacemaker.current_round)
-        b=self.block_tree.generate_block(self.mempool.get_transactions(),self.pacemaker.current_round)
-        p =ProposalMsg(b,last_tc,self.block_tree.high_commit_qc)
-        return p
+        b=self.block_tree.generate_block(u,self.mempool.get_transactions(),self.pacemaker.current_round,high_qc=self.block_tree.high_commit_qc)
+        p =ProposalMsg(b,last_tc,self.block_tree.high_commit_qc,self.safety.valid_signatures(high_qc=self.block_tree.high_commit_qc,last_tc=last_tc))
+        print("Block round for new round",p.block.round)
+        return pickle.dumps(p)
 
     def process_vote_msg(self,M):
         qc=self.block_tree.process_vote(M)

@@ -6,15 +6,25 @@ import logging
 import time
 from libra.Main import Main
 class Replica(process):
-    def setup(replica_id:int,nodes:dict,f:int,number_of_requests:int):
+    def setup(replica_id:int,nodes:dict,ps:set,f:int,number_of_requests:int):
         self.main = Main(replica_id,nodes)
         self.nodes = nodes
         self.f = f
+        self.ps=ps
+        self.proposals=set()
         self.number_of_requests = number_of_requests
+
+    def receive(msg=('proposal',p)):
+        output("recieved message in",replica_id)
+        self.main.process_proposal_message(p)
 
     def run():
         for i in range(number_of_requests):
-            self.main.process_new_round_event()
+            p=self.main.process_new_round_event()
+            output("sending messages to all processes")
+            send(('proposal',p),to=self.ps)
+
+
 def main():
     number_of_procs = int(sys.argv[1]) if len(sys.argv) > 1 else 10
     number_of_reqs = int(sys.argv[2]) if len(sys.argv) > 1 else 10
@@ -27,7 +37,7 @@ def main():
         i=i+1
     i=0
     for p in ps:
-        setup(p, (i,replica_map,f,number_of_reqs))
+        setup(p, (i,replica_map,ps-{p},f,number_of_reqs))
         i=i+1
 
     start(ps)
