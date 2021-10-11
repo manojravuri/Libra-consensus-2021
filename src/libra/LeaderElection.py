@@ -31,11 +31,12 @@ class LeaderElection:
         return active_nodes.get(random.seed)
 
     def update_leader(self, qc):
-        extended_round = qc.vote_info.parent_round
-        qc_round = qc.vote_info.round
-        current_round = self.pacemaker.current_round
-        if (extended_round + 1 == qc_round and qc_round + 1 == current_round):
-            self.reputation_of_leaders[current_round + 1] = self.elect_reputation_leader(qc)
+        if (qc and qc.vote_info):
+            extended_round = qc.vote_info.parent_round
+            qc_round = qc.vote_info.round
+            current_round = self.pacemaker.current_round
+            if (extended_round + 1 == qc_round and qc_round + 1 == current_round):
+                self.reputation_of_leaders[current_round + 1] = self.elect_reputation_leader(qc)
 
     def get_leader(self, round):
         if (self.reputation_of_leaders is not None and round in self.reputation_of_leaders):

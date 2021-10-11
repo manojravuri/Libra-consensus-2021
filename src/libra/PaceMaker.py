@@ -52,8 +52,10 @@ class PaceMaker:
         return True
 
     def advance_round_qc(self, qc):
-        if (qc.vote_info.round < self.current_round):
-            return False
-        self.last_round_tc = None
-        self.start_timer(qc.vote_info.round + 1)
+        if (qc and qc.vote_info):
+            if (qc.vote_info.round < self.current_round):
+                return False
+            self.last_round_tc = None
+            self.start_timer(qc.vote_info.round + 1)
+            return True
         return True

@@ -10,7 +10,8 @@ class BlockTree:
 
 
     def process_qc(self,qc):
-        if(qc.ledger_commit_info.commit_state_id is not None):
+        print('qc is ', qc)
+        if(qc and qc.ledger_commit_info and qc.ledger_commit_info.commit_state_id):
             self.ledger.commit(self,qc.vote_info.parent_id)
             self.pending_block_tree.prune(qc.vote_info_parent_id)
             self.high_commit_qc=max(qc,self.high_commit_qc)

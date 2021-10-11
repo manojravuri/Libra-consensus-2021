@@ -50,35 +50,39 @@ class Main:
             return False
 
 
-    def start_event_processing(self, M, type):
-        message = pickle.loads(M)
-        if (type == 'local timeout'):
+    def start_event_processing(self,M,type):
+        message=pickle.loads(M)
+        if(type=='local_timeout'):
             self.pacemaker.local_timeout_round()
-        if (type == 'proposal_message'):
-            self.process_proposal_msg(message)
-        if (type == 'vote message'):
-            self.process_vote_msg(message)
-        if (type == 'timeout mesaage'):
+        if(type=='proposal_message'):
+            return self.process_proposal_msg(message)
+        if(type == 'vote_message'):
+            return self.process_vote_msg(message)
+        if(type == 'timeout_mesaage'):
             self.process_timeout_message(message)
 
     def process_certificate_qc(self, qc):
-        self.block_tree.process_qc()
+        self.block_tree.process_qc(qc)
         self.leader_election.update_leader(qc)
         self.pacemaker.advance_round_qc(qc)
 
     def process_proposal_msg(self, P):
+        print("Processing proposal message")
+        print("processing certificate qc")
         self.process_certificate_qc(P.block.qc)
+        print("processing high commit qc")
         self.process_certificate_qc(P.high_commit_qc)
+        print("Advancing current round")
         self.pacemaker.advance_round_tc(P.last_round_tc)
         round = self.pacemaker.current_round
         leader = self.leader_election.get_leader(round)
         if (P.block.round != round or P.sender != leader or P.block.author != leader):
             return
         self.block_tree.execute_and_insert(P)
-        vote_msg = self.safety.make_vote(P.block, P.last_round_tc)
-        if (vote_msg is not None):
-            return vote_msg, LeaderElection.get_leader(round + 1)
-            # send vote_msg to LeaderElection.get_leader(current_round+1)
+        vote_msg=self.safety.make_vote(P.block,P.last_round_tc)
+        if(vote_msg is not None):
+            return pickle.dumps(vote_msg),pickle.dumps(LeaderElection.get_leader(round+1))
+            #send vote_msg to LeaderElection.get_leader(current_round+1)
 
     def process_timeout_message(self, M):
         self.process_certificate_qc(M.tmo_info.high_qc)
@@ -101,4 +105,12 @@ class Main:
         qc = self.block_tree.process_vote(M)
         if (qc is not None):
             self.process_certificate_qc(qc)
-            self.process_new_round_event(None)
+            return self.process_new_round_event(qc.last_tc)
+        return None
+
+    def workload_exists(self):
+        if(self.mempool.get_transactions() is not None):
+            return True
+        else:
+            return False
+
