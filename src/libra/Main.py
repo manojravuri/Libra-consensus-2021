@@ -91,7 +91,7 @@ class Main:
         self.process_certificate_qc(M.high_commit_qc)
         self.pacemaker.advance_round_tc(M.last_round_tc)
         tc = self.pacemaker.process_remote_timeout(M)
-        if (tc is not None):
+        if (tc ):
             self.pacemaker.advance_round_tc(tc)
             self.process_new_round_event(tc)
 
@@ -108,13 +108,13 @@ class Main:
 
     def process_vote_msg(self, M):
         qc = self.block_tree.process_vote(M)
-        if (qc is not None):
+        if (qc):
             self.process_certificate_qc(qc)
             return self.process_new_round_event(qc.last_tc), self.leader_election.get_leader(self.pacemaker.current_round)
         return None, self.leader_election.get_leader(self.pacemaker.current_round)
 
     def workload_exists(self):
-        if(self.mempool.get_transactions() is not None):
+        if(self.mempool.get_transactions()):
             return True
         else:
             return False
