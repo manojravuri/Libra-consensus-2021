@@ -20,9 +20,9 @@ class PaceMaker:
         return None
 
     def start_timer(self, new_round):
-        self.stop_timer(self.current_round)
+        # self.stop_timer(self.current_round)
         self.current_round = new_round
-        return self.get_round_timer(self, self.current_round)
+        # return self.get_round_timer(self, self.current_round)
 
     def local_timeout_round(self):
         # save_consensus_state()

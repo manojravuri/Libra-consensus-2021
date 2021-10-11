@@ -40,8 +40,15 @@ class Safety:
     def valid_signatures(self, high_qc, last_tc):
         return True
 
-    def make_vote(self, b, last_tc):
-        return VoteMsg(VoteInfo())
+    def make_vote(self, b, last_tc, high_commit_qc):
+        qc_round = b.qc.vote_info.round
+        if self.valid_signatures(b, last_tc) or safe_to_vote(b.round, qc_round, last_tc):
+            self.update_highest_qc_round(qc_round)
+            self.increase_highest_vote_round(b.round)
+            vote_info = VoteInfo(b.id, b.round, b.qc.vote_info, qc_round, Ledger.pending_state(b.id))
+            ledger_commit_info = LedgerCommitInfo(commit_state_id_candidate(b.round, b.qc), vote_info)
+            return VoteMsg(vote_info, ledger_commit_info, high_commit_qc)
+        return None
 
     def make_timeout(self, round, high_qc, last_tc):
         qc_round = high_qc.vote_info.round

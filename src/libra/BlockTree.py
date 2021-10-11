@@ -1,26 +1,28 @@
 from libra.Ledger import Ledger
 
 class BlockTree:
-    def __init__(self,ledger,pending_block_tree = None,pending_votes= None,high_qc= None,high_commit_qc= None):
-        self.ledger=ledger
-        self.pending_block_tree=pending_block_tree
-        self.pending_votes=pending_votes or {}
-        self.high_qc=QC()
-        self.high_commit_qc=high_commit_qc
+    def __init__(self, ledger, pending_block_tree = None, pending_votes = {}, high_qc = None, high_commit_qc = None):
+        self.ledger = ledger
+        self.pending_block_tree = pending_block_tree
+        self.pending_votes = pending_votes
+        self.high_qc = QC()
+        self.high_commit_qc = QC()
 
 
-    def process_qc(self,qc):
+    def process_qc(self, qc):
         print('qc is ', qc)
         if(qc and qc.ledger_commit_info and qc.ledger_commit_info.commit_state_id):
-            self.ledger.commit(self,qc.vote_info.parent_id)
+            self.ledger.commit(self, qc.vote_info.parent_id)
             self.pending_block_tree.prune(qc.vote_info_parent_id)
-            self.high_commit_qc=max(qc,self.high_commit_qc)
-            self.high_qc=max(qc,self.high_qc)
+            self.high_commit_qc=max(qc, self.high_commit_qc)
+            self.high_qc=max(qc, self.high_qc)
 
 
     def execute_and_insert(self,b):
-        self.ledger.speculate(b.qc.block_id,b.id,b.payload)
-        self.pending_block_tree.add(b)
+        # print(b)
+        if (b and b.qc):
+            self.ledger.speculate(b.qc.block_id,b.id,b.payload)
+            self.pending_block_tree.add(b)
 
     def process_vote(self,v):
         self.process_qc(self,v.high_commit_qc)
@@ -63,7 +65,7 @@ class VoteMsg:
 
 
 class QC:
-    def __init__(self,vote_info,ledger_commit_info,signatures,author,author_signature):
+    def __init__(self,vote_info = None,ledger_commit_info = None,signatures = None,author = None,author_signature = None):
         self.vote_info=vote_info
         self.ledger_commit_info=ledger_commit_info
         self.signatures=signatures
@@ -102,8 +104,10 @@ class TimeoutMsg:
 
 
 class ProposalMsg:
-    def __init__(self,block,last_round_qc,high_commit_qc,signature):
+    def __init__(self,block,last_round_qc,high_commit_qc,signature, last_round_tc, sender):
         self.block=block
         self.last_round_qc=last_round_qc
         self.high_commit_qc=high_commit_qc
         self.signature=signature
+        self.last_round_tc = last_round_tc
+        self.sender = sender
