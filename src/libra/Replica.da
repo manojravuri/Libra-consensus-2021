@@ -16,9 +16,9 @@ class Replica(process):
         #while(number_of_requests>0 ):
             #while(sync()):
         if(self.main.current_leader()):
-          p=self.main.process_new_round_event(None)
+          p = self.main.process_new_round_event(None)
           broadcast(p)
-          
+
     def receive(msg=('vote',m)):
         #message=Message()
         #message.type='vote message'
