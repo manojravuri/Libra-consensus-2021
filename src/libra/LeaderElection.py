@@ -40,7 +40,8 @@ class LeaderElection:
 
 
     def get_leader(self,round):
-        print("current round",round)
+        #print("current round",round)
         if(self.reputation_of_leaders is not None and round in self.reputation_of_leaders):
             return self.reputation_of_leaders[round]
-        return self.nodes[((round/2)%len(self.nodes))]
+        idx=((round/2)%len(self.nodes))
+        return idx,self.nodes[((round/2)%len(self.nodes))]

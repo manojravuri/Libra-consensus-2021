@@ -46,6 +46,12 @@ class Main:
         else:
             return False
 
+    def can_send(self):
+        if(self.leader_election.get_leader(self.pacemaker.current_round)[0]==self.id):
+            return True
+        else:
+            return False
+
 
     def start_event_processing(self,M,type):
         message=pickle.loads(M)
@@ -88,11 +94,11 @@ class Main:
             self.process_new_round_event(tc)
 
     def process_new_round_event(self,last_tc=None):
-        print("pacemaker round",self.pacemaker.current_round)
+        #print("pacemaker round",self.pacemaker.current_round)
         u= self.leader_election.get_leader(self.pacemaker.current_round)
         b=self.block_tree.generate_block(u,self.mempool.get_transactions(),self.pacemaker.current_round,high_qc=self.block_tree.high_commit_qc)
         p =ProposalMsg(b,last_tc,self.block_tree.high_commit_qc,self.safety.valid_signatures(high_qc=self.block_tree.high_commit_qc,last_tc=last_tc))
-        print("Block round for new round",p.block.round)
+        #print("Block round for new round",p.block.round)
         return pickle.dumps(p)
 
     def process_vote_msg(self,M):

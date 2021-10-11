@@ -20,9 +20,10 @@ class Replica(process):
 
     def run():
         for i in range(number_of_requests):
-            p=self.main.process_new_round_event()
-            output("sending messages to all processes")
-            send(('proposal',p),to=self.ps)
+            if(self.main.can_send()):
+                p=self.main.process_new_round_event()
+                output("sending messages to all processes from replica",replica_id)
+                send(('proposal',p),to=self.ps)
 
 
 def main():

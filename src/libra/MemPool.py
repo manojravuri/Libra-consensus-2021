@@ -32,5 +32,4 @@ class MemPool:
             line = linecache.getline(self.file_name, i)
             txns.append(line.strip())
         linecache.clearcache()
-        print("transactions",txns)
         return txns
