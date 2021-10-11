@@ -1,21 +1,21 @@
 import random
 
-import src.libra.Ledger as Ledger
-from src.libra.Ledger import Ledger
-import src.libra.PaceMaker as PaceMaker
-from src.libra.PaceMaker import PaceMaker
+import libra.Ledger as Ledger
+from libra.Ledger import Ledger
+import libra.PaceMaker as PaceMaker
+from libra.PaceMaker import PaceMaker
 
 class LeaderElection:
-    def __init__(self,validators= None,window_size= None,exclude_size= None,reputation_of_leaders = None):
-        self.validators=validators
+    def __init__(self,pacemaker=None,nodes= None,window_size= None,exclude_size= None,reputation_of_leaders = None):
+        self.nodes=nodes
         self.window_size=window_size
         self.exclude_size=exclude_size
         self.reputation_of_leaders=reputation_of_leaders
         self.ledger=Ledger()
-        self.pacemaker=PaceMaker
+        self.pacemaker=pacemaker
 
     def elect_reputation_leader(self,qc):
-        active_validators=None
+        active_nodes=None
         last_authors=None
         current_qc=qc
         for i in range(self.window_size):
@@ -24,12 +24,12 @@ class LeaderElection:
             current_block=self.ledger.committed_block(current_qc.vote_info.parent_id)
             block_author=current_block.author
             if(i<self.window_size):
-                active_validators.add(current_qc.signatures.signers())
+                active_nodes.add(current_qc.signatures.signers())
 
             if(last_authors.size()<self.exclude_size):
                 last_authors.add(block_author)
             current_qc=current_block.qc
-        return active_validators.get(random.seed)
+        return active_nodes.get(random.seed)
 
     def update_leader(self,qc):
         extended_round=qc.vote_info.parent_round
@@ -40,6 +40,7 @@ class LeaderElection:
 
 
     def get_leader(self,round):
-        if(round in self.reputation_of_leaders):
+        print("current round",round)
+        if(self.reputation_of_leaders is not None and round in self.reputation_of_leaders):
             return self.reputation_of_leaders[round]
-        return self.validators[((round/2)%(self.validators.size()))]
+        return self.nodes[((round/2)%len(self.nodes))]
