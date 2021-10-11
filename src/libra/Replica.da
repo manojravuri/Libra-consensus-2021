@@ -44,6 +44,8 @@ class Replica(process):
                 send(('proposal',p,c),to=ps)
                 -- l2
                 await(len(setof(a,received(('proposal ack',c3), from_=a)))>2*f+1)
+        await(len(setof(a,received(('done',c3), from_=a)))>2*f+1)
+
 
 
 def main():

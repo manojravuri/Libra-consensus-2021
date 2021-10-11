@@ -80,7 +80,7 @@ class Main:
             return
         self.block_tree.execute_and_insert(P)
         vote_msg=self.safety.make_vote(P.block,P.last_round_tc)
-        if(vote_msg is not None):
+        if(vote_msg):
             return pickle.dumps(vote_msg),pickle.dumps(LeaderElection.get_leader(round+1))
             #send vote_msg to LeaderElection.get_leader(current_round+1)
 
@@ -89,7 +89,7 @@ class Main:
         self.process_certificate_qc(M.high_commit_qc)
         self.pacemaker.advance_round_tc(M.last_round_tc)
         tc = self.pacemaker.process_remote_timeout(M)
-        if (tc is not None):
+        if (tc ):
             self.pacemaker.advance_round_tc(tc)
             self.process_new_round_event(tc)
 
@@ -103,13 +103,13 @@ class Main:
 
     def process_vote_msg(self, M):
         qc = self.block_tree.process_vote(M)
-        if (qc is not None):
+        if (qc):
             self.process_certificate_qc(qc)
             return self.process_new_round_event(qc.last_tc)
         return None
 
     def workload_exists(self):
-        if(self.mempool.get_transactions() is not None):
+        if(self.mempool.get_transactions()):
             return True
         else:
             return False
