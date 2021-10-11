@@ -1,12 +1,7 @@
-import libra.BlockTree as BlockTree
 from libra.BlockTree import BlockTree
-import libra.LeaderElection as LeaderElection
 from libra.LeaderElection import LeaderElection
-import libra.PaceMaker as PaceMaker
 from libra.PaceMaker import PaceMaker
-import libra.Safety as Safety
 from libra.Safety import Safety
-import libra.MemPool as MemPool
 from libra.MemPool import MemPool
 from libra.Ledger import Ledger
 from libra.BlockTree import ProposalMsg
@@ -36,16 +31,24 @@ class Main:
         self.safety = Safety(self.ledger)
         self.block_tree = BlockTree(self.ledger)
         self.pacemaker = PaceMaker(self.safety,self.block_tree,current_round=0)
-        self.leader_election = LeaderElection(pacemaker=self.pacemaker, nodes=nodes)
+        self.leader_election = LeaderElection(self.ledger,pacemaker=self.pacemaker, nodes=nodes)
 
     def sync(self, round_number):
         self.pacemaker.current_round = round_number
+
 
     def current_leader(self):
         if (id == self.leader_election.get_leader()):
             return True
         else:
             return False
+
+    def can_send(self):
+        if(self.leader_election.get_leader(self.pacemaker.current_round)[0]==self.id):
+            return True
+        else:
+            return False
+
 
     def start_event_processing(self, M, type):
         message = pickle.loads(M)
@@ -87,13 +90,11 @@ class Main:
             self.process_new_round_event(tc)
 
     def process_new_round_event(self, last_tc=None):
-        print("pacemaker round", self.pacemaker.current_round)
         u = self.leader_election.get_leader(self.pacemaker.current_round)
         b = self.block_tree.generate_block(u, self.mempool.get_transactions(), self.pacemaker.current_round,
                                            high_qc=self.block_tree.high_commit_qc)
         p = ProposalMsg(b, last_tc, self.block_tree.high_commit_qc,
                         self.safety.valid_signatures(high_qc=self.block_tree.high_commit_qc, last_tc=last_tc))
-        print("Block round for new round", p.block.round)
         return pickle.dumps(p)
 
     def process_vote_msg(self, M):

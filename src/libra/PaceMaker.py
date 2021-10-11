@@ -1,6 +1,4 @@
-import libra.Safety as Safety
 from libra.Safety import Safety
-import libra.BlockTree as BlockTree
 from libra.BlockTree import BlockTree
 from libra.BlockTree import TimeoutMsg
 

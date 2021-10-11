@@ -1,9 +1,8 @@
-from libra.Mempool import Mempool
-
+from libra.MemPool import MemPool
 
 class Ledger:
     def __init__(self, mempool):
-        self.mempool = Mempool
+        self.mempool = mempool
         pass
 
     def speculate(self, prev_block_id, block_id, txns):

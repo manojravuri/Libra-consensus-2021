@@ -1,4 +1,3 @@
-import libra.Ledger as Ledger
 from libra.Ledger import Ledger
 
 class BlockTree:

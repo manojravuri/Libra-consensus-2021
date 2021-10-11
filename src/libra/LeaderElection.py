@@ -1,18 +1,16 @@
 import random
 
-import libra.Ledger as Ledger
 from libra.Ledger import Ledger
-import libra.PaceMaker as PaceMaker
 from libra.PaceMaker import PaceMaker
 
 
 class LeaderElection:
-    def __init__(self, pacemaker, nodes=None, window_size=None, exclude_size=None, reputation_of_leaders=None):
+    def __init__(self,ledger, pacemaker, nodes=None, window_size=None, exclude_size=None, reputation_of_leaders=None):
         self.nodes = nodes
         self.window_size = window_size
         self.exclude_size = exclude_size
         self.reputation_of_leaders = reputation_of_leaders
-        self.ledger = Ledger()
+        self.ledger = ledger
         self.pacemaker = pacemaker
 
     def elect_reputation_leader(self, qc):
@@ -40,7 +38,7 @@ class LeaderElection:
             self.reputation_of_leaders[current_round + 1] = self.elect_reputation_leader(qc)
 
     def get_leader(self, round):
-        print("current round", round)
         if (self.reputation_of_leaders is not None and round in self.reputation_of_leaders):
             return self.reputation_of_leaders[round]
-        return self.nodes[((round / 2) % len(self.nodes))]
+        idx=((round/2)%len(self.nodes))
+        return idx,self.nodes[((round / 2) % len(self.nodes))]
