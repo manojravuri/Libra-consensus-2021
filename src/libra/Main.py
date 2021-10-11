@@ -1,14 +1,14 @@
-import src.libra.BlockTree as BlockTree
-from src.libra.BlockTree import BlockTree
-import src.libra.LeaderElection as LeaderElection
-from src.libra.LeaderElection import LeaderElection
-import src.libra.PaceMaker as PaceMaker
-from src.libra.PaceMaker import PaceMaker
-import src.libra.Safety as Safety
-from src.libra.Safety import Safety
-import src.libra.MemPool as MemPool
-from src.libra.MemPool import MemPool
-from src.libra.BlockTree import ProposalMsg
+import libra.BlockTree as BlockTree
+from libra.BlockTree import BlockTree
+import libra.LeaderElection as LeaderElection
+from libra.LeaderElection import LeaderElection
+import libra.PaceMaker as PaceMaker
+from libra.PaceMaker import PaceMaker
+import libra.Safety as Safety
+from libra.Safety import Safety
+import libra.MemPool as MemPool
+from libra.MemPool import MemPool
+from libra.BlockTree import ProposalMsg
 
 class Message:
     def __init__(self,type = None,block = None,high_commit_qc = None,last_round_tc = None,tmo_info = None):
@@ -24,20 +24,15 @@ class Proposal(Message):
 
 
 class Main:
-    def __init__(self, id = None):
+    def __init__(self, id = None,nodes=None):
         self.id=id
-        self.pacemaker=PaceMaker()
+        self.pacemaker=PaceMaker(current_round=0)
         self.block_tree=BlockTree()
-        self.leader_election=LeaderElection()
+        self.leader_election=LeaderElection(pacemaker=self.pacemaker,nodes=nodes)
         self.pacemaker=PaceMaker()
         self.safety=Safety()
         self.mempool=MemPool()
 
-    def get_round_number(self):
-        if(self.pacemaker.current_round is not None):
-            return self.pacemaker.current_round
-        else:
-            return 0
 
     def sync(self,round_number):
         self.pacemaker.current_round=round_number
@@ -89,7 +84,8 @@ class Main:
             self.pacemaker.advance_round_tc(tc)
             self.process_new_round_event(tc)
 
-    def process_new_round_event(self,last_tc):
+    def process_new_round_event(self,last_tc=None):
+        print("pacemaker round",self.pacemaker.current_round)
         u= self.leader_election.get_leader(self.pacemaker.current_round)
         b=self.block_tree.generate_block(self.mempool.get_transactions(),self.pacemaker.current_round)
         p =ProposalMsg(b,last_tc,self.block_tree.high_commit_qc)

@@ -1,5 +1,5 @@
-import src.libra.Ledger as Ledger
-from src.libra.Ledger import Ledger
+import libra.Ledger as Ledger
+from libra.Ledger import Ledger
 
 class BlockTree:
     def __init__(self,pending_block_tree = None,pending_votes= None,high_qc= None,high_commit_qc= None):
