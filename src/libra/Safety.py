@@ -1,6 +1,6 @@
-import src.libra.Ledger as Ledger
-from src.libra.Ledger import Ledger
-from src.libra.BlockTree import VoteMsg,VoteInfo,TimeoutInfo
+import libra.Ledger as Ledger
+from libra.Ledger import Ledger
+from libra.BlockTree import VoteMsg,VoteInfo,TimeoutInfo
 class Safety:
     def __init__(self,private_key = None,highest_vote_round = None,highest_qc_round = None):
         self.private_key=private_key
