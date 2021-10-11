@@ -27,7 +27,7 @@ class Main:
     def __init__(self, id=None, nodes=None):
         self.id = id
         self.mempool = MemPool()
-        self.ledger = Ledger(self.mempool)
+        self.ledger = Ledger(id,self.mempool)
         self.safety = Safety(self.ledger)
         self.block_tree = BlockTree(self.ledger)
         self.pacemaker = PaceMaker(self.safety,self.block_tree,current_round=0)

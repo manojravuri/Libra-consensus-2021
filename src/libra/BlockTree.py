@@ -5,7 +5,7 @@ class BlockTree:
         self.ledger=ledger
         self.pending_block_tree=pending_block_tree
         self.pending_votes=pending_votes or {}
-        self.high_qc=high_qc
+        self.high_qc=QC()
         self.high_commit_qc=high_commit_qc
 
 
