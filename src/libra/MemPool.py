@@ -1,6 +1,4 @@
 import linecache
-import sys
-import pathlib
 import os
 
 
@@ -11,7 +9,7 @@ class MemPool:
         self.start_line = 1
 
         cur_path = os.path.dirname(__file__)
-        absolute = os.path.abspath(cur_path+"/../../data/transactions.txt")
+        absolute = os.path.abspath(cur_path + "/../../data/transactions.txt")
         self.file_name = absolute
 
         file = open(self.file_name, "r")
@@ -32,5 +30,7 @@ class MemPool:
             line = linecache.getline(self.file_name, i)
             txns.append(line.strip())
         linecache.clearcache()
-        print("transactions",txns)
         return txns
+
+    def increment_txn_start_num(self):
+        self.start_line = self.start_line + self.txns_cnt
