@@ -25,23 +25,24 @@ class Replica(process):
         c2=logical_clock()
         output("recieved message in",replica_id)
         send(('proposal ack',c2), to=ps)
-        p=self.main.process_proposal_message(p1,'proposal_message')
+        p=self.main.start_event_processing(p1,'proposal_message')
         send(('proposal',p,logical_clock()),to=ps)
 
     def receive(msg=('vote',vote_info,c1)):
         c2=logical_clock()
         output("recieved vote in leader ",replica_id)
-        vote_info,leader=self.main.process_proposal_message(p1,'vote_message')
+        vote_info,leader=self.main.start_event_processing(vote_info,'vote_message')
         send(('proposal',vote_info,logical_clock()),to=leader)
 
     def run():
+        -- l1
         if(self.main.workload_exists()):
             if(self.main.can_send()):
                 p=self.main.process_new_round_event()
                 output("sending messages to all processes from replica",replica_id)
                 c=logical_clock()
                 send(('proposal',p,c),to=ps)
-                -- l
+                -- l2
                 await(len(setof(a,received(('proposal ack',c3), from_=a)))>2*f+1)
 
 

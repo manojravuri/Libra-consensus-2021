@@ -62,13 +62,17 @@ class Main:
             self.process_timeout_message(message)
 
     def process_certificate_qc(self, qc):
-        self.block_tree.process_qc()
+        self.block_tree.process_qc(qc)
         self.leader_election.update_leader(qc)
         self.pacemaker.advance_round_qc(qc)
 
     def process_proposal_msg(self, P):
+        print("Processing proposal message")
+        print("processing certificate qc")
         self.process_certificate_qc(P.block.qc)
+        print("processing high commit qc")
         self.process_certificate_qc(P.high_commit_qc)
+        print("Advancing current round")
         self.pacemaker.advance_round_tc(P.last_round_tc)
         round = self.pacemaker.current_round
         leader = self.leader_election.get_leader(round)
