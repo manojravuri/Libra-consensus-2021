@@ -74,12 +74,14 @@ class Main:
         self.process_certificate_qc(P.high_commit_qc)
         print("Advancing current round")
         self.pacemaker.advance_round_tc(P.last_round_tc)
+        print("advanced round")
         round = self.pacemaker.current_round
         leader = self.leader_election.get_leader(round)
         if (P.block.round != round or P.sender != leader or P.block.author != leader):
             return
-        self.block_tree.execute_and_insert(P)
-        vote_msg=self.safety.make_vote(P.block,P.last_round_tc)
+        block_P = self.block_tree.generate_block(self.id,self.mempool.get_transactions()[0],round,P.high_commit_qc)
+        self.block_tree.execute_and_insert(block_P)
+        vote_msg=self.safety.make_vote(P.block,P.last_round_tc, P.high_commit_qc)
         if(vote_msg is not None):
             return pickle.dumps(vote_msg),pickle.dumps(LeaderElection.get_leader(round+1))
             #send vote_msg to LeaderElection.get_leader(current_round+1)
@@ -94,23 +96,25 @@ class Main:
             self.process_new_round_event(tc)
 
     def process_new_round_event(self, last_tc=None):
+        # u = self.id
         u = self.leader_election.get_leader(self.pacemaker.current_round)
+        # if u == self.leader_election.get_leader(self.pacemaker.current_round):
         b = self.block_tree.generate_block(u, self.mempool.get_transactions(), self.pacemaker.current_round,
                                            high_qc=self.block_tree.high_commit_qc)
         p = ProposalMsg(b, last_tc, self.block_tree.high_commit_qc,
-                        self.safety.valid_signatures(high_qc=self.block_tree.high_commit_qc, last_tc=last_tc))
+                        self.safety.valid_signatures(high_qc=self.block_tree.high_commit_qc, last_tc=last_tc), last_tc, u)
         return pickle.dumps(p)
+        # return None
 
     def process_vote_msg(self, M):
         qc = self.block_tree.process_vote(M)
         if (qc is not None):
             self.process_certificate_qc(qc)
-            return self.process_new_round_event(qc.last_tc)
-        return None
+            return self.process_new_round_event(qc.last_tc), self.leader_election.get_leader(self.pacemaker.current_round)
+        return None, self.leader_election.get_leader(self.pacemaker.current_round)
 
     def workload_exists(self):
         if(self.mempool.get_transactions() is not None):
             return True
         else:
             return False
-

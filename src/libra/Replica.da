@@ -25,8 +25,8 @@ class Replica(process):
         c2=logical_clock()
         output("recieved message in",replica_id)
         send(('proposal ack',c2), to=ps)
-        p=self.main.start_event_processing(p1,'proposal_message')
-        send(('proposal',p,logical_clock()),to=ps)
+        p, leader = self.main.start_event_processing(p1,'proposal_message')
+        send(('vote',p,logical_clock()),to=leader)
 
     def receive(msg=('vote',vote_info,c1)):
         c2=logical_clock()
@@ -44,6 +44,8 @@ class Replica(process):
                 send(('proposal',p,c),to=ps)
                 -- l2
                 await(len(setof(a,received(('proposal ack',c3), from_=a)))>2*f+1)
+        await(len(setof(a,received(('done',c3), from_=a)))>2*f+1)
+
 
 
 def main():
