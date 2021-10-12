@@ -1,7 +1,8 @@
-from libra.Ledger import Ledger
+from .Ledger import Ledger
+from collections import defaultdict
 
 class BlockTree:
-    def __init__(self, ledger, pending_block_tree = set(), pending_votes = {}, high_qc = None, high_commit_qc = None):
+    def __init__(self, ledger, pending_block_tree = set(), pending_votes = defaultdict(list), high_qc = None, high_commit_qc = None):
         self.ledger = ledger
         self.pending_block_tree = pending_block_tree
         self.pending_votes = pending_votes
@@ -31,11 +32,18 @@ class BlockTree:
             self.pending_block_tree.add(b)
 
     def process_vote(self,v):
-        self.process_qc(self,v.high_commit_qc)
-        vote_idx=hash(v.ledger_commit_info)
-        pending_votes[vote_idx]=pending_votes[idx].add(v.signature)
-        if(len(pending_votes[idx])==2*f+1):
-            qc=QC(vote_info=v.vote_info,state_id=v.state_id,votes=pending_votes[vote_idx])
+        print("in process_vote ", v)
+        self.process_qc(v.high_commit_qc)
+        print("1")
+        vote_idx=(v.ledger_commit_info.vote_info_hash.round)
+        print("vote_idx is , ", vote_idx)
+        print("2")
+        self.pending_votes[vote_idx].append(v.signature)
+        print("self.pending_votes[vote_idx] is , ", self.pending_votes[vote_idx])
+        print("3")
+        if(self.pending_votes[vote_idx] and len(self.pending_votes[vote_idx])==7):
+            print("in if loop")
+            qc=QC(vote_info=v.vote_info,state_id=v.state_id,votes=self.pending_votes[vote_idx])
             return qc
         return None
 
@@ -54,6 +62,7 @@ class VoteInfo:
         self.round=round
         self.parent_id=parent_id
         self.parent_round=parent_round
+        self.hash_ = str(id) + " " + str(round) + " " + str(parent_id) + " " + str(parent_round)
 
 class LedgerCommitInfo:
     def __init__(self,commit_state_id = None,vote_info_hash = None):
@@ -71,13 +80,14 @@ class VoteMsg:
 
 
 class QC:
-    def __init__(self,vote_info = None,ledger_commit_info = None,signatures = None,author = None,author_signature = None, block = None):
+    def __init__(self,vote_info = None,ledger_commit_info = None,signatures = None,author = None,author_signature = None, block = None, votes = None):
         self.vote_info=vote_info
         self.ledger_commit_info=ledger_commit_info
         self.signatures=signatures
         self.author=author
         self.author_signature=author_signature
         self.block = block
+        self.votes = votes
 
 class Block:
     def __init__(self,author,round,payload,qc):

@@ -1,4 +1,4 @@
-from libra.MemPool import MemPool
+from .MemPool import MemPool
 import os
 import copy
 
@@ -39,7 +39,7 @@ class Ledger:
         "prev_block": None,
         "txns":""
         }
-        
+
     def committed_block(self, block_id):
         if block_id in self.pending_map:
             return self.pending_map[block_id]

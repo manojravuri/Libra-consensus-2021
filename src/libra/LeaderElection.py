@@ -1,7 +1,7 @@
 import random
 
-from libra.Ledger import Ledger
-from libra.PaceMaker import PaceMaker
+from .Ledger import Ledger
+from .PaceMaker import PaceMaker
 
 
 class LeaderElection:
@@ -14,7 +14,7 @@ class LeaderElection:
         self.pacemaker = pacemaker
 
     def elect_reputation_leader(self, qc):
-        active_nodes = [self.nodes[0]]
+        active_nodes = [self.nodes[1]]
         last_authors = set()
         current_qc = qc
         print("in erl")

@@ -1,10 +1,10 @@
-from libra.BlockTree import BlockTree
-from libra.LeaderElection import LeaderElection
-from libra.PaceMaker import PaceMaker
-from libra.Safety import Safety
-from libra.MemPool import MemPool
-from libra.Ledger import Ledger
-from libra.BlockTree import ProposalMsg
+from .BlockTree import BlockTree
+from .LeaderElection import LeaderElection
+from .PaceMaker import PaceMaker
+from .Safety import Safety
+from .MemPool import MemPool
+from .Ledger import Ledger
+from .BlockTree import ProposalMsg
 
 import pickle
 
@@ -51,13 +51,21 @@ class Main:
 
 
     def start_event_processing(self,M,type):
+        # print("M in sep is, ", M)
         message=pickle.loads(M)
         if(type=='local_timeout'):
             self.pacemaker.local_timeout_round()
         if(type=='proposal_message'):
-            return self.process_proposal_msg(message)
+            msg = self.process_proposal_msg(message)
+            if msg:
+                return msg
         if(type == 'vote_message'):
-            return self.process_vote_msg(message)
+            msg = self.process_vote_msg(message)
+            print("got msg in sep , " ,msg)
+            if msg:
+                return msg
+            else:
+                return None, None
         if(type == 'timeout_mesaage'):
             self.process_timeout_message(message)
 
@@ -93,7 +101,8 @@ class Main:
             vote_msg.author = self.id
             vote_msg.author_signature = self.id
             vote_msg.block = block_P
-            return pickle.dumps(vote_msg),pickle.dumps(self.leader_election.get_leader(round+1))
+            print("new leader is, ", self.leader_election.get_leader(round+1))
+            return pickle.dumps(vote_msg),(self.leader_election.get_leader(round+1))
             #send vote_msg to LeaderElection.get_leader(current_round+1)
 
     def process_timeout_message(self, M):
@@ -117,9 +126,12 @@ class Main:
         # return None
 
     def process_vote_msg(self, M):
+        print("Mis ", M)
         qc = self.block_tree.process_vote(M)
+        print("qc done")
         if (qc):
             self.process_certificate_qc(qc)
+            print("here is it")
             return self.process_new_round_event(qc.last_tc), self.leader_election.get_leader(self.pacemaker.current_round)
             #return None, self.leader_election.get_leader(self.pacemaker.current_round)
 
