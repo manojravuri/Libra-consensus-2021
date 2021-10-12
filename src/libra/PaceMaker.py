@@ -1,6 +1,7 @@
 from .Safety import Safety
 from .BlockTree import BlockTree
 from .BlockTree import TimeoutMsg
+import threading
 
 
 class PaceMaker:
@@ -11,21 +12,28 @@ class PaceMaker:
         self.pending_timeouts = pending_timeouts
         self.safety = safety
         self.block_tree = block_tree
+        self.delta = 1
+        self.timer = 0
 
     def stop_timer(self, round):
+        self.timer.cancel()
         pass
 
     def get_round_timer(self, r):
         # c=logical_clock()
-        return None
+        return 4 * self.delta
 
     def start_timer(self, new_round):
         # self.stop_timer(self.current_round)
         self.current_round = new_round
+        self.timer = threading.Timer(self.get_round_timer(1), self.local_timeout_round())
+        self.timer.start()
         # return self.get_round_timer(self, self.current_round)
 
     def local_timeout_round(self):
         # save_consensus_state()
+        print("local timeout")
+        self.stop_timer()
         timeout_info = self.safety.make_timeout(self.current_round, self.block_tree.high_qc, self.last_round_tc)
         # broadcast TimeoutMsg(timeout_info,self.last_round_tc,self.block_tree.high_commit_qc)
 
