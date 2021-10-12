@@ -43,7 +43,8 @@ class BlockTree:
         print("3")
         if(self.pending_votes[vote_idx] and len(self.pending_votes[vote_idx])==7):
             print("in if loop")
-            qc=QC(vote_info=v.vote_info,state_id=v.state_id,votes=self.pending_votes[vote_idx])
+            # qc=QC(vote_info=v.vote_info,state_id=v.state_id,votes=self.pending_votes[vote_idx])
+            qc=QC(vote_info=v.vote_info,votes=self.pending_votes[vote_idx])
             return qc
         return None
 
@@ -80,7 +81,7 @@ class VoteMsg:
 
 
 class QC:
-    def __init__(self,vote_info = None,ledger_commit_info = None,signatures = None,author = None,author_signature = None, block = None, votes = None):
+    def __init__(self,vote_info = None,ledger_commit_info = None,signatures = None,author = None,author_signature = None, block = None, votes = None, last_tc = None):
         self.vote_info=vote_info
         self.ledger_commit_info=ledger_commit_info
         self.signatures=signatures
@@ -88,6 +89,7 @@ class QC:
         self.author_signature=author_signature
         self.block = block
         self.votes = votes
+        self.last_tc = last_tc
 
 class Block:
     def __init__(self,author,round,payload,qc):
