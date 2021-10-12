@@ -16,7 +16,6 @@ class BlockTree:
         ledger.custom_commit_block(self.high_qc.block)
 
     def process_qc(self, qc):
-        print('qc is ', qc)
         if(qc and qc.ledger_commit_info and qc.ledger_commit_info.commit_state_id):
             self.ledger.commit(self, qc.vote_info.parent_id)
             self.pending_block_tree.prune(qc.vote_info_parent_id)
@@ -32,7 +31,6 @@ class BlockTree:
             self.pending_block_tree.add(b)
 
     def process_vote(self,v):
-        print("in process_vote ", v)
         self.process_qc(v.high_commit_qc)
         print("1")
         vote_idx=(v.ledger_commit_info.vote_info_hash.round)

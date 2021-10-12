@@ -51,7 +51,6 @@ class Main:
 
 
     def start_event_processing(self,M,type):
-        # print("M in sep is, ", M)
         message=pickle.loads(M)
         if(type=='local_timeout'):
             self.pacemaker.local_timeout_round()
@@ -127,7 +126,6 @@ class Main:
         # return None
 
     def process_vote_msg(self, M):
-        print("Mis ", M)
         qc = self.block_tree.process_vote(M)
         print("qc done")
         print("qc",qc)
