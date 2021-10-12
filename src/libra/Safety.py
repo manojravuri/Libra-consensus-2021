@@ -1,9 +1,8 @@
 from .Ledger import Ledger
 from .BlockTree import VoteMsg, VoteInfo, TimeoutInfo, LedgerCommitInfo
-from nacl.signing import SigningKey
 from nacl.signing import VerifyKey
 from nacl.encoding import HexEncoder
-
+from nacl.exceptions import BadSignatureError
 
 class Safety:
     def __init__(self, ledger, private_key=None,all_replica_public_keys=None,all_client_public_keys=None, highest_vote_round=-1, highest_qc_round=-1):
@@ -54,7 +53,7 @@ class Safety:
                                            encoder=HexEncoder)
         try:
             v_key.verify(message)
-        except nacl.exceptions.BadSignatureError:
+        except BadSignatureError:
             return False
         except:
             return False
