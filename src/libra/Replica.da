@@ -4,7 +4,7 @@ import string
 import sys
 import logging
 import time
-from libra.Main import Main
+from .Main import Main
 
 config(clock = 'Lamport')
 config(handling = 'all')
@@ -32,7 +32,9 @@ class Replica(process):
         c2=logical_clock()
         output("recieved vote in leader ",replica_id)
         vote_info,leader=self.main.start_event_processing(vote_info,'vote_message')
-        send(('proposal',vote_info,logical_clock()),to=leader)
+        if leader and vote_info:
+          output("got vote_info, leader")
+          send(('proposal',vote_info,logical_clock()),to=leader)
 
     def run():
         -- l1

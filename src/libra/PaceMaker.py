@@ -1,6 +1,6 @@
-from libra.Safety import Safety
-from libra.BlockTree import BlockTree
-from libra.BlockTree import TimeoutMsg
+from .Safety import Safety
+from .BlockTree import BlockTree
+from .BlockTree import TimeoutMsg
 
 
 class PaceMaker:

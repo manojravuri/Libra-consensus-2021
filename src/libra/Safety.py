@@ -1,5 +1,5 @@
-from libra.Ledger import Ledger
-from libra.BlockTree import VoteMsg, VoteInfo, TimeoutInfo, LedgerCommitInfo
+from .Ledger import Ledger
+from .BlockTree import VoteMsg, VoteInfo, TimeoutInfo, LedgerCommitInfo
 
 
 class Safety:
