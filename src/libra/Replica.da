@@ -38,6 +38,22 @@ class Replica(process):
         if proposal_msg and leader:
           output("got vote_info, leader")
           send(('proposal',proposal_msg,logical_clock()),to=ps)
+          #if leader and proposal_msg:
+            #output("got proposal_msg, leader, ", leader)
+            #send(('proposal',proposal_msg, logical_clock()),to=ps)
+
+      def receive(msg=('send_new_event', c3)):
+          c4 = logical_clock()
+          output("recieved send_new_event in leader ",replica_id)
+          #if(self.main.workload_exists()):
+            #if(self.main.can_send()):
+          output("sending messages to all processes from replica",replica_id)
+          output("starting new_round_event")
+          p=self.main.process_new_round_event()
+          output("sending messages to all processes from replica",replica_id)
+          c=logical_clock()
+          send(('proposal',p,c),to=ps)
+          await(len(setof(a,received(('proposal ack',c3), from_=a)))>2*f+1)
 
     def run():
         -- l1
@@ -51,5 +67,3 @@ class Replica(process):
                 await(len(setof(a,received(('proposal ack',c3), from_=a)))>2*f+1)
         await(len(setof(a,received(('done',c3), from_=a)))>2*f+1)
         output("Replica ", replica_id," is terminaed")
-
-

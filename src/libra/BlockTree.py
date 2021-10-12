@@ -91,6 +91,17 @@ class QC:
         self.votes = votes
         self.last_tc = last_tc
 
+    # def __repr__(self):
+    #     return f'{self.author}'
+
+    def __lt__(self, other):
+        # p1 < p2 calls p1.__lt__(p2)
+        return self.block.round < other.block.round
+
+    def __eq__(self, other):
+        # p1 == p2 calls p1.__eq__(p2)
+        return self.block.round == other.block.round
+
 class Block:
     def __init__(self,author,round,payload,qc):
         self.author=author

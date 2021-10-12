@@ -24,17 +24,17 @@ class Safety:
         return round + 1
 
     def safe_to_extednd(self, block_round, qc_round, tc):
-        return self.consecutive(self, block_round, tc, round) and qc_round >= max(tc.tmo_high_qc_rounds)
+        return self.consecutive(block_round, tc, round) and qc_round >= max(tc.tmo_high_qc_rounds)
 
     def safe_to_vote(self, block_round, qc_round, tc):
         if (block_round <= max(self.highest_vote_round, qc_round)):
             return False
-        return self.consecutive(self, block_round, qc_round) and self.safe_to_extednd(self, block_round, qc_round, tc)
+        return self.consecutive(block_round, qc_round) and self.safe_to_extednd(self, block_round, qc_round, tc)
 
     def safe_to_timeout(self, round, qc_round, tc):
         if (qc_round < self.highest_qc_round or round <= max(self.highest_vote_round - 1, qc_round)):
             return False
-        return self.consecutive(self, round, qc_round) or self.consecutive(self, round, tc.round)
+        return self.consecutive(round, qc_round) or (self.consecutive(self, round, tc.round) if tc else False)
 
     def commit_state_id_candidate(self, block_round, qc):
         if (self.consecutive(block_round, qc.vote_info.round)):
@@ -80,7 +80,11 @@ class Safety:
         return None
 
     def make_timeout(self, round, high_qc, last_tc):
-        qc_round = high_qc.vote_info.round
-        if (self.valid_signatures(high_qc, last_tc) and self.safe_to_timeout(round, qc_round, last_tc)):
-            return TimeoutInfo(round, high_qc)
+        if (high_qc and high_qc.vote_info):
+            print("inside make_timeout if condition, ", high_qc, high_qc.vote_info)
+            qc_round = high_qc.vote_info.round
+            print("qc_round is , ", qc_round)
+            if (self.valid_signatures(high_qc, last_tc) and self.safe_to_timeout(round, qc_round, last_tc)):
+                print("inside make_timeout second if")
+                return TimeoutInfo(round, high_qc)
         return None

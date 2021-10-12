@@ -127,7 +127,7 @@ class Main:
         # return None
 
     def process_vote_msg(self, M):
-        print("Mis ", M)
+        print("M is ", M)
         qc = self.block_tree.process_vote(M)
         print("qc done")
         print("qc",qc)

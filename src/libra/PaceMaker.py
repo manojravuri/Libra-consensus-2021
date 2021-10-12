@@ -13,7 +13,7 @@ class PaceMaker:
         self.safety = safety
         self.block_tree = block_tree
         self.delta = 1
-        self.timer = 0
+        self.timer = threading.Timer(0,0)
 
     def stop_timer(self, round):
         self.timer.cancel()
@@ -33,23 +33,26 @@ class PaceMaker:
     def local_timeout_round(self):
         # save_consensus_state()
         print("local timeout")
-        self.stop_timer(self.current_round)
+        self.stop_timer(self.current_round) ## TODO: check if this is wrong or right
+        print("stopped timer")
         timeout_info = self.safety.make_timeout(self.current_round, self.block_tree.high_qc, self.last_round_tc)
+        print("local_timeout done")
         # broadcast TimeoutMsg(timeout_info,self.last_round_tc,self.block_tree.high_commit_qc)
 
     def process_remote_timeout(self, tmo):
         tmo_info = tmo.tmo_info
-        if (tmo_info.round < self.current_round):
-            return None
-        if (tmo_info.sender not in self.pending_timeouts):
-            self.pending_timeouts.add(tmo_info)
-        if (self.pending_timeouts.size() == f + 1):
-            self.stop_timer(self.current_round)
-            self.local_timeout_round()
-        if (self.pending_timeouts.size() == 2 * f + 1):
-            round = tmo_info.round
-            tmo_high_qc_rounds = self.pending_timeouts[tmo_info.round][0].high_qc.round
-            signatures = self.pending_timeouts[tmo_info.round][0].signature
+        if tmo_info:
+            if (tmo_info.round < self.current_round):
+                return None
+            if (tmo_info.sender not in self.pending_timeouts):
+                self.pending_timeouts.add(tmo_info)
+            if (self.pending_timeouts.size() == f + 1):
+                self.stop_timer(self.current_round)
+                self.local_timeout_round()
+            if (self.pending_timeouts.size() == 2 * f + 1):
+                round = tmo_info.round
+                tmo_high_qc_rounds = self.pending_timeouts[tmo_info.round][0].high_qc.round
+                signatures = self.pending_timeouts[tmo_info.round][0].signature
         return None
 
     def advance_round_tc(self, tc):
