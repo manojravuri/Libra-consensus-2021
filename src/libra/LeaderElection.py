@@ -14,7 +14,7 @@ class LeaderElection:
         self.pacemaker = pacemaker
 
     def elect_reputation_leader(self, qc):
-        active_nodes = [self.nodes[1]]
+        active_nodes = []
         last_authors = set()
         current_qc = qc
         print("in erl")
@@ -35,8 +35,12 @@ class LeaderElection:
                 current_qc = current_block.qc
                 i += 1
             else:
+                active_nodes=self.nodes
                 break
         print("active_nodes is ", active_nodes)
+        #active_nodes=active_nodes-last_authors
+        #check random seed
+        random.seed(qc.vote_info.round)
         return active_nodes[random.randint(0,len(active_nodes)-1)]
 
     def update_leader(self, qc):

@@ -33,7 +33,7 @@ class PaceMaker:
     def local_timeout_round(self):
         # save_consensus_state()
         print("local timeout")
-        self.stop_timer()
+        self.stop_timer(self.current_round)
         timeout_info = self.safety.make_timeout(self.current_round, self.block_tree.high_qc, self.last_round_tc)
         # broadcast TimeoutMsg(timeout_info,self.last_round_tc,self.block_tree.high_commit_qc)
 

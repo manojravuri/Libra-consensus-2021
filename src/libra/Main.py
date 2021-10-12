@@ -96,6 +96,7 @@ class Main:
         self.block_tree.execute_and_insert(block_P)
         print("executed and inserted")
         vote_msg=self.safety.make_vote(block_P, P.last_round_tc, P.high_commit_qc)
+        vote_msg.ledger_commit_info.vote_info_hash.round=round+1
         print("make vote done")
         if(vote_msg is not None):
             vote_msg.author = self.id
@@ -129,6 +130,7 @@ class Main:
         print("Mis ", M)
         qc = self.block_tree.process_vote(M)
         print("qc done")
+        print("qc",qc)
         if (qc):
             self.process_certificate_qc(qc)
             print("here is it")
