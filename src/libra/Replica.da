@@ -29,8 +29,9 @@ class Replica(process):
         output("recieved message in",replica_id)
         send(('proposal ack',c2), to=ps)
         p, leader = self.main.start_event_processing(p1,'proposal_message')
-        output("Sending proposal to replicas",leader)
-        send(('vote',p,logical_clock()),to=leader)
+        if p and leader:
+            output("Sending proposal to replicas",leader)
+            send(('vote',p,logical_clock()),to=leader)
 
     def receive(msg=('vote',vote_info,c1)):
         c2=logical_clock()

@@ -63,6 +63,7 @@ class Main:
             print("got msg in sep , " ,msg)
             if msg:
                 return msg
+                # return pickle.dumps(msg)
             else:
                 return None, None
         if(type == 'timeout_mesaage'):
@@ -132,7 +133,7 @@ class Main:
         if (qc):
             self.process_certificate_qc(qc)
             print("here is it")
-            return self.process_new_round_event(qc.last_tc), self.leader_election.get_leader(self.pacemaker.current_round)
+            return pickle.dumps(self.process_new_round_event(qc.last_tc)), self.leader_election.get_leader(self.pacemaker.current_round)
             #return None, self.leader_election.get_leader(self.pacemaker.current_round)
 
     def workload_exists(self):
