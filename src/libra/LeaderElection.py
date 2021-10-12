@@ -51,5 +51,7 @@ class LeaderElection:
     def get_leader(self, round):
         if (self.reputation_of_leaders and  round in self.reputation_of_leaders):
             return self.reputation_of_leaders[round]
-        idx=((round/2)%len(self.nodes))
-        return idx,self.nodes[((round / 2) % len(self.nodes))]
+        # idx=(((round+2)/2)%len(self.nodes))
+        # return idx,self.nodes[(((round+2) / 2) % len(self.nodes))]
+        idx=(((round)/2)%len(self.nodes))
+        return idx,self.nodes[(((round) / 2) % len(self.nodes))]
