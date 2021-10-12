@@ -1,13 +1,18 @@
 from libra.Ledger import Ledger
 
 class BlockTree:
-    def __init__(self, ledger, pending_block_tree = None, pending_votes = {}, high_qc = None, high_commit_qc = None):
+    def __init__(self, ledger, pending_block_tree = set(), pending_votes = {}, high_qc = None, high_commit_qc = None):
         self.ledger = ledger
         self.pending_block_tree = pending_block_tree
         self.pending_votes = pending_votes
-        self.high_qc = QC()
-        self.high_commit_qc = QC()
-
+        vote_info = VoteInfo(-1,-1,-2,-2)
+        ledger_commit_info = LedgerCommitInfo()
+        qc = QC(vote_info, ledger_commit_info)
+        genesis_block = Block(0, -1, "", QC())
+        qc.block = genesis_block
+        self.high_qc = qc
+        self.high_commit_qc = qc
+        ledger.custom_commit_block(self.high_qc.block)
 
     def process_qc(self, qc):
         print('qc is ', qc)
@@ -16,12 +21,13 @@ class BlockTree:
             self.pending_block_tree.prune(qc.vote_info_parent_id)
             self.high_commit_qc=max(qc, self.high_commit_qc)
             self.high_qc=max(qc, self.high_qc)
+        # print("process qc done")
 
 
     def execute_and_insert(self,b):
         # print(b)
         if (b and b.qc):
-            self.ledger.speculate(b.qc.block_id,b.id,b.payload)
+            self.ledger.speculate(b.qc.block,b,b.payload)
             self.pending_block_tree.add(b)
 
     def process_vote(self,v):
@@ -50,7 +56,7 @@ class VoteInfo:
         self.parent_round=parent_round
 
 class LedgerCommitInfo:
-    def __init__(self,commit_state_id,vote_info_hash):
+    def __init__(self,commit_state_id = None,vote_info_hash = None):
         self.commit_state_id=commit_state_id
         self.vote_info_hash=vote_info_hash
 
@@ -65,12 +71,13 @@ class VoteMsg:
 
 
 class QC:
-    def __init__(self,vote_info = None,ledger_commit_info = None,signatures = None,author = None,author_signature = None):
+    def __init__(self,vote_info = None,ledger_commit_info = None,signatures = None,author = None,author_signature = None, block = None):
         self.vote_info=vote_info
         self.ledger_commit_info=ledger_commit_info
         self.signatures=signatures
         self.author=author
         self.author_signature=author_signature
+        self.block = block
 
 class Block:
     def __init__(self,author,round,payload,qc):

@@ -1,9 +1,9 @@
 from libra.Ledger import Ledger
-from libra.BlockTree import VoteMsg, VoteInfo, TimeoutInfo
+from libra.BlockTree import VoteMsg, VoteInfo, TimeoutInfo, LedgerCommitInfo
 
 
 class Safety:
-    def __init__(self, ledger, private_key=None, highest_vote_round=None, highest_qc_round=None):
+    def __init__(self, ledger, private_key=None, highest_vote_round=-1, highest_qc_round=-1):
         self.private_key = private_key
         self.highest_vote_round = highest_vote_round
         self.highest_qc_round = highest_qc_round
@@ -33,7 +33,7 @@ class Safety:
 
     def commit_state_id_candidate(self, block_round, qc):
         if (self.consecutive(block_round, qc.vote_info.round)):
-            return self.ledger.pending_state(self, qc.id)
+            return self.ledger.pending_state(qc.id)
         else:
             return None
 
@@ -41,13 +41,21 @@ class Safety:
         return True
 
     def make_vote(self, b, last_tc, high_commit_qc):
+        # import pdb; pdb.set_trace()
+        print(b)
         qc_round = b.qc.vote_info.round
         if self.valid_signatures(b, last_tc) or safe_to_vote(b.round, qc_round, last_tc):
+            print(1)
             self.update_highest_qc_round(qc_round)
+            print(2)
             self.increase_highest_vote_round(b.round)
-            vote_info = VoteInfo(b.id, b.round, b.qc.vote_info, qc_round, Ledger.pending_state(b.id))
-            ledger_commit_info = LedgerCommitInfo(commit_state_id_candidate(b.round, b.qc), vote_info)
-            return VoteMsg(vote_info, ledger_commit_info, high_commit_qc)
+            print(3)
+            print(b, b.id)
+            vote_info = VoteInfo(b.id, b.round, b.qc.vote_info, qc_round)
+            print(4)
+            ledger_commit_info = LedgerCommitInfo(self.commit_state_id_candidate(b.round, b.qc), vote_info)
+            print(5)
+            return VoteMsg(vote_info, ledger_commit_info, high_commit_qc, None, None)
         return None
 
     def make_timeout(self, round, high_qc, last_tc):
