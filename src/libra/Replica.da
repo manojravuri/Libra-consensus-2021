@@ -12,13 +12,16 @@ config(handling = 'all')
 TIMEOUT=1
 
 class Replica(process):
-    def setup(replica_id:int,nodes:dict,ps:set,f:int,number_of_requests:int):
+    def setup(replica_id:int,nodes:dict,ps:set,f:int,number_of_requests:int,all_replica_public_keys,all_client_public_keys:list,replica_private_key:list):
         output("creating replica ", replica_id)
-        self.main = Main(replica_id,nodes)
+        self.main = Main(replica_id,nodes,all_replica_public_keys,all_client_public_keys,replica_private_key)
         self.nodes = nodes
         self.f = f
         self.ps=ps
         self.proposals=set()
+        self.all_replica_public_keys=all_replica_public_keys
+        self.all_client_public_keys=all_client_public_keys
+        self.replica_private_key=replica_private_key
         self.number_of_requests = number_of_requests
 
     def receive(msg=('proposal',p1,c1)):
@@ -31,10 +34,10 @@ class Replica(process):
     def receive(msg=('vote',vote_info,c1)):
         c2=logical_clock()
         output("recieved vote in leader ",replica_id)
-        vote_info,leader=self.main.start_event_processing(vote_info,'vote_message')
-        if leader and vote_info:
+        proposal_msg,leader=self.main.start_event_processing(vote_info,'vote_message')
+        if proposal_msg and leader:
           output("got vote_info, leader")
-          send(('proposal',vote_info,logical_clock()),to=leader)
+          send(('proposal',proposal_msg,logical_clock()),to=ps)
 
     def run():
         -- l1
@@ -50,21 +53,3 @@ class Replica(process):
         output("Replica ", replica_id," is terminaed")
 
 
-
-def main():
-    number_of_procs = int(sys.argv[1]) if len(sys.argv) > 1 else 10
-    number_of_reqs = int(sys.argv[2]) if len(sys.argv) > 1 else 10
-    f=(number_of_procs-1)/3
-    ps = new(Replica, num= number_of_procs)
-    i=0
-    replica_map={}
-    for p in ps:
-        replica_map[i]=p
-        i=i+1
-    i=0
-    for p in ps:
-        setup(p, (i,replica_map,ps-{p},f,number_of_reqs))
-        i=i+1
-
-    start(ps)
-    await(len(setof(a,received(('done'), from_=a)))>2*f+1)

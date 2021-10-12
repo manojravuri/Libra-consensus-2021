@@ -24,11 +24,11 @@ class Proposal(Message):
 
 
 class Main:
-    def __init__(self, id=None, nodes=None):
+    def __init__(self, id=None, nodes=None,all_replica_public_keys=None,all_client_public_keys=None,replica_private_key=None):
         self.id = id
         self.mempool = MemPool()
         self.ledger = Ledger(id,self.mempool)
-        self.safety = Safety(self.ledger)
+        self.safety = Safety(self.ledger,replica_private_key,all_replica_public_keys,all_client_public_keys)
         self.block_tree = BlockTree(self.ledger)
         self.pacemaker = PaceMaker(self.safety,self.block_tree,current_round=0)
         self.leader_election = LeaderElection(self.ledger,pacemaker=self.pacemaker, nodes=nodes)

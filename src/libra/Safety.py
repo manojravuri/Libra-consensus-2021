@@ -1,10 +1,15 @@
 from .Ledger import Ledger
 from .BlockTree import VoteMsg, VoteInfo, TimeoutInfo, LedgerCommitInfo
+from nacl.signing import SigningKey
+from nacl.signing import VerifyKey
+from nacl.encoding import HexEncoder
 
 
 class Safety:
-    def __init__(self, ledger, private_key=None, highest_vote_round=-1, highest_qc_round=-1):
+    def __init__(self, ledger, private_key=None,all_replica_public_keys=None,all_client_public_keys=None, highest_vote_round=-1, highest_qc_round=-1):
         self.private_key = private_key
+        self.all_replica_public_keys=all_replica_public_keys
+        self.all_client_public_keys=all_client_public_keys
         self.highest_vote_round = highest_vote_round
         self.highest_qc_round = highest_qc_round
         self.ledger = ledger
@@ -38,6 +43,22 @@ class Safety:
             return None
 
     def valid_signatures(self, high_qc, last_tc):
+        return True
+
+    def verify_signature(self,id,message,type='replica'):
+        if type == "replica":
+            v_key = VerifyKey(self.all_replicas_public_keys[id],
+                                           encoder=HexEncoder)
+        elif type == 'client':
+            v_key = VerifyKey(self.all_clients_public_keys[id],
+                                           encoder=HexEncoder)
+        try:
+            v_key.verify(message)
+        except nacl.exceptions.BadSignatureError:
+            return False
+        except:
+            return False
+
         return True
 
     def make_vote(self, b, last_tc, high_commit_qc):

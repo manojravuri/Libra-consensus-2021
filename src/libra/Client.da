@@ -11,7 +11,7 @@ config(handling = 'all')
 
 
 class Client(process):
-    def setup(client_id:int,replicas:set,f:int,number_of_requests:int,request_gap:int):
+    def setup(client_id:int,replicas:set,f:int,number_of_requests:int,request_gap:int,all_replicas_public_keys,client_private_key):
         output("creating client ", client_id)
         self.replicas=replicas
         self.number_of_requests = number_of_requests
