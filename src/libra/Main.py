@@ -63,8 +63,11 @@ class Main:
 
     def process_certificate_qc(self, qc):
         self.block_tree.process_qc(qc)
+        print("process qc done")
         self.leader_election.update_leader(qc)
+        print("leader election done")
         self.pacemaker.advance_round_qc(qc)
+        print("advance round done")
 
     def process_proposal_msg(self, P):
         print("Processing proposal message")
@@ -79,11 +82,18 @@ class Main:
         leader = self.leader_election.get_leader(round)
         if (P.block.round != round or P.sender != leader or P.block.author != leader):
             return
+        print("generating block")
         block_P = self.block_tree.generate_block(self.id,self.mempool.get_transactions()[0],round,P.high_commit_qc)
+        print("generated block")
         self.block_tree.execute_and_insert(block_P)
-        vote_msg=self.safety.make_vote(P.block,P.last_round_tc, P.high_commit_qc)
+        print("executed and inserted")
+        vote_msg=self.safety.make_vote(block_P, P.last_round_tc, P.high_commit_qc)
+        print("make vote done")
         if(vote_msg is not None):
-            return pickle.dumps(vote_msg),pickle.dumps(LeaderElection.get_leader(round+1))
+            vote_msg.author = self.id
+            vote_msg.author_signature = self.id
+            vote_msg.block = block_P
+            return pickle.dumps(vote_msg),pickle.dumps(self.leader_election.get_leader(round+1))
             #send vote_msg to LeaderElection.get_leader(current_round+1)
 
     def process_timeout_message(self, M):
@@ -111,7 +121,7 @@ class Main:
         if (qc):
             self.process_certificate_qc(qc)
             return self.process_new_round_event(qc.last_tc), self.leader_election.get_leader(self.pacemaker.current_round)
-        return None, self.leader_election.get_leader(self.pacemaker.current_round)
+            #return None, self.leader_election.get_leader(self.pacemaker.current_round)
 
     def workload_exists(self):
         if(self.mempool.get_transactions()):
