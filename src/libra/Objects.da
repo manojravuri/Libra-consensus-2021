@@ -65,13 +65,11 @@ class TimeoutMsg:
 
 
 class ProposalMsg:
-    def __init__(self, block, last_round_qc, high_commit_qc, signature, last_round_tc, sender):
+    def __init__(self, block,last_round_tc, high_commit_qc):
         self.block = block
-        self.last_round_qc = last_round_qc
-        self.high_commit_qc = high_commit_qc
-        self.signature = signature
         self.last_round_tc = last_round_tc
-        self.sender = sender
+        self.high_commit_qc = high_commit_qc
+
 
 class Message:
     def __init__(self, type=None, block=None, high_commit_qc=None, last_round_tc=None, tmo_info=None):

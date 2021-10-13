@@ -10,7 +10,7 @@ def main():
     ps = new(Replica, num= number_of_procs)
     i=0
     for p in ps:
-        setup(p, (i,p,ps-{p},f,number_of_reqs))
+        setup(p, (i,p,ps,f,number_of_reqs))
         i=i+1
 
     start(ps)
