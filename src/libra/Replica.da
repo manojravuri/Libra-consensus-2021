@@ -35,7 +35,7 @@ class Replica(process):
 
     # ====== attributes of Ledger ======
         cur_path = os.getcwd()
-        self.file_name = os.path.abspath(cur_path + "/../../data/Ledger_" + str(self.replica_id) + ".txt")
+        self.file_name = os.path.abspath(cur_path + "/../data/Ledger_" + str(self.replica_id) + ".txt")
         self.pending_map = {}
         self.committed_blocks = deque()  # committed block with window size
         self.ledger_state = ""
@@ -48,12 +48,15 @@ class Replica(process):
     # ====== attributes of BlockTree ======
         self.pending_block_tree = set()
         self.pending_votes = defaultdict(list)
-        vote_info = VoteInfo(-1, -1, -2, -2)
-        ledger_commit_info = LedgerCommitInfo()
-        qc = QC(vote_info, ledger_commit_info)
-        genesis_block = Block(0, -1, "", qc)
-        self.high_qc = qc
-        self.high_commit_qc = qc
+        vote_info = VoteInfo("block_id", -1, "parent_block_id", -2,hash("pending state of block_id"))
+        ledger_commit_info = LedgerCommitInfo(None,vote_info)
+        signatures=[]
+        for i in range (2*f+1):
+            signatures.append(i)
+        self.high_commit_qc = QC(vote_info, ledger_commit_info,signatures,"Rohith","Rohith_sign")
+        vote_info = VoteInfo("block_id", 1, "parent_block_id", 0,hash("pending state of block_id"))
+        ledger_commit_info = LedgerCommitInfo(None,vote_info)
+        self.high_qc = QC(vote_info, ledger_commit_info,signatures,"Rohith","Rohith_sign_hQC")
 
     # ====== attributes of PaceMaker ======
         self.current_round = 0
@@ -71,7 +74,7 @@ class Replica(process):
         return id == LeaderElection_get_leader()
 
     def Main_can_send():
-        return LeaderElection_get_leader(self.current_round) == self.curr_pr
+        return LeaderElection_get_leader(self.current_round) == self.replica_id
 
     def Main_start_event_processing(M, type):
         #print("message in sep")
@@ -79,9 +82,10 @@ class Replica(process):
         if (type == 'local_timeout'):
             self.PaceMaker_local_timeout_round()
         if (type == 'proposal_message'):
-            msg = self.Main_process_proposal_msg(message)
-            if msg:
-                return msg
+            msg,sender = self.Main_process_proposal_msg(message)
+            print("msg",msg)
+            print("sender",sender)
+            return msg,all_nodes[sender]
         if (type == 'vote_message'):
             msg = self.Main_process_vote_msg(message)
             print("got msg in sep , ", msg)
@@ -101,29 +105,26 @@ class Replica(process):
         print("advance round done")
 
     def Main_process_proposal_msg(P):
-        print("Processing proposal message")
         print("processing certificate qc")
         self.Main_process_certificate_qc(P.block.qc)
         print("processing high commit qc")
         self.Main_process_certificate_qc(P.high_commit_qc)
-        print("Advancing current round")
+        print("Advancing current round",self.current_round)
         self.PaceMaker_advance_round_tc(P.last_round_tc)
-        print("advanced round")
+        print("advanced round",self.current_round)
         round = self.current_round
         leader = LeaderElection_get_leader(round)
+        print("WORKING")
         if (P.block.round != round or P.sender != leader or P.block.author != leader):
             return
         print("generating block")
-        block_P = self.block_tree.generate_block(self.replica_id, self.MemPool_get_transactions(), round, P.high_commit_qc)
+        block_P = self.BlockTree_generate_block(self.replica_id, self.MemPool_get_transactions(), round, P.high_commit_qc)
         print("generated block")
-        self.block_tree.execute_and_insert(block_P)
+        self.BlockTree_execute_and_insert(block_P)
         print("executed and inserted")
         vote_msg = self.Safety_make_vote(block_P, P.last_round_tc, P.high_commit_qc)
-        print("make vote done")
-        if (vote_msg is not None):
-            vote_msg.author = self.replica_id
-            vote_msg.author_signature = self.replica_id
-            vote_msg.block = block_P
+        print("make vote done",vote_msg)
+        if vote_msg:
             print("new leader is, ", LeaderElection_get_leader(round + 1))
             return pickle.dumps(vote_msg), (LeaderElection_get_leader(round + 1))
             # send vote_msg to LeaderElection.get_leader(current_round+1)
@@ -137,15 +138,15 @@ class Replica(process):
             self.PaceMaker_advance_round_qc(tc)
             self.process_new_round_event(tc)
 
-    def Main_process_new_round_event( last_tc=None):
+    def Main_process_new_round_event(last_tc):
         # u = self.replica_id
 
         u = LeaderElection_get_leader(self.current_round)
-        print(u,"u")
+
         # if u == LeaderElection_get_leader(self.current_round):
         b = self.BlockTree_generate_block(u, self.MemPool_get_transactions(), self.current_round,
                                            high_qc=self.high_commit_qc)
-        p = ProposalMsg(b, last_tc, self.high_commit_qc)
+        p = ProposalMsg(b, last_tc, self.high_commit_qc,replica_id)
         return pickle.dumps(p)
 
     def Main_process_vote_msg(M):
@@ -208,11 +209,12 @@ class Replica(process):
     def Ledger_pending_state(block_id):
         return self.pending_map[block_id]["block"].payload
 
-    def Ledger_commit( block_id):
+    def Ledger_commit(block_id):
         # update start txn after commit
-        file = open(self.file_name, "w")
+        file = open(self.file_name, "w+")
         file.write(self.pending_map[block_id]["block"].payload)
         file.close()
+        print("persisted to ledger remember to use flsuh and fsync later")
         self.add_committed_block_to_Q(block_id)
         self.ledger_state = hash(self.ledger_state +"||"+ self.pending_map[block_id]["block"].payload)
         self.pending_map = {}
@@ -241,15 +243,15 @@ class Replica(process):
         self.highest_qc_round = max(self.highest_qc_round, qc_round)
 
     def Safety_consecutive( block_round, round):
-        return round + 1
+        return round + 1 == block_round
 
-    def Safety_safe_to_extednd( block_round, qc_round, tc):
-        return Safety_consecutive( block_round, tc, round) and qc_round >= max(tc.tmo_high_qc_rounds)
+    def Safety_safe_to_extend( block_round, qc_round, tc):
+        return Safety_consecutive(block_round, tc.round) and qc_round >= max(tc.tmo_high_qc_rounds)
 
     def Safety_safe_to_vote( block_round, qc_round, tc):
         if (block_round <= max(self.highest_vote_round, qc_round)):
             return False
-        return Safety_consecutive( block_round, qc_round) and Safety_safe_to_extednd( block_round, qc_round, tc)
+        return Safety_consecutive(block_round, qc_round) and Safety_safe_to_extend( block_round, qc_round, tc)
 
     def Safety_safe_to_timeout( round, qc_round, tc):
         if (qc_round < self.highest_qc_round or round <= max(self.highest_vote_round - 1, qc_round)):
@@ -267,17 +269,19 @@ class Replica(process):
 
     def Safety_make_vote( b, last_tc, high_commit_qc):
         qc_round = b.qc.vote_info.round
-        if self.valid_signatures(b, last_tc) or safe_to_vote(b.round, qc_round, last_tc):
-            self.update_highest_qc_round(qc_round)
-            self.increase_highest_vote_round(b.round)
-            vote_info = VoteInfo(b.id, b.round, b.qc.vote_info, qc_round)
-            ledger_commit_info = LedgerCommitInfo(self.commit_state_id_candidate(b.round, b.qc), vote_info)
-            return VoteMsg(vote_info, ledger_commit_info, high_commit_qc, None, None)
+        print(b.round, qc_round, last_tc.round)
+        print(Safety_safe_to_vote(b.round, qc_round, last_tc))
+        if self.Safety_valid_signatures(b, last_tc) and Safety_safe_to_vote(b.round, qc_round, last_tc):
+            self.Safety_update_highest_qc_round(qc_round)
+            self.Safety_increase_highest_vote_round(b.round)
+            vote_info = VoteInfo(b.id, b.round, b.qc.vote_info.id, b.qc.vote_info.round,Ledger_pending_state(b.id))
+            ledger_commit_info = LedgerCommitInfo(self.commit_state_id_candidate(b.round, b.qc), hash(vote_info))
+            return VoteMsg(vote_info, ledger_commit_info, high_commit_qc, replica_id, str(replica_id)+"sign")
         return None
 
     def Safety_make_timeout( round, high_qc, last_tc):
         qc_round = high_qc.vote_info.round
-        if (self.valid_signatures(high_qc, last_tc) and self.safe_to_timeout(round, qc_round, last_tc)):
+        if (self.Safety_valid_signatures(high_qc, last_tc) and self.safe_to_timeout(round, qc_round, last_tc)):
             return TimeoutInfo(round, high_qc)
         return None
 
@@ -285,7 +289,7 @@ class Replica(process):
 
 
     def BlockTree_process_qc(qc):
-        print('qc is ', str(qc))
+        print("ledger commit id in qc",qc.ledger_commit_info.commit_state_id)
         if qc.ledger_commit_info.commit_state_id:
             self.Ledger_commit( qc.vote_info.parent_id)
             # prune branches
@@ -296,7 +300,7 @@ class Replica(process):
 
     def BlockTree_execute_and_insert(b):
         # print(b)
-        self.Ledger_speculate(b.qc.block, b, b.payload)
+        self.Ledger_speculate(b.qc.vote_info.id, b.id, b)
         self.pending_block_tree.add(b)
 
     def BlockTree_process_vote(v):
@@ -365,7 +369,7 @@ class Replica(process):
             signatures = self.pending_timeouts[tmo_info.round][0].signature
         return None
 
-    def PaceMaker_advance_round_tc( tc):
+    def PaceMaker_advance_round_tc(tc):
         if tc is None or tc.round < self.current_round:
             return False
         self.last_round_tc = tc
@@ -383,19 +387,20 @@ class Replica(process):
     # ====== methods of LeaderElection ======
 
 
-    def LeaderElection_elect_reputation_leader( qc):
+    def LeaderElection_elect_reputation_leader(qc):
         active_validators = set()
         last_authors = set()
         current_qc = qc
         i = 0
         while i < self.window_size or len(last_authors) < self.exclude_size:
             current_block = self.Ledger_committed_block(current_qc.vote_info.parent_id)
-            block_author = current_block.author
+            block_author = current_block.author if current_block else None
             if i < self.window_size:
-                active_validators.add(current_qc.signatures.signers())
-            if len(last_authors) < self.exclude_size:
+                active_validators=set.union(active_validators,set(current_qc.signatures))
+            if len(last_authors) < self.exclude_size and block_author:
                 last_authors.add(block_author)
-            current_qc = current_block.qc
+            if current_block:
+                current_qc = current_block.qc
             i += 1
         active_validators = active_validators.difference(last_authors)
         print("active_validators is ", active_validators)
@@ -411,7 +416,7 @@ class Replica(process):
     def LeaderElection_get_leader(round):
         if self.reputation_leaders and round in self.reputation_leaders:
             return self.reputation_leaders[round]
-        return all_nodes[int((round / 2) % len(all_nodes))]
+        return int((round / 2) % len(all_nodes))
 
 
     # ====== methods of Validator ======
@@ -419,9 +424,10 @@ class Replica(process):
 
     def receive(msg=('proposal',p1,c1)):
         c2=logical_clock()
-        output("recieved message in",replica_id)
+        output("recieved proposal message in",replica_id)
         send(('proposal ack',c2), to=ps)
         p, leader = self.Main_start_event_processing(p1,'proposal_message')
+        print("sending votes to next leader")
         send(('vote',p,logical_clock()),to=leader)
 
     def receive(msg=('vote',vote_info,c1)):
@@ -441,14 +447,15 @@ class Replica(process):
     def run():
         time.sleep(5)
         if(self.Main_can_send()):
-            p=self.Main_process_new_round_event()
+            p=self.Main_process_new_round_event(TC(-10))
             output("sending messages to all processes from replica",replica_id)
             c=logical_clock()
             send(('proposal',p,c),to=ps)
             -- l2
-            #await(len(setof(a,received(('proposal ack',c3), from_=a)))>2*f+1)
+           # processed_votes=0
         while(1):
             -- handlemessages
+           # await(len(setof(a,received(('proposal ack',c3), from_=a)))>2*f+1)
             #time.sleep(1)
         #await(len(setof(a,received(('done',c3), from_=a)))>2*f+1)
         output("Replica ", replica_id," is terminated")

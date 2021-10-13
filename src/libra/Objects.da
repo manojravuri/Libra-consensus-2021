@@ -1,16 +1,16 @@
 class VoteInfo:
-    def __init__(self, id, round, parent_id, parent_round):
+    def __init__(self, id, round, parent_id, parent_round,exec_state_id):
         self.id = id
         self.round = round
         self.parent_id = parent_id
         self.parent_round = parent_round
-        self.hash_ = str(id) + "||" + str(round) + "||" + str(parent_id) + "||" + str(parent_round)
+        self.exec_state_id = exec_state_id
 
 
 class LedgerCommitInfo:
-    def __init__(self, commit_state_id=None, vote_info_hash=None):
+    def __init__(self, commit_state_id=None, vote_info=None):
         self.commit_state_id = commit_state_id
-        self.vote_info_hash = hash(vote_info_hash)
+        self.vote_info_hash = hash(vote_info)
 
 
 class VoteMsg:
@@ -29,8 +29,6 @@ class QC:
         self.signatures = signatures
         self.author = author
         self.author_signature = author_signature
-        # self.block = block
-        # self.last_tc = last_tc
 
 
 class Block:
@@ -51,7 +49,7 @@ class TimeoutInfo:
 
 
 class TC:
-    def __init__(self, round, tmo_high_qc_rounds, tmo_signatures):
+    def __init__(self, round, tmo_high_qc_rounds=None, tmo_signatures=None):
         self.round = round
         self.tmo_high_qc_rounds = tmo_high_qc_rounds
         self.tmo_signatures = tmo_signatures
@@ -65,10 +63,11 @@ class TimeoutMsg:
 
 
 class ProposalMsg:
-    def __init__(self, block,last_round_tc, high_commit_qc):
+    def __init__(self, block,last_round_tc, high_commit_qc,sender):
         self.block = block
         self.last_round_tc = last_round_tc
         self.high_commit_qc = high_commit_qc
+        self.sender=sender
 
 
 class Message:
