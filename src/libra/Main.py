@@ -34,8 +34,6 @@ class Main:
         return self.leader_election.get_leader(self.pacemaker.current_round) == self.curr_pr
 
     def start_event_processing(self, M, type):
-        # print("message in sep")
-        message = pickle.loads(M)
         if (type == 'local_timeout'):
             self.pacemaker.local_timeout_round()
         if (type == 'proposal_message'):
@@ -85,7 +83,7 @@ class Main:
             vote_msg.author_signature = self.id
             vote_msg.block = block_P
             print("new leader is, ", self.leader_election.get_leader(round + 1))
-            return pickle.dumps(vote_msg), (self.leader_election.get_leader(round + 1))
+            return vote_msg, (self.leader_election.get_leader(round + 1))
             # send vote_msg to LeaderElection.get_leader(current_round+1)
 
     def process_timeout_message(self, M):
@@ -107,7 +105,7 @@ class Main:
         p = ProposalMsg(b, last_tc, self.block_tree.high_commit_qc,
                         self.safety.valid_signatures(high_qc=self.block_tree.high_commit_qc, last_tc=last_tc), last_tc,
                         u)
-        return pickle.dumps(p)
+        return p
         # return None
 
     def process_vote_msg(self, M):

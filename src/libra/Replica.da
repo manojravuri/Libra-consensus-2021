@@ -78,7 +78,7 @@ class Replica(process):
 
     def Main_start_event_processing(M, type):
         #print("message in sep")
-        message = pickle.loads(M)
+        message = M
         if (type == 'local_timeout'):
             self.PaceMaker_local_timeout_round()
         if (type == 'proposal_message'):
@@ -126,7 +126,7 @@ class Replica(process):
         print("make vote done",vote_msg)
         if vote_msg:
             print("new leader is, ", LeaderElection_get_leader(round + 1))
-            return pickle.dumps(vote_msg), (LeaderElection_get_leader(round + 1))
+            return vote_msg, (LeaderElection_get_leader(round + 1))
             # send vote_msg to LeaderElection.get_leader(current_round+1)
 
     def Main_process_timeout_message(M):
@@ -147,7 +147,7 @@ class Replica(process):
         b = self.BlockTree_generate_block(u, self.MemPool_get_transactions(), self.current_round,
                                            high_qc=self.high_commit_qc)
         p = ProposalMsg(b, last_tc, self.high_commit_qc,replica_id)
-        return pickle.dumps(p)
+        return p
 
     def Main_process_vote_msg(M):
         print("Mis ", M)
