@@ -17,12 +17,25 @@ class Client(process):
         self.number_of_requests = number_of_requests
         self.request_gap = request_gap
         self.f=f
+        self.replica_timeout=5
+
+    def broadcast_request(cmd,reps):
+        c=logical_clock()
+        send(('request',cmd,c,self),to=reps)
+        #re-transmit
+        #await(each(p in replicas, has=received(('ack', p)))): pass
+        #timeout replica_timeout: broadcast_request(cmd,____)
 
 
     def run():
         for i in range(number_of_requests):
+            output("client "+str(client_id)+"sleeping for "+str(request_gap))
             time.sleep(request_gap)
-            c=logical_clock()
-            send(('request',c),to=replicas)
+            cmd=str(client_id)+"-"+str(i)
+            output("client is broadcasting "+cmd)
+
+            broadcast_request(cmd,replicas)
             await(len(setof(a,received(('committed'), from_=a)))>2*f+1)
         output("Client ", client_id," is terminated")
+
+

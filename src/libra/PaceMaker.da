@@ -1,6 +1,6 @@
 from .Safety import Safety
 from .BlockTree import BlockTree
-from .BlockTree import TimeoutMsg
+from .Objects import *
 import threading
 
 
@@ -33,8 +33,9 @@ class PaceMaker:
     def local_timeout_round(self):
         # save_consensus_state()
         print("local timeout")
-        self.stop_timer()
+        self.stop_timer(self.current_round)
         timeout_info = self.safety.make_timeout(self.current_round, self.block_tree.high_qc, self.last_round_tc)
+        print("broadcast Timeout to Replicas")
         # broadcast TimeoutMsg(timeout_info,self.last_round_tc,self.block_tree.high_commit_qc)
 
     def process_remote_timeout(self, tmo):
@@ -53,17 +54,15 @@ class PaceMaker:
         return None
 
     def advance_round_tc(self, tc):
-        if (tc is None or tc.round < self.current_round):
+        if tc is None or tc.round < self.current_round:
             return False
         self.last_round_tc = tc
         self.start_timer(tc.round + 1)
         return True
 
     def advance_round_qc(self, qc):
-        if (qc and qc.vote_info):
-            if (qc.vote_info.round < self.current_round):
-                return False
-            self.last_round_tc = None
-            self.start_timer(qc.vote_info.round + 1)
-            return True
+        if qc.vote_info.round < self.current_round:
+            return False
+        self.last_round_tc = None
+        self.start_timer(qc.vote_info.round + 1)
         return True

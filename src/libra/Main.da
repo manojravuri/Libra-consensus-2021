@@ -4,69 +4,52 @@ from .PaceMaker import PaceMaker
 from .Safety import Safety
 from .MemPool import MemPool
 from .Ledger import Ledger
-from .BlockTree import ProposalMsg
+from .Objects import *
 
 import pickle
 
 
-class Message:
-    def __init__(self, type=None, block=None, high_commit_qc=None, last_round_tc=None, tmo_info=None):
-        self.type = type
-        self.block = block
-        self.high_commit_qc = high_commit_qc
-        self.last_round_tc = last_round_tc
-        self.tmo_info = tmo_info
-
-
-class Proposal(Message):
-    def __init__(self):
-        pass
-
 
 class Main:
-    def __init__(self, id=None, nodes=None):
+    def __init__(self, id, curr_pr, ps=None):
+
         self.id = id
         self.mempool = MemPool()
-        self.ledger = Ledger(id,self.mempool)
+        self.win_sz = 1
+        self.ledger = Ledger(id, self.mempool, self.win_sz)
         self.safety = Safety(self.ledger)
-        self.block_tree = BlockTree(self.ledger)
-        self.pacemaker = PaceMaker(self.safety,self.block_tree,current_round=0)
-        self.leader_election = LeaderElection(self.ledger,pacemaker=self.pacemaker, nodes=nodes)
+        self.block_tree = BlockTree(self.ledger,f=int(len(ps)/3))
+        self.pacemaker = PaceMaker(self.safety, self.block_tree, current_round=0)
+        self.curr_pr = curr_pr
+        ps.add(curr_pr)
+        self.leader_election = LeaderElection(self.ledger, window_size=self.win_sz, pacemaker=self.pacemaker, ps=ps)
 
     def sync(self, round_number):
         self.pacemaker.current_round = round_number
 
-
     def current_leader(self):
-        if (id == self.leader_election.get_leader()):
-            return True
-        else:
-            return False
+        return id == self.leader_election.get_leader()
 
     def can_send(self):
-        if(self.leader_election.get_leader(self.pacemaker.current_round)[0]==self.id):
-            return True
-        else:
-            return False
+        return self.leader_election.get_leader(self.pacemaker.current_round) == self.curr_pr
 
-
-    def start_event_processing(self,M,type):
-        # print("M in sep is, ", M)
-        message=pickle.loads(M)
-        if(type=='local_timeout'):
+    def start_event_processing(self, M, type):
+        # print("message in sep")
+        message = pickle.loads(M)
+        if (type == 'local_timeout'):
             self.pacemaker.local_timeout_round()
-        if(type=='proposal_message'):
+        if (type == 'proposal_message'):
             msg = self.process_proposal_msg(message)
             if msg:
                 return msg
-        if(type == 'vote_message'):
+        if (type == 'vote_message'):
             msg = self.process_vote_msg(message)
-            print("got msg in sep , " ,msg)
+            print("got msg in sep , ", msg)
             if msg:
                 return msg
             else:
                 return None, None
-        if(type == 'timeout_mesaage'):
+        if (type == 'timeout_mesaage'):
             self.process_timeout_message(message)
 
     def process_certificate_qc(self, qc):
@@ -91,37 +74,39 @@ class Main:
         if (P.block.round != round or P.sender != leader or P.block.author != leader):
             return
         print("generating block")
-        block_P = self.block_tree.generate_block(self.id,self.mempool.get_transactions()[0],round,P.high_commit_qc)
+        block_P = self.block_tree.generate_block(self.id, self.mempool.get_transactions()[0], round, P.high_commit_qc)
         print("generated block")
         self.block_tree.execute_and_insert(block_P)
         print("executed and inserted")
-        vote_msg=self.safety.make_vote(block_P, P.last_round_tc, P.high_commit_qc)
+        vote_msg = self.safety.make_vote(block_P, P.last_round_tc, P.high_commit_qc)
         print("make vote done")
-        if(vote_msg is not None):
+        if (vote_msg is not None):
             vote_msg.author = self.id
             vote_msg.author_signature = self.id
             vote_msg.block = block_P
-            print("new leader is, ", self.leader_election.get_leader(round+1))
-            return pickle.dumps(vote_msg),(self.leader_election.get_leader(round+1))
-            #send vote_msg to LeaderElection.get_leader(current_round+1)
+            print("new leader is, ", self.leader_election.get_leader(round + 1))
+            return pickle.dumps(vote_msg), (self.leader_election.get_leader(round + 1))
+            # send vote_msg to LeaderElection.get_leader(current_round+1)
 
     def process_timeout_message(self, M):
         self.process_certificate_qc(M.tmo_info.high_qc)
         self.process_certificate_qc(M.high_commit_qc)
         self.pacemaker.advance_round_tc(M.last_round_tc)
         tc = self.pacemaker.process_remote_timeout(M)
-        if (tc ):
+        if (tc):
             self.pacemaker.advance_round_tc(tc)
             self.process_new_round_event(tc)
 
     def process_new_round_event(self, last_tc=None):
         # u = self.id
+
         u = self.leader_election.get_leader(self.pacemaker.current_round)
         # if u == self.leader_election.get_leader(self.pacemaker.current_round):
         b = self.block_tree.generate_block(u, self.mempool.get_transactions(), self.pacemaker.current_round,
                                            high_qc=self.block_tree.high_commit_qc)
         p = ProposalMsg(b, last_tc, self.block_tree.high_commit_qc,
-                        self.safety.valid_signatures(high_qc=self.block_tree.high_commit_qc, last_tc=last_tc), last_tc, u)
+                        self.safety.valid_signatures(high_qc=self.block_tree.high_commit_qc, last_tc=last_tc), last_tc,
+                        u)
         return pickle.dumps(p)
         # return None
 
@@ -132,11 +117,15 @@ class Main:
         if (qc):
             self.process_certificate_qc(qc)
             print("here is it")
-            return self.process_new_round_event(qc.last_tc), self.leader_election.get_leader(self.pacemaker.current_round)
-            #return None, self.leader_election.get_leader(self.pacemaker.current_round)
+            return self.process_new_round_event(qc.last_tc), self.leader_election.get_leader(
+                self.pacemaker.current_round)
+            # return None, self.leader_election.get_leader(self.pacemaker.current_round)
 
     def workload_exists(self):
-        if(self.mempool.get_transactions()):
+        if (self.mempool.get_transactions()):
             return True
         else:
             return False
+
+    def add_to_Mempool(self, M):
+        self.mempool.add_to_queue(M)
