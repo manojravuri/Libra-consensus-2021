@@ -1,0 +1,28 @@
+import os
+import random
+import string
+import sys
+import logging
+import time
+from .Main import Main
+
+config(clock = 'Lamport')
+config(handling = 'all')
+
+
+class Client(process):
+    def setup(client_id:int,replicas:set,f:int,number_of_requests:int,request_gap:int,all_replicas_public_keys,client_private_key):
+        output("creating client ", client_id)
+        self.replicas=replicas
+        self.number_of_requests = number_of_requests
+        self.request_gap = request_gap
+        self.f=f
+
+
+    def run():
+        for i in range(number_of_requests):
+            time.sleep(request_gap)
+            c=logical_clock()
+            send(('request',c),to=replicas)
+            await(len(setof(a,received(('committed'), from_=a)))>2*f+1)
+        output("Client ", client_id," is terminated")

@@ -1,0 +1,57 @@
+import os
+import random
+import string
+import sys
+import logging
+import time
+from .Main import Main
+
+config(clock = 'Lamport')
+config(handling = 'all')
+
+TIMEOUT=1
+
+class Replica(process):
+    def setup(replica_id:int,nodes:dict,ps:set,f:int,number_of_requests:int,all_replica_public_keys,all_client_public_keys:list,replica_private_key:list):
+        output("creating replica ", replica_id)
+        self.main = Main(replica_id,nodes,all_replica_public_keys,all_client_public_keys,replica_private_key)
+        self.nodes = nodes
+        self.f = f
+        self.ps=ps
+        self.proposals=set()
+        self.all_replica_public_keys=all_replica_public_keys
+        self.all_client_public_keys=all_client_public_keys
+        self.replica_private_key=replica_private_key
+        self.number_of_requests = number_of_requests
+
+    def receive(msg=('proposal',p1,c1)):
+        c2=logical_clock()
+        output("recieved message in",replica_id)
+        send(('proposal ack',c2), to=ps)
+        p, leader = self.main.start_event_processing(p1,'proposal_message')
+        if p and leader:
+            output("Sending proposal to replicas",leader)
+            send(('vote',p,logical_clock()),to=leader)
+
+    def receive(msg=('vote',vote_info,c1)):
+        c2=logical_clock()
+        output("recieved vote in leader ",replica_id)
+        proposal_msg,leader=self.main.start_event_processing(vote_info,'vote_message')
+        if proposal_msg and leader:
+          output("got vote_info, leader")
+          send(('proposal',proposal_msg,logical_clock()),to=ps)
+
+    def run():
+        -- l1
+        if(self.main.workload_exists()):
+            if(self.main.can_send()):
+                p=self.main.process_new_round_event()
+                output("sending messages to all processes from replica",replica_id)
+                c=logical_clock()
+                send(('proposal',p,c),to=ps)
+                -- l2
+                await(len(setof(a,received(('proposal ack',c3), from_=a)))>2*f+1)
+        await(len(setof(a,received(('done',c3), from_=a)))>2*f+1)
+        output("Replica ", replica_id," is terminaed")
+
+
