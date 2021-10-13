@@ -1,11 +1,10 @@
-from .Ledger import Ledger
+from Ledger import Ledger
 from collections import defaultdict
 
-from .Objects import *
 
 
 class BlockTree:
-    def __init__(self, ledger, f, high_qc=None,high_commit_qc=None):
+    def __init__(self, ledger, f=1, high_qc=None,high_commit_qc=None):
         self.ledger = ledger
         self.pending_block_tree = set()
         self.pending_votes = defaultdict(list)
@@ -28,10 +27,10 @@ class BlockTree:
         self.high_qc = self.get_max_QC(qc, self.high_qc)
         # print("process qc done")
 
-    def execute_and_insert(self, b):
+    def execute_and_insert(self, proposal):
         # print(b)
-        self.ledger.speculate(b.qc.block, b, b.payload)
-        self.pending_block_tree.add(b)
+        self.ledger.speculate(proposal.block.qc, proposal.block.id, proposal.block.payload)
+        self.pending_block_tree.add(proposal.block)
 
     def process_vote(self, v):
         print("in process_vote ", v)
@@ -43,14 +42,14 @@ class BlockTree:
         self.pending_votes[vote_idx].append(v.signature)
         print("self.pending_votes[vote_idx] is , ", self.pending_votes[vote_idx])
 
-        if self.pending_votes[vote_idx] and len(self.pending_votes[vote_idx]) == (2 * self.f + 1):
-            qc = QC(vote_info=v.vote_info, votes=self.pending_votes[vote_idx])
+        if self.pending_votes[vote_idx] and len(self.pending_votes[vote_idx]) == ( 1):
+            qc = QC(vote_info=v.vote_info,ledger_commit_info=v.ledger_commit_info ,signatures=self.pending_votes[vote_idx])
             print("QuorumC", QC)
             return qc
         return None
 
-    def generate_block(self, u, txns, current_round, high_qc):
-        return Block(author=u, round=current_round, payload=txns, qc=high_qc)
+    def generate_block(self, u, txns, current_round):
+        return Block(author=u, round=current_round, payload=txns, qc=self.high_qc)
 
     def get_max_QC(self, qc1, qc2):
         print("qc1",qc1.vote_info.round)
@@ -61,12 +60,11 @@ class BlockTree:
 
 
 class VoteInfo:
-    def __init__(self, id, round, parent_id, parent_round,exec_state_id):
+    def __init__(self, id, round, parent_id, parent_round):
         self.id = id
         self.round = round
         self.parent_id = parent_id
         self.parent_round = parent_round
-        self.exec_state_id = exec_state_id
 
 
 class LedgerCommitInfo:

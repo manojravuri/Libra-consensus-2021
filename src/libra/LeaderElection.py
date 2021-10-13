@@ -1,8 +1,8 @@
 import random
 
-from .Ledger import Ledger
-from .PaceMaker import PaceMaker
-from .Objects import *
+from Ledger import Ledger
+from PaceMaker import PaceMaker
+from Objects import *
 
 class LeaderElection:
     def __init__(self, ledger, pacemaker, ps, window_size=1, exclude_size=None, reputation_leaders={}):
@@ -20,6 +20,8 @@ class LeaderElection:
         i = 0
         while i < self.window_size or len(last_authors) < self.exclude_size:
             current_block = self.ledger.committed_block(current_qc.vote_info.parent_id)
+            if not current_block:
+                return self.ps[random.randint(0, len(self.ps) - 1)]
             block_author = current_block.author
             if i < self.window_size:
                 active_validators.add(current_qc.signatures.signers())

@@ -1,5 +1,5 @@
-from .Ledger import Ledger
-from .Objects import *
+from Ledger import Ledger
+from Objects import *
 
 
 class Safety:
@@ -33,27 +33,27 @@ class Safety:
 
     def commit_state_id_candidate(self, block_round, qc):
         if (self.consecutive(block_round, qc.vote_info.round)):
-            return self.ledger.pending_state(qc.id)
+            return self.ledger.pending_state(qc.vote_info.round)
         else:
             return None
 
     def valid_signatures(self, high_qc, last_tc):
         return True
 
-    def make_vote(self, b, last_tc, high_commit_qc):
+    def make_vote(self, block, last_tc, high_commit_qc):
         # import pdb; pdb.set_trace()
-        print(b)
-        qc_round = b.qc.vote_info.round
-        if self.valid_signatures(b, last_tc) or safe_to_vote(b.round, qc_round, last_tc):
+        print(block)
+        qc_round = block.qc.vote_info.round
+        if self.valid_signatures(block, last_tc) or safe_to_vote(block.round, qc_round, last_tc):
             print(1)
             self.update_highest_qc_round(qc_round)
             print(2)
-            self.increase_highest_vote_round(b.round)
+            self.increase_highest_vote_round(block.round)
             print(3)
-            print(b, b.id)
-            vote_info = VoteInfo(b.id, b.round, b.qc.vote_info, qc_round)
+            print(block, block.id)
+            vote_info = VoteInfo(block.id, block.round, block.qc.vote_info, qc_round)
             print(4)
-            ledger_commit_info = LedgerCommitInfo(self.commit_state_id_candidate(b.round, b.qc), vote_info)
+            ledger_commit_info = LedgerCommitInfo(self.commit_state_id_candidate(block.round, block.qc), vote_info)
             print(5)
             return VoteMsg(vote_info, ledger_commit_info, high_commit_qc, None, None)
         return None

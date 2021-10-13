@@ -1,6 +1,6 @@
-from .Safety import Safety
-from .BlockTree import BlockTree
-from .Objects import *
+from Safety import Safety
+from BlockTree import BlockTree
+from Objects import *
 import threading
 
 
@@ -16,7 +16,7 @@ class PaceMaker:
         self.timer = 0
 
     def stop_timer(self, round):
-        self.timer.cancel()
+        #self.timer.cancel()
         pass
 
     def get_round_timer(self, r):
@@ -24,10 +24,10 @@ class PaceMaker:
         return 4 * self.delta
 
     def start_timer(self, new_round):
-        # self.stop_timer(self.current_round)
+        #self.stop_timer(self.current_round)
         self.current_round = new_round
-        self.timer = threading.Timer(self.get_round_timer(1), self.local_timeout_round())
-        self.timer.start()
+        #self.timer = threading.Timer(self.get_round_timer(1), self.local_timeout_round())
+        #self.timer.start()
         # return self.get_round_timer(self, self.current_round)
 
     def local_timeout_round(self):

@@ -1,6 +1,6 @@
 from collections import deque
 
-from .MemPool import MemPool
+from MemPool import MemPool
 import os
 import copy
 
