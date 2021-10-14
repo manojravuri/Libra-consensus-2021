@@ -7,6 +7,7 @@ class MemPool:
 
     def __init__(self):
         self.q = deque()
+        self.i = 0
         pass
 
     def get_transactions(self):
@@ -15,7 +16,8 @@ class MemPool:
             a = self.q.popleft()
             self.q.appendleft(a)
             return a
-        return "test1"
+        self.i += 1
+        return str(self.i)
         # return None
 
     def increment_txn_start_num(self):

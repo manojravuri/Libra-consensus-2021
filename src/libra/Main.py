@@ -21,9 +21,9 @@ class Main:
         self.mempool = MemPool()
         self.win_sz = 1
         self.ledger = Ledger(id, self.mempool, self.win_sz)
-        self.safety = Safety(id,self.ledger,highest_vote_round=-1,highest_qc_round=-1,private_key=replica_private_key,replica_public_keys=all_replica_public_keys,client_public_keys=all_client_public_keys)
+        self.safety = Safety(id,self.ledger,highest_vote_round=-1,highest_qc_round=-1,private_key=replica_private_key,replica_public_keys=all_replica_public_keys,client_public_keys=all_client_public_keys, curr_pr = curr_pr)
         self.block_tree = BlockTree(self.ledger,self.safety,f=int(len(ps)/3))
-        self.pacemaker = PaceMaker(self.safety, self.block_tree, current_round=0)
+        self.pacemaker = PaceMaker(self.safety, self.block_tree, current_round=0, ps = ps)
         self.curr_pr = curr_pr
         self.leader_election = LeaderElection(self.ledger, window_size=self.win_sz, pacemaker=self.pacemaker, ps=ps)
 
@@ -38,7 +38,7 @@ class Main:
 
     def start_event_processing(self, message, type):
         if (type == 'local_timeout'):
-            self.pacemaker.local_timeout_round()
+            msg = self.pacemaker.local_timeout_round()
         if (type == 'proposal_message'):
             msg = self.process_proposal_msg(message)
             if msg:
@@ -50,9 +50,12 @@ class Main:
                 return msg
             else:
                 return None, None
-        if (type == 'timeout_mesaage'):
-            self.process_timeout_message(message)
-
+        if (type == 'timeout_message'):
+            msg = self.process_timeout_message(message)
+            if msg:
+                return msg
+            else:
+                return None, None
     def process_certificate_qc(self, qc):
         self.block_tree.process_qc(qc)
         #print("process qc done")
@@ -92,13 +95,14 @@ class Main:
         tc = self.pacemaker.process_remote_timeout(M)
         if (tc):
             self.pacemaker.advance_round_tc(tc)
-            self.process_new_round_event(tc)
+            return self.process_new_round_event(tc), self.leader_election.get_leader(self.pacemaker.current_round)
 
     def process_new_round_event(self, last_tc=None):
+        # import pdb; pdb.set_trace()
         u = self.leader_election.get_leader(self.pacemaker.current_round)
         # if u == self.leader_election.get_leader(self.pacemaker.current_round):
         b = self.block_tree.generate_block(u, self.mempool.get_transactions(), self.pacemaker.current_round)
-        p = ProposalMsg(b, last_tc, self.block_tree.high_commit_qc,u)
+        p = ProposalMsg(b, last_tc, self.block_tree.high_commit_qc, u)
         return p
         # return None
 
@@ -165,6 +169,7 @@ if __name__ == '__main__':
     main5 = Main(4, nodes[4], nodes,all_replica_public_keys=all_replica_public_keys,all_client_public_keys=all_client_public_keys,replica_private_key=all_replica_private_keys[4])
     p1=main1.process_new_round_event()
     print(p1)
+    # import pdb; pdb.set_trace()
     vote_msg_2,leader_2 =main2.start_event_processing(p1,'proposal_message')
     vote_msg_6, leader_6 = main1.start_event_processing(p1, 'proposal_message')
     vote_msg_3, leader_3 = main3.start_event_processing(p1, 'proposal_message')
@@ -176,19 +181,19 @@ if __name__ == '__main__':
     proposal_msg, leader = main2.start_event_processing(vote_msg_3, 'vote_message')
     proposal_msg, leader = main2.start_event_processing(vote_msg_4, 'vote_message')
     proposal_msg, leader = main2.start_event_processing(vote_msg_5, 'vote_message')
-
+    # import pdb; pdb.set_trace()
     vote_msg_2, leader_2 = main1.start_event_processing(proposal_msg_2, 'proposal_message')
     vote_msg_3, leader_3 = main3.start_event_processing(proposal_msg_2, 'proposal_message')
     vote_msg_4, leader_4 = main4.start_event_processing(proposal_msg_2, 'proposal_message')
     vote_msg_5, leader_5 = main5.start_event_processing(proposal_msg_2, 'proposal_message')
     vote_msg_6, leader_6 = main2.start_event_processing(proposal_msg_2, 'proposal_message')
-
+    # import pdb; pdb.set_trace()
     proposal_msg, leader_2 = main3.start_event_processing(vote_msg_2, 'vote_message')
     proposal_msg_2, leader = main3.start_event_processing(vote_msg_3, 'vote_message')
     proposal_msg, leader = main3.start_event_processing(vote_msg_4, 'vote_message')
     proposal_msg, leader = main3.start_event_processing(vote_msg_5, 'vote_message')
     proposal_msg_6, leader_6 = main3.start_event_processing(vote_msg_6, 'vote_message')
-
+    # import pdb; pdb.set_trace()
     vote_msg_2, leader_2 = main2.start_event_processing(proposal_msg_2, 'proposal_message')
     vote_msg_6, leader_2 = main3.start_event_processing(proposal_msg_2, 'proposal_message')
     vote_msg_4, leader_4 = main4.start_event_processing(proposal_msg_2, 'proposal_message')
@@ -201,16 +206,15 @@ if __name__ == '__main__':
     proposal_msg, leader = main4.start_event_processing(vote_msg_3, 'vote_message')
     proposal_msg, leader = main4.start_event_processing(vote_msg_4, 'vote_message')
     proposal_msg, leader = main4.start_event_processing(vote_msg_5, 'vote_message')
-
+    # import pdb; pdb.set_trace()
     vote_msg_2, leader_2 = main1.start_event_processing(proposal_msg_2, 'proposal_message')
-    vote_msg_6, leader_2 = main1.start_event_processing(proposal_msg_2, 'proposal_message')
+    vote_msg_6, leader_2 = main4.start_event_processing(proposal_msg_2, 'proposal_message')
     vote_msg_3, leader_3 = main3.start_event_processing(proposal_msg_2, 'proposal_message')
     vote_msg_4, leader_4 = main2.start_event_processing(proposal_msg_2, 'proposal_message')
     vote_msg_5, leader_5 = main5.start_event_processing(proposal_msg_2, 'proposal_message')
-
+    # import pdb; pdb.set_trace()
     proposal_msg_2, leader_2 = main5.start_event_processing(vote_msg_2, 'vote_message')
     proposal_msg, leader_2 = main5.start_event_processing(vote_msg_6, 'vote_message')
     proposal_msg, leader = main5.start_event_processing(vote_msg_3, 'vote_message')
     proposal_msg, leader = main5.start_event_processing(vote_msg_4, 'vote_message')
     proposal_msg, leader = main5.start_event_processing(vote_msg_5, 'vote_message')
-

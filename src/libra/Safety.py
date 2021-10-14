@@ -7,7 +7,7 @@ from nacl.signing import VerifyKey
 from nacl.encoding import HexEncoder
 
 class Safety:
-    def __init__(self,id, ledger, highest_vote_round=-1, highest_qc_round=-1,private_key=None,replica_public_keys=None,client_public_keys=None):
+    def __init__(self,id, ledger, highest_vote_round=-1, highest_qc_round=-1,private_key=None,replica_public_keys=None,client_public_keys=None, curr_pr = None):
         self.id=id
         self.private_key = private_key
         self.replica_public_keys = replica_public_keys
@@ -15,6 +15,7 @@ class Safety:
         self.highest_vote_round = highest_vote_round
         self.highest_qc_round = highest_qc_round
         self.ledger = ledger
+        self.curr_pr = curr_pr
 
     def increase_highest_vote_round(self, round):
         self.highest_vote_round = max(round, self.highest_vote_round)
@@ -26,19 +27,21 @@ class Safety:
         return round + 1==block_round
 
     def safe_to_extend(self, block_round, qc_round, tc):
-        return self.consecutive( block_round, tc.round) and qc_round >= max(tc.tmo_high_qc_rounds)
+        if tc is not None:
+            return self.consecutive( block_round, tc.round) and qc_round >= max(tc.tmo_high_qc_rounds)
+        return True
 
     def safe_to_vote(self, block_round, qc_round, tc):
         if (block_round <= max(self.highest_vote_round, qc_round)):
             return False
-        return self.consecutive( block_round, qc_round) and self.safe_to_extend( block_round, qc_round, tc)
+        return self.consecutive(block_round, qc_round) or self.safe_to_extend( block_round, qc_round, tc)
 
     def safe_to_timeout(self, round, qc_round, tc):
         if (qc_round < self.highest_qc_round or round <= max(self.highest_vote_round - 1, qc_round)):
             return False
         return self.consecutive( round, qc_round) or self.consecutive( round, tc.round)
 
-    def commit_state_id_candidate(self, block_round, qc,block):
+    def commit_state_id_candidate(self, block_round, qc, block):
         if (self.consecutive(block_round, qc.vote_info.round) and qc.vote_info.round >=0):
             return self.ledger.pending_state(block.round)
         else:
@@ -80,7 +83,8 @@ class Safety:
         # import pdb; pdb.set_trace()
         #print(block)
         qc_round = block.qc.vote_info.round
-        if (self.valid_signatures(high_commit_qc, last_tc) or self.safe_to_vote(block.round, qc_round, last_tc)):
+        # import pdb; pdb.set_trace()
+        if (self.valid_signatures(high_commit_qc, last_tc) and self.safe_to_vote(block.round, qc_round, last_tc)):
             #print(1)
             self.update_highest_qc_round(qc_round)
             #print(2)
@@ -90,7 +94,7 @@ class Safety:
             signature=self.make_signature(block)
             vote_info = VoteInfo(block.id, block.round, block.qc.vote_info, qc_round)
             #print(4)
-            ledger_commit_info = LedgerCommitInfo(self.commit_state_id_candidate(block.round, block.qc,block), vote_info)
+            ledger_commit_info = LedgerCommitInfo(self.commit_state_id_candidate(block.round, block.qc, block), vote_info)
             #print(5)
             return VoteMsg(vote_info, ledger_commit_info, high_commit_qc, sender=self.id, signature=signature)
         return None
@@ -99,5 +103,5 @@ class Safety:
     def make_timeout(self, round, high_qc, last_tc):
         qc_round = high_qc.vote_info.round
         if (self.valid_signatures(high_qc, last_tc) and self.safe_to_timeout(round, qc_round, last_tc)):
-            return TimeoutInfo(round, high_qc)
+            return TimeoutInfo(round, high_qc, self.curr_pr, Signature(self.id,self.private_key.sign(str((round, high_qc.vote_info.round)).encode('utf-8')),'replica'))
         return None
