@@ -26,6 +26,7 @@ class PaceMaker:
     def start_timer(self, new_round):
         #self.stop_timer(self.current_round)
         self.current_round = new_round
+        print("current round",self.current_round)
         #self.timer = threading.Timer(self.get_round_timer(1), self.local_timeout_round())
         #self.timer.start()
         # return self.get_round_timer(self, self.current_round)

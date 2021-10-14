@@ -15,8 +15,21 @@ config(handling = 'all')
 
 TIMEOUT=1
 
+
+def setup(replica_id:int,nodes:dict,ps:set,f:int,number_of_requests:int,all_replica_public_keys,all_client_public_keys:list,replica_private_key:list):
+        output("creating replica ", replica_id)
+        self.main = Main(replica_id,nodes,all_replica_public_keys,all_client_public_keys,replica_private_key)
+        self.nodes = nodes
+        self.f = f
+        self.ps=ps
+        self.proposals=set()
+        self.all_replica_public_keys=all_replica_public_keys
+        self.all_client_public_keys=all_client_public_keys
+        self.replica_private_key=replica_private_key
+        self.number_of_requests = number_of_requests
+
 class Replica(process):
-    def setup(replica_id:int,curr_pr,ps:set,f:int,number_of_requests:int):
+    def setup(replica_id:int,curr_pr,ps:list,f:int,number_of_requests:int,all_replica_public_keys:list,all_client_public_keys:list,replica_private_key):
     # ====== attributes of Replica ======
         output("creating replica ", replica_id)
         self.f = f
@@ -29,6 +42,12 @@ class Replica(process):
         self.replica_id = replica_id
         self.window_size = 1
         self.curr_pr = curr_pr
+        self.all_replica_public_keys=all_replica_public_keys
+        self.all_client_public_keys=all_client_public_keys
+        self.replica_private_key=replica_private_key
+
+
+
 
     # ====== attributes of MemPool ======
         self.q = deque()

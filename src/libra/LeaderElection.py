@@ -3,6 +3,7 @@ import random
 from Ledger import Ledger
 from PaceMaker import PaceMaker
 from Objects import *
+import random
 
 class LeaderElection:
     def __init__(self, ledger, pacemaker, ps, window_size=1, exclude_size=None, reputation_leaders={}):
@@ -12,6 +13,7 @@ class LeaderElection:
         self.reputation_leaders = reputation_leaders
         self.ledger = ledger
         self.pacemaker = pacemaker
+        random.seed(10)
 
     def elect_reputation_leader(self, qc):
         active_validators = set()
@@ -23,14 +25,17 @@ class LeaderElection:
             if not current_block:
                 return self.ps[random.randint(0, len(self.ps) - 1)]
             block_author = current_block.author
+            signers=set()
+            for signature in current_qc.signatures:
+                signers.add(ps[signature.id])
             if i < self.window_size:
-                active_validators.add(current_qc.signatures.signers())
+                active_validators.update(signers)
             if len(last_authors) < self.exclude_size:
                 last_authors.add(block_author)
             current_qc = current_block.qc
             i += 1
         active_validators = active_validators.difference(last_authors)
-        print("active_validators is ", active_validators)
+        #print("active_validators is ", active_validators)
         return active_validators[random.randint(0, len(active_validators) - 1)]
 
     def update_leader(self, qc):
@@ -41,7 +46,7 @@ class LeaderElection:
             self.reputation_leaders[current_round + 1] = self.elect_reputation_leader(qc)
 
     def get_leader(self, round):
-        print("round",round)
+        #print("round",round)
         if self.reputation_leaders and round in self.reputation_leaders:
             return self.reputation_leaders[round]
         return self.ps[int((round / 2) % len(self.ps))]

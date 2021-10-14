@@ -11,9 +11,14 @@ class LedgerCommitInfo:
         self.commit_state_id = commit_state_id
         self.vote_info_hash = hash(vote_info)
 
+class Signature:
+    def __init__(self,id=None,message=None,type=None):
+        self.id=id
+        self.message=message
+        self.type=type
 
 class VoteMsg:
-    def __init__(self, vote_info, ledger_commit_info, high_commit_qc, sender, signature):
+    def __init__(self, vote_info, ledger_commit_info, high_commit_qc, sender, signature:Signature):
         self.sender = sender
         self.signature = signature
         self.vote_info = vote_info
