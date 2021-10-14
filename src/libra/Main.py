@@ -21,9 +21,9 @@ class Main:
         self.mempool = MemPool()
         self.win_sz = 1
         self.ledger = Ledger(id, self.mempool, self.win_sz)
-        self.safety = Safety(id,self.ledger,highest_vote_round=-1,highest_qc_round=-1,private_key=replica_private_key,replica_public_keys=all_replica_public_keys,client_public_keys=all_client_public_keys)
+        self.safety = Safety(id,self.ledger,highest_vote_round=-1,highest_qc_round=-1,private_key=replica_private_key,replica_public_keys=all_replica_public_keys,client_public_keys=all_client_public_keys, curr_pr = curr_pr)
         self.block_tree = BlockTree(self.ledger,self.safety,f=int(len(ps)/3))
-        self.pacemaker = PaceMaker(self.safety, self.block_tree, current_round=0)
+        self.pacemaker = PaceMaker(self.safety, self.block_tree, current_round=0, ps = ps)
         self.curr_pr = curr_pr
         self.leader_election = LeaderElection(self.ledger, window_size=self.win_sz, pacemaker=self.pacemaker, ps=ps)
 
@@ -213,4 +213,3 @@ if __name__ == '__main__':
     proposal_msg, leader = main5.start_event_processing(vote_msg_3, 'vote_message')
     proposal_msg, leader = main5.start_event_processing(vote_msg_4, 'vote_message')
     proposal_msg, leader = main5.start_event_processing(vote_msg_5, 'vote_message')
-

@@ -7,7 +7,7 @@ from nacl.signing import VerifyKey
 from nacl.encoding import HexEncoder
 
 class Safety:
-    def __init__(self,id, ledger, highest_vote_round=-1, highest_qc_round=-1,private_key=None,replica_public_keys=None,client_public_keys=None):
+    def __init__(self,id, ledger, highest_vote_round=-1, highest_qc_round=-1,private_key=None,replica_public_keys=None,client_public_keys=None, curr_pr = None):
         self.id=id
         self.private_key = private_key
         self.replica_public_keys = replica_public_keys
@@ -15,6 +15,7 @@ class Safety:
         self.highest_vote_round = highest_vote_round
         self.highest_qc_round = highest_qc_round
         self.ledger = ledger
+        self.curr_pr = curr_pr
 
     def increase_highest_vote_round(self, round):
         self.highest_vote_round = max(round, self.highest_vote_round)
@@ -99,5 +100,5 @@ class Safety:
     def make_timeout(self, round, high_qc, last_tc):
         qc_round = high_qc.vote_info.round
         if (self.valid_signatures(high_qc, last_tc) and self.safe_to_timeout(round, qc_round, last_tc)):
-            return TimeoutInfo(round, high_qc)
+            return TimeoutInfo(round, high_qc, self.curr_pr, Signature(self.id,self.private_key.sign(str((round, high_qc.vote_info.round)).encode('utf-8')),'replica'))
         return None

@@ -36,6 +36,7 @@ class Ledger:
     def commit(self, block_id):
         # update start txn after commit
         file = open(self.file_name, "a+")
+        print("node_id is ", self.node_id, " , round is ", self.pending_map[block_id]["block"].round)
         file.write(self.pending_map[block_id]["payload"])
         file.close()
         self.add_committed_block_to_Q(block_id)
