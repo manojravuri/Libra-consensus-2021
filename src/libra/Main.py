@@ -34,26 +34,37 @@ class Main:
         return id == self.leader_election.get_leader()
 
     def can_send(self):
+        print("can_send is, ", self.leader_election.get_leader(self.pacemaker.current_round) == self.id)
+        print(self.pacemaker.current_round , self.id)
         return self.leader_election.get_leader(self.pacemaker.current_round) == self.curr_pr
+        # return self.leader_election.get_leader(self.pacemaker.current_round) == self.id
 
     def start_event_processing(self, message, type):
+        # print("M is, ", M)
+        # message = pickle.loads(M)
+        # print("message is, ", message)
         if (type == 'local_timeout'):
             msg = self.pacemaker.local_timeout_round()
         if (type == 'proposal_message'):
+
             msg = self.process_proposal_msg(message)
+
             if msg:
                 return msg
+                # return pickle.dumps(msg[0]), msg[1]
         if (type == 'vote_message'):
             msg = self.process_vote_msg(message)
             #print("got msg in sep , ", msg)
             if msg:
                 return msg
+                # return pickle.dumps(msg[0]), msg[1]
             else:
                 return None, None
         if (type == 'timeout_message'):
             msg = self.process_timeout_message(message)
             if msg:
                 return msg
+                # return pickle.dumps(msg[0]), msg[1]
             else:
                 return None, None
     def process_certificate_qc(self, qc):
@@ -67,7 +78,10 @@ class Main:
     def process_proposal_msg(self, P):
         #print("Processing proposal message")
         #print("processing certificate qc")
+        # print("P is, ", P)
+        # print("P.block.qc")
         self.process_certificate_qc(P.block.qc)
+        # print("P.block.qc done")
         #print("processing high commit qc")
         self.process_certificate_qc(P.high_commit_qc)
         #print("Advancing current round")
@@ -104,6 +118,7 @@ class Main:
         # if u == self.leader_election.get_leader(self.pacemaker.current_round):
         b = self.block_tree.generate_block(u, self.mempool.get_transactions(), self.pacemaker.current_round)
         p = ProposalMsg(b, last_tc, self.block_tree.high_commit_qc, u)
+        # return pickle.dumps(p), self.leader_election.get_leader(self.pacemaker.current_round)
         return p
         # return None
 
@@ -114,6 +129,8 @@ class Main:
         if (qc):
             self.process_certificate_qc(qc)
             #print("here is it")
+            # import pdb; pdb.set_trace()
+            qc.author = self.curr_pr
             return self.process_new_round_event(None), self.leader_election.get_leader(self.pacemaker.current_round)
             # return None, self.leader_election.get_leader(self.pacemaker.current_round)
 

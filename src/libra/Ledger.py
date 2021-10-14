@@ -1,4 +1,4 @@
-from collections import deque
+from collections import deque, defaultdict
 
 from MemPool import MemPool
 import os
@@ -12,13 +12,15 @@ class Ledger:
         cur_path = os.path.dirname(__file__)
         self.file_name = os.path.abspath(cur_path + "/../../data/Ledger_" + str(self.node_id) + ".txt")
         # self.file_name = os.path.abspath("/Users/nihalgoalla/Documents/Fall21/CSE535/libra_blockchain/data/Ledger_" + str(self.node_id) + ".txt")
-        self.pending_map = {}
+        self.pending_map = defaultdict(list)
         self.window_size = window_size
         self.commited_blocks = deque()  # committed block with window size
         self.ledger_state = ""
         # pass
 
     def speculate(self, prev_block_id, block_id, payload, block):
+        # if block_id in self.pending_map:
+        #     import pdb; pdb.set_trace()
         self.pending_map[block_id] = {
             "prev_block_id": prev_block_id,
             "payload": payload,
@@ -27,6 +29,7 @@ class Ledger:
         # pass
 
     def pending_state(self, block_id):
+        # import pdb; pdb.set_trace()
         if(block_id in self.pending_map):
             if(self.pending_map[block_id]["prev_block_id"] is not None):
                 return self.pending_map[block_id]["prev_block_id"]
@@ -39,7 +42,7 @@ class Ledger:
         file = open(self.file_name, "a+")
         # import pdb; pdb.set_trace()
         if block_id in self.pending_map:
-            print("node_id is ", self.node_id, " , round is ", self.pending_map[block_id]["block"].round)
+            # print("node_id is ", self.node_id, " , round is ", self.pending_map[block_id]["block"].round)
             file.write(self.pending_map[block_id]["payload"])
             file.close()
             self.add_committed_block_to_Q(block_id)
