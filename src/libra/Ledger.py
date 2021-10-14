@@ -17,24 +17,31 @@ class Ledger:
         self.ledger_state = ""
         pass
 
-    def speculate(self, prev_block_id, block_id, block):
+    def speculate(self, prev_block_id, block_id, payload,block):
         self.pending_map[block_id] = {
             "prev_block_id": prev_block_id,
-            "block": block,
+            "payload": payload,
+            "block":block
         }
         pass
 
     def pending_state(self, block_id):
-        return self.pending_map[block_id]["block"].payload
-
+        if(block_id in self.pending_map):
+            if(self.pending_map[block_id]["prev_block_id"] is not None):
+                return self.pending_map[block_id]["prev_block_id"]
+            else:
+                return None
+        else:
+            return None
     def commit(self, block_id):
         # update start txn after commit
-        file = open(self.file_name, "w")
-        file.write(self.pending_map[block_id]["block"].payload)
+        file = open(self.file_name, "w+")
+        file.write(self.pending_map[block_id]["payload"])
         file.close()
         self.add_committed_block_to_Q(block_id)
-        self.ledger_state = hash(self.ledger_state +"||"+ self.pending_map[block_id]["block"].payload)
-        self.pending_map = {}
+        # self.ledger_state = hash(self.ledger_state +"||"+ self.pending_map[block_id]["payload"])
+        # self.pending_map = {}
+        #TODO: look at above two lines to complete code
 
         # pass
 

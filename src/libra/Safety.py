@@ -31,9 +31,9 @@ class Safety:
             return False
         return self.consecutive(self, round, qc_round) or self.consecutive(self, round, tc.round)
 
-    def commit_state_id_candidate(self, block_round, qc):
+    def commit_state_id_candidate(self, block_round, qc,block):
         if (self.consecutive(block_round, qc.vote_info.round)):
-            return self.ledger.pending_state(qc.vote_info.round)
+            return self.ledger.pending_state(block.round)
         else:
             return None
 
@@ -53,7 +53,7 @@ class Safety:
             print(block, block.id)
             vote_info = VoteInfo(block.id, block.round, block.qc.vote_info, qc_round)
             print(4)
-            ledger_commit_info = LedgerCommitInfo(self.commit_state_id_candidate(block.round, block.qc), vote_info)
+            ledger_commit_info = LedgerCommitInfo(self.commit_state_id_candidate(block.round, block.qc,block), vote_info)
             print(5)
             return VoteMsg(vote_info, ledger_commit_info, high_commit_qc, None, None)
         return None

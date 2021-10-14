@@ -15,7 +15,8 @@ class MemPool:
             a = self.q.popleft()
             self.q.appendleft(a)
             return a
-        return None
+        return "test1"
+        # return None
 
     def increment_txn_start_num(self):
         print("Popped from queue")
