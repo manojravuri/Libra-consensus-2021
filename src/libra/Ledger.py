@@ -35,7 +35,7 @@ class Ledger:
             return None
     def commit(self, block_id):
         # update start txn after commit
-        file = open(self.file_name, "w+")
+        file = open(self.file_name, "a+")
         file.write(self.pending_map[block_id]["payload"])
         file.close()
         self.add_committed_block_to_Q(block_id)
