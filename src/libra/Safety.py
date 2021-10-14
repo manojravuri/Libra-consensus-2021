@@ -51,7 +51,7 @@ class Safety:
             self.increase_highest_vote_round(block.round)
             print(3)
             print(block, block.id)
-            vote_info = VoteInfo(block.id, block.round, block.qc.vote_info, qc_round)
+            vote_info = VoteInfo(block.id, block.round, block.qc.vote_info.id, qc_round)
             print(4)
             ledger_commit_info = LedgerCommitInfo(self.commit_state_id_candidate(block.round, block.qc,block), vote_info)
             print(5)

@@ -97,7 +97,8 @@ class Block:
         self.round = round
         self.payload = payload
         self.qc = qc
-        self.id = hash(str(author) + "||" + str(round) + "||" + str(payload) + "||" + str(qc))
+        # self.id = hash(str(author) + "||" + str(round) + "||" + str(payload) + "||" + str(qc))
+        self.id = round
 
 
 class TimeoutInfo:

@@ -19,7 +19,7 @@ class Main:
         self.ledger = Ledger(id, self.mempool, self.win_sz)
         self.safety = Safety(self.ledger)
         self.block_tree = BlockTree(self.ledger,f=int(len(ps)/3))
-        self.pacemaker = PaceMaker(self.safety, self.block_tree, current_round=0)
+        self.pacemaker = PaceMaker(self.safety, self.block_tree, current_round=0, ps = ps)
         self.curr_pr = curr_pr
         ps.append(curr_pr)
         self.leader_election = LeaderElection(self.ledger, window_size=self.win_sz, pacemaker=self.pacemaker, ps=ps)
