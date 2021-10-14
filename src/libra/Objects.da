@@ -41,7 +41,7 @@ class Block:
 
 
 class TimeoutInfo:
-    def __init__(self, round, high_qc, sender, signature):
+    def __init__(self, round, high_qc, sender=None, signature=None):
         self.round = round
         self.high_qc = high_qc
         self.sender = sender

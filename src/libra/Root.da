@@ -10,15 +10,15 @@ def main():
     ps = new(Replica, num= number_of_procs)
     i=0
     for p in ps:
-        setup(p, (i,p,ps,f,number_of_reqs))
+        setup(p, (i,p,list(ps),f,number_of_reqs))
         i=i+1
 
     start(ps)
 
     ##clients
     number_of_clients=1
-    client_reqs=1
-    request_gap=0
+    client_reqs=4
+    request_gap=5
     cps=new(Client, num= number_of_clients)
     i=0
     for cp in cps:
