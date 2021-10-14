@@ -118,12 +118,3 @@ class ProposalMsg:
         self.last_round_tc = last_round_tc
         self.high_commit_qc = high_commit_qc
         self.sender=sender
-
-
-class Message:
-    def __init__(self, type=None, block=None, high_commit_qc=None, last_round_tc=None, tmo_info=None):
-        self.type = type
-        self.block = block
-        self.high_commit_qc = high_commit_qc
-        self.last_round_tc = last_round_tc
-        self.tmo_info = tmo_info
