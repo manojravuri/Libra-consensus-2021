@@ -33,7 +33,7 @@ class Ledger:
         file.write(self.pending_map[block_id]["block"].payload)
         file.close()
         self.add_committed_block_to_Q(block_id)
-        self.ledger_state = hash(self.ledger_state +"||"+ self.pending_map[block_id]["block"].payload)
+        self.ledger_state = (self.ledger_state +"||"+ self.pending_map[block_id]["block"].payload)
         self.pending_map = {}
 
         # pass
@@ -45,6 +45,6 @@ class Ledger:
         return None
 
     def add_committed_block_to_Q(self, block_id):
-        if len(self.commited_blocks) == self.window_size:
-            self.commited_blocks.popleft()
-        self.commited_blocks.append(self.pending_map[block_id])
+        if len(self.committed_blocks) == self.window_size:
+            self.committed_blocks.popleft()
+        self.committed_blocks.append(self.pending_map[block_id])

@@ -10,7 +10,7 @@ class VoteInfo:
 class LedgerCommitInfo:
     def __init__(self, commit_state_id=None, vote_info=None):
         self.commit_state_id = commit_state_id
-        self.vote_info_hash = hash(vote_info)
+        self.vote_info_hash = str(vote_info.id) + "||" + str(vote_info.round) + "||" + str(vote_info.parent_id) + "||"+ str(vote_info.parent_round) + "||" +str(vote_info.exec_state_id)
 
 
 class VoteMsg:
@@ -37,7 +37,7 @@ class Block:
         self.round = round
         self.payload = payload
         self.qc = qc
-        self.id = hash(str(author) + "||" + str(round) + "||" + str(payload) + "||" + str(qc))
+        self.id = str(author) + "||" + str(round) + "||" + str(payload) + "||" + str(qc.vote_info.id)+"||"+str(qc.signatures)
 
 
 class TimeoutInfo:
