@@ -27,12 +27,14 @@ class Safety:
         return round + 1==block_round
 
     def safe_to_extend(self, block_round, qc_round, tc):
-        return self.consecutive( block_round, tc.round) and qc_round >= max(tc.tmo_high_qc_rounds)
+        if tc is not None:
+            return self.consecutive( block_round, tc.round) and qc_round >= max(tc.tmo_high_qc_rounds)
+        return True
 
     def safe_to_vote(self, block_round, qc_round, tc):
         if (block_round <= max(self.highest_vote_round, qc_round)):
             return False
-        return self.consecutive( block_round, qc_round) and self.safe_to_extend( block_round, qc_round, tc)
+        return self.consecutive(block_round, qc_round) or self.safe_to_extend( block_round, qc_round, tc)
 
     def safe_to_timeout(self, round, qc_round, tc):
         if (qc_round < self.highest_qc_round or round <= max(self.highest_vote_round - 1, qc_round)):
@@ -81,7 +83,8 @@ class Safety:
         # import pdb; pdb.set_trace()
         #print(block)
         qc_round = block.qc.vote_info.round
-        if (self.valid_signatures(high_commit_qc, last_tc) or self.safe_to_vote(block.round, qc_round, last_tc)):
+        # import pdb; pdb.set_trace()
+        if (self.valid_signatures(high_commit_qc, last_tc) and self.safe_to_vote(block.round, qc_round, last_tc)):
             #print(1)
             self.update_highest_qc_round(qc_round)
             #print(2)

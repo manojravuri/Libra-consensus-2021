@@ -31,8 +31,8 @@ class PaceMaker:
         # self.stop_timer(self.current_round)
         print("current_round is, ", new_round)
         self.current_round = new_round
-        self.timer = threading.Timer(self.get_round_timer(new_round), self.local_timeout_round)
-        self.timer.start()
+        # self.timer = threading.Timer(self.get_round_timer(new_round), self.local_timeout_round)
+        # self.timer.start()
         # return self.get_round_timer(self, self.current_round)
 
     def local_timeout_round(self):
@@ -73,6 +73,7 @@ class PaceMaker:
         return True
 
     def advance_round_qc(self, qc):
+        # import pdb; pdb.set_trace()
         if qc.vote_info.round < self.current_round:
             return False
         self.last_round_tc = None
