@@ -11,19 +11,20 @@ class Ledger:
         self.mempool = mempool
         cur_path = os.path.dirname(__file__)
         self.file_name = os.path.abspath(cur_path + "/../../data/Ledger_" + str(self.node_id) + ".txt")
+        # self.file_name = os.path.abspath("/Users/nihalgoalla/Documents/Fall21/CSE535/libra_blockchain/data/Ledger_" + str(self.node_id) + ".txt")
         self.pending_map = {}
         self.window_size = window_size
         self.commited_blocks = deque()  # committed block with window size
         self.ledger_state = ""
-        pass
+        # pass
 
-    def speculate(self, prev_block_id, block_id, payload,block):
+    def speculate(self, prev_block_id, block_id, payload, block):
         self.pending_map[block_id] = {
             "prev_block_id": prev_block_id,
             "payload": payload,
             "block":block
         }
-        pass
+        # pass
 
     def pending_state(self, block_id):
         if(block_id in self.pending_map):
@@ -36,12 +37,16 @@ class Ledger:
     def commit(self, block_id):
         # update start txn after commit
         file = open(self.file_name, "a+")
-        file.write(self.pending_map[block_id]["payload"])
-        file.close()
-        self.add_committed_block_to_Q(block_id)
-        # self.ledger_state = hash(self.ledger_state +"||"+ self.pending_map[block_id]["payload"])
-        # self.pending_map = {}
-        #TODO: look at above two lines to complete code
+        # import pdb; pdb.set_trace()
+        if block_id in self.pending_map:
+            print("node_id is ", self.node_id, " , round is ", self.pending_map[block_id]["block"].round)
+            file.write(self.pending_map[block_id]["payload"])
+            file.close()
+            self.add_committed_block_to_Q(block_id)
+            # self.ledger_state = hash(self.ledger_state +"||"+ self.pending_map[block_id]["payload"])
+            # self.pending_map = {}
+            self.pending_map.pop(block_id)
+            #TODO: look at above two lines to complete code
 
         # pass
 

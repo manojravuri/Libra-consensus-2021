@@ -17,6 +17,7 @@ class BlockTree:
 
     def process_qc(self, qc):
         if qc.ledger_commit_info.commit_state_id is not None:
+            # import pdb; pdb.set_trace()
             self.ledger.commit(qc.vote_info.parent_round)
             self.high_commit_qc = self.get_max_QC(qc, self.high_commit_qc)
         self.high_qc = self.get_max_QC(qc, self.high_qc)
@@ -24,6 +25,7 @@ class BlockTree:
 
     def execute_and_insert(self, proposal):
         # print(b)
+        # import pdb; pdb.set_trace()
         self.ledger.speculate(proposal.block.qc.vote_info.round, proposal.block.round, proposal.block.payload,proposal.block)
         self.pending_block_tree.add(proposal.block)
 
