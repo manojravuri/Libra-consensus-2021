@@ -38,13 +38,15 @@ class Ledger:
         # update start txn after commit
         file = open(self.file_name, "a+")
         # import pdb; pdb.set_trace()
-        print("node_id is ", self.node_id, " , round is ", self.pending_map[block_id]["block"].round)
-        file.write(self.pending_map[block_id]["payload"])
-        file.close()
-        self.add_committed_block_to_Q(block_id)
-        # self.ledger_state = hash(self.ledger_state +"||"+ self.pending_map[block_id]["payload"])
-        # self.pending_map = {}
-        #TODO: look at above two lines to complete code
+        if block_id in self.pending_map:
+            print("node_id is ", self.node_id, " , round is ", self.pending_map[block_id]["block"].round)
+            file.write(self.pending_map[block_id]["payload"])
+            file.close()
+            self.add_committed_block_to_Q(block_id)
+            # self.ledger_state = hash(self.ledger_state +"||"+ self.pending_map[block_id]["payload"])
+            # self.pending_map = {}
+            self.pending_map.pop(block_id)
+            #TODO: look at above two lines to complete code
 
         # pass
 
