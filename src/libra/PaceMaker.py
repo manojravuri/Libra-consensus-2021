@@ -45,7 +45,7 @@ class PaceMaker:
         # broadcast TimeoutMsg(timeout_info,self.last_round_tc,self.block_tree.high_commit_qc)
         time_out_msg = TimeoutMsg(timeout_info,self.last_round_tc,self.block_tree.high_commit_qc)
         c = logical_clock()
-        send(('time_out_msg_local',time_out_msg,c),to=ps)
+        send(('time_out_msg',time_out_msg,c),to=ps)
 
     def process_remote_timeout(self, tmo):
         tmo_info = tmo.tmo_info
@@ -61,6 +61,7 @@ class PaceMaker:
                 round = tmo_info.round
                 tmo_high_qc_rounds = self.pending_timeouts[tmo_info.round][0].high_qc.vote_info.round
                 signatures = self.pending_timeouts[tmo_info.round][0].signature
+                return TC(round = round, tmo_high_qc_rounds=tmo_high_qc_rounds, tmo_signatures=signatures)
         return None
 
     def advance_round_tc(self, tc):

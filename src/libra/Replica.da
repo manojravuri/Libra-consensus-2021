@@ -463,6 +463,14 @@ class Replica(process):
         self.Main_add_to_Mempool(M)
         processing_req=True
 
+    def receive(msg = ('time_out_msg', time_out_msg, c2)):
+        output("timeout message received" + str(time_out_msg) + " to " + str(replica_id))
+        proposal, leader = self.Main_start_event_processing(time_out_msg,'timeout_message')
+        if leader and proposal:
+          output("got proposal, leader")
+          
+
+
     def run():
         time.sleep(5)
         if(self.Main_can_send()):
@@ -478,4 +486,3 @@ class Replica(process):
             #time.sleep(1)
         #await(len(setof(a,received(('done',c3), from_=a)))>2*f+1)
         output("Replica ", replica_id," is terminated")
-

@@ -38,7 +38,7 @@ class Main:
 
     def start_event_processing(self, message, type):
         if (type == 'local_timeout'):
-            self.pacemaker.local_timeout_round()
+            msg = self.pacemaker.local_timeout_round()
         if (type == 'proposal_message'):
             msg = self.process_proposal_msg(message)
             if msg:
@@ -50,9 +50,12 @@ class Main:
                 return msg
             else:
                 return None, None
-        if (type == 'timeout_mesaage'):
-            self.process_timeout_message(message)
-
+        if (type == 'timeout_message'):
+            msg = self.process_timeout_message(message)
+            if msg:
+                return msg
+            else:
+                return None, None
     def process_certificate_qc(self, qc):
         self.block_tree.process_qc(qc)
         #print("process qc done")
@@ -92,7 +95,7 @@ class Main:
         tc = self.pacemaker.process_remote_timeout(M)
         if (tc):
             self.pacemaker.advance_round_tc(tc)
-            self.process_new_round_event(tc)
+            return self.process_new_round_event(tc), self.leader_election.get_leader(self.pacemaker.current_round)
 
     def process_new_round_event(self, last_tc=None):
         u = self.leader_election.get_leader(self.pacemaker.current_round)
