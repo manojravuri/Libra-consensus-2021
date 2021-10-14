@@ -73,6 +73,7 @@ class Main:
         #print("Advancing current round")
         self.pacemaker.advance_round_tc(P.last_round_tc)
         #print("advanced round")
+        self.mempool.get_transactions() ## TODO: have to remove transaction from mempool
         round = self.pacemaker.current_round
         leader = self.leader_election.get_leader(round)
         if (P.block.round != round or P.sender != leader or P.block.author != leader):

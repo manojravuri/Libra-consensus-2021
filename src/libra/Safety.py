@@ -28,7 +28,7 @@ class Safety:
 
     def safe_to_extend(self, block_round, qc_round, tc):
         if tc is not None:
-            return self.consecutive( block_round, tc.round) and qc_round >= max(tc.tmo_high_qc_rounds)
+            return self.consecutive(block_round, tc.round) and qc_round >= max(tc.tmo_high_qc_rounds)
         return True
 
     def safe_to_vote(self, block_round, qc_round, tc):
