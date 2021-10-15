@@ -1,14 +1,15 @@
 from Ledger import Ledger
 from collections import defaultdict
 
+
 class BlockTree:
-    def __init__(self, ledger,safety ,f=1, high_qc=None,high_commit_qc=None):
+    def __init__(self, ledger, safety, f=1, high_qc=None, high_commit_qc=None):
         self.ledger = ledger
-        self.safety=safety
+        self.safety = safety
         self.pending_block_tree = set()
         self.pending_votes = defaultdict(list)
         vote_info = VoteInfo(-1, -1, -2, -2)
-        ledger_commit_info = LedgerCommitInfo()
+        ledger_commit_info = LedgerCommitInfo(None,vote_info)
         qc = QC(vote_info, ledger_commit_info)
         genesis_block = Block(0, -1, "", qc)
         self.high_qc = qc
@@ -18,26 +19,26 @@ class BlockTree:
     def process_qc(self, qc):
         if qc.ledger_commit_info.commit_state_id is not None:
             # import pdb; pdb.set_trace()
-            self.ledger.commit(qc.vote_info.parent_round)
+            self.ledger.commit(qc.vote_info.parent_id)
             self.high_commit_qc = self.get_max_QC(qc, self.high_commit_qc)
         self.high_qc = self.get_max_QC(qc, self.high_qc)
-
 
     def execute_and_insert(self, proposal):
         # print(b)
         # import pdb; pdb.set_trace()
-        self.ledger.speculate(proposal.block.qc.vote_info.round, proposal.block.round, proposal.block.payload,proposal.block)
+        self.ledger.speculate(proposal.block.qc.vote_info.id, proposal.block.id, proposal.block.payload, proposal.block)
         self.pending_block_tree.add(proposal.block)
 
     def process_vote(self, v):
         self.process_qc(v.high_commit_qc)
 
-        vote_idx = hash(v.vote_info.round)
-        if(self.safety.verify_signature(v.signature.id,v.signature.message,v.signature.type)):
+        vote_idx = str(v.ledger_commit_info.commit_state_id) + str(v.ledger_commit_info.vote_info_hash)
+        if (self.safety.verify_signature(v.signature.id, v.signature.message, v.signature.type)):
             self.pending_votes[vote_idx].append(v.signature)
 
-        if self.pending_votes[vote_idx] and len(self.pending_votes[vote_idx]) ==  2:
-            qc = QC(vote_info=v.vote_info,ledger_commit_info=v.ledger_commit_info ,signatures=self.pending_votes[vote_idx].copy())
+        if self.pending_votes[vote_idx] and len(self.pending_votes[vote_idx]) == 2:
+            qc = QC(vote_info=v.vote_info, ledger_commit_info=v.ledger_commit_info,
+                    signatures=self.pending_votes[vote_idx].copy())
             return qc
         return None
 
@@ -47,7 +48,6 @@ class BlockTree:
     def get_max_QC(self, qc1, qc2):
         maxQC = qc1 if (qc1.vote_info.round > qc2.vote_info.round) else qc2
         return maxQC
-
 
 
 class VoteInfo:
@@ -61,7 +61,8 @@ class VoteInfo:
 class LedgerCommitInfo:
     def __init__(self, commit_state_id=None, vote_info=None):
         self.commit_state_id = commit_state_id
-        self.vote_info_hash = hash(vote_info)
+        self.vote_info_hash = str(vote_info.id) + "||" + str(vote_info.round) + "||" + str(
+            vote_info.parent_id) + "||" + str(vote_info.parent_round)
 
 
 class VoteMsg:
@@ -88,8 +89,7 @@ class Block:
         self.round = round
         self.payload = payload
         self.qc = qc
-        # self.id = hash(str(author) + "||" + str(round) + "||" + str(payload) + "||" + str(qc))
-        self.id = round
+        self.id = (str(author) + "||" + str(round) + "||" + str(payload) + "||" + str(qc.vote_info.id) + "||"+str(qc.signatures))
 
 
 class TimeoutInfo:
@@ -115,11 +115,11 @@ class TimeoutMsg:
 
 
 class ProposalMsg:
-    def __init__(self, block,last_round_tc, high_commit_qc,sender):
+    def __init__(self, block, last_round_tc, high_commit_qc, sender):
         self.block = block
         self.last_round_tc = last_round_tc
         self.high_commit_qc = high_commit_qc
-        self.sender=sender
+        self.sender = sender
 
 
 class Message:

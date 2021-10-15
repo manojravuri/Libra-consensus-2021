@@ -9,13 +9,16 @@ class VoteInfo:
 class LedgerCommitInfo:
     def __init__(self, commit_state_id=None, vote_info=None):
         self.commit_state_id = commit_state_id
-        self.vote_info_hash = hash(vote_info)
+        self.vote_info_hash = str(vote_info.id) + "||" + str(vote_info.round) + "||" + str(
+            vote_info.parent_id) + "||" + str(vote_info.parent_round)
 
 class Signature:
     def __init__(self,id=None,message=None,type=None):
         self.id=id
         self.message=message
         self.type=type
+    def __repr__(self):
+        return str(self.id) + str(self.message) + str(self.type)
 
 class VoteMsg:
     def __init__(self, vote_info, ledger_commit_info, high_commit_qc, sender, signature:Signature):

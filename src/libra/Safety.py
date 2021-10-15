@@ -43,11 +43,12 @@ class Safety:
 
     def commit_state_id_candidate(self, block_round, qc, block):
         if (self.consecutive(block_round, qc.vote_info.round) and qc.vote_info.round >=0):
-            return self.ledger.pending_state(block.round)
+            return self.ledger.pending_state(block.id)
         else:
             return None
 
     def valid_signatures(self, high_qc, last_tc):
+        #return True
         i=0
         if(high_qc.vote_info.round==-1):
             return True
@@ -92,9 +93,11 @@ class Safety:
             #print(3)
             #print(block, block.id)
             signature=self.make_signature(block)
-            vote_info = VoteInfo(block.id, block.round, block.qc.vote_info, qc_round)
+            vote_info = VoteInfo(block.id, block.round, block.qc.vote_info.id, qc_round)
             #print(4)
+            # import pdb;pdb.set_trace()
             ledger_commit_info = LedgerCommitInfo(self.commit_state_id_candidate(block.round, block.qc, block), vote_info)
+            # import pdb;pdb.set_trace()
             #print(5)
             return VoteMsg(vote_info, ledger_commit_info, high_commit_qc, sender=self.id, signature=signature)
         return None

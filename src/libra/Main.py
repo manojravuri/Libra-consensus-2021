@@ -36,7 +36,7 @@ class Main:
     def can_send(self):
         print("can_send is, ", self.leader_election.get_leader(self.pacemaker.current_round) == self.id)
         print(self.pacemaker.current_round , self.id)
-        return self.leader_election.get_leader(self.pacemaker.current_round) == self.curr_pr
+        return self.leader_election.get_leader(self.pacemaker.current_round) == self.id
         # return self.leader_election.get_leader(self.pacemaker.current_round) == self.id
 
     def start_event_processing(self, message, type):
@@ -115,11 +115,11 @@ class Main:
     def process_new_round_event(self, last_tc=None):
         # import pdb; pdb.set_trace()
         u = self.leader_election.get_leader(self.pacemaker.current_round)
-        # if u == self.leader_election.get_leader(self.pacemaker.current_round):
-        b = self.block_tree.generate_block(u, self.mempool.get_transactions(), self.pacemaker.current_round)
-        p = ProposalMsg(b, last_tc, self.block_tree.high_commit_qc, u)
+        if self.curr_pr == u:
+            b = self.block_tree.generate_block(u, self.mempool.get_transactions(), self.pacemaker.current_round)
+            p = ProposalMsg(b, last_tc, self.block_tree.high_commit_qc, u)
         # return pickle.dumps(p), self.leader_election.get_leader(self.pacemaker.current_round)
-        return p
+            return p
         # return None
 
     def process_vote_msg(self, M):
@@ -147,6 +147,9 @@ class Main:
 class Replica1():
     def __init__(self,id):
         self.id=id
+
+    def __repr__(self):
+        return "author is " + str(self.id)
 
 if __name__ == '__main__':
 

@@ -12,7 +12,7 @@ class Ledger:
         cur_path = os.path.dirname(__file__)
         self.file_name = os.path.abspath(cur_path + "/../../data/Ledger_" + str(self.node_id) + ".txt")
         # self.file_name = os.path.abspath("/Users/nihalgoalla/Documents/Fall21/CSE535/libra_blockchain/data/Ledger_" + str(self.node_id) + ".txt")
-        self.pending_map = defaultdict(list)
+        self.pending_map = {}
         self.window_size = window_size
         self.commited_blocks = deque()  # committed block with window size
         self.ledger_state = ""
@@ -20,12 +20,13 @@ class Ledger:
 
     def speculate(self, prev_block_id, block_id, payload, block):
         # if block_id in self.pending_map:
-        import pdb; pdb.set_trace()
+       # import pdb; pdb.set_trace()
         self.pending_map[block_id] = {
             "prev_block_id": prev_block_id,
             "payload": payload,
             "block":block
         }
+        a=2
         # pass
 
     def pending_state(self, block_id):
