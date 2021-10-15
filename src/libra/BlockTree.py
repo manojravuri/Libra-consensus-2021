@@ -23,6 +23,7 @@ class BlockTree:
             self.high_commit_qc = self.get_max_QC(qc, self.high_commit_qc)
         self.high_qc = self.get_max_QC(qc, self.high_qc)
 
+
     def execute_and_insert(self, proposal):
         # print(b)
         # import pdb; pdb.set_trace()
@@ -48,6 +49,7 @@ class BlockTree:
     def get_max_QC(self, qc1, qc2):
         maxQC = qc1 if (qc1.vote_info.round > qc2.vote_info.round) else qc2
         return maxQC
+
 
 
 class VoteInfo:

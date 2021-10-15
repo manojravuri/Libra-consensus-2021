@@ -26,7 +26,6 @@ class Ledger:
             "payload": payload,
             "block":block
         }
-        a=2
         # pass
 
     def pending_state(self, block_id):

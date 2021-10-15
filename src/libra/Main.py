@@ -5,7 +5,7 @@ from Safety import Safety
 from MemPool import MemPool
 from Ledger import Ledger
 from Objects import *
-
+import copy
 
 from nacl.signing import SigningKey
 from nacl.signing import VerifyKey
@@ -36,7 +36,7 @@ class Main:
     def can_send(self):
         print("can_send is, ", self.leader_election.get_leader(self.pacemaker.current_round) == self.id)
         print(self.pacemaker.current_round , self.id)
-        return self.leader_election.get_leader(self.pacemaker.current_round) == self.id
+        return self.leader_election.get_leader(self.pacemaker.current_round) == self.curr_pr
         # return self.leader_election.get_leader(self.pacemaker.current_round) == self.id
 
     def start_event_processing(self, message, type):
