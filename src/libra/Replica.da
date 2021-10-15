@@ -15,6 +15,7 @@ import os
 from nacl.signing import SigningKey
 from nacl.signing import VerifyKey
 from nacl.encoding import HexEncoder
+import heapq
 
 config(clock='Lamport')
 config(handling='all')
@@ -42,7 +43,8 @@ class Replica(process):
         self.curr_pr = curr_pr
 
         # ====== attributes of MemPool ======
-        self.q = deque()
+        # self.hq = heapq.heapify([])
+        self.hq = []
 
         # ====== attributes of Ledger ======
         cur_path = os.getcwd()
@@ -94,16 +96,9 @@ class Replica(process):
         if (type == 'local_timeout'):
             msg = self.PaceMaker_local_timeout_round()
         if (type == 'proposal_message'):
-            msg = self.Main_process_proposal_msg(message)
-            if msg:
-                send(('vote',msg[0],logical_clock()),to=msg[1])
-                
+            msg = self.Main_process_proposal_msg(message)    
         if (type == 'vote_message'):
             msg = self.Main_process_vote_msg(message)
-            if msg:
-                return msg
-            else:
-                return None, None
         if (type == 'timeout_message'):
             msg = self.Main_process_timeout_message(message)
             if msg:
@@ -123,17 +118,23 @@ class Replica(process):
         else:
             print("dont remove transactions for ", replica_id, curr_pr, P.sender)
         self.Main_process_certificate_qc(P.block.qc)
+        #print("Main_process_certificate_qc")
         self.Main_process_certificate_qc(P.high_commit_qc)
+        #print("Main_process_certificate_qc ")
         self.PaceMaker_advance_round_tc(P.last_round_tc)
         #self.MemPool_get_transactions()  ## TODO: have to remove transaction from mempool
         round = self.current_round
         leader = self.LeaderElection_get_leader(round)
+        
         if (P.block.round != round or P.sender != leader or P.block.author != leader):
+            print("return before proposal")
             return
         self.BlockTree_execute_and_insert(P)
         vote_msg = self.Safety_make_vote(P.block, P.last_round_tc, P.high_commit_qc)
+        print("vote_msg",vote_msg)
         if (vote_msg is not None):
-            return vote_msg, (self.LeaderElection_get_leader(round + 1))
+            send( ('vote',vote_msg,logical_clock()),to=self.LeaderElection_get_leader(round + 1))
+            
 
     def Main_process_timeout_message(M):
         self.Main_process_certificate_qc(M.tmo_info.high_qc)
@@ -149,7 +150,7 @@ class Replica(process):
         print("broadcasting QC")
         if self.curr_pr == u:
             b = self.BlockTree_generate_block(u, self.MemPool_get_transactions(), self.current_round)
-            print("sendin proposal message")
+            print("sending proposal message")
             p=ProposalMsg(b, last_tc, self.high_commit_qc, u)
             send(('proposal', p,logical_clock()), to=replicas)
             
@@ -174,10 +175,11 @@ class Replica(process):
 
     def MemPool_get_transactions():
         print("Get Transactions")
-        await(len(self.q))
+        await(len(self.hq))
         print("Get Transactions after await")
-        if len(self.q):
-            a = self.q.popleft()
+        if len(self.hq):
+            # a = self.hq.heappop()
+            a = heapq.heappop(self.hq)
             #self.q.appendleft(a)
             print("Mesg",a[1])
             return a[1]
@@ -185,21 +187,25 @@ class Replica(process):
 
     def MemPool_increment_txn_start_num():
         # print("Popped from queue")
-        self.q.popleft()
+        heapq.heappop(self.hq)
         return
 
     def MemPool_add_to_queue(M):
         print("Added to queue in", M,replica_id)
-        self.q.append(M)
+        # self.hq.heappush(M)
+        heapq.heappush(self.hq, (M[2], M[1]))
         q_not_empty = True
+        print(self.hq)
         return
 
     def MemPool_pop_txns_on_proposal(txns):
-        if len(self.q):
-            a = self.q.popleft()[1]
+        if len(self.hq):
+            # a = self.hq.heappop()[1]
+            a = heapq.heappop(self.hq)
             # print(a)
-            if (a != txns):
-                self.q.appendleft(a)
+            if (a[1] != txns):
+                # self.hq.heappush(a)
+                heapq.heappush(self.hq, (a[2],a[1]))
         return
 
     # ====== methods of Ledger ======
@@ -229,6 +235,7 @@ class Replica(process):
             file.close()
             self.Ledger_add_committed_block_to_Q(block_id)
             self.pending_map.pop(block_id)
+            print("finished ledger commit")
             # TODO: look at above two lines to complete code
 
         # pass
@@ -243,6 +250,7 @@ class Replica(process):
         if len(self.commited_blocks) == self.window_size:
             self.commited_blocks.popleft()
         self.commited_blocks.append(self.pending_map[block_id].copy())
+        print("finished after commiting block")
 
     # ====== methods of Safety ======
 
@@ -283,7 +291,7 @@ class Replica(process):
         for signature in high_qc.signatures:
             if self.Safety_verify_signature(signature.id, signature.message, signature.type):
                 i += 1
-        if (i == 2):
+        if (i == 2*f+1):
             return True
         else:
             return False
@@ -312,6 +320,7 @@ class Replica(process):
         # print(block)
         qc_round = block.qc.vote_info.round
         # import pdb; pdb.set_trace()
+        print(self.Safety_valid_signatures(high_commit_qc, last_tc),"   ",self.Safety_safe_to_vote(block.round, qc_round,last_tc))
         if (self.Safety_valid_signatures(high_commit_qc, last_tc) and self.Safety_safe_to_vote(block.round, qc_round,
                                                                                                last_tc)):
             self.Safety_update_highest_qc_round(qc_round)
