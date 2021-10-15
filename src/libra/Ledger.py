@@ -20,7 +20,7 @@ class Ledger:
 
     def speculate(self, prev_block_id, block_id, payload, block):
         # if block_id in self.pending_map:
-        #     import pdb; pdb.set_trace()
+        import pdb; pdb.set_trace()
         self.pending_map[block_id] = {
             "prev_block_id": prev_block_id,
             "payload": payload,
@@ -54,12 +54,14 @@ class Ledger:
         # pass
 
     def committed_block(self, block_id):
+        # import pdb; pdb.set_trace()
         for di in self.commited_blocks:
             if block_id in di:
                 return di[block_id]
         return None
 
     def add_committed_block_to_Q(self, block_id):
+        # import pdb; pdb.set_trace()
         if len(self.commited_blocks) == self.window_size:
             self.commited_blocks.popleft()
-        self.commited_blocks.append(self.pending_map[block_id])
+        self.commited_blocks.append(self.pending_map[block_id].copy())
