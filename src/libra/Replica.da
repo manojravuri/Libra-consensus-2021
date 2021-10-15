@@ -46,7 +46,7 @@ class Replica(process):
 
         # ====== attributes of Ledger ======
         cur_path = os.getcwd()
-        self.file_name = os.path.abspath(cur_path + "/../../data/Ledger_" + str(self.replica_id) + ".txt")
+        self.file_name = os.path.abspath(cur_path + "/../data/Ledger_" + str(self.replica_id) + ".txt")
         self.pending_map = {}
         self.commited_blocks = deque()  # committed block with window size
         self.ledger_state = ""
@@ -96,7 +96,8 @@ class Replica(process):
         if (type == 'proposal_message'):
             msg = self.Main_process_proposal_msg(message)
             if msg:
-                return msg
+                send(('vote',msg[0],logical_clock()),to=msg[1])
+                
         if (type == 'vote_message'):
             msg = self.Main_process_vote_msg(message)
             if msg:
@@ -113,13 +114,18 @@ class Replica(process):
     def Main_process_certificate_qc(qc):
         self.BlockTree_process_qc(qc)
         self.LeaderElection_update_leader(qc)
-        self.Pacemaker_advance_round_qc(qc)
+        self.PaceMaker_advance_round_qc(qc)
 
     def Main_process_proposal_msg(P):
+        if  P.sender!=curr_pr:
+            print("remove txn for ", replica_id, curr_pr, P.sender)
+            self.MemPool_get_transactions()
+        else:
+            print("dont remove transactions for ", replica_id, curr_pr, P.sender)
         self.Main_process_certificate_qc(P.block.qc)
         self.Main_process_certificate_qc(P.high_commit_qc)
         self.PaceMaker_advance_round_tc(P.last_round_tc)
-        self.MemPool_get_transactions()  ## TODO: have to remove transaction from mempool
+        #self.MemPool_get_transactions()  ## TODO: have to remove transaction from mempool
         round = self.current_round
         leader = self.LeaderElection_get_leader(round)
         if (P.block.round != round or P.sender != leader or P.block.author != leader):
@@ -140,6 +146,7 @@ class Replica(process):
 
     def Main_process_new_round_event(last_tc=None):
         u = self.LeaderElection_get_leader(self.current_round)
+        print("broadcasting QC")
         if self.curr_pr == u:
             b = self.BlockTree_generate_block(u, self.MemPool_get_transactions(), self.current_round)
             print("sendin proposal message")
@@ -152,7 +159,7 @@ class Replica(process):
         if qc:
             self.Main_process_certificate_qc(qc)
             qc.author = self.curr_pr
-            return self.Main_process_new_round_event(None), self.LeaderElection_get_leader(self.current_round)
+            self.Main_process_new_round_event(None)
 
     def Main_workload_exists():
         if (self.MemPool_get_transactions()):
@@ -171,7 +178,7 @@ class Replica(process):
         print("Get Transactions after await")
         if len(self.q):
             a = self.q.popleft()
-            self.q.appendleft(a)
+            #self.q.appendleft(a)
             print("Mesg",a[1])
             return a[1]
         return None
@@ -214,11 +221,13 @@ class Replica(process):
             return None
 
     def Ledger_commit(block_id):
-        file = open(self.file_name, "a+")
+
         if block_id in self.pending_map:
-            file.write(self.pending_map[block_id]["block"].payload)
+            file = open(self.file_name, "a+")
+            print("write to file ",self.pending_map[block_id]["block"].payload," in replica",replica_id)
+            file.write(self.pending_map[block_id]["block"].payload+" time: "+str(logical_clock())+"\n")
             file.close()
-            self.add_committed_block_to_Q(block_id)
+            self.Ledger_add_committed_block_to_Q(block_id)
             self.pending_map.pop(block_id)
             # TODO: look at above two lines to complete code
 
@@ -236,6 +245,9 @@ class Replica(process):
         self.commited_blocks.append(self.pending_map[block_id].copy())
 
     # ====== methods of Safety ======
+
+    def Safety_increase_highest_vote_round(round):
+        self.highest_vote_round = max(round, self.highest_vote_round)
 
     def Safety_update_highest_qc_round(qc_round):
         self.highest_qc_round = max(self.highest_qc_round, qc_round)
@@ -304,7 +316,7 @@ class Replica(process):
                                                                                                last_tc)):
             self.Safety_update_highest_qc_round(qc_round)
             self.Safety_increase_highest_vote_round(block.round)
-            signature = self.make_signature(block)
+            signature = self.Safety_make_signature(block)
             vote_info = VoteInfo(block.id, block.round, block.qc.vote_info.id, qc_round)
             ledger_commit_info = LedgerCommitInfo(self.Safety_commit_state_id_candidate(block.round, block.qc, block),
                                                   vote_info)
@@ -328,7 +340,7 @@ class Replica(process):
 
     def BlockTree_execute_and_insert(proposal):
         self.Ledger_speculate(proposal.block.qc.vote_info.id, proposal.block.id, proposal.block)
-        self.pending_block_tree_add(proposal.block)
+        self.pending_block_tree.add(proposal.block)
 
     def BlockTree_process_vote(v):
         self.BlockTree_process_qc(v.high_commit_qc)
@@ -337,7 +349,7 @@ class Replica(process):
         if (self.Safety_verify_signature(v.signature.id, v.signature.message, v.signature.type)):
             self.pending_votes[vote_idx].append(v.signature)
 
-        if self.pending_votes[vote_idx] and len(self.pending_votes[vote_idx]) == 2:
+        if self.pending_votes[vote_idx] and len(self.pending_votes[vote_idx]) == 2*f+1:
             qc = QC(vote_info=v.vote_info, ledger_commit_info=v.ledger_commit_info,
                     signatures=self.pending_votes[vote_idx].copy())
             return qc
@@ -450,18 +462,18 @@ class Replica(process):
     def receive(msg=('proposal', p1, c1)):
         c2 = logical_clock()
         output("recieved proposal message in", replica_id)
-        send(('proposal ack', c2), to=replicas)
+        #send(('proposal ack', c2), to=replicas)
         self.Main_start_event_processing(p1, 'proposal_message')
     
     def receive(msg=('vote', vote_info, c1)):
         # check if received replica is leader using PaceMaker
-        print("votes received before check", votes_received)
-        if received_suf_votes():
-            return
+        #print("votes received before check", votes_received)
+        #if received_suf_votes():
+        #    return
         output("votes_received", votes_received, " in replica", replica_id)
         votes_received = votes_received + 1
         c2 = logical_clock()
-        output("recieved vote in leader ", replica_id)
+        #output("recieved vote in leader ", replica_id)
         self.Main_start_event_processing(vote_info, 'vote_message')
     
     def receive(msg=('request', cmd, c, p)):

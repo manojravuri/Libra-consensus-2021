@@ -50,8 +50,8 @@ def main():
 
     ##clients
     
-    client_reqs=1
-    request_gap=0
+    client_reqs=10
+    request_gap=1
     cps=new(Client, num= number_of_clients)
     i=0
     for cp in cps:
