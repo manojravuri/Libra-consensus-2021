@@ -29,10 +29,10 @@ class Client(process):
 
     def run():
         for i in range(number_of_requests):
-            output("client "+str(client_id)+"sleeping for "+str(request_gap))
+            #output("client "+str(client_id)+"sleeping for "+str(request_gap))
             time.sleep(request_gap)
             cmd=str(client_id)+"----->"+str(i)
-            output("client is broadcasting "+cmd)
+            #output("client is broadcasting "+cmd)
 
             broadcast_request(cmd,replicas)
             #await(len(setof(a,received(('committed'), from_=a)))>2*f+1)
