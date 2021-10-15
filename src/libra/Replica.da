@@ -498,8 +498,10 @@ class Replica(process):
         self.Main_start_event_processing(vote_info, 'vote_message')
     
     def receive(msg=('request', cmd, c, p)):
-        #output("message received " + str(cmd) + " from " + str(p) + " at " + str(replica_id))
+        output("message received " + str(cmd) + " from " + str(p) + " at " + str(replica_id))
         M = ('request', cmd, c)
+        send( ('request_ack',self.replica_id),to=p)
+        print("sent ack to client",p)
         self.Main_add_to_Mempool(M)
     
     def run():
