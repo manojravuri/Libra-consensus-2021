@@ -166,9 +166,7 @@ if __name__ == '__main__':
         all_replica_private_keys.append(signing_key)
 
     ##clients
-    number_of_clients = 5
-    client_reqs = 1
-    request_gap = 5
+
     #cps = new(Client, num=number_of_clients)
 
     all_client_private_keys = []

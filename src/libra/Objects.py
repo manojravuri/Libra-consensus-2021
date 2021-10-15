@@ -12,16 +12,19 @@ class LedgerCommitInfo:
         self.vote_info_hash = str(vote_info.id) + "||" + str(vote_info.round) + "||" + str(
             vote_info.parent_id) + "||" + str(vote_info.parent_round)
 
+
 class Signature:
-    def __init__(self,id=None,message=None,type=None):
-        self.id=id
-        self.message=message
-        self.type=type
+    def __init__(self, id=None, message=None, type=None):
+        self.id = id
+        self.message = message
+        self.type = type
+
     def __repr__(self):
         return str(self.id) + str(self.message) + str(self.type)
 
+
 class VoteMsg:
-    def __init__(self, vote_info, ledger_commit_info, high_commit_qc, sender, signature:Signature):
+    def __init__(self, vote_info, ledger_commit_info, high_commit_qc, sender, signature: Signature):
         self.sender = sender
         self.signature = signature
         self.vote_info = vote_info
@@ -70,11 +73,11 @@ class TimeoutMsg:
 
 
 class ProposalMsg:
-    def __init__(self, block,last_round_tc, high_commit_qc,sender):
+    def __init__(self, block, last_round_tc, high_commit_qc, sender):
         self.block = block
         self.last_round_tc = last_round_tc
         self.high_commit_qc = high_commit_qc
-        self.sender=sender
+        self.sender = sender
 
 
 class Message:
