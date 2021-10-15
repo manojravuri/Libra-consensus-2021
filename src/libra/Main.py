@@ -5,7 +5,7 @@ from Safety import Safety
 from MemPool import MemPool
 from Ledger import Ledger
 from Objects import *
-
+import copy
 
 from nacl.signing import SigningKey
 from nacl.signing import VerifyKey
@@ -117,6 +117,7 @@ class Main:
         u = self.leader_election.get_leader(self.pacemaker.current_round)
         # if u == self.leader_election.get_leader(self.pacemaker.current_round):
         b = self.block_tree.generate_block(u, self.mempool.get_transactions(), self.pacemaker.current_round)
+        # import pdb; pdb.set_trace()
         p = ProposalMsg(b, last_tc, self.block_tree.high_commit_qc, u)
         # return pickle.dumps(p), self.leader_election.get_leader(self.pacemaker.current_round)
         return p
@@ -199,7 +200,7 @@ if __name__ == '__main__':
     proposal_msg, leader = main2.start_event_processing(vote_msg_3, 'vote_message')
     proposal_msg, leader = main2.start_event_processing(vote_msg_4, 'vote_message')
     proposal_msg, leader = main2.start_event_processing(vote_msg_5, 'vote_message')
-    # import pdb; pdb.set_trace()
+    import pdb; pdb.set_trace()
     vote_msg_2, leader_2 = main1.start_event_processing(proposal_msg_2, 'proposal_message')
     vote_msg_3, leader_3 = main3.start_event_processing(proposal_msg_2, 'proposal_message')
     vote_msg_4, leader_4 = main4.start_event_processing(proposal_msg_2, 'proposal_message')

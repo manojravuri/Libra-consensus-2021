@@ -59,7 +59,7 @@ class LeaderElection:
     def get_leader(self, round):
         #print("round",round)
         # import pdb; pdb.set_trace()
-        if self.reputation_leaders and round in self.reputation_leaders:
-            return self.reputation_leaders[round]
-        return self.ps[int((round / 2) % len(self.ps))]
-        # return self.ps[int((round) % len(self.ps))]
+        # if self.reputation_leaders and round in self.reputation_leaders:
+        #     return self.reputation_leaders[round]
+        # return self.ps[int((round / 2) % len(self.ps))]
+        return self.ps[int((round) % len(self.ps))]

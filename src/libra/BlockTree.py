@@ -18,7 +18,7 @@ class BlockTree:
     def process_qc(self, qc):
         if qc.ledger_commit_info.commit_state_id is not None:
             # import pdb; pdb.set_trace()
-            self.ledger.commit(qc.vote_info.parent_round)
+            self.ledger.commit(qc.vote_info.parent_id)
             self.high_commit_qc = self.get_max_QC(qc, self.high_commit_qc)
         self.high_qc = self.get_max_QC(qc, self.high_qc)
 
@@ -26,13 +26,14 @@ class BlockTree:
     def execute_and_insert(self, proposal):
         # print(b)
         # import pdb; pdb.set_trace()
-        self.ledger.speculate(proposal.block.qc.vote_info.round, proposal.block.round, proposal.block.payload,proposal.block)
+        self.ledger.speculate(proposal.block.qc.vote_info.id, proposal.block.id, proposal.block.payload, proposal.block)
         self.pending_block_tree.add(proposal.block)
 
     def process_vote(self, v):
         self.process_qc(v.high_commit_qc)
 
-        vote_idx = hash(v.vote_info.round)
+        vote_idx = hash(v.vote_info.round) ## TODO: change to ledger commit info
+        import pdb; pdb.set_trace()
         if(self.safety.verify_signature(v.signature.id,v.signature.message,v.signature.type)):
             self.pending_votes[vote_idx].append(v.signature)
 
@@ -88,8 +89,8 @@ class Block:
         self.round = round
         self.payload = payload
         self.qc = qc
-        # self.id = hash(str(author) + "||" + str(round) + "||" + str(payload) + "||" + str(qc))
-        self.id = round
+        self.id = (str(author) + "||" + str(round) + "||" + str(payload) + "||" + str(qc.vote_info.id) + '||' + str(qc.signatures))
+        # self.id = round
 
 
 class TimeoutInfo:
