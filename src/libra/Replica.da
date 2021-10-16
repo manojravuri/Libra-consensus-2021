@@ -436,8 +436,6 @@ class Replica(process):
 
     def PaceMaker_get_round_timer(r):
         c=logical_clock()
-        while(1):
-            if(await(new_round not in timer_map or timer_map[new_round])):
 
         return 4 * self.delta
 
