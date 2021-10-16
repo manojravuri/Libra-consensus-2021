@@ -19,6 +19,8 @@ from nacl.signing import VerifyKey
 from nacl.encoding import HexEncoder
 import heapq
 
+import time
+
 config(clock='Lamport')
 config(handling='all')
 
@@ -431,17 +433,20 @@ class Replica(process):
     # ====== methods of PaceMaker ======
 
     def PaceMaker_stop_timer(round):
-        self.timer.cancel()
-        pass
+        if(round in timer_map):
+            timer_map[round]=timer_map[round]-time.perf_counter()
+            self.timer.cancel()
+            pass
 
     def PaceMaker_get_round_timer(r):
         c=logical_clock()
-
+        #while(timer_map[self.current_round]-time.perf_counter())
         return 4 * self.delta
 
     def PaceMaker_start_timer(new_round):
         self.current_round = new_round
-        if new_round not in timer_map:            timer_map[new_round]=True
+        if new_round not in timer_map:
+            timer_map[new_round]=time.perf_counter()
         # self.timer = threading.Timer(self.get_round_timer(new_round), self.local_timeout_round)
         # self.timer.start()
         # return self.get_round_timer( self.current_round)

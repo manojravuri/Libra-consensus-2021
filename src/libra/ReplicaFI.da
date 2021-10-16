@@ -6,11 +6,27 @@ config(handling='all')
 TIMEOUT = 1
 
 class ReplicaFI(Replica):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.terminate=False
+
+    def setup(self, *args, **kwargs):
+        super().setup(*args, **kwargs)
+        print("Self",dir(self))
+
     def run(self):
-        print("Starting faulty replica")
+        print("Starting faulty replica,", dir(self))
         runDone=False
-        while(not runDone):
+        while(not runDone and not self.terminate):
             if(await(runDone)):
                 pass
             elif timeout(5):
                 self.PaceMaker_local_timeout_round()
+
+        while (not self.terminate):  # keep replica always running
+            if (self.LeaderElection_get_leader(self.current_round+1)):
+                -- handlemessages
+                #await(some( received( ('proposal',_,_))) and  (some( received( ('vote',_,_,rid) ),has =rid ==self.replica_id ) )  )
+
+        output("Replica ", replica_id, " is terminated")

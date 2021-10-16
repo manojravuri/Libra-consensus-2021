@@ -94,7 +94,7 @@ def main():
     #output("Sending done to replicas")
     #send(('replica_done',replica_id,logical_clock()),to=parent())
 
-    await(len(setof(a,received( ('replica_done',_),from_=a) ) ) ==  number_of_procs )
+    #await(len(setof(a,received( ('replica_done',_),from_=a) ) ) ==  number_of_procs )
    # output("Replicas are done executions")
     output("Main function is terminating")
     os._exit(-1)
