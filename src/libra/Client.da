@@ -18,16 +18,24 @@ class Client(process):
         self.request_gap = request_gap
         self.f=f
         self.replica_timeout=5
+        self.client_id=client_id
+        self.terminate=False
+        self.cmds_pending={}
 
     def broadcast_request(cmd,reps):
         c=logical_clock()
-        send(('request',cmd,c,self),to=reps)
+        send(('request',cmd,c,client_id),to=reps)
         #re-transmit
         # if await(each( p in replicas, has=received(('request_ack', p)) ) ): pass
         # elif timeout(replica_timeout): output("TIMED OUT") #broadcast_request(cmd,reps)
 
-    def receive(msg=('request_ack', rid)):
-        output('received ack from ',rid)
+    def receive(msg=('committed', cmd)):
+        if 'dummy_txn' not in cmd :
+            cmds_pending[cmd]+=1
+            for cmd_ in cmds_pending:
+                if cmds_pending[cmd_] <= 2*f:
+                    return
+            self.terminate=True
 
 
     def run():
@@ -35,8 +43,13 @@ class Client(process):
             #output("client "+str(client_id)+"sleeping for "+str(request_gap))
             time.sleep(request_gap)
             cmd=str(client_id)+"----->"+str(i)
-            output("client is broadcasting "+cmd)
-
+           # output("client is broadcasting "+cmd)
+            cmds_pending[cmd]=0
             broadcast_request(cmd,replicas)
             #await(len(setof(a,received(('committed'), from_=a)))>2*f+1)
-        output("Client ", client_id," is terminated")
+
+        broadcast_request('dummy_txn1',replicas)
+        broadcast_request('dummy_txn2',replicas)
+        await(terminate)
+        #output("Client ", client_id," is terminated")
+        send(('client_done',client_id,logical_clock()),to=parent())

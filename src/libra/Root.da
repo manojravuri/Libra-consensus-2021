@@ -1,10 +1,14 @@
 from libra.Replica import Replica
 from libra.Client import Client
+
+import os
 import sys
 
 from nacl.signing import SigningKey
 from nacl.signing import VerifyKey
 from nacl.encoding import HexEncoder
+
+config(clock='Lamport')
 
 def main():
 
@@ -23,7 +27,7 @@ def main():
         replica_private_keys.append(signing_key)
 
     ##clients
-    number_of_clients=1
+    number_of_clients=2
 
     #cps = new(Client, num=number_of_clients)
 
@@ -42,31 +46,54 @@ def main():
     ps = new(Replica, num= number_of_procs)
     
     rep_map={}
+    cl_map={}
     ps=list(ps)
     i=0
     for p in ps:
         rep_map[i]=p
         i=i+1
     
-    i=0
-    for p in ps:
-        setup(p, (i,p,ps,rep_map,f,number_of_reqs,replica_public_keys,client_public_keys,replica_private_keys[i]))
-        i=i+1
-
-    start(ps)
 
     ##clients
     
     client_reqs=10
     request_gap=0
     cps=new(Client, num= number_of_clients)
+    
+    i=0
+    for cp in cps:
+        cl_map[i]=cp
+        i=i+1
+
+    i=0
+    for p in ps:
+        setup(p, (i,p,ps,rep_map,cl_map,f,number_of_reqs,replica_public_keys,client_public_keys,replica_private_keys[i]))
+        i=i+1
+
+    start(ps)
+
+    
     i=0
     for cp in cps:
         setup(cp, (i,ps,f,client_reqs,request_gap))
         i=i+1
     start(cps)
 
-    await(len(setof(a,received(('done'), from_=a)))>2*f+1)
+    await(len(setof(a,received(  ('client_done',_,_), from_=a))) == number_of_clients)
+   # output("Clients are done executions")
+    
+    send( ('done',self),to= ps)
+
+    #output("Sending done to replicas")
+    #send(('replica_done',replica_id,logical_clock()),to=parent())
+    
+    await(len(setof(a,received( ('replica_done',_),from_=a) ) ) ==  number_of_procs )
+   # output("Replicas are done executions")
+    output("Main function is terminating")
+    os._exit(-1)
+
+
+    
 
 
    

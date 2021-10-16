@@ -14,10 +14,11 @@ class LedgerCommitInfo:
 
 
 class Signature:
-    def __init__(self, id=None, message=None, type=None):
+    def __init__(self, id=None, message=None, type=None ,replica_process=None):
         self.id = id
         self.message = message
         self.type = type
+        self.replica_process= replica_process
 
     def __repr__(self):
         return str(self.id) + str(self.message) + str(self.type)
