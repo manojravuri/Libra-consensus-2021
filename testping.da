@@ -1,0 +1,21 @@
+import ping
+
+class RunPingPong(process):
+    def setup(config):
+        self.nrounds = config['nrounds']
+        self.npings = config['npings']
+
+    def run():
+        pong = new(ping.Pong, [nrounds * npings], num= 1)
+        pings = new(ping.Ping, num= npings)
+        setup(pings, (pong, nrounds))
+        start(pong)
+        start(pings)
+
+def main():
+    config(clock='Lamport')
+    configs = [{'nrounds':3, 'npings':3}, {'nrounds': 1, 'npings':2}]
+    for config in configs:
+        p = new(RunPingPong)
+        setup(p,(config,))
+        start(p)

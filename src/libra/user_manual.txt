@@ -1,0 +1,43 @@
+An implementation of DiemBFT v4 based on-
+
+DiemBFT v4: State Machine Replication in the Diem Blockchain by The Diem Team at Facebook
+
+The described system has 3f+1 replicas which will tolerate f failures, we will change type of failures based on the 
+
+Motivation
+
+This was done as course project for the course CSE 535 Asyschronous Systems at Stony Brook University taught by Professor Scott Stoller.
+
+The system is structured in following way: A startup process (bcr.da) reads the configuration file provided as commandline argument and creates Olympus and clients as mentioned in the configuration file. The Olympus after starting created the replicas based on the value of fault tolerance. The clients get their workload from the configuration file. Clients and replicas depend upon the Olympus to create the keys for signing. The public keys of all elements are shared on request. Fault Injection: If failure and triggers are mentioned in the configuration file then the necessary failures are injected during runtime in replicas when the trigger occurs.
+
+Used DistAlgo for the creation of async clients and message passing.
+
+PLATFORM
+OS: Windows 10
+DistAlgo version: 1.0.9
+Python implementation: CPython
+Python version: 3.5
+
+INSTRUCTION
+1. Unzip the release zip in your Windows 10 PC. Go to the root of the unzipped folder.
+2. Put your config file in config folder.
+3. Open two command line terminals
+4. In the first terminal run the following command with <config_file_name.txt> as the argument
+    python -m da --logfile -n MainNode --logfilename logs\log_verify_result_single_client_2_mainnode.txt -F info --message-buffer-size 100000  src\bcr.da <config_file_name.txt>
+5. In the second terminal run the following command with <config_file_name.txt> as the argument
+    python -m da --logfile -n ClientNode --logfilename logs\log_verify_result_single_client_2_clientnode.txt -F info --message-buffer-size 100000  src\bcr.da <config_file_name.txt>
+
+For example to run test case 1:
+1. open 2 command line terminals
+2. on terminal 1 run the following command-
+    python -m da --logfile -n MainNode --logfilename logs\log_verify_result_single_client_2_mainnode.txt -F info --message-buffer-size 100000  src\bcr.da config_result_verify_testcase_2.txt
+2. on terminal 2 run the following command-
+    python -m da --logfile -n ClientNode --logfilename logs\log_verify_result_single_client_2_clientnode.txt -F info --message-buffer-size 100000  src\bcr.da config_result_verify_testcase_2.txt
+
+WORKLOAD GENERATION
+Algorithm:
+pseudorandom(seed, n):
+    initialize python's random number generator with the specified seed.
+    for i in range(n):
+        generate a random number from 1 to 4 and map it to (get put slice append)
+        generated key and value using random to generate 4 random lowercase character

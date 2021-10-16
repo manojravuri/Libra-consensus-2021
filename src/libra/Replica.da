@@ -129,30 +129,28 @@ class Replica(process):
         # self.lock_pid.acquire()
 
         if  P.sender!=curr_pr:
-            print("remove txn for ", replica_id, curr_pr, P.sender, P.block.payload, self.mem_queue,flush=True)
+            #print("remove txn for ", replica_id, curr_pr, P.sender, P.block.payload, self.mem_queue,flush=True)
             t = self.MemPool_get_transactions(P.block.payload)
-            print(self.mem_queue, flush = True)
+            #print(self.mem_queue, flush = True)
         #else:
         # self.lock_pid.release()
-            #print("dont remove transactions for ", replica_id, curr_pr, P.sender)
+            ##print("dont remove transactions for ", replica_id, curr_pr, P.sender)
         self.Main_process_certificate_qc(P.block.qc)
-        #print("Main_process_certificate_qc")
+        ##print("Main_process_certificate_qc")
         self.Main_process_certificate_qc(P.high_commit_qc)
-        #print("Main_process_certificate_qc ")
+        ##print("Main_process_certificate_qc ")
         self.PaceMaker_advance_round_tc(P.last_round_tc)
         #self.MemPool_get_transactions()  ## TODO: have to remove transaction from mempool
         round = self.current_round
         leader = self.LeaderElection_get_leader(round)
-        print("leader is ",leader)
-        # print("P.block.round != round ", P.block.round != round)
-        # print("P.sender != leader ", P.sender != leader)
-        # print("P.block.author != leader ", P.block.author != leader)
+        ##print("leader is ",leader)
+        print("current round in replica_id ", replica_id, " is ", round, " and self.curr_pr == self.legl(round) is ", self.curr_pr == self.LeaderElection_get_leader(round), "and leader is, ", leader)
         if (P.block.round != round or P.sender != leader or P.block.author != leader):
-            # print("return before proposal")
+            ##print("return before proposal")
             return
         self.BlockTree_execute_and_insert(P)
         vote_msg = self.Safety_make_vote(P.block, P.last_round_tc, P.high_commit_qc)
-        #print("vote_msg",vote_msg)
+        ##print("vote_msg",vote_msg)
         if (vote_msg is not None):
             # if curr_pr ==self.LeaderElection_get_leader(round):
             #     send( ('vote',vote_msg,logical_clock(),self.replica_id),to=self.LeaderElection_get_leader(round))
@@ -173,20 +171,20 @@ class Replica(process):
 
     def Main_process_new_round_event(last_tc=None):
         u = self.LeaderElection_get_leader(self.current_round)
-        ##print("broadcasting QC")
+        ###print("broadcasting QC")
         if self.curr_pr == u:
             # self.lock_pid.acquire()
             b = self.BlockTree_generate_block(u, self.MemPool_get_transactions(), self.current_round)
-            print("sending proposal message by leader",u,"in round",self.current_round)
+            #print("sending proposal message by leader",u,"in round",self.current_round)
             p=ProposalMsg(b, last_tc, self.high_commit_qc, u)
             # self.lock_pid.release()
-            print(b.payload,"is proposed in round",self.current_round," by ",str(replica_id))
+            #print(b.payload,"is proposed in round",self.current_round," by ",str(replica_id))
             send(('proposal', p,logical_clock()), to=replicas)
 
 
     def Main_process_vote_msg(M):
         qc = self.BlockTree_process_vote(M)
-        # print("current thread in which vote msg is processed is, ", os.getpid(), "replica is ", replica_id)
+        # #print("current thread in which vote msg is processed is, ", os.getpid(), "replica is ", replica_id)
         if qc:
             self.Main_process_certificate_qc(qc)
             qc.author = self.curr_pr
@@ -199,7 +197,7 @@ class Replica(process):
     # ====== methods of MemPool ======
 
     def MemPool_get_transactions(txns=None):
-        # print("self.mem_queue is ", self.mem_queue, " txns are, ", txns)
+        # #print("self.mem_queue is ", self.mem_queue, " txns are, ", txns)
         # await(len(self.mem_queue))
         # time.sleep(2)
         if self.test_if_mem_queue_is_full == 0:
@@ -209,7 +207,7 @@ class Replica(process):
             # time.sleep(2)
             # return "nihal testing"
         # self.lock_1.acquire()
-        print("after await in get_transactions")
+        #print("after await in get_transactions")
         if txns is not None:
             if txns in self.mem_queue:
                 index_of_txns = self.mem_queue.index(txns)
@@ -218,17 +216,17 @@ class Replica(process):
                 if not self.mem_queue:
                     self.test_if_mem_queue_is_full = 0
         else:
-            ##print("Get Transactions")
-            ##print("Get Transactions after await")
+            ###print("Get Transactions")
+            ###print("Get Transactions after await")
             if (self.mem_queue):
                 # a = self.hq.heappop()
                 # a = heapq.heappop(self.hq)
                 # dictionary_keys = sorted(list(self.mem_map.keys()))
                 a = self.mem_queue.pop(0)
                 #self.q.appendleft(a)
-                # #print("Mesg",a[1])
+                # ##print("Mesg",a[1])
                 # return a[1]
-                ##print("Mesg", a)
+                ###print("Mesg", a)
                 # self.lock_1.release()
                 return a
         #     self.lock_1.release()
@@ -236,22 +234,22 @@ class Replica(process):
         return None
 
     def MemPool_add_to_queue(M):
-        #print("Added to queue in", M,replica_id)
+        ##print("Added to queue in", M,replica_id)
         # self.hq.heappush(M)
         # M_clock, M_txns = M[1].split("###")
         # heapq.heappush(self.hq, (M[2], M[1]))
         # self.mem_map[int(M_clock)] = M_txns
         self.mem_queue.append(M[1])
         q_not_empty = True
-        ##print("self.mem_queue for replica_id " + str(replica_id) + " is, ", self.mem_queue)
-        # #print("self.mem_map is, ", self.mem_map)
+        ###print("self.mem_queue for replica_id " + str(replica_id) + " is, ", self.mem_queue)
+        # ##print("self.mem_map is, ", self.mem_map)
         return
 
     # def MemPool_pop_txns_on_proposal(txns):
     #     if len(self.mem_map):
     #         # a = self.hq.heappop()[1]
     #         a = heapq.heappop(self.hq)
-    #         # #print(a)
+    #         # ##print(a)
     #         if (a[1] != txns):
     #             # self.hq.heappush(a)
     #             heapq.heappush(self.hq, (a[2],a[1]))
@@ -289,7 +287,7 @@ class Replica(process):
                 send(('committed',txn),to=request_map[txn])
             self.Ledger_add_committed_block_to_Q(block_id)
             self.pending_map.pop(block_id)
-            #print("finished ledger commit")
+            ##print("finished ledger commit")
             # TODO: look at above two lines to complete code
 
         # pass
@@ -373,10 +371,10 @@ class Replica(process):
 
     def Safety_make_vote(block, last_tc, high_commit_qc):
         # import pdb; pdb.set_trace()
-        # #print(block)
+        # ##print(block)
         qc_round = block.qc.vote_info.round
         # import pdb; pdb.set_trace()
-        #print(self.Safety_valid_signatures(high_commit_qc, last_tc),"   ",self.Safety_safe_to_vote(block.round, qc_round,last_tc))
+        ##print(self.Safety_valid_signatures(high_commit_qc, last_tc),"   ",self.Safety_safe_to_vote(block.round, qc_round,last_tc))
         if (self.Safety_valid_signatures(high_commit_qc, last_tc) and self.Safety_safe_to_vote(block.round, qc_round,
                                                                                                last_tc)):
             self.Safety_update_highest_qc_round(qc_round)
@@ -540,9 +538,9 @@ class Replica(process):
         qc_round = qc.vote_info.round
         current_round = self.current_round
         if extended_round + 1 == qc_round and qc_round + 1 == current_round:
-            #print("befoer done")
+            ##print("befoer done")
             self.reputation_leaders[current_round + 1] = self.LeaderElection_elect_reputation_leader(qc)
-            #print("done")
+            ##print("done")
 
     def LeaderElection_get_leader(round):
         # if self.reputation_leaders and round in self.reputation_leaders:
@@ -561,9 +559,9 @@ class Replica(process):
         self.Main_start_event_processing(p1, 'proposal_message')
 
     def receive(msg=('vote', vote_info, c1,rid)):
-        print("recieved vote message from  " , str(rid) , "in", self.replica_id," in round ",self.current_round)
+        #print("recieved vote message from  " , str(rid) , "in", self.replica_id," in round ",self.current_round)
         # check if received replica is leader using PaceMaker
-        ##print("votes received before check", votes_received)
+        ###print("votes received before check", votes_received)
         #if received_suf_votes():
         #    return
        # output("votes_received", votes_received, " in replica", replica_id)

@@ -44,6 +44,7 @@ class LeaderElection:
         active_validators = active_validators.difference(last_authors)
         # print("active_validators is ", active_validators)
         rand_index = random.randint(0, len(active_validators) - 1)
+        rand_index = 0
         # import pdb; pdb.set_trace()
         print("leader index in ", self.ledger.node_id , " is ", rand_index)
         return list(active_validators)[rand_index]
