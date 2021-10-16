@@ -45,6 +45,7 @@ class Main:
         # print("message is, ", message)
         if (type == 'local_timeout'):
             msg = self.pacemaker.local_timeout_round()
+            return msg
         if (type == 'proposal_message'):
 
             msg = self.process_proposal_msg(message)
@@ -169,6 +170,8 @@ if __name__ == '__main__':
 
     #cps = new(Client, num=number_of_clients)
 
+    number_of_clients=4
+
     all_client_private_keys = []
     all_client_public_keys = []
 
@@ -212,6 +215,19 @@ if __name__ == '__main__':
     proposal_msg, leader = main3.start_event_processing(vote_msg_4, 'vote_message')
     proposal_msg, leader = main3.start_event_processing(vote_msg_5, 'vote_message')
     proposal_msg_6, leader_6 = main3.start_event_processing(vote_msg_6, 'vote_message')
+
+
+    timeout_msg1 = main4.start_event_processing("","local_timeout")
+    timeout_msg2 = main1.start_event_processing("", "local_timeout")
+    timeout_msg3 = main2.start_event_processing("", "local_timeout")
+    timeout_msg4 = main3.start_event_processing("", "local_timeout")
+    TC=main5.start_event_processing(timeout_msg1,"timeout_message")
+    TC=main5.start_event_processing(timeout_msg2, "timeout_message")
+
+
+
+
+
     # import pdb; pdb.set_trace()
     vote_msg_2, leader_2 = main2.start_event_processing(proposal_msg_2, 'proposal_message')
     vote_msg_6, leader_2 = main3.start_event_processing(proposal_msg_2, 'proposal_message')

@@ -78,10 +78,11 @@ class Replica(process):
         # ====== attributes of PaceMaker ======
         self.current_round = 0
         self.last_round_tc = None
-        self.pending_timeouts = None
+        self.pending_timeouts = {}
         self.delta = 1
         self.timer = threading.Timer(None, None)
         self.ps = ps
+        self.timer_map={}
 
         # ====== attributes of LeaderElection ======
         self.exclude_size = f  # f to 2f
@@ -145,6 +146,7 @@ class Replica(process):
         self.Main_process_certificate_qc(M.high_commit_qc)
         self.PaceMaker_advance_round_tc(M.last_round_tc)
         tc = self.PaceMaker_process_remote_timeout(M)
+        #output("tc",tc)
         if (tc):
             self.PaceMaker_advance_round_tc(tc)
             return self.Main_process_new_round_event(tc), self.LeaderElection_get_leader(self.current_round)
@@ -345,7 +347,7 @@ class Replica(process):
 
     def Safety_make_timeout(round, high_qc, last_tc):
         qc_round = high_qc.vote_info.round
-        if (self.valid_signatures(high_qc, last_tc) and self.safe_to_timeout(round, qc_round, last_tc)):
+        if (self.Safety_valid_signatures(high_qc, last_tc) and self.Safety_safe_to_timeout(round, qc_round, last_tc)):
             return TimeoutInfo(round, high_qc, self.curr_pr, Signature(self.replica_id, self.private_key.sign(
                 str((round, high_qc.vote_info.round)).encode('utf-8')), 'replica'))
         return None
@@ -389,38 +391,54 @@ class Replica(process):
         pass
 
     def PaceMaker_get_round_timer(r):
-        # c=logical_clock()
+        c=logical_clock()
+        while(1):
+            if(await(new_round not in timer_map or timer_map[new_round])):
+
         return 4 * self.delta
 
     def PaceMaker_start_timer(new_round):
         self.current_round = new_round
+        if new_round not in timer_map:            timer_map[new_round]=True
         # self.timer = threading.Timer(self.get_round_timer(new_round), self.local_timeout_round)
         # self.timer.start()
         # return self.get_round_timer( self.current_round)
 
     def PaceMaker_local_timeout_round():
-
+        print("Creating a local timeout at ", self.replica_id)
         self.PaceMaker_stop_timer(self.current_round)  ## TODO: check if this is wrong or right
         timeout_info = self.Safety_make_timeout(self.current_round, self.high_qc, self.last_round_tc)
         time_out_msg = TimeoutMsg(timeout_info, self.last_round_tc, self.high_commit_qc)
         c = logical_clock()
         send(('time_out_msg', time_out_msg, c), to=ps)
+        #output("Sending local timeout to all replicas")
 
     def PaceMaker_process_remote_timeout(tmo):
-        tmo_info = tmo.tmo_info
+        tmo_info=tmo.tmo_info
+        #print("tmo round",tmo_info.round)
         if tmo_info:
             if (tmo_info.round < self.current_round):
                 return None
-            if (tmo_info.sender not in self.pending_timeouts):
-                self.pending_timeouts.add(tmo_info)
-            if (self.pending_timeouts.size() == f + 1):
-                self.stop_timer(self.current_round)
-                self.local_timeout_round()
-            if (self.pending_timeouts.size() == 2 * f + 1):
+            if(tmo_info.round not in self.pending_timeouts):
+                self.pending_timeouts[tmo_info.round]={}
+                self.pending_timeouts[tmo_info.round]["tmos"]=[]
+                self.pending_timeouts[tmo_info.round]["senders"]=[]
+            if ( tmo_info.sender not in self.pending_timeouts[tmo_info.round]["senders"]):
+                self.pending_timeouts[tmo_info.round]["tmos"].append(tmo_info)
+                self.pending_timeouts[tmo_info.round]["senders"].append(tmo_info.sender)
+            if (len(self.pending_timeouts[tmo_info.round]["senders"]) ==  f+1):
+                #print("f+1 timeouts")
+                self.PaceMaker_stop_timer(self.current_round)
+                self.PaceMaker_local_timeout_round()
+            if (len(self.pending_timeouts[tmo_info.round]["senders"]) ==  2*f+1):
                 round = tmo_info.round
-                tmo_high_qc_rounds = self.pending_timeouts[tmo_info.round][0].high_qc.vote_info.round
-                signatures = self.pending_timeouts[tmo_info.round][0].signature
-                return TC(round=round, tmo_high_qc_rounds=tmo_high_qc_rounds, tmo_signatures=signatures)
+                tmo_high_qc_rounds = []
+                signatures=[]
+                for tmo_info_in_round in self.pending_timeouts[tmo_info.round]["tmos"]:
+                    tmo_high_qc_rounds.append(tmo_info_in_round.round)
+                    signatures.append(tmo_info_in_round.signature)
+                output("Creating a timeout certificate")
+                return TC(round = round, tmo_high_qc_rounds=tmo_high_qc_rounds, tmo_signatures=signatures)
         return None
 
     def PaceMaker_advance_round_tc(tc):
@@ -501,6 +519,10 @@ class Replica(process):
         #output("message received " + str(cmd) + " from " + str(p) + " at " + str(replica_id))
         M = ('request', cmd, c)
         self.Main_add_to_Mempool(M)
+
+    def receive(msg=('time_out_msg', timeout_msg,c)):
+        #output("received local timeout")
+        self.Main_start_event_processing(timeout_msg,'timeout_message')
     
     def run():
         # handle first round

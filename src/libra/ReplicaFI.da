@@ -1,0 +1,16 @@
+from libra.Replica import Replica
+
+config(clock='Lamport')
+config(handling='all')
+
+TIMEOUT = 1
+
+class ReplicaFI(Replica):
+    def run(self):
+        print("Starting faulty replica")
+        runDone=False
+        while(not runDone):
+            if(await(runDone)):
+                pass
+            elif timeout(5):
+                self.PaceMaker_local_timeout_round()

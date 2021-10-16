@@ -66,9 +66,9 @@ class TC:
 
 
 class TimeoutMsg:
-    def __init__(self, tmo_info, last_round_qc, high_commit_qc):
+    def __init__(self, tmo_info=None, last_round_tc=None, high_commit_qc=None):
         self.tmo_info = tmo_info
-        self.last_round_qc = last_round_qc
+        self.last_round_tc = last_round_tc
         self.high_commit_qc = high_commit_qc
 
 

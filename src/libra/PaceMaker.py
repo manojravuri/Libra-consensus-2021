@@ -1,9 +1,10 @@
 # from .Safety import Safety
 # from .BlockTree import BlockTree
 # from .BlockTree import TimeoutMsg
+
 from Safety import Safety
 from BlockTree import BlockTree
-from BlockTree import TimeoutMsg
+from BlockTree import TimeoutMsg,TC
 import threading
 
 
@@ -12,7 +13,7 @@ class PaceMaker:
 
         self.current_round = current_round
         self.last_round_tc = last_round_tc
-        self.pending_timeouts = pending_timeouts
+        self.pending_timeouts = {}
         self.safety = safety
         self.block_tree = block_tree
         self.delta = 1
@@ -44,23 +45,32 @@ class PaceMaker:
         print("local_timeout done")
         # broadcast TimeoutMsg(timeout_info,self.last_round_tc,self.block_tree.high_commit_qc)
         time_out_msg = TimeoutMsg(timeout_info,self.last_round_tc,self.block_tree.high_commit_qc)
-        c = logical_clock()
-        send(('time_out_msg',time_out_msg,c),to=ps)
+        return time_out_msg
+        #c = logical_clock()
+        #send(('time_out_msg',time_out_msg,c),to=ps)
 
     def process_remote_timeout(self, tmo):
         tmo_info = tmo.tmo_info
         if tmo_info:
             if (tmo_info.round < self.current_round):
                 return None
-            if (tmo_info.sender not in self.pending_timeouts):
-                self.pending_timeouts.add(tmo_info)
-            if (self.pending_timeouts.size() == f + 1):
+            if(tmo_info.round not in self.pending_timeouts):
+                self.pending_timeouts[tmo_info.round]={}
+                self.pending_timeouts[tmo_info.round]["tmos"]=[]
+                self.pending_timeouts[tmo_info.round]["senders"]=[]
+            if ( tmo_info.sender not in self.pending_timeouts[tmo_info.round]["senders"]):
+                self.pending_timeouts[tmo_info.round]["tmos"].append(tmo_info)
+                self.pending_timeouts[tmo_info.round]["senders"].append(tmo_info.sender)
+            if (len(self.pending_timeouts[tmo_info.round]["senders"]) ==  2):
                 self.stop_timer(self.current_round)
                 self.local_timeout_round()
-            if (self.pending_timeouts.size() == 2 * f + 1):
+            if (len(self.pending_timeouts[tmo_info.round]["senders"]) ==  2):
                 round = tmo_info.round
-                tmo_high_qc_rounds = self.pending_timeouts[tmo_info.round][0].high_qc.vote_info.round
-                signatures = self.pending_timeouts[tmo_info.round][0].signature
+                tmo_high_qc_rounds = []
+                signatures=[]
+                for tmo_info_in_round in self.pending_timeouts[tmo_info.round]["tmos"]:
+                    tmo_high_qc_rounds.append(tmo_info_in_round.round)
+                    signatures.append(tmo_info_in_round.signature)
                 return TC(round = round, tmo_high_qc_rounds=tmo_high_qc_rounds, tmo_signatures=signatures)
         return None
 
