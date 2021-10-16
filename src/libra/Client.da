@@ -5,13 +5,14 @@ import sys
 import logging
 import time
 
+from .Objects import *
 
 config(clock = 'Lamport')
 config(handling = 'all')
 
 
 class Client(process):
-    def setup(client_id:int,replicas:set,f:int,number_of_requests:int,request_gap:int):
+    def setup(client_id:int,replicas:set,f:int,number_of_requests:int,request_gap:int,client_private_key):
         output("creating client ", client_id)
         self.replicas=replicas
         self.number_of_requests = number_of_requests
@@ -21,13 +22,18 @@ class Client(process):
         self.client_id=client_id
         self.terminate=False
         self.cmds_pending={}
+        self.private_key=client_private_key
 
     def broadcast_request(cmd,reps):
         c=logical_clock()
-        send(('request',cmd,c,client_id),to=reps)
+        signature=sign_cmd(cmd)
+        send(('request',cmd,c,client_id,signature),to=reps)
         #re-transmit
         # if await(each( p in replicas, has=received(('request_ack', p)) ) ): pass
         # elif timeout(replica_timeout): output("TIMED OUT") #broadcast_request(cmd,reps)
+
+    def sign_cmd(cmd):
+        return Signature(self.client_id, self.private_key.sign(cmd.encode('utf-8')), 'client',None)
 
     def receive(msg=('committed', cmd)):
         if 'dummy_txn' not in cmd :

@@ -166,7 +166,7 @@ class Replica(process):
         self.Main_process_certificate_qc(M.high_commit_qc)
         self.PaceMaker_advance_round_tc(M.last_round_tc)
         tc = self.PaceMaker_process_remote_timeout(M)
-        #output("tc",tc)
+        output("tc",tc)
         if (tc):
             self.PaceMaker_advance_round_tc(tc)
             return self.Main_process_new_round_event(tc), self.LeaderElection_get_leader(self.current_round)
@@ -365,7 +365,7 @@ class Replica(process):
             return False
         except:
             return False
-
+        output("Signature of "+ type+ " verified")
         return True
 
     def Safety_make_signature(block):
@@ -431,10 +431,9 @@ class Replica(process):
     # ====== methods of PaceMaker ======
 
     def PaceMaker_stop_timer(round):
-        if(round in timer_map):
-            timer_map[round]=timer_map[round]-time.perf_counter()
-            self.timer.cancel()
-            pass
+        timer_map[round]=False
+        self.timer.cancel()
+        pass
 
     def PaceMaker_get_round_timer(r):
         c=logical_clock()
@@ -444,19 +443,20 @@ class Replica(process):
     def PaceMaker_start_timer(new_round):
         self.current_round = new_round
         if new_round not in timer_map:
-            timer_map[new_round]=time.perf_counter()
-        # self.timer = threading.Timer(self.get_round_timer(new_round), self.local_timeout_round)
-        # self.timer.start()
+            timer_map[new_round]=True
+        self.timer = threading.Timer(self.PaceMaker_get_round_timer(new_round), self.PaceMaker_local_timeout_round)
+        self.timer.start()
         # return self.get_round_timer( self.current_round)
 
     def PaceMaker_local_timeout_round():
-        print("Creating a local timeout at ", self.replica_id)
-        self.PaceMaker_stop_timer(self.current_round)  ## TODO: check if this is wrong or right
-        timeout_info = self.Safety_make_timeout(self.current_round, self.high_qc, self.last_round_tc)
-        time_out_msg = TimeoutMsg(timeout_info, self.last_round_tc, self.high_commit_qc)
-        c = logical_clock()
-        send(('time_out_msg', time_out_msg, c), to=ps)
-        #output("Sending local timeout to all replicas")
+        if(not self.terminate):
+            print("Creating a local timeout at ", self.replica_id,flush=True)
+            self.PaceMaker_stop_timer(self.current_round)  ## TODO: check if this is wrong or right
+            timeout_info = self.Safety_make_timeout(self.current_round, self.high_qc, self.last_round_tc)
+            time_out_msg = TimeoutMsg(timeout_info, self.last_round_tc, self.high_commit_qc)
+            c = logical_clock()
+            send(('time_out_msg', time_out_msg, c), to=ps)
+            #output("Sending local timeout to all replicas")
 
     def PaceMaker_process_remote_timeout(tmo):
         tmo_info=tmo.tmo_info
@@ -576,17 +576,18 @@ class Replica(process):
         self.Main_start_event_processing(vote_info, 'vote_message')
 
 
-    def receive(msg=('request', cmd, c, p)):
-        #output("message received " + str(cmd) + " from " + str(p) + " at " + str(replica_id))
-        M = ('request', cmd, c)
+    def receive(msg=('request', cmd, c, p,signature)):
+        if(self.Safety_verify_signature(signature.id, signature.message, signature.type)):
+            #output("message received " + str(cmd) + " from " + str(p) + " at " + str(replica_id))
+            M = ('request', cmd, c)
 
-        request_map[cmd]=client_map[p]
-        #send( ('request_ack',self.replica_id),to=client_map[p])
-        ##print("sent ack to client",p)
-        self.Main_add_to_Mempool(M)
+            request_map[cmd]=client_map[p]
+            #send( ('request_ack',self.replica_id),to=client_map[p])
+            ##print("sent ack to client",p)
+            self.Main_add_to_Mempool(M)
 
     def receive(msg=('time_out_msg', timeout_msg,c)):
-        #output("received local timeout")
+        output("received local timeout")
         self.Main_start_event_processing(timeout_msg,'timeout_message')
 
 
@@ -595,6 +596,7 @@ class Replica(process):
         if sender==parent():
             send(('replica_done',replica_id),to=parent())
             output("Terminate replica",replica_id)
+            self.PaceMaker_stop_timer(self.current_round)
             self.terminate=True
 
 
