@@ -23,8 +23,8 @@ class Client(process):
         c=logical_clock()
         send(('request',cmd,c,self),to=reps)
         #re-transmit
-        if await(each( p in replicas, has=received(('request_ack', p)) ) ): pass
-        elif timeout(replica_timeout): output("TIMED OUT") #broadcast_request(cmd,reps)
+        # if await(each( p in replicas, has=received(('request_ack', p)) ) ): pass
+        # elif timeout(replica_timeout): output("TIMED OUT") #broadcast_request(cmd,reps)
 
     def receive(msg=('request_ack', rid)):
         output('received ack from ',rid)
@@ -35,7 +35,7 @@ class Client(process):
             #output("client "+str(client_id)+"sleeping for "+str(request_gap))
             time.sleep(request_gap)
             cmd=str(client_id)+"----->"+str(i)
-            #output("client is broadcasting "+cmd)
+            output("client is broadcasting "+cmd)
 
             broadcast_request(cmd,replicas)
             #await(len(setof(a,received(('committed'), from_=a)))>2*f+1)
