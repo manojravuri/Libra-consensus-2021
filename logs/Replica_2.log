@@ -1,7 +1,4 @@
 creating replica 2
 Replica started2
-Creating a local timeout at 2
-received local timeout
-received local timeout
-received local timeout
-received local timeout
+Terminate replica2
+Replica 2 is terminated
