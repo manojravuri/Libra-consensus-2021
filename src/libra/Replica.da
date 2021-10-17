@@ -28,13 +28,12 @@ TIMEOUT = 1
 
 
 class Replica(process):
-    def setup(replica_id: int, curr_pr, ps: list,rep_map:dict,cl_map:dict, f: int, number_of_requests: int,replica_public_keys=None,client_public_keys=None,replica_private_key=None):
+    def setup(replica_id: int, curr_pr, ps: list,rep_map:dict,cl_map:dict, f: int, replica_public_keys=None,client_public_keys=None,replica_private_key=None):
         # ====== attributes of Replica ======
         output("creating replica ", replica_id)
         self.f = f
         self.replicas = ps
         self.proposals = set()
-        self.number_of_requests = number_of_requests
         self.processing_req = False
         self.votes_received = 0
         self.replica_map=rep_map
@@ -54,16 +53,19 @@ class Replica(process):
         # self.hq = heapq.heapify([])
         #self.hq = []
         # self.mem_map={}
+        self.processed_transactions = []
         self.mem_queue =  []
         # self.lock_1 = threading.Lock()
         # self.lock_pid = multiprocessing.Lock()
         self.test_if_mem_queue_is_full = 0
+
         # ====== attributes of Ledger ======
         cur_path = os.getcwd()
         self.file_name = os.path.abspath(cur_path + "/../data/Ledger_" + str(self.replica_id) + ".txt")
         self.pending_map = {}
         self.commited_blocks = {}  # committed block with window size
         self.ledger_state = ""
+        self.commit_state_id= hash("")
 
         # ====== attributes of Safety ======
         self.highest_vote_round = -1
@@ -88,7 +90,7 @@ class Replica(process):
         self.current_round = 0
         self.last_round_tc = None
         self.pending_timeouts = {}
-        self.delta = 1
+        self.delta = 2
         self.timer = threading.Timer(None, None)
         self.ps = ps
         self.timer_map={}
@@ -202,9 +204,17 @@ class Replica(process):
         # #print("self.mem_queue is ", self.mem_queue, " txns are, ", txns)
         # await(len(self.mem_queue))
         # time.sleep(2)
-        if self.test_if_mem_queue_is_full == 0:
+        if txns is not None:
+            self.processed_transactions.append(txns)
+
+        if not self.mem_queue:
             await(len(self.mem_queue))
-            self.test_if_mem_queue_is_full = 1
+            # await(len(self.mem_queue) and   )
+            # if txns is not None:
+            #     await(len(self.mem_queue) and txns in self.mem_queue)
+            # else:
+            #     await(len(self.mem_queue))
+            # self.test_if_mem_queue_is_full = 1
         # if not self.mem_queue:
             # time.sleep(2)
             # return "nihal testing"
@@ -215,8 +225,9 @@ class Replica(process):
                 index_of_txns = self.mem_queue.index(txns)
                 # self.mem_map.pop(clock)
                 self.mem_queue.pop(index_of_txns)
-                if not self.mem_queue:
-                    self.test_if_mem_queue_is_full = 0
+            return None
+                # if not self.mem_queue:
+                #     self.test_if_mem_queue_is_full = 0
         else:
             ###print("Get Transactions")
             ###print("Get Transactions after await")
@@ -230,9 +241,15 @@ class Replica(process):
                 # return a[1]
                 ###print("Mesg", a)
                 # self.lock_1.release()
+                if a in self.processed_transactions:
+                    return self.MemPool_get_transactions()
+                self.processed_transactions.append(a)
                 return a
+            else:
+                print("memqueue is empty")
         #     self.lock_1.release()
         # self.lock_1.release()
+        # return self.MemPool_get_transactions()
         return None
 
     def MemPool_add_to_queue(M):
@@ -241,6 +258,7 @@ class Replica(process):
         # M_clock, M_txns = M[1].split("###")
         # heapq.heappush(self.hq, (M[2], M[1]))
         # self.mem_map[int(M_clock)] = M_txns
+        # if M is not None:
         self.mem_queue.append(M[1])
         q_not_empty = True
         ###print("self.mem_queue for replica_id " + str(replica_id) + " is, ", self.mem_queue)
@@ -270,7 +288,7 @@ class Replica(process):
     def Ledger_pending_state(block_id):
         if (block_id in self.pending_map):
             if (self.pending_map[block_id]["prev_block_id"] is not None):
-                return self.pending_map[block_id]["prev_block_id"]
+                return hash(str( self.commit_state_id) +str(self.pending_map[block_id]["prev_block_id"]) )
             else:
                 return None
         else:
@@ -284,6 +302,7 @@ class Replica(process):
             txn=self.pending_map[block_id]["block"].payload
             if('dummy_txn' not in txn):
                 file = open(self.file_name, "a+")
+                self.commit_state_id=hash(str(self.commit_state_id)+str(txn))
                 file.write(txn+" time: "+str(logical_clock())+"\n")
                 file.close()
                 send(('committed',txn),to=request_map[txn])
@@ -582,7 +601,7 @@ class Replica(process):
             M = ('request', cmd, c)
 
             request_map[cmd]=client_map[p]
-            #send( ('request_ack',self.replica_id),to=client_map[p])
+            send( ('request_ack',self.replica_id),to=client_map[p])
             ##print("sent ack to client",p)
             self.Main_add_to_Mempool(M)
 
