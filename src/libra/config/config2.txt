@@ -13,7 +13,7 @@ test_case_name = test2
 number_of_procs = 4
 client_reqs = 4
 number_of_clients = 2
-request_gap = 0
+request_gap = 1
 
 
 
