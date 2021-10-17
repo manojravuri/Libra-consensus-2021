@@ -24,25 +24,22 @@ Python implementation: CPython TODO: change this
 Python version: 3.7.12
 
 INSTRUCTION
-1. Unzip the release zip in your PC. Install the requirements in requirements.txt using pip install -r requirements.txt.
-2. Put your config file in config folder.
-3. Open two command line terminals
-4. In the first terminal run the following command with <config_file_name.txt> as the argument
-    python -m da --logfile -n MainNode --logfilename logs\log_verify_result_single_client_2_mainnode.txt -F info --message-buffer-size 100000  src\bcr.da <config_file_name.txt>
-5. In the second terminal run the following command with <config_file_name.txt> as the argument
-    python -m da --logfile -n ClientNode --logfilename logs\log_verify_result_single_client_2_clientnode.txt -F info --message-buffer-size 100000  src\bcr.da <config_file_name.txt>
+1. Download the relevant python and distalgo release.
+2. Unzip the release zip in your PC. Install the requirements in requirements.txt using pip install -r requirements.txt.
+3. Put your config file in config folder.
+4. Open a command line terminal.
+5.Change your current directory to <DAROOT>/src
+6. In the terminal, run the following command
+    python -m da -m libra.Root <path to your config file>
 
-For example to run test case 1:
-1. open 2 command line terminals
-2. on terminal 1 run the following command-
-    python -m da --logfile -n MainNode --logfilename logs\log_verify_result_single_client_2_mainnode.txt -F info --message-buffer-size 100000  src\bcr.da config_result_verify_testcase_2.txt
-2. on terminal 2 run the following command-
-    python -m da --logfile -n ClientNode --logfilename logs\log_verify_result_single_client_2_clientnode.txt -F info --message-buffer-size 100000  src\bcr.da config_result_verify_testcase_2.txt
+For example to run config2 file:
+1. open a command line terminal after installing relevant distributions.
+2. cd to <DAROOT>/src
+2. on the terminal run:
+    python -m da -m libra/config/config2.txt
 
-WORKLOAD GENERATION
-Algorithm:
-pseudorandom(seed, n):
-    initialize python's random number generator with the specified seed.
-    for i in range(n):
-        generate a random number from 1 to 4 and map it to (get put slice append)
-        generated key and value using random to generate 4 random lowercase character
+LOGS
+Once you run the relevant test case, then the logs with what is happening would come up in <DAROOT>/logs (for client and replica logs).
+
+
+The commits happening on each node would be written to text files, which are present in <DAROOT>/data (indexed with the node id)
