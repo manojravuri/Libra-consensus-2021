@@ -10,9 +10,9 @@
 
 test_case_name = test2
 
-number_of_procs = 4
-client_reqs = 4
-number_of_clients = 2
+number_of_procs = 7
+client_reqs = 10
+number_of_clients = 10
 request_gap = 1
 
 

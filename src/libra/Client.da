@@ -42,7 +42,7 @@ class Client(process):
         return Signature(self.client_id, self.private_key.sign(cmd.encode('utf-8')), 'client',None)
 
     def receive(msg=('committed', cmd,replica_id)):
-        Logger.log('Received transaction :'+str(cmd)+' commited message from replica '+str(replica_id),logfile)
+        Logger.log('Received transaction :'+str(cmd)+' committed message from replica '+str(replica_id),logfile)
         if 'dummy_txn' not in cmd :
             cmds_pending[cmd]+=1
             for cmd_ in cmds_pending:
@@ -57,8 +57,9 @@ class Client(process):
             cmd=str(client_id)+"----->"+str(i)
             cmds_pending[cmd]=0
             broadcast_request(cmd,replicas)
-        broadcast_request(str(client_id) + "----->" + str(0),replicas)
-        broadcast_request(str(client_id) + "--->" + 'dummy_txn1',replicas)
-        broadcast_request(str(client_id) + "--->" + 'dummy_txn2',replicas)
+        if client_id==0:
+            broadcast_request(str(client_id) + "----->" + str(0),replicas)
+            broadcast_request(str(client_id) + "--->" + 'dummy_txn1',replicas)
+            broadcast_request(str(client_id) + "--->" + 'dummy_txn2',replicas)
         await(self.terminate)
         send(('client_done',client_id,logical_clock()),to=parent())
