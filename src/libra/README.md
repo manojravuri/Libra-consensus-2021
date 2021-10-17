@@ -36,7 +36,15 @@ For example to run config2 file:
 1. open a command line terminal after installing relevant distributions.
 2. cd to <DAROOT>/src
 2. on the terminal run:
-    python -m da -m libra/config/config2.txt
+    python -m da -m libra.Root libra/config/config2.txt
+
+WORKLOAD GENERATION
+We use config files to generate the relevant workload. The client files are present in libra_blockchain/src/libra/config folders.
+
+The code pulls up the file passed as argument and sets up the client, replicas accordingly.
+
+You run python -m da -m libra.Root libra/config/config2.txt to set up the system with configurations in config2.txt
+
 
 LOGS
 Once you run the relevant test case, then the logs with what is happening would come up in <DAROOT>/logs (for client and replica logs).
@@ -52,11 +60,16 @@ Each round will wait for a 4*delta time and if no operation is done, it will pro
 
 BUGS and LIMITATIONS
 
+LeaderElection:
+Timeouts:
 
 
 MAIN FILES
 
-
+src/libra/Root.da
+src/libra/Client.da
+src/libra/Replica.da
+src/libra/Objects.py
 
 CODE SIZE
 
