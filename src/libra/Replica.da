@@ -479,9 +479,8 @@ class Replica(process):
 
     def PaceMaker_process_remote_timeout(tmo):
         tmo_info=tmo.tmo_info
-        signature = tmo_info.signature
-        if tmo_info and self.Safety_verify_signature(signature.id, signature.message, signature.type):
-            output("timeout signature verified")
+        #print("tmo round",tmo_info.round)
+        if tmo_info:
             if (tmo_info.round < self.current_round):
                 return None
             if(tmo_info.round not in self.pending_timeouts):
