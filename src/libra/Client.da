@@ -32,6 +32,7 @@ class Client(process):
     def broadcast_request(cmd,reps):
         c=logical_clock()
         signature=sign_cmd(cmd)
+        Logger.log("Client is sending :"+ cmd+" to all replicas",logfile)
         send(('request',cmd,c,client_id,signature),to=reps)
         #re-transmit
         if await(each( id in rep_keys, has=received(('request_ack', id)) ) ): pass
@@ -40,7 +41,8 @@ class Client(process):
     def sign_cmd(cmd):
         return Signature(self.client_id, self.private_key.sign(cmd.encode('utf-8')), 'client',None)
 
-    def receive(msg=('committed', cmd)):
+    def receive(msg=('committed', cmd,replica_id)):
+        Logger.log('Received transaction :'+str(cmd)+' commited message from replica '+str(replica_id),logfile)
         if 'dummy_txn' not in cmd :
             cmds_pending[cmd]+=1
             for cmd_ in cmds_pending:
@@ -51,16 +53,12 @@ class Client(process):
 
     def run():
         for i in range(number_of_requests):
-            #Logger.log("client "+str(client_id)+"sleeping for "+str(request_gap))
             time.sleep(request_gap)
             cmd=str(client_id)+"----->"+str(i)
-           # Logger.log("client is broadcasting "+cmd)
             cmds_pending[cmd]=0
             broadcast_request(cmd,replicas)
-            #await(len(setof(a,received(('committed'), from_=a)))>2*f+1)
         broadcast_request(str(client_id) + "----->" + str(0),replicas)
         broadcast_request(str(client_id) + "--->" + 'dummy_txn1',replicas)
         broadcast_request(str(client_id) + "--->" + 'dummy_txn2',replicas)
         await(self.terminate)
-        #output("Client ", client_id," is terminated")
         send(('client_done',client_id,logical_clock()),to=parent())
