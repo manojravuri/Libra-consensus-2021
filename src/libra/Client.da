@@ -4,6 +4,7 @@ import string
 import sys
 import logging
 import time
+from libra.Logger import Logger
 
 from .Objects import *
 
@@ -13,13 +14,15 @@ config(handling = 'all')
 
 class Client(process):
     def setup(client_id:int,replicas:set,rep_map:dict,f:int,number_of_requests:int,request_gap:int,client_private_key):
-        output("creating client ", client_id)
+        
+        self.client_id=client_id
+        self.logfile="Client_"+str(client_id)+".log"
+        Logger.log("creating client "+str(client_id),logfile)
         self.replicas=replicas
         self.number_of_requests = number_of_requests
         self.request_gap = request_gap
         self.f=f
         self.replica_timeout=5
-        self.client_id=client_id
         self.terminate=False
         self.cmds_pending={}
         self.rep_map=rep_map
@@ -32,7 +35,7 @@ class Client(process):
         send(('request',cmd,c,client_id,signature),to=reps)
         #re-transmit
         if await(each( id in rep_keys, has=received(('request_ack', id)) ) ): pass
-        elif timeout(replica_timeout): output("TIMED OUT") #broadcast_request(cmd,reps)
+        elif timeout(replica_timeout): broadcast_request(cmd,reps)
 
     def sign_cmd(cmd):
         return Signature(self.client_id, self.private_key.sign(cmd.encode('utf-8')), 'client',None)
@@ -48,10 +51,10 @@ class Client(process):
 
     def run():
         for i in range(number_of_requests):
-            #output("client "+str(client_id)+"sleeping for "+str(request_gap))
+            #Logger.log("client "+str(client_id)+"sleeping for "+str(request_gap))
             time.sleep(request_gap)
             cmd=str(client_id)+"----->"+str(i)
-           # output("client is broadcasting "+cmd)
+           # Logger.log("client is broadcasting "+cmd)
             cmds_pending[cmd]=0
             broadcast_request(cmd,replicas)
             #await(len(setof(a,received(('committed'), from_=a)))>2*f+1)
@@ -59,5 +62,5 @@ class Client(process):
         broadcast_request('dummy_txn1',replicas)
         broadcast_request('dummy_txn2',replicas)
         await(terminate)
-        #output("Client ", client_id," is terminated")
+        #Logger.log("Client ", client_id," is terminated")
         send(('client_done',client_id,logical_clock()),to=parent())

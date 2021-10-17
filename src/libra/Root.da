@@ -7,10 +7,13 @@ import sys, time
 from nacl.signing import SigningKey
 from nacl.signing import VerifyKey
 from nacl.encoding import HexEncoder
+from libra.Logger import Logger
 
 config(clock='Lamport')
 
 def main():
+
+    Logger.cleanup()
     # time_start = time.time()
     if len(sys.argv) > 1:
         config_file = sys.argv[1]
