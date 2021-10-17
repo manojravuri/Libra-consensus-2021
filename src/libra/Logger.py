@@ -7,6 +7,10 @@ class Logger:
         dir = os.path.dirname(os.getcwd())+'/logs/'
         for f in os.listdir(dir):
             os.remove(os.path.join(dir, f))
+
+        dir = os.path.dirname(os.getcwd()) + '/data/'
+        for f in os.listdir(dir):
+            os.remove(os.path.join(dir, f))
         
 
 

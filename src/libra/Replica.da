@@ -3,6 +3,7 @@ import os
 import random
 import string
 import sys
+import logging
 import time
 from collections import deque
 from collections import defaultdict
@@ -30,7 +31,7 @@ TIMEOUT = 1
 class Replica(process):
     def setup(replica_id: int, curr_pr, ps: list,rep_map:dict,cl_map:dict, f: int, replica_public_keys=None,client_public_keys=None,replica_private_key=None):
         # ====== attributes of Replica ======
-        
+
         self.replica_id = replica_id
         self.logfile="Replica_"+str(replica_id)+".log"
         Logger.log("creating replica "+str(replica_id),logfile)
@@ -47,7 +48,7 @@ class Replica(process):
         random.seed(6)
         # ====== attributes of Main ======
 
-        
+
         self.window_size = 1
         self.replica_id = replica_id
         self.win_sz = 1
@@ -172,9 +173,11 @@ class Replica(process):
         self.Main_process_certificate_qc(M.high_commit_qc)
         self.PaceMaker_advance_round_tc(M.last_round_tc)
         tc = self.PaceMaker_process_remote_timeout(M)
+        output("tc",tc)
         if (tc):
             self.PaceMaker_advance_round_tc(tc)
-            return self.Main_process_new_round_event(tc), self.LeaderElection_get_leader(self.current_round)
+            # return self.Main_process_new_round_event(tc), self.LeaderElection_get_leader(self.current_round)
+            self.Main_process_new_round_event(tc)
 
     def Main_process_new_round_event(last_tc=None):
         u = self.LeaderElection_get_leader(self.current_round)
@@ -222,7 +225,7 @@ class Replica(process):
             # time.sleep(2)
             # return "nihal testing"
         # self.lock_1.acquire()
-        #Logger.log("after await in get_transactions")
+        #print("after await in get_transactions")
         if txns is not None:
             if txns in self.mem_queue:
                 index_of_txns = self.mem_queue.index(txns)
@@ -264,6 +267,8 @@ class Replica(process):
         # if M is not None:
         self.mem_queue.append(M[1])
         q_not_empty = True
+        ###print("self.mem_queue for replica_id " + str(replica_id) + " is, ", self.mem_queue)
+        # ##print("self.mem_map is, ", self.mem_map)
         return
 
     # ====== methods of Ledger ======
@@ -431,7 +436,6 @@ class Replica(process):
                     signatures=self.pending_votes[vote_idx].copy())
             return qc
         return None
-
 
     def BlockTree_generate_block(u, txns, current_round):
         return Block(author=u, round=current_round, payload=txns, qc=self.high_qc)
