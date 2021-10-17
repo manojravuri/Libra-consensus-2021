@@ -13,21 +13,10 @@ class ReplicaFI(Replica):
 
     def setup(self, *args, **kwargs):
         super().setup(*args, **kwargs)
-        #print("Self",dir(self))
-
-
-    def PaceMaker_local_timeout_round():
-        print("Creating a local timeout at ", self.replica_id)
-        self.PaceMaker_stop_timer(self.current_round)  ## TODO: check if this is wrong or right
-        timeout_info = self.Safety_make_timeout(self.current_round, self.high_qc, self.last_round_tc)
-        time_out_msg = TimeoutMsg(timeout_info, self.last_round_tc, self.high_commit_qc)
-        c = logical_clock()
-        send(('time_out_msg', time_out_msg, c), to=ps)
-        #output("Sending local timeout to all replicas")
 
 
     def run(self):
-        print("Starting faulty replica,", dir(self))
+        #print("Starting faulty replica,", dir(self))
         runDone=False
         while(not runDone and not self.terminate):
             if(await(runDone)):
