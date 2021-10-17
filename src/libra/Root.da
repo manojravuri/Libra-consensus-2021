@@ -33,7 +33,7 @@ def main():
     # number_of_procs = int(sys.argv[1]) if len(sys.argv) > 1 else 4
     # number_of_reqs = int(sys.argv[2]) if len(sys.argv) > 1 else 4
     number_of_procs = config['number_of_procs']
-    number_of_reqs = config['number_of_reqs']
+    # number_of_reqs = config['number_of_reqs']
 
      ####Keys
     replica_public_keys = []
@@ -76,8 +76,8 @@ def main():
 
     ##clients
 
-    client_reqs=10
-    request_gap=0
+    client_reqs=config['client_reqs']
+    request_gap=config['request_gap']
     cps=new(Client, num= number_of_clients)
 
     i=0
