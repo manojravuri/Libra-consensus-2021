@@ -82,7 +82,7 @@ def main():
 
     i=0
     for cp in cps:
-        setup(cp, (i,ps,f,client_reqs,request_gap))
+        setup(cp, (i,ps,f,client_reqs,request_gap,client_private_keys[i]))
         i=i+1
     start(cps)
 
