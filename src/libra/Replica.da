@@ -267,6 +267,7 @@ class Replica(process):
     # find the pending state for the given block id or ⊥ if not present
     # Check if block_id is present in the pending_map and return the corresponding block data
     def Ledger_pending_state(block_id):
+        Logger.log("Fetching pending state for block_id " + str(block_id),logfile)
         if block_id in self.pending_map and self.pending_map[block_id]["prev_block_id"]:
             return hash(str( self.commit_state_id) +str(self.pending_map[block_id]["prev_block_id"]) )
         else:
@@ -294,7 +295,9 @@ class Replica(process):
                 Logger.log("Committed txn : "+str(txn)+" to ledger",logfile)
                 send(('committed',txn,replica_id),to=request_map[txn])
             self.commited_blocks[block_id]=self.pending_map[block_id].copy()
+            Logger.log("Updated commited-blocks cache",logfile)
             self.pending_map.pop(block_id)
+            Logger.log("Pruned pending state tree.",logfile)
 
     # Check in committed_blocks if the block_id is there
     # returns a committed block given its id
@@ -382,6 +385,7 @@ class Replica(process):
 
     # checks if the current parameters are good to vote on and returns a VoteMsg if it is right, or else returns None
     def Safety_make_vote(block, last_tc, high_commit_qc):
+        Logger.log("Started make vote",logfile)
         qc_round = block.qc.vote_info.round
         if (self.Safety_valid_signatures(high_commit_qc, last_tc) and self.__Safety_safe_to_vote(block.round, qc_round,
                                                                                                last_tc)):
@@ -391,17 +395,22 @@ class Replica(process):
             self.__Safety_increase_highest_vote_round(block.round) # Don’t vote again in this (or lower) round
             # VoteInfo carries the potential QC info with ids and rounds of the parent QC
             signature = self.Safety_make_signature(block)
+            Logger.log("Generated signature to make vote ",logfile)
             vote_info = VoteInfo(block.id, block.round, block.qc.vote_info.id, qc_round)
             ledger_commit_info = LedgerCommitInfo(self.__Safety_commit_state_id_candidate(block.round, block.qc, block),
 
                                                   vote_info)
+            Logger.log("Finished make vote ",logfile)
             return VoteMsg(vote_info, ledger_commit_info, high_commit_qc, sender=self.replica_id, signature=signature)
+        Logger.log("Finished make vote ",logfile)
         return None
 
     # It is called in local_timeout and it will be used to return a TimeoutInfo Object which is again passed on to prepare a TimeoutMsg.
     def Safety_make_timeout(round, high_qc, last_tc):
+        Logger.log("Calling make_timeout",logfile)
         qc_round = high_qc.vote_info.round
         if (self.Safety_valid_signatures(high_qc, last_tc) and self.__Safety_safe_to_timeout(round, qc_round, last_tc)):
+            Logger.log("Generating signature for replica, " + str(self.replica_id),logfile)
             return TimeoutInfo(round, high_qc, self.curr_pr, Signature(self.replica_id, self.private_key.sign(
                 str((round, high_qc.vote_info.round)).encode('utf-8')), 'replica', self.curr_pr))
         return None
@@ -421,6 +430,7 @@ class Replica(process):
     # This is used to speculate a proposal, which means the block in that proposal is added in the ledger cache
     # we arent using pending_block_tree attribute in our code. Instead of it, we are using pending_map which is present in Ledger.
     def BlockTree_execute_and_insert(proposal):
+        Logger.log("Executing and Inserting",logfile)
         self.Ledger_speculate(proposal.block.qc.vote_info.id, proposal.block.id, proposal.block)
         self.pending_block_tree.add(proposal.block)
 
@@ -437,11 +447,13 @@ class Replica(process):
         # return ⊥
     # This function is used to process the VoteMsg object received by the leader.
     def BlockTree_process_vote(v):
+        Logger.log("Processing Vote",logfile)
         self.BlockTree_process_qc(v.high_commit_qc)
 
         vote_idx = str(v.ledger_commit_info.commit_state_id) + str(v.ledger_commit_info.vote_info_hash)
         if (self.Safety_verify_signature(v.signature.id, v.signature.message, v.signature.type)):
             self.pending_votes[vote_idx].append(v.signature)
+            Logger.log("Signature verified to process vote. ",logfile)
 
         if self.pending_votes[vote_idx] and len(self.pending_votes[vote_idx]) == 2*f+1:
             qc = QC(vote_info=v.vote_info, ledger_commit_info=v.ledger_commit_info,
@@ -451,6 +463,7 @@ class Replica(process):
 
     #This is a set function used to generate blocks given the parameters
     def BlockTree_generate_block(u, txns, current_round):
+        Logger.log("Generating Block",logfile)
         return Block(author=u, round=current_round, payload=txns, qc=self.high_qc)
 
     # This is a custom comparator within the QC objects, which returns 'a' in (a, b) if the round of a > round of b
@@ -462,6 +475,7 @@ class Replica(process):
 
     # We utilised threading to implement timers. When the below function is called, the timer is stopped.
     def PaceMaker_stop_timer(round):
+        Logger.log("Stopping round in PaceMaker",logfile)
         timer_map[round]=False
         self.timer.cancel()
         pass
@@ -472,6 +486,7 @@ class Replica(process):
 
     # This function is used to start the timer for the new round. Starting the timer means to start a thread for PaceMaker_get_round_timer(round) time. If that much time is passed, then the thread will call local_timeout in the parent process.
     def PaceMaker_start_timer(new_round):
+        Logger.log("Started round in PaceMaker",logfile)
         self.current_round = new_round
         if new_round not in timer_map:
             timer_map[new_round]=True
@@ -490,6 +505,7 @@ class Replica(process):
 
     # When a replica gets a TimeOutMsg from its neighbor, then this function will be called.
     def PaceMaker_process_remote_timeout(tmo):
+        Logger.log("Processing remote time out",logfile)
         tmo_info=tmo.tmo_info
         if tmo_info:
             if (tmo_info.round < self.current_round): # it means that the round for which timeout happened is less than the current round. So, nothing should take place.
@@ -517,6 +533,7 @@ class Replica(process):
 
     # This function uses the TC information to advance the round. It is used in syncing up.
     def PaceMaker_advance_round_tc(tc):
+        Logger.log("Advancing round based on tc",logfile)
         if (tc is None or tc.round < self.current_round):
             return False
         self.last_round_tc = tc
@@ -526,6 +543,7 @@ class Replica(process):
 
     # This function uses the QC information to advance the round. It is used in syncing up.
     def PaceMaker_advance_round_qc(qc):
+        Logger.log("Advancing round based on qc",logfile)
         if qc.vote_info.round < self.current_round:
             return False
         self.last_round_tc = None
@@ -594,6 +612,7 @@ class Replica(process):
     def receive(msg=('request', cmd, c, p,signature)):
         Logger.log("Received Client Request from "+str(p),logfile)
         if(self.Safety_verify_signature(signature.id, signature.message, signature.type)): # if the client signature is not valid, then we will retransmit the message
+            Logger.log("verified client signature for cmd " + str(cmd),logfile)
             M = ('request', cmd, c)
             if cmd in request_map:
                 Logger.log("Received duplicate "+str(cmd)+" which has been dropped",logfile) # here deduplication happens
