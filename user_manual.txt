@@ -1,0 +1,23 @@
+PLATFORM
+OS: Mac OSX
+DistAlgo version: 1.1.0b15
+Python version: 3.7.12
+
+INSTRUCTION
+1. Download the relevant python (any of 3.5, 3.6, 3.7) and distalgo release(1.1.0b15).
+2. Unzip the release zip in your PC. Install the python requirements in requirements.txt using pip install -r requirements.txt.
+3. Put your config file in config folder.
+4. Open a command line terminal.
+5. Change your current directory to <DAROOT>/src
+6. In the terminal, run the following command
+    python -m da -m libra.Root <path to your config file>
+
+For example to run config2 file:
+1. open a command line terminal after installing relevant distributions.
+2. cd to <DAROOT>/src
+3. on the terminal run:
+    python -m da -m libra/config/config2.txt
+
+Things to look out for:
+1. The config files have to be in .txt format
+2. Try to include all the relevant variables in the config files.
