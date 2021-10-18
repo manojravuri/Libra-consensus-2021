@@ -183,6 +183,7 @@ class Replica(process):
             if (self.mem_queue):
                 a = self.mem_queue.pop(0)
                 if a in self.processed_transactions:
+                    Logger.log('Duplicate txn'+str(a)+" will not be processed")
                     return self.MemPool_get_transactions()
                 self.processed_transactions.append(a)
                 return a
@@ -475,18 +476,19 @@ class Replica(process):
         Logger.log("Received Client Request from "+str(p),logfile)
         if(self.Safety_verify_signature(signature.id, signature.message, signature.type)):
             M = ('request', cmd, c)
-
-            request_map[cmd]=client_map[p]
-            send( ('request_ack',self.replica_id),to=client_map[p])
-            self.Main_add_to_Mempool(M)
+            if cmd in request_map:
+                Logger.log("Received duplicate "+str(cmd)+" which has been dropped",logfile)
+                send( ('request_ack',self.replica_id),to=client_map[p])
+            else:        
+                request_map[cmd]=client_map[p]
+                send( ('request_ack',self.replica_id),to=client_map[p])
+                self.Main_add_to_Mempool(M)
 
     def receive(msg=('request', cmd, c, p)):
         Logger.log("Received dummy txn Request from Root",logfile)
         print(p,parent())
         if(p==parent()):
             M = ('request', cmd, c)
-
-            #request_map[cmd]=client_map[p]
             Logger.log("Sending ack back to Root",logfile)
             send(('request_ack',self.replica_id),to=parent())
             self.Main_add_to_Mempool(M)
