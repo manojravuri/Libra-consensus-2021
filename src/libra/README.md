@@ -27,13 +27,13 @@ INSTRUCTION
 4. Open a command line terminal.
 5. Change your current directory to <DAROOT>/src
 6. In the terminal, run the following command
-    python -m da -m libra.Root <path to your config file>
+    python -m da -m libra.Root <name of your config file>
 
 For example to run config2 file:
 1. open a command line terminal after installing relevant distributions.
 2. cd to <DAROOT>/src
 2. on the terminal run:
-    python -m da -m libra.Root libra/config/config2.txt
+    python -m da -m libra.Root config2.txt
 
 WORKLOAD GENERATION
 We use config files to generate the relevant workload. The client files are present in libra_blockchain/src/libra/config folders.
