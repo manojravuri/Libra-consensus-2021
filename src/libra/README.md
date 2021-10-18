@@ -49,7 +49,6 @@ You run python -m da -m libra.Root libra/config/config2.txt to set up the system
 LOGS
 Once you run the relevant test case, then the logs with what is happening would come up in <DAROOT>/logs (for client and replica logs).
 
-
 The commits happening on each node would be written to text files, which are present in <DAROOT>/data (indexed with the node id)
 
 
@@ -61,7 +60,10 @@ Each round will wait for a 4*delta time and if no operation is done, it will pro
 BUGS and LIMITATIONS
 
 LeaderElection:
+1. We are doing leader election in a round-robin system.
+
 Timeouts:
+1. When a TC is generated, we are running into an infinite loop.
 
 
 MAIN FILES
@@ -72,17 +74,20 @@ src/libra/Replica.da
 src/libra/Objects.py
 
 CODE SIZE
-
-
+non-blank non-comment lines of code  = 766
+algorithm  = 403
+other = 161
+comments = 202
 
 LANGUAGE FEATURE USAGE
-
+list comprehensions  = 24
+dictionary comprehensions = 18
+set comprehensions = 10
+await statements = 12
+recieve handlers = 7
 
 
 CONTRIBUTIONS
-
-
-
-
-
-OTHER Comments
+Nihal Goalla: pseudocode, documentation, client.da, timeouts methodology.
+Manoj Ravuri: Signatures, Replica.py, Main.py, modules in python,
+Rohith Vaddavalli: Replica.da, logging, Root.da, Ledger methodology

@@ -11,6 +11,7 @@ import os
 from nacl.signing import SigningKey
 from nacl.signing import VerifyKey
 from nacl.encoding import HexEncoder
+from nacl.exceptions import BadSignatureError
 from libra.Logger import Logger
 
 import time
@@ -22,7 +23,7 @@ TIMEOUT = 1
 
 
 class Replica(process):
-    def setup(replica_id: int, curr_pr, ps: list,rep_map:dict,cl_map:dict, f: int, replica_public_keys=None,client_public_keys=None,replica_private_key=None):
+    def setup(replica_id: int, curr_pr, ps: list,rep_map:dict,cl_map:dict, f: int, replica_public_keys=None,client_public_keys=None,replica_private_key=None,message_delay=False):
         # ====== attributes of Replica ======
 
         self.replica_id = replica_id
@@ -38,6 +39,7 @@ class Replica(process):
         self.client_map=cl_map
         self.request_map={}
         self.terminate=False
+        self.message_delay=message_delay
         random.seed(6)
 
         # ====== attributes of Main ======
@@ -49,7 +51,7 @@ class Replica(process):
         self.curr_pr = curr_pr
 
         # ====== attributes of MemPool ======
-        
+
         self.processed_transactions = []
         self.mem_queue =  []
         self.test_if_mem_queue_is_full = 0
@@ -59,6 +61,7 @@ class Replica(process):
         self.file_name = os.path.abspath(cur_path + "/../data/Ledger_" + str(self.replica_id) + ".txt")
         self.pending_map = {}
         self.commited_blocks = {}  # committed block with window size
+        self.ledger_state = ""
         self.commit_state_id= hash("")
 
         # ====== attributes of Safety ======
@@ -99,9 +102,11 @@ class Replica(process):
 
     # ====== methods of Main ======
 
+    #Will check if the current process is the leader for the current round
     def Main_can_send():
         return self.LeaderElection_get_leader(self.current_round) == self.curr_pr
 
+    #All messages will go through this function. Based on the type, the appropriate functions are called.
     def Main_start_event_processing(message, type):
         if (type == 'local_timeout'):
             self.PaceMaker_local_timeout_round()
@@ -112,11 +117,29 @@ class Replica(process):
         if (type == 'timeout_message'):
             self.Main_process_timeout_message(message)
 
+    #The below function will process the qc certificate received in the message. based on that it will update the leader, round and add appropriate blocks
+    #Procedure process certificate qc(qc)
+    # Block-Tree.process qc(qc)
+    # LeaderElection.update leaders(qc)
+    # Pacemaker.advance round(qc.vote info.round)
     def Main_process_certificate_qc(qc):
         self.BlockTree_process_qc(qc)
         self.LeaderElection_update_leader(qc)
         self.PaceMaker_advance_round_qc(qc)
 
+    # This method is used to process the message received by the followers, the following is the pseudocode from the paper
+    # Procedure process proposal msg(P)
+    #     process certificate qc(P.block.qc)
+    #     process certificate qc(P.high commit qc)
+    #     Pacemaker.advance round tc(P.last round tc)
+    #     round ← Pacemaker.current round
+    #     leader ← LeaderElection.get leader(current round)
+    #     if P.block.round 6= round ∨ P.sender 6= leader ∨ P.block.author 6= leader then
+    #     return
+    #     Block-Tree.execute and insert(P) // Adds a new speculative state to the Ledger
+    #     vote msg ← Safety.make vote(P.block, P.last round tc)
+    #     if vote msg 6= ⊥ then
+    #     send vote msg to LeaderElection.get leader(current round + 1)
     def Main_process_proposal_msg(P):
         if  P.sender!=curr_pr:
             t = self.MemPool_get_transactions(P.block.payload)
@@ -134,16 +157,32 @@ class Replica(process):
                 leader=self.LeaderElection_get_leader(round+1)
                 send( ('vote',vote_msg,logical_clock(),replica_id),to=leader)
 
-
+    # The below code will be used to process timeout messages.
+    # Procedure process timeout msg(M)
+        # process certificate qc(M.tmo info.high qc)
+        # process certificate qc(M.high commit qc)
+        # Pacemaker.advance round tc(M.last round tc)
+        # tc ← Pacemaker.process remote timeout(M)
+        # if tc 6= ⊥ then
+        # Pacemaker.advance round(tc)
+        # process new round event(tc)
     def Main_process_timeout_message(M):
         self.Main_process_certificate_qc(M.tmo_info.high_qc)
         self.Main_process_certificate_qc(M.high_commit_qc)
         self.PaceMaker_advance_round_tc(M.last_round_tc)
         tc = self.PaceMaker_process_remote_timeout(M)
         if (tc):
+            Logger.log("Generating a timeout certificate",logfile)
             self.PaceMaker_advance_round_tc(tc)
             self.Main_process_new_round_event(tc)
 
+    # Whenever a leader is assigned, it tries to send a proposalmsg to its followers using the below function.
+    # Procedure process new round event(last tc)
+        # if u = LeaderElection.get leader(Pacemaker.current round) then
+            # // Leader code: generate proposal.
+            # b ← Block-Tree.generate block( MemPool.get transactions(),
+            # Pacemaker.current round )
+            # broadcast ProposalMsghb, last tc, Block-Tree.high_commit_qc
     def Main_process_new_round_event(last_tc=None):
         u = self.LeaderElection_get_leader(self.current_round)
         if self.curr_pr == u:
@@ -153,7 +192,12 @@ class Replica(process):
         +"Block Author :"+str(inv_map[p.block.author])+" Transactions :"+str(p.block.payload),logfile)
             send(('proposal', p,logical_clock(),replica_id), to=replicas)
 
-
+    # Process VoteMsg object recieved by the Leader. The below code is in correspondence with the commented pesudocode.
+    # Procedure process vote msg(M)
+        # qc ← Block-Tree.process vote(M)
+        # if qc 6= ⊥ then
+        # process certificate qc(qc)
+        # process new round event(⊥)
     def Main_process_vote_msg(M):
         qc = self.BlockTree_process_vote(M)
         if qc:
@@ -161,36 +205,54 @@ class Replica(process):
             qc.author = self.curr_pr
             self.Main_process_new_round_event(None)
 
-
+    # This function is called by the handler which recieves message from the client to add the requests to the appropriate mempool.
     def Main_add_to_Mempool(M):
         self.MemPool_add_to_queue(M)
 
     # ====== methods of MemPool ======
 
+    # This is used to get the latest un-procesed transaction when it is called from the leader. And it is also used to remove processed transactions when it is called by the followers.
+    # / We call this function in two cases.
+	# // 1. When a new leader has to get the latest transaction to be processed.
+	# // 2. When a replica has to remove the current processing transaction from its own cache of mem_queue
+
     def MemPool_get_transactions(txns=None):
-        if txns:
-            self.processed_transactions.append(txns)
+        if txns is not None:
+            self.processed_transactions.append(txns) # it means a leader is processing txns
 
         if not self.mem_queue:
-            await(len(self.mem_queue))
-        if txns and txns in self.mem_queue:
+            await(len(self.mem_queue)) # wait till some transaction is put in mem_queue
+        if txns is not None:
+            # // this statement will be acted upon in followers, so we have to remove the txns from the pending transactions in the current replica (mem_queue)
+            # Remove txns from the mem_queue of current replica
+            if txns in self.mem_queue:
                 index_of_txns = self.mem_queue.index(txns)
                 self.mem_queue.pop(index_of_txns)
+            return None
         else:
-            a = self.mem_queue.pop(0)
-            if a in self.processed_transactions:
-                Logger.log('Duplicate txn'+str(a)+" will not be processed")
-                return self.MemPool_get_transactions()
-            self.processed_transactions.append(a)
-            return a
+            # //this call will be done in leader
+            # Get the earliest transaction present in mem_queue and send it to Main process to send a ProposalMsg
+            if (self.mem_queue):
+                a = self.mem_queue.pop(0)
+                if a in self.processed_transactions:
+                    Logger.log('Duplicate txn'+str(a)+" will not be processed")
+                    return self.MemPool_get_transactions()
+                self.processed_transactions.append(a)
+                return a
+            else:
+                Logger.log("Memqueue is empty",logfile)
         return None
 
+    # This function will be called from the client to add the request in the replica’s mempool
+    # Add M to the mem_queue of the current replica
     def MemPool_add_to_queue(M):
         self.mem_queue.append(M[1])
         return
 
     # ====== methods of Ledger ======
 
+    # apply txns speculatively
+    # // Make a mapping in speculate to store the block data with block_id as key
     def Ledger_speculate(prev_block_id, block_id, block):
 
         self.pending_map[block_id] = {
@@ -198,12 +260,25 @@ class Replica(process):
             "block": block
         }
 
+    # find the pending state for the given block id or ⊥ if not present
+    # Check if block_id is present in the pending_map and return the corresponding block data
     def Ledger_pending_state(block_id):
         if (block_id in self.pending_map):
-                return hash(str( self.commit_state_id) +str(self.pending_map[block_id]["block"].payload) )
+            if (self.pending_map[block_id]["prev_block_id"] is not None):
+                return hash(str( self.commit_state_id) +str(self.pending_map[block_id]["prev_block_id"]) )
+            else:
+                return None
         else:
             return None
 
+
+    # commit the pending prefix of the given block id and prune other branches
+    # Check if block_id is present in pending map
+    # What it does is mentioned below:
+    # If block_id is in cache:
+	# 	Pop and commit that block to the ledger and add the blocks in committed_blocks map
+	# Else If block_id is not in cache:
+		# Do nothing
     def Ledger_commit(block_id):
 
         if block_id in self.pending_map:
@@ -217,46 +292,67 @@ class Replica(process):
                 file.close()
                 Logger.log("Committed txn : "+str(txn)+" to ledger",logfile)
                 send(('committed',txn,replica_id),to=request_map[txn])
-            self.commited_blocks[block_id]=self.pending_map[block_id].copy()
+            self.Ledger_add_committed_block_to_Q(block_id)
             self.pending_map.pop(block_id)
 
+    # Check in committed_blocks if the block_id is there
+    # returns a committed block given its id
+    # If the block_is in cache, it will return the relevant information.
+    # else: it will return nothing
     def Ledger_committed_block(block_id):
+        a=None
         if block_id in self.commited_blocks :
-            return self.commited_blocks[block_id]["block"]
-        return None
+            a= self.commited_blocks[block_id]["block"]
+        return a
+
+    # This helper function is used to add block_id and its info into the Ledger Cache.
+    # It adds the data from pending_blocks to the committed_blocks map
+    def Ledger_add_committed_block_to_Q(block_id):
+        # if len(self.commited_blocks) == self.exclude_size:
+        #     self.commited_blocks.popleft()
+        self.commited_blocks[block_id]=self.pending_map[block_id].copy()
 
     # ====== methods of Safety ======
-
-    def Safety_increase_highest_vote_round(round):
+    # commit not to vote in rounds lower than round
+    def __Safety_increase_highest_vote_round(round):
         self.highest_vote_round = max(round, self.highest_vote_round)
 
-    def Safety_update_highest_qc_round(qc_round):
+    # it updates highest_qc_round
+    def __Safety_update_highest_qc_round(qc_round):
         self.highest_qc_round = max(self.highest_qc_round, qc_round)
 
-    def Safety_consecutive(block_round, round):
+    # check if the block round and the current round are consecutive
+    def __Safety_consecutive(block_round, round):
         return round + 1 == block_round
 
-    def Safety_safe_to_extend(block_round, qc_round, tc):
+    # it is used to make safety check on whether or not a replica is allowed to do a particular operation
+    def __Safety_safe_to_extend(block_round, qc_round, tc):
         if tc is not None:
-            return self.Safety_consecutive(block_round, tc.round) and qc_round >= max(tc.tmo_high_qc_rounds)
+            return self.__Safety_consecutive(block_round, tc.round) and qc_round >= max(tc.tmo_high_qc_rounds)
         return True
 
-    def Safety_safe_to_vote(block_round, qc_round, tc):
+    # it is used to check if the current block is safe to vote
+    def __Safety_safe_to_vote(block_round, qc_round, tc):
         if (block_round <= max(self.highest_vote_round, qc_round)):
+            # must vote in monotonically increasing rounds
+            # must extend a smaller round
             return False
-        return self.Safety_consecutive(block_round, qc_round) or self.Safety_safe_to_extend(block_round, qc_round, tc)
+        return self.__Safety_consecutive(block_round, qc_round) or self.__Safety_safe_to_extend(block_round, qc_round, tc)
 
-    def Safety_safe_to_timeout(round, qc_round, tc):
+    # check if current parameters is safe to timeout
+    def __Safety_safe_to_timeout(round, qc_round, tc):
         if (qc_round < self.highest_qc_round or round <= max(self.highest_vote_round - 1, qc_round)):
             return False
-        return self.Safety_consecutive(round, qc_round) or self.Safety_consecutive(round, tc.round)
+        return self.__Safety_consecutive(round, qc_round) or self.__Safety_consecutive(round, tc.round)
 
-    def Safety_commit_state_id_candidate(block_round, qc, block):
-        if (self.Safety_consecutive(block_round, qc.vote_info.round) and qc.vote_info.round >= 0):
+    # find the committed id in case a qc is formed in the vote round
+    def __Safety_commit_state_id_candidate(block_round, qc, block):
+        if (self.__Safety_consecutive(block_round, qc.vote_info.round) and qc.vote_info.round >= 0):
             return self.Ledger_pending_state(block.id)
         else:
             return None
 
+    # This is a custom function to check if the given qc or tc have valid signatures
     def Safety_valid_signatures(high_qc, last_tc):
         i = 0
         if (high_qc.vote_info.round == -1):
@@ -269,6 +365,7 @@ class Replica(process):
         else:
             return False
 
+    # This is a helper function to Safety_valid_signatures and it will use VerifyKey to check if a sign is valid
     def Safety_verify_signature(id, message, type='replica'):
         if type == "replica":
             v_key = VerifyKey(self.replica_public_keys[id],
@@ -279,47 +376,70 @@ class Replica(process):
         try:
             v_key.verify(message)
         except BadSignatureError:
+            Logger.log("Bad signature from"+type+" "+str(id),logfile)
             return False
         except:
             return False
         return True
 
+    # creates a signature object from the block data
     def Safety_make_signature(block):
         return Signature(self.replica_id, self.private_key.sign(block.payload.encode('utf-8')), 'replica', self.curr_pr)
 
+    # checks if the current parameters are good to vote on and returns a VoteMsg if it is right, or else returns None
     def Safety_make_vote(block, last_tc, high_commit_qc):
         qc_round = block.qc.vote_info.round
-        if (self.Safety_valid_signatures(high_commit_qc, last_tc) and self.Safety_safe_to_vote(block.round, qc_round,
+        if (self.Safety_valid_signatures(high_commit_qc, last_tc) and self.__Safety_safe_to_vote(block.round, qc_round,
                                                                                                last_tc)):
-            self.Safety_update_highest_qc_round(qc_round)
-            self.Safety_increase_highest_vote_round(block.round)
+            self.__Safety_update_highest_qc_round(qc_round) # Protect qc round
+            self.__Safety_increase_highest_vote_round(block.round) # Don’t vote again in this (or lower) round
+            # VoteInfo carries the potential QC info with ids and rounds of the parent QC
             signature = self.Safety_make_signature(block)
             vote_info = VoteInfo(block.id, block.round, block.qc.vote_info.id, qc_round)
-            ledger_commit_info = LedgerCommitInfo(self.Safety_commit_state_id_candidate(block.round, block.qc, block),
+            ledger_commit_info = LedgerCommitInfo(self.__Safety_commit_state_id_candidate(block.round, block.qc, block),
 
                                                   vote_info)
             return VoteMsg(vote_info, ledger_commit_info, high_commit_qc, sender=self.replica_id, signature=signature)
         return None
 
+    # It is called in local_timeout and it will be used to return a TimeoutInfo Object which is again passed on to prepare a TimeoutMsg.
     def Safety_make_timeout(round, high_qc, last_tc):
         qc_round = high_qc.vote_info.round
-        if (self.Safety_valid_signatures(high_qc, last_tc) and self.Safety_safe_to_timeout(round, qc_round, last_tc)):
+        if (self.Safety_valid_signatures(high_qc, last_tc) and self.__Safety_safe_to_timeout(round, qc_round, last_tc)):
             return TimeoutInfo(round, high_qc, self.curr_pr, Signature(self.replica_id, self.private_key.sign(
                 str((round, high_qc.vote_info.round)).encode('utf-8')), 'replica', self.curr_pr))
         return None
 
     # ====== methods of BlockTree ======
 
+    # Used to process QC
     def BlockTree_process_qc(qc):
-        if qc.ledger_commit_info.commit_state_id is not None:
-            self.Ledger_commit(qc.vote_info.parent_id)
-            self.high_commit_qc = self.BlockTree_get_max_QC(qc, self.high_commit_qc)
-        self.high_qc = self.BlockTree_get_max_QC(qc, self.high_qc)
+        if qc.ledger_commit_info.commit_state_id is not None: # checking if the given qc has a parent commited in the pending_block_tree
+            self.Ledger_commit(qc.vote_info.parent_id) # pruning is also being done in this function, when something is being commited; its child is promoted.
+            self.high_commit_qc = self.BlockTree_get_max_QC(qc, self.high_commit_qc) # We used a custom comparator of QC's to update high_commit_qc
+        self.high_qc = self.BlockTree_get_max_QC(qc, self.high_qc) # We used a custom comparator of QC's to update high_qc
 
+    #Procedure execute and insert(b)
+        # Ledger.speculate(b.qc.block id, b.id, b.payload)
+        # pending block tree.add(b)
+    # This is used to speculate a proposal, which means the block in that proposal is added in the ledger cache
+    # we arent using pending_block_tree attribute in our code. Instead of it, we are using pending_map which is present in Ledger.
     def BlockTree_execute_and_insert(proposal):
         self.Ledger_speculate(proposal.block.qc.vote_info.id, proposal.block.id, proposal.block)
         self.pending_block_tree.add(proposal.block)
 
+#     Function process vote(v)
+        # process qc(v.high commit qc)
+        # vote idx ← hash(v.ledger commit info)
+        # pending votes[vote idx] ← pending votes[vote idx] ∪ v.signature
+        # if |pending votes[vote idx]| = 2f + 1 then
+        # qc ←QC h
+        # vote info ← v.vote info,
+        # state id ← v.state id,
+        # votes ← pending votes[vote idx] i
+        # return qc
+        # return ⊥
+    # This function is used to process the VoteMsg object received by the leader.
     def BlockTree_process_vote(v):
         self.BlockTree_process_qc(v.high_commit_qc)
 
@@ -333,23 +453,28 @@ class Replica(process):
             return qc
         return None
 
+    #This is a set function used to generate blocks given the parameters
     def BlockTree_generate_block(u, txns, current_round):
         return Block(author=u, round=current_round, payload=txns, qc=self.high_qc)
 
+    # This is a custom comparator within the QC objects, which returns 'a' in (a, b) if the round of a > round of b
     def BlockTree_get_max_QC(qc1, qc2):
         maxQC = qc1 if (qc1.vote_info.round > qc2.vote_info.round) else qc2
         return maxQC
 
     # ====== methods of PaceMaker ======
 
+    # We utilised threading to implement timers. When the below function is called, the timer is stopped.
     def PaceMaker_stop_timer(round):
         timer_map[round]=False
         self.timer.cancel()
         pass
 
+    # This is used to get the allowed time delay for each round.
     def PaceMaker_get_round_timer(r):
         return 4 * self.delta
 
+    # This function is used to start the timer for the new round. Starting the timer means to start a thread for PaceMaker_get_round_timer(round) time. If that much time is passed, then the thread will call local_timeout in the parent process.
     def PaceMaker_start_timer(new_round):
         self.current_round = new_round
         if new_round not in timer_map:
@@ -357,20 +482,23 @@ class Replica(process):
         self.timer = threading.Timer(self.PaceMaker_get_round_timer(new_round), self.PaceMaker_local_timeout_round)
         self.timer.start()
 
+    #This function is called to generate a local timeout.
     def PaceMaker_local_timeout_round():
         if(not self.terminate):
             Logger.log("Creating a local timeout at "+str(self.replica_id),logfile)
-            self.PaceMaker_stop_timer(self.current_round)  
-            timeout_info = self.Safety_make_timeout(self.current_round, self.high_qc, self.last_round_tc)
-            time_out_msg = TimeoutMsg(timeout_info, self.last_round_tc, self.high_commit_qc)
+            self.PaceMaker_stop_timer(self.current_round) # it is used to stop the timer for the current round
+            timeout_info = self.Safety_make_timeout(self.current_round, self.high_qc, self.last_round_tc) # Create a TimeOutInfo object
+            time_out_msg = TimeoutMsg(timeout_info, self.last_round_tc, self.high_commit_qc) # TimeOutMsg to send it to its neighbors
             c = logical_clock()
             send(('time_out_msg', time_out_msg, c), to=ps)
 
+    # When a replica gets a TimeOutMsg from its neighbor, then this function will be called.
     def PaceMaker_process_remote_timeout(tmo):
         tmo_info=tmo.tmo_info
         if tmo_info:
-            if (tmo_info.round < self.current_round):
+            if (tmo_info.round < self.current_round): # it means that the round for which timeout happened is less than the current round. So, nothing should take place.
                 return None
+            # the following if clauses will be used to check if a TC is formed or if f + 1timeouts from different replicas are formed.
             if(tmo_info.round not in self.pending_timeouts):
                 self.pending_timeouts[tmo_info.round]={}
                 self.pending_timeouts[tmo_info.round]["tmos"]=[]
@@ -391,6 +519,7 @@ class Replica(process):
                 return TC(round = round, tmo_high_qc_rounds=tmo_high_qc_rounds, tmo_signatures=signatures)
         return None
 
+    # This function uses the TC information to advance the round. It is used in syncing up.
     def PaceMaker_advance_round_tc(tc):
         if (tc is None or tc.round < self.current_round):
             return False
@@ -399,6 +528,7 @@ class Replica(process):
         self.PaceMaker_start_timer(tc.round + 1)
         return True
 
+    # This function uses the QC information to advance the round. It is used in syncing up.
     def PaceMaker_advance_round_qc(qc):
         if qc.vote_info.round < self.current_round:
             return False
@@ -409,22 +539,23 @@ class Replica(process):
 
     # ====== methods of LeaderElection ======
 
+
     def LeaderElection_elect_reputation_leader(qc):
-        active_validators = set()
-        last_authors = set()
+        active_validators = set() # validators that signed the last window size committed blocks
+        last_authors = set() # ordered set of authors of last exclude size committed blocks
         current_qc = qc
         i = 0
         while i < self.window_size:
-            current_block = self.Ledger_committed_block(current_qc.vote_info.parent_id)
+            current_block = self.Ledger_committed_block(current_qc.vote_info.parent_id) # get block of parent block of qc
             block_author = current_block.author if current_block else None
             signers = set()
             if current_qc.signatures:
                 for signature in current_qc.signatures:
-                    signers.add(signature.replica_process)
+                    signers.add(signature.replica_process) # adds signatures of current qc to signers
             else:
                 signers = signers.union(replicas)
             if i < self.window_size:
-                active_validators.update(signers)
+                active_validators.update(signers) # the active validators are updates using signers of current_qc
             if len(last_authors) < self.exclude_size and block_author is not None:
                 last_authors.add(block_author)
             if current_block:
@@ -433,8 +564,9 @@ class Replica(process):
         active_validators = active_validators.difference(last_authors)
         rand_index = 0
         active_validators=list(active_validators)
-        return active_validators[rand_index]   
+        return active_validators[rand_index] # return the replica present at rand_index in the active_validators list
 
+    # This is called from process_qc in Main. It is used to update the leader of the next round using reputation leader function.
     def LeaderElection_update_leader(qc):
         extended_round = qc.vote_info.parent_round
         qc_round = qc.vote_info.round
@@ -442,33 +574,42 @@ class Replica(process):
         if extended_round + 1 == qc_round and qc_round + 1 == current_round:
             self.reputation_leaders[current_round + 1] = self.LeaderElection_elect_reputation_leader(qc)
 
+    # returns the leader of the round
     def LeaderElection_get_leader(round):
        return self.ps[int((round) % len(self.ps))]
 
     # ====== methods of Validator ======
 
+    # This handler is called when a message with 'proposal' tag is sent to the replica process.
+    # the message is sent from the leader of the round, and it will be processed in the followers
     def receive(msg=('proposal', p1, c1,sid)):
         Logger.log("Received proposal message from "+str(sid)+ " containing block ->"
         +"Block Author :"+str(inv_map[p1.block.author])+" Transactions :"+str(p1.block.payload),logfile)
         self.Main_start_event_processing(p1, 'proposal_message')
 
+    # This handler is called when a message with 'vote' tag is sent to the replica process.
+    # the message is sent from the followers of the round, and it will be processed in the leader
     def receive(msg=('vote', vote_info, c1,rid)):
         Logger.log("Received vote message from "+str(rid),logfile)
         self.Main_start_event_processing(vote_info, 'vote_message')
 
-
+    # This handler is called when a message with 'request' tag is sent to the replica process with 4 arguments (from Client)
+    # the message is sent from the clients and it will be processed in all the replicas.
     def receive(msg=('request', cmd, c, p,signature)):
         Logger.log("Received Client Request from "+str(p),logfile)
-        if(self.Safety_verify_signature(signature.id, signature.message, signature.type)):
+        if(self.Safety_verify_signature(signature.id, signature.message, signature.type)): # if the client signature is not valid, then we will retransmit the message
             M = ('request', cmd, c)
             if cmd in request_map:
-                Logger.log("Received duplicate "+str(cmd)+" which has been dropped",logfile)
+                Logger.log("Received duplicate "+str(cmd)+" which has been dropped",logfile) # here deduplication happens
                 send( ('request_ack',self.replica_id),to=client_map[p])
-            else:        
+            else:
                 request_map[cmd]=client_map[p]
                 send( ('request_ack',self.replica_id),to=client_map[p])
-                self.Main_add_to_Mempool(M)
+                self.Main_add_to_Mempool(M) # adds the request M in the local MemPool if it is not a duplicate
 
+    # This handler is called when a message with 'request' tag is sent to the replica process with only 3 arguments (from Root)
+    # This function is used to ensure that all the relevant transactions are vote on and committed
+    # the message is sent from the root, at the end of the whole process
     def receive(msg=('request', cmd, c, p)):
         Logger.log("Received dummy txn Request from Root",logfile)
         print(p,parent())
@@ -478,12 +619,16 @@ class Replica(process):
             send(('request_ack',self.replica_id),to=parent())
             self.Main_add_to_Mempool(M)
 
-
+    # This handler is called when a message with 'time_out_msg' tag is sent to the replica process.
+    # It means some other replica has had a local_timeout and this handler will recieve the message.
+    # the message is sent from the timed out replicas and it will be processed in other replicas
     def receive(msg=('time_out_msg', timeout_msg,c)):
         Logger.log("Received local timeout",logfile)
         self.Main_start_event_processing(timeout_msg,'timeout_message')
 
-
+    # In our termination process, once the client terminates, it sends a request back to the Root.
+    # Then the Root will send a termination signal to the replicas.
+    # The below is a handler to handle a termination signal.
     def receive(msg=('done',sender)):
         Logger.log("Received Terminate signal from Root",logfile)
         if sender==parent():
@@ -501,7 +646,7 @@ class Replica(process):
             Logger.log("sending messages to all processes from replica "+str(replica_id),logfile)
             self.Main_process_new_round_event()
             -- l2
-        
+
 
         while (not self.terminate):  # keep replica always running
             if (self.LeaderElection_get_leader(self.current_round+1)):

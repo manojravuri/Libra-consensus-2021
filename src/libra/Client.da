@@ -8,12 +8,17 @@ from libra.Logger import Logger
 
 from .Objects import *
 
+from nacl.signing import SigningKey
+from nacl.signing import VerifyKey
+from nacl.encoding import HexEncoder
+from libra.Logger import Logger
+
 config(clock = 'Lamport')
 config(handling = 'all')
 
 
 class Client(process):
-    def setup(client_id:int,replicas:set,rep_map:dict,f:int,number_of_requests:int,request_gap:int,client_private_key):
+    def setup(client_id:int,replicas:set,rep_map:dict,f:int,number_of_requests:int,request_gap:int,client_private_key,duplicate_requests=False,faulty_client=False):
 
         self.client_id=client_id
         self.logfile="Client_"+str(client_id)+".log"
@@ -29,6 +34,8 @@ class Client(process):
         self.rep_keys=rep_map.keys()
         self.private_key=client_private_key
         self.req_root=False
+        self.duplicate_requests=duplicate_requests
+        self.faulty_client=faulty_client
 
     def broadcast_request(cmd,reps):
         c=logical_clock()
@@ -40,7 +47,14 @@ class Client(process):
         elif timeout(replica_timeout): broadcast_request(cmd,reps)
 
     def sign_cmd(cmd):
-        return Signature(self.client_id, self.private_key.sign(cmd.encode('utf-8')), 'client',None)
+        if not self.faulty_client:
+            return Signature(self.client_id, self.private_key.sign(cmd.encode('utf-8')), 'client',None)
+        else:
+            Logger.log("Sending bad signature from faulty client",logfile)
+            self.faulty_client=False
+            faulty_private_key=SigningKey.generate()
+            faulty_public_key=faulty_private_key.verify_key
+            return Signature(self.client_id, faulty_private_key.sign(cmd.encode('utf-8')), 'client', None)
 
     def receive(msg=('committed', cmd,replica_id)):
         Logger.log('Received transaction :'+str(cmd)+' committed message from replica '+str(replica_id),logfile)
@@ -67,7 +81,9 @@ class Client(process):
             cmd=str(client_id)+"----->"+str(i)
             cmds_pending[cmd]=0
             broadcast_request(cmd,replicas)
-        
+
+            if(self.duplicate_requests):
+                broadcast_request(cmd, replicas)
         await(self.terminate)
         Logger.log("Terminating client "+str(client_id),logfile)
         send(('client_done',client_id,logical_clock()),to=parent())

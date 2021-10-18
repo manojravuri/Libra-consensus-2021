@@ -11,20 +11,20 @@ from libra.Logger import Logger
 
 config(clock='Lamport')
 
-
+# Root is the orchestrator for the whole process and it will setup the clients and replicas based on the config file.
 def main():
 
-    Logger.cleanup()
+    Logger.cleanup() # to initialise a new set of log and ledger files.
     logfile='Root.log'
-    Logger.log("Main process started",logfile)
+    Logger.log("Main process started",logfile) # starts a log file
     if len(sys.argv) > 1:
         config_file = sys.argv[1]
     else:
-        config_file = 'config2.txt'
+        config_file = 'configNoFault.txt'
 
     """ reading config from file """
     config = {}
-    with open(os.path.join(os.path.abspath(''), 'libra/config', config_file), 'r') as input:
+    with open(os.path.join(os.path.abspath(''), 'libra/config', config_file), 'r') as input: # gets a config file and loads the input into config map.
         for line in input:
             if line[0] != '#':
                 (key, sep, val) = line.partition('=')
@@ -32,7 +32,7 @@ def main():
                     val = val.strip()
                     config[key.strip()] = int(val) if str.isdecimal(val) else val
 
-    print(config)
+    # print(config)
 
     # os._exit(-1)
     # number_of_procs = int(sys.argv[1]) if len(sys.argv) > 1 else 4
@@ -44,6 +44,7 @@ def main():
     replica_public_keys = []
     replica_private_keys = []
 
+    # generating keys for replicas
     for i in range(number_of_procs):
         signing_key = SigningKey.generate()
         verify_key = signing_key.verify_key
@@ -59,6 +60,7 @@ def main():
     client_private_keys = []
     client_public_keys = []
 
+    # generating keys for clients
     for i in range(number_of_clients):
         signing_key = SigningKey.generate()
         verify_key = signing_key.verify_key
@@ -108,7 +110,7 @@ def main():
     await(len(setof(a,received(  ('send dummy txns',_), from_=a))) == number_of_clients)
     Logger.log("All clients requested to send replicas empty block",logfile)
 
-
+    # this loop is to send dummy transactions to ensure that all the required transactions are committed.
     for i in range(2):
         c=logical_clock()
         cmd=str(number_of_clients) + "--->" + 'dummy_txn'+str(i)
