@@ -20,5 +20,5 @@ class Logger:
         filename=dir+filename
         file=open(filename,"a+")
         file.write(str(datetime.now())+": "+msg+"\n")
-        # print(msg)
+        print(msg)
         file.close()
