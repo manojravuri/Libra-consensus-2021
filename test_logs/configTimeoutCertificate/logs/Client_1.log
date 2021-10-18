@@ -1,0 +1,9 @@
+2021-10-18 01:28:12.575885: Creating client 1
+2021-10-18 01:28:12.576783: Attributes of client 1:
+number_of_requests :4
+request_gap :1
+faulty_client :False
+2021-10-18 01:28:13.604875: Client is sending :1----->0 to all replicas
+2021-10-18 01:28:14.624695: Client is sending :1----->1 to all replicas
+2021-10-18 01:28:15.628242: Client is sending :1----->2 to all replicas
+2021-10-18 01:28:16.630776: Client is sending :1----->3 to all replicas

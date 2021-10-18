@@ -1,0 +1,6 @@
+2021-10-18 01:28:12.366827: Main process started
+2021-10-18 01:28:12.367256: Generating workload based on config file configTimeoutCertificate.txt
+2021-10-18 01:28:12.368441: Generated workload based on config file configTimeoutCertificate.txt
+2021-10-18 01:28:12.369416: Generated signature keys for replicas
+2021-10-18 01:28:12.370112: Generated signature keys for clients
+2021-10-18 01:28:12.455977: Running replicas with f+1 timeout replicas

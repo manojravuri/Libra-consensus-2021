@@ -1,0 +1,94 @@
+2021-10-18 01:48:40.260023: Creating client 0
+2021-10-18 01:48:40.261524: Attributes of client 0:
+number_of_requests :4
+request_gap :1
+faulty_client :True
+2021-10-18 01:48:41.289135: Sending bad signature from faulty client
+2021-10-18 01:48:41.290793: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.293724: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.294692: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.296620: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.298249: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.299965: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.301304: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.304388: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.305178: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.306527: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.307253: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.308578: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.309290: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.311559: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.320395: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.322001: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.322862: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.325076: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.325869: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.332847: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.333700: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.335391: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.336064: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.337616: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.344046: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.345938: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.346784: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.351476: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.352290: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.359511: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.361703: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.364263: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.365165: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.369332: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.370084: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.371636: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.372474: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.374319: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.375075: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.380431: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.381138: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.387309: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.388048: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.389814: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.390487: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.392232: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.393006: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.394614: Retransmitting request because we didn't get enough acks for 0----->0
+2021-10-18 01:48:46.403888: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:46.408805: Client is sending :0----->0 to all replicas
+2021-10-18 01:48:47.411919: Client is sending :0----->1 to all replicas
+2021-10-18 01:48:47.418494: Client is sending :0----->1 to all replicas
+2021-10-18 01:48:48.421963: Client is sending :0----->2 to all replicas
+2021-10-18 01:48:48.424528: Received transaction :0----->0 committed message from replica 2
+2021-10-18 01:48:48.425214: Transactions committed count :0,4
+2021-10-18 01:48:48.426364: Client is sending :0----->2 to all replicas
+2021-10-18 01:48:49.430371: Client is sending :0----->3 to all replicas
+2021-10-18 01:48:49.433076: Received transaction :0----->0 committed message from replica 3
+2021-10-18 01:48:49.433862: Transactions committed count :0,4
+2021-10-18 01:48:49.434429: Received transaction :0----->0 committed message from replica 1
+2021-10-18 01:48:49.434957: Transactions committed count :1,4
+2021-10-18 01:48:49.435772: Received transaction :0----->0 committed message from replica 0
+2021-10-18 01:48:49.436352: Transactions committed count :1,4
+2021-10-18 01:48:49.436935: Received transaction :0----->1 committed message from replica 3
+2021-10-18 01:48:49.437532: Transactions committed count :1,4
+2021-10-18 01:48:49.438749: Client is sending :0----->3 to all replicas
+2021-10-18 01:48:49.459646: Received transaction :0----->1 committed message from replica 1
+2021-10-18 01:48:49.460358: Transactions committed count :1,4
+2021-10-18 01:48:49.500941: Received transaction :0----->1 committed message from replica 0
+2021-10-18 01:48:49.501592: Transactions committed count :2,4
+2021-10-18 01:48:49.502155: Request root to send dummy txns to replicas
+2021-10-18 01:48:49.519377: Received transaction :0----->1 committed message from replica 2
+2021-10-18 01:48:49.519961: Transactions committed count :2,4
+2021-10-18 01:48:49.572795: Received transaction :0----->2 committed message from replica 0
+2021-10-18 01:48:49.573397: Transactions committed count :2,4
+2021-10-18 01:48:49.612091: Received transaction :0----->2 committed message from replica 2
+2021-10-18 01:48:49.613102: Transactions committed count :2,4
+2021-10-18 01:48:49.618613: Received transaction :0----->2 committed message from replica 1
+2021-10-18 01:48:49.619158: Transactions committed count :3,4
+2021-10-18 01:48:49.642177: Received transaction :0----->2 committed message from replica 3
+2021-10-18 01:48:49.643349: Transactions committed count :3,4
+2021-10-18 01:48:49.750784: Received transaction :0----->3 committed message from replica 1
+2021-10-18 01:48:49.751574: Transactions committed count :3,4
+2021-10-18 01:48:49.772900: Received transaction :0----->3 committed message from replica 0
+2021-10-18 01:48:49.773542: Transactions committed count :3,4
+2021-10-18 01:48:49.775884: Received transaction :0----->3 committed message from replica 3
+2021-10-18 01:48:49.776683: Transactions committed count :4,4
+2021-10-18 01:48:49.777330: Terminating client 0
