@@ -38,7 +38,7 @@ class Replica(process):
         self.terminate=False
         self.message_loss=message_loss
         self.message_delay=message_delay
-        
+
         self.attr="Attributes of Replica "+str(replica_id)+":\n"
 
         # ====== attributes of Main ======
@@ -50,11 +50,11 @@ class Replica(process):
         # ====== attributes of MemPool ======
 
         self.processed_transactions = []
-        self.mem_queue =  []   
+        self.mem_queue =  []
 
         # ====== attributes of Ledger ======
         cur_path = os.getcwd()
-        self.file_name = os.path.abspath(cur_path + "/../data/Ledger_" + str(self.replica_id) + ".txt")
+        self.file_name = os.path.abspath(cur_path + "/../ledger/Ledger_" + str(self.replica_id) + ".txt")
         self.pending_map = {}
         self.commited_blocks = {}  # committed block with window size
         self.ledger_state = ""
@@ -94,7 +94,7 @@ class Replica(process):
         self.exclude_size = f  # f to 2f
         attr = attr +"exclude_size :" +str(exclude_size)+"\n"
         attr = attr +"commit_state_id :"+str(commit_state_id)
-        
+
         self.reputation_leaders = {}
         self.init_replica_ids=[]
         for i in range (2*f+1):
