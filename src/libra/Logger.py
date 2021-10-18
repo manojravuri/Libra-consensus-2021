@@ -8,7 +8,7 @@ class Logger:
         for f in os.listdir(dir):
             os.remove(os.path.join(dir, f))
 
-        dir = os.path.dirname(os.getcwd()) + '/data/'
+        dir = os.path.dirname(os.getcwd()) + '/ledgers/'
         for f in os.listdir(dir):
             os.remove(os.path.join(dir, f))
 

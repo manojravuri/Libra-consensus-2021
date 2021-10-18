@@ -54,7 +54,7 @@ class Replica(process):
 
         # ====== attributes of Ledger ======
         cur_path = os.getcwd()
-        self.file_name = os.path.abspath(cur_path + "/../ledger/Ledger_" + str(self.replica_id) + ".txt")
+        self.file_name = os.path.abspath(cur_path + "/../ledgers/Ledger_" + str(self.replica_id) + ".txt")
         self.pending_map = {}
         self.commited_blocks = {}  # committed block with window size
         self.ledger_state = ""

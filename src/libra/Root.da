@@ -28,7 +28,7 @@ def main():
     Logger.log("Generating workload based on config file "+str(config_file),logfile)
     """ reading config from file """
     config = {}
-    with open(os.path.join(os.path.abspath(''), 'libra/config', config_file), 'r') as input:
+    with open(os.path.join(os.path.abspath(''), '../config', config_file), 'r') as input:
         for line in input:
             if line[0] != '#':
                 (key, sep, val) = line.partition('=')
