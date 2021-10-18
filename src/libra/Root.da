@@ -13,10 +13,12 @@ from libra.Logger import Logger
 
 config(clock='Lamport')
 
+
 def main():
 
     Logger.cleanup()
-    # time_start = time.time()
+    logfile='Root.log'
+    Logger.log("Main process started",logfile)
     if len(sys.argv) > 1:
         config_file = sys.argv[1]
     else:
@@ -68,6 +70,7 @@ def main():
 
 
     f=int((number_of_procs-1)/3)
+    replicas = new(Replica, num= number_of_procs)
 
 
     #print("config['time_out_commit']",config['time_out_commit'])
@@ -94,12 +97,13 @@ def main():
 
     rep_map={}
     cl_map={}
-    ps=list(ps)
+    replicas=list(replicas)
     i=0
-    for p in ps:
+    for p in replicas:
         rep_map[i]=p
         i=i+1
 
+    rep_keys=rep_map.keys()
 
     ##clients
 
@@ -119,28 +123,41 @@ def main():
         i=i+1
 
     i=0
-    for p in ps:
-        setup(p, (i,p,ps,rep_map,cl_map,f,replica_public_keys,client_public_keys,replica_private_keys[i]))
+    for p in replicas:
+        setup(p, (i,p,replicas,rep_map,cl_map,f,replica_public_keys,client_public_keys,replica_private_keys[i]))
         i=i+1
 
-    start(ps)
+    start(replicas)
 
 
     i=0
     for cp in cps:
-        setup(cp, (i,ps,rep_map,f,client_reqs,request_gap,client_private_keys[i]))
+        setup(cp, (i,replicas,rep_map,f,client_reqs,request_gap,client_private_keys[i]))
         i=i+1
     start(cps)
+
+    await(len(setof(a,received(  ('send dummy txns',_), from_=a))) == number_of_clients)
+    Logger.log("All clients requested to send replicas empty block",logfile)
+
+
+    for i in range(2):
+        c=logical_clock()
+        cmd=str(number_of_clients) + "--->" + 'dummy_txn'+str(i)
+        Logger.log("Root is sending :"+ cmd+" to all replicas",logfile)
+        send(('request',cmd,c,parent()),to=replicas)
+        #re-transmit
+        if await(each( id in rep_keys, has=received(('request_ack', id)) ) ): pass
+        elif timeout(5): broadcast_request(cmd,replicas,rep_keys)
 
     await(len(setof(a,received(  ('client_done',_,_), from_=a))) == number_of_clients)
    # output("Clients are done executions")
 
-    send( ('done',self),to= ps)
+    send( ('done',self),to= replicas)
 
     #output("Sending done to replicas")
     #send(('replica_done',replica_id,logical_clock()),to=parent())
 
     await(len(setof(a,received( ('replica_done',_),from_=a) ) ) ==  number_of_procs )
    # output("Replicas are done executions")
-    output("Main function is terminating")
+    Logger.log("Main function is terminating",logfile)
     os._exit(-1)

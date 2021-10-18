@@ -22,7 +22,7 @@ class Client(process):
 
         self.client_id=client_id
         self.logfile="Client_"+str(client_id)+".log"
-        Logger.log("creating client "+str(client_id),logfile)
+        Logger.log("Creating client "+str(client_id),logfile)
         self.replicas=replicas
         self.number_of_requests = number_of_requests
         self.request_gap = request_gap
@@ -33,12 +33,14 @@ class Client(process):
         self.rep_map=rep_map
         self.rep_keys=rep_map.keys()
         self.private_key=client_private_key
+        self.req_root=False
         self.duplicate_requests=duplicate_requests
         self.faulty_client=faulty_client
 
     def broadcast_request(cmd,reps):
         c=logical_clock()
         signature=sign_cmd(cmd)
+        Logger.log("Client is sending :"+ cmd+" to all replicas",logfile)
         send(('request',cmd,c,client_id,signature),to=reps)
         #re-transmit
         if await(each( id in rep_keys, has=received(('request_ack', id)) ) ): pass
@@ -54,30 +56,35 @@ class Client(process):
             faulty_public_key=faulty_private_key.verify_key
             return Signature(self.client_id, faulty_private_key.sign(cmd.encode('utf-8')), 'client', None)
 
-    def receive(msg=('committed', cmd)):
+    def receive(msg=('committed', cmd,replica_id)):
+        Logger.log('Received transaction :'+str(cmd)+' committed message from replica '+str(replica_id),logfile)
+        cnt=0
         if 'dummy_txn' not in cmd :
             cmds_pending[cmd]+=1
             for cmd_ in cmds_pending:
-                if cmds_pending[cmd_] <= 2*f:
-                    return
+                if cmds_pending[cmd_] >= 2*f+1:
+                    cnt = cnt + 1
+                    #return
+        Logger.log('Received transactions cnt :'+str(cnt)+','+str(number_of_requests),logfile)
+        if (cnt == (number_of_requests-2)) and  not req_root :
+            Logger.log('Request root to send dummy txns to replicas',logfile)
+            send(('send dummy txns',logical_clock()),to=parent())
+            req_root=True
+        elif cnt == number_of_requests:
             self.terminate=True
+
 
 
     def run():
         for i in range(number_of_requests):
-            #Logger.log("client "+str(client_id)+"sleeping for "+str(request_gap))
             time.sleep(request_gap)
             cmd=str(client_id)+"----->"+str(i)
-           # Logger.log("client is broadcasting "+cmd)
             cmds_pending[cmd]=0
             broadcast_request(cmd,replicas)
+
             if(self.duplicate_requests):
                 broadcast_request(cmd, replicas)
-                #logging.log("broadcasting duplicate requests from client",logfile)
-            #await(len(setof(a,received(('committed'), from_=a)))>2*f+1)
-        broadcast_request(str(client_id) + "----->" + str(0),replicas)
-        broadcast_request(str(client_id) + "--->" + 'dummy_txn1',replicas)
-        broadcast_request(str(client_id) + "--->" + 'dummy_txn2',replicas)
         await(self.terminate)
-        #output("Client ", client_id," is terminated")
+        Logger.log("Terminating client "+str(client_id),logfile)
         send(('client_done',client_id,logical_clock()),to=parent())
+

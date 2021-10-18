@@ -1,5 +1,5 @@
 import os
-
+from datetime import datetime
 class Logger:
 
     @staticmethod
@@ -19,7 +19,7 @@ class Logger:
         dir = os.path.dirname(os.getcwd())+'/logs/'
         filename=dir+filename
         file=open(filename,"a+")
-        file.write(msg+"\n")
+        file.write(str(datetime.now())+": "+msg+"\n")
         print(msg)
         file.close()
 

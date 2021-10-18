@@ -1,22 +1,3 @@
-An implementation of DiemBFT v4 based on-
-
-DiemBFT v4: State Machine Replication in the Diem Blockchain by The Diem Team at Facebook
-
-The described system has 3f+1 replicas which will tolerate f failures, we will change type of failures based on the probability of failure types or we can hardcode the failures
-
-Motivation
-
-This was done as course project for the course CSE 535 Distributed Systems at Stony Brook University taught by Professor Scott Stoller.
-
-The system is structured in following way: A startup process (bcr.da) reads the configuration file provided as commandline argument and creates Olympus and clients as mentioned in the configuration file. The Olympus after starting created the replicas based on the value of fault tolerance. The clients get their workload from the configuration file. Clients and replicas depend upon the Olympus to create the keys for signing. The public keys of all elements are shared on request. Fault Injection: If failure and triggers are mentioned in the configuration file then the necessary failures are injected during runtime in replicas when the trigger occurs.
-
-The system is structured as follows: The startup process (Root.da) will read the configuration of Clients (Client.da) and Replicas (Replica.da) from the text file we give in as an input which loads the workload.
-The Root module will read and start the Clients with specifications and the Replicas with the given specifications.
-
-The client will generate random requests and send it to the replicas and the replicas will try to form a consensus and then commit the requests to their local ledgers and exit on succesfull completion of all requests.
-
-Used DistAlgo for the creation of async clients and message passing.
-
 PLATFORM
 OS: Mac OSX
 DistAlgo version: 1.0.9 TODO: change this version
@@ -24,25 +5,20 @@ Python implementation: CPython TODO: change this
 Python version: 3.7.12
 
 INSTRUCTION
-1. Unzip the release zip in your PC. Install the requirements in requirements.txt using pip install -r requirements.txt.
-2. Put your config file in config folder.
-3. Open two command line terminals
-4. In the first terminal run the following command with <config_file_name.txt> as the argument
-    python -m da --logfile -n MainNode --logfilename logs\log_verify_result_single_client_2_mainnode.txt -F info --message-buffer-size 100000  src\bcr.da <config_file_name.txt>
-5. In the second terminal run the following command with <config_file_name.txt> as the argument
-    python -m da --logfile -n ClientNode --logfilename logs\log_verify_result_single_client_2_clientnode.txt -F info --message-buffer-size 100000  src\bcr.da <config_file_name.txt>
+1. Download the relevant python and distalgo release. TODO: update python and distalgo version values
+2. Unzip the release zip in your PC. Install the python requirements in requirements.txt using pip install -r requirements.txt.
+3. Put your config file in config folder.
+4. Open a command line terminal.
+5. Change your current directory to <DAROOT>/src
+6. In the terminal, run the following command
+    python -m da -m libra.Root <path to your config file>
 
-For example to run test case 1:
-1. open 2 command line terminals
-2. on terminal 1 run the following command-
-    python -m da --logfile -n MainNode --logfilename logs\log_verify_result_single_client_2_mainnode.txt -F info --message-buffer-size 100000  src\bcr.da config_result_verify_testcase_2.txt
-2. on terminal 2 run the following command-
-    python -m da --logfile -n ClientNode --logfilename logs\log_verify_result_single_client_2_clientnode.txt -F info --message-buffer-size 100000  src\bcr.da config_result_verify_testcase_2.txt
+For example to run config2 file:
+1. open a command line terminal after installing relevant distributions.
+2. cd to <DAROOT>/src
+3. on the terminal run:
+    python -m da -m libra/config/config2.txt
 
-WORKLOAD GENERATION
-Algorithm:
-pseudorandom(seed, n):
-    initialize python's random number generator with the specified seed.
-    for i in range(n):
-        generate a random number from 1 to 4 and map it to (get put slice append)
-        generated key and value using random to generate 4 random lowercase character
+Things to look out for:
+1. The config files have to be in .txt format
+2. Try to include all the relevant variables in the config files.
