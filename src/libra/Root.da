@@ -20,7 +20,7 @@ def main():
     if len(sys.argv) > 1:
         config_file = sys.argv[1]
     else:
-        config_file = 'config2.txt'
+        config_file = 'configNoFault.txt'
 
     """ reading config from file """
     config = {}
