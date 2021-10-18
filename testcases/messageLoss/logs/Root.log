@@ -1,0 +1,10 @@
+2021-10-18 02:52:55.181319: Main process started
+2021-10-18 02:52:55.181424: Generating workload based on config file configMessageLoss.txt
+2021-10-18 02:52:55.181678: Generated workload based on config file configMessageLoss.txt
+2021-10-18 02:52:55.182166: Generated signature keys for replicas
+2021-10-18 02:52:55.182419: Generated signature keys for clients
+2021-10-18 02:52:55.255873: Running replicas with f message loss replicas
+2021-10-18 02:53:05.443080: All clients requested to send replicas empty block
+2021-10-18 02:53:05.443236: Root is sending :2--->dummy_txn0 to all replicas
+2021-10-18 02:53:05.462465: Root is sending :2--->dummy_txn1 to all replicas
+2021-10-18 02:53:05.570985: Main function is terminating

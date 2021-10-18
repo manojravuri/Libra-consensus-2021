@@ -1,0 +1,2684 @@
+2021-10-18 02:55:08.499788: Creating Replica 2
+2021-10-18 02:55:08.500376: Attributes of Replica 2:
+window_size :1
+delta :2
+exclude_size :1
+commit_state_id :0
+2021-10-18 02:55:09.506534: Creating a local timeout at 2
+2021-10-18 02:55:09.506827: Stopping round in PaceMaker
+2021-10-18 02:55:09.507062: Calling make_timeout
+2021-10-18 02:55:09.507287: Generating signature for replica, 2
+2021-10-18 02:55:09.508871: Received local timeout
+2021-10-18 02:55:09.509125: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e2b8390> of type timeout_message
+2021-10-18 02:55:09.509416: Started processing timeout message.
+2021-10-18 02:55:09.509640: Started process certificate qc
+2021-10-18 02:55:09.509953: Advancing round based on qc
+2021-10-18 02:55:09.510180: Started process certificate qc
+2021-10-18 02:55:09.510421: Advancing round based on qc
+2021-10-18 02:55:09.510632: Advancing round based on tc
+2021-10-18 02:55:09.511117: Processing remote time out
+2021-10-18 02:55:09.512201: Received local timeout
+2021-10-18 02:55:09.512634: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e364f10> of type timeout_message
+2021-10-18 02:55:09.512995: Started processing timeout message.
+2021-10-18 02:55:09.513289: Started process certificate qc
+2021-10-18 02:55:09.513497: Advancing round based on qc
+2021-10-18 02:55:09.513706: Started process certificate qc
+2021-10-18 02:55:09.513909: Advancing round based on qc
+2021-10-18 02:55:09.514117: Advancing round based on tc
+2021-10-18 02:55:09.514325: Processing remote time out
+2021-10-18 02:55:09.514535: Stopping round in PaceMaker
+2021-10-18 02:55:09.514755: Creating a local timeout at 2
+2021-10-18 02:55:09.514959: Stopping round in PaceMaker
+2021-10-18 02:55:09.515158: Calling make_timeout
+2021-10-18 02:55:09.515366: Generating signature for replica, 2
+2021-10-18 02:55:09.516223: Received Client Request from 0
+2021-10-18 02:55:09.516786: verified client signature for cmd 0----->0
+2021-10-18 02:55:09.517305: Received Client Request from 1
+2021-10-18 02:55:09.518196: verified client signature for cmd 1----->0
+2021-10-18 02:55:09.519047: Received local timeout
+2021-10-18 02:55:09.519279: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e364f50> of type timeout_message
+2021-10-18 02:55:09.519483: Started processing timeout message.
+2021-10-18 02:55:09.519669: Started process certificate qc
+2021-10-18 02:55:09.519872: Advancing round based on qc
+2021-10-18 02:55:09.520067: Started process certificate qc
+2021-10-18 02:55:09.520277: Advancing round based on qc
+2021-10-18 02:55:09.520483: Advancing round based on tc
+2021-10-18 02:55:09.520693: Processing remote time out
+2021-10-18 02:55:09.520890: Stopping round in PaceMaker
+2021-10-18 02:55:09.521263: Creating a local timeout at 2
+2021-10-18 02:55:09.521472: Stopping round in PaceMaker
+2021-10-18 02:55:09.521682: Calling make_timeout
+2021-10-18 02:55:09.521907: Generating signature for replica, 2
+2021-10-18 02:55:09.523025: Received local timeout
+2021-10-18 02:55:09.523350: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e364fd0> of type timeout_message
+2021-10-18 02:55:09.523918: Started processing timeout message.
+2021-10-18 02:55:09.524130: Started process certificate qc
+2021-10-18 02:55:09.524626: Advancing round based on qc
+2021-10-18 02:55:09.524879: Started process certificate qc
+2021-10-18 02:55:09.525421: Advancing round based on qc
+2021-10-18 02:55:09.525654: Advancing round based on tc
+2021-10-18 02:55:09.526074: Processing remote time out
+2021-10-18 02:55:09.526643: Stopping round in PaceMaker
+2021-10-18 02:55:09.527091: Creating a local timeout at 2
+2021-10-18 02:55:09.527293: Stopping round in PaceMaker
+2021-10-18 02:55:09.527680: Calling make_timeout
+2021-10-18 02:55:09.527951: Generating signature for replica, 2
+2021-10-18 02:55:09.528762: Received local timeout
+2021-10-18 02:55:09.528978: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e2b80d0> of type timeout_message
+2021-10-18 02:55:09.529193: Started processing timeout message.
+2021-10-18 02:55:09.529447: Started process certificate qc
+2021-10-18 02:55:09.529665: Advancing round based on qc
+2021-10-18 02:55:09.529881: Started process certificate qc
+2021-10-18 02:55:09.530100: Advancing round based on qc
+2021-10-18 02:55:09.530332: Advancing round based on tc
+2021-10-18 02:55:09.530594: Processing remote time out
+2021-10-18 02:55:09.530807: Generating a timeout certificate
+2021-10-18 02:55:09.531230: Advancing round based on tc
+2021-10-18 02:55:09.531430: Stopping round in PaceMaker
+2021-10-18 02:55:09.531774: Started round in PaceMaker
+2021-10-18 02:55:09.532137: Started processing new round event 
+2021-10-18 02:55:09.533509: Received proposal message from 0 containing block ->Block Author :0 Transactions :0----->0
+2021-10-18 02:55:09.533720: Started event processing for message <libra.Objects.ProposalMsg object at 0x10dddf0d0> of type proposal_message
+2021-10-18 02:55:09.533946: Started event processing
+2021-10-18 02:55:09.534163: Started process certificate qc
+2021-10-18 02:55:09.534473: Advancing round based on qc
+2021-10-18 02:55:09.534674: Started process certificate qc
+2021-10-18 02:55:09.534887: Advancing round based on qc
+2021-10-18 02:55:09.535100: Advancing round based on tc
+2021-10-18 02:55:09.535306: Received local timeout
+2021-10-18 02:55:09.535548: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e364790> of type timeout_message
+2021-10-18 02:55:09.535748: Started processing timeout message.
+2021-10-18 02:55:09.535947: Started process certificate qc
+2021-10-18 02:55:09.536188: Advancing round based on qc
+2021-10-18 02:55:09.536734: Started process certificate qc
+2021-10-18 02:55:09.536934: Advancing round based on qc
+2021-10-18 02:55:09.537129: Advancing round based on tc
+2021-10-18 02:55:09.537460: Processing remote time out
+2021-10-18 02:55:09.537728: Received local timeout
+2021-10-18 02:55:09.538144: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e370c10> of type timeout_message
+2021-10-18 02:55:09.538459: Started processing timeout message.
+2021-10-18 02:55:09.538990: Started process certificate qc
+2021-10-18 02:55:09.539206: Advancing round based on qc
+2021-10-18 02:55:09.539441: Started process certificate qc
+2021-10-18 02:55:09.539646: Advancing round based on qc
+2021-10-18 02:55:09.539883: Advancing round based on tc
+2021-10-18 02:55:09.540173: Processing remote time out
+2021-10-18 02:55:09.540405: Received local timeout
+2021-10-18 02:55:09.540686: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e370490> of type timeout_message
+2021-10-18 02:55:09.540898: Started processing timeout message.
+2021-10-18 02:55:09.541117: Started process certificate qc
+2021-10-18 02:55:09.542191: Advancing round based on qc
+2021-10-18 02:55:09.542531: Started process certificate qc
+2021-10-18 02:55:09.543097: Advancing round based on qc
+2021-10-18 02:55:09.543305: Advancing round based on tc
+2021-10-18 02:55:09.547606: Processing remote time out
+2021-10-18 02:55:09.547893: Received local timeout
+2021-10-18 02:55:09.548141: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e364c90> of type timeout_message
+2021-10-18 02:55:09.548360: Started processing timeout message.
+2021-10-18 02:55:09.548588: Started process certificate qc
+2021-10-18 02:55:09.549405: Advancing round based on qc
+2021-10-18 02:55:09.550193: Started process certificate qc
+2021-10-18 02:55:09.551027: Advancing round based on qc
+2021-10-18 02:55:09.551538: Advancing round based on tc
+2021-10-18 02:55:09.552470: Processing remote time out
+2021-10-18 02:55:09.553354: Received local timeout
+2021-10-18 02:55:09.553629: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e374250> of type timeout_message
+2021-10-18 02:55:09.554302: Started processing timeout message.
+2021-10-18 02:55:09.554534: Started process certificate qc
+2021-10-18 02:55:09.554753: Advancing round based on qc
+2021-10-18 02:55:09.555156: Started process certificate qc
+2021-10-18 02:55:09.555369: Advancing round based on qc
+2021-10-18 02:55:09.555626: Advancing round based on tc
+2021-10-18 02:55:09.555861: Processing remote time out
+2021-10-18 02:55:09.556174: Received local timeout
+2021-10-18 02:55:09.556481: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e374890> of type timeout_message
+2021-10-18 02:55:09.556720: Started processing timeout message.
+2021-10-18 02:55:09.556933: Started process certificate qc
+2021-10-18 02:55:09.557471: Advancing round based on qc
+2021-10-18 02:55:09.557708: Started process certificate qc
+2021-10-18 02:55:09.557941: Advancing round based on qc
+2021-10-18 02:55:09.558175: Advancing round based on tc
+2021-10-18 02:55:09.558381: Processing remote time out
+2021-10-18 02:55:09.560403: Received local timeout
+2021-10-18 02:55:09.560789: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e374950> of type timeout_message
+2021-10-18 02:55:09.561281: Started processing timeout message.
+2021-10-18 02:55:09.561684: Started process certificate qc
+2021-10-18 02:55:09.562067: Advancing round based on qc
+2021-10-18 02:55:09.562308: Started process certificate qc
+2021-10-18 02:55:09.562526: Advancing round based on qc
+2021-10-18 02:55:09.562907: Advancing round based on tc
+2021-10-18 02:55:09.563117: Processing remote time out
+2021-10-18 02:55:09.563352: Received proposal message from 1 containing block ->Block Author :1 Transactions :0----->0
+2021-10-18 02:55:09.563587: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e3742d0> of type proposal_message
+2021-10-18 02:55:09.563812: Started event processing
+2021-10-18 02:55:09.564030: Started process certificate qc
+2021-10-18 02:55:09.564452: Advancing round based on qc
+2021-10-18 02:55:09.565214: Started process certificate qc
+2021-10-18 02:55:09.565824: Advancing round based on qc
+2021-10-18 02:55:09.566034: Advancing round based on tc
+2021-10-18 02:55:09.566248: Executing and Inserting
+2021-10-18 02:55:09.566470: Adding block with 7783929690860932010 in ledger pending_map
+2021-10-18 02:55:09.566861: Started make vote
+2021-10-18 02:55:09.567779: Finished make vote 
+2021-10-18 02:55:09.568391: Received local timeout
+2021-10-18 02:55:09.569294: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e374150> of type timeout_message
+2021-10-18 02:55:09.569530: Started processing timeout message.
+2021-10-18 02:55:09.569879: Started process certificate qc
+2021-10-18 02:55:09.570594: Advancing round based on qc
+2021-10-18 02:55:09.571100: Started process certificate qc
+2021-10-18 02:55:09.571346: Advancing round based on qc
+2021-10-18 02:55:09.571579: Advancing round based on tc
+2021-10-18 02:55:09.571809: Processing remote time out
+2021-10-18 02:55:09.572070: Received local timeout
+2021-10-18 02:55:09.572296: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10dddf0d0> of type timeout_message
+2021-10-18 02:55:09.572512: Started processing timeout message.
+2021-10-18 02:55:09.572904: Started process certificate qc
+2021-10-18 02:55:09.573777: Advancing round based on qc
+2021-10-18 02:55:09.573981: Started process certificate qc
+2021-10-18 02:55:09.574885: Advancing round based on qc
+2021-10-18 02:55:09.575665: Advancing round based on tc
+2021-10-18 02:55:09.576400: Processing remote time out
+2021-10-18 02:55:10.509866: Creating a local timeout at 2
+2021-10-18 02:55:10.510672: Stopping round in PaceMaker
+2021-10-18 02:55:10.511439: Calling make_timeout
+2021-10-18 02:55:10.513395: Generating signature for replica, 2
+2021-10-18 02:55:10.515490: Received local timeout
+2021-10-18 02:55:10.516193: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e29c410> of type timeout_message
+2021-10-18 02:55:10.516429: Started processing timeout message.
+2021-10-18 02:55:10.516950: Started process certificate qc
+2021-10-18 02:55:10.517264: Advancing round based on qc
+2021-10-18 02:55:10.517623: Started process certificate qc
+2021-10-18 02:55:10.518310: Advancing round based on qc
+2021-10-18 02:55:10.518614: Advancing round based on tc
+2021-10-18 02:55:10.518870: Processing remote time out
+2021-10-18 02:55:10.519101: Received local timeout
+2021-10-18 02:55:10.519313: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e2b3250> of type timeout_message
+2021-10-18 02:55:10.519522: Started processing timeout message.
+2021-10-18 02:55:10.519740: Started process certificate qc
+2021-10-18 02:55:10.519958: Advancing round based on qc
+2021-10-18 02:55:10.520163: Started process certificate qc
+2021-10-18 02:55:10.520381: Advancing round based on qc
+2021-10-18 02:55:10.520579: Advancing round based on tc
+2021-10-18 02:55:10.520771: Processing remote time out
+2021-10-18 02:55:10.520973: Stopping round in PaceMaker
+2021-10-18 02:55:10.521185: Creating a local timeout at 2
+2021-10-18 02:55:10.521390: Stopping round in PaceMaker
+2021-10-18 02:55:10.521586: Calling make_timeout
+2021-10-18 02:55:10.521788: Generating signature for replica, 2
+2021-10-18 02:55:10.525038: Received local timeout
+2021-10-18 02:55:10.525283: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e2b0e90> of type timeout_message
+2021-10-18 02:55:10.525506: Started processing timeout message.
+2021-10-18 02:55:10.525726: Started process certificate qc
+2021-10-18 02:55:10.526103: Advancing round based on qc
+2021-10-18 02:55:10.526865: Started process certificate qc
+2021-10-18 02:55:10.527840: Advancing round based on qc
+2021-10-18 02:55:10.528180: Advancing round based on tc
+2021-10-18 02:55:10.529402: Processing remote time out
+2021-10-18 02:55:10.530100: Stopping round in PaceMaker
+2021-10-18 02:55:10.531240: Creating a local timeout at 2
+2021-10-18 02:55:10.531572: Stopping round in PaceMaker
+2021-10-18 02:55:10.531810: Calling make_timeout
+2021-10-18 02:55:10.532032: Generating signature for replica, 2
+2021-10-18 02:55:10.532987: Received local timeout
+2021-10-18 02:55:10.533206: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e370c10> of type timeout_message
+2021-10-18 02:55:10.533402: Started processing timeout message.
+2021-10-18 02:55:10.533604: Started process certificate qc
+2021-10-18 02:55:10.533839: Advancing round based on qc
+2021-10-18 02:55:10.534088: Started process certificate qc
+2021-10-18 02:55:10.534334: Advancing round based on qc
+2021-10-18 02:55:10.534562: Advancing round based on tc
+2021-10-18 02:55:10.534950: Processing remote time out
+2021-10-18 02:55:10.535209: Stopping round in PaceMaker
+2021-10-18 02:55:10.535468: Creating a local timeout at 2
+2021-10-18 02:55:10.535699: Stopping round in PaceMaker
+2021-10-18 02:55:10.535943: Calling make_timeout
+2021-10-18 02:55:10.536555: Generating signature for replica, 2
+2021-10-18 02:55:10.540558: Received local timeout
+2021-10-18 02:55:10.540949: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e374bd0> of type timeout_message
+2021-10-18 02:55:10.542643: Started processing timeout message.
+2021-10-18 02:55:10.542895: Started process certificate qc
+2021-10-18 02:55:10.543156: Advancing round based on qc
+2021-10-18 02:55:10.543409: Started process certificate qc
+2021-10-18 02:55:10.543745: Advancing round based on qc
+2021-10-18 02:55:10.544675: Advancing round based on tc
+2021-10-18 02:55:10.545253: Processing remote time out
+2021-10-18 02:55:10.545462: Stopping round in PaceMaker
+2021-10-18 02:55:10.545688: Creating a local timeout at 2
+2021-10-18 02:55:10.546438: Stopping round in PaceMaker
+2021-10-18 02:55:10.547915: Calling make_timeout
+2021-10-18 02:55:10.548361: Generating signature for replica, 2
+2021-10-18 02:55:10.550399: Received local timeout
+2021-10-18 02:55:10.550642: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e3742d0> of type timeout_message
+2021-10-18 02:55:10.550878: Started processing timeout message.
+2021-10-18 02:55:10.551115: Started process certificate qc
+2021-10-18 02:55:10.551920: Advancing round based on qc
+2021-10-18 02:55:10.552419: Started process certificate qc
+2021-10-18 02:55:10.552627: Advancing round based on qc
+2021-10-18 02:55:10.553144: Advancing round based on tc
+2021-10-18 02:55:10.553478: Processing remote time out
+2021-10-18 02:55:10.554223: Stopping round in PaceMaker
+2021-10-18 02:55:10.554583: Creating a local timeout at 2
+2021-10-18 02:55:10.554813: Stopping round in PaceMaker
+2021-10-18 02:55:10.555017: Calling make_timeout
+2021-10-18 02:55:10.555231: Generating signature for replica, 2
+2021-10-18 02:55:10.556209: Received local timeout
+2021-10-18 02:55:10.556549: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e376690> of type timeout_message
+2021-10-18 02:55:10.558070: Started processing timeout message.
+2021-10-18 02:55:10.558471: Started process certificate qc
+2021-10-18 02:55:10.558693: Advancing round based on qc
+2021-10-18 02:55:10.559196: Started process certificate qc
+2021-10-18 02:55:10.559743: Advancing round based on qc
+2021-10-18 02:55:10.559977: Advancing round based on tc
+2021-10-18 02:55:10.560563: Processing remote time out
+2021-10-18 02:55:10.560776: Stopping round in PaceMaker
+2021-10-18 02:55:10.561486: Creating a local timeout at 2
+2021-10-18 02:55:10.561720: Stopping round in PaceMaker
+2021-10-18 02:55:10.561987: Calling make_timeout
+2021-10-18 02:55:10.562217: Generating signature for replica, 2
+2021-10-18 02:55:10.566172: Received local timeout
+2021-10-18 02:55:10.567391: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e376450> of type timeout_message
+2021-10-18 02:55:10.568768: Started processing timeout message.
+2021-10-18 02:55:10.569568: Started process certificate qc
+2021-10-18 02:55:10.569967: Advancing round based on qc
+2021-10-18 02:55:10.570194: Started process certificate qc
+2021-10-18 02:55:10.570395: Advancing round based on qc
+2021-10-18 02:55:10.571365: Advancing round based on tc
+2021-10-18 02:55:10.572142: Processing remote time out
+2021-10-18 02:55:10.573098: Stopping round in PaceMaker
+2021-10-18 02:55:10.573311: Creating a local timeout at 2
+2021-10-18 02:55:10.573515: Stopping round in PaceMaker
+2021-10-18 02:55:10.573737: Calling make_timeout
+2021-10-18 02:55:10.573941: Generating signature for replica, 2
+2021-10-18 02:55:10.575391: Received Client Request from 0
+2021-10-18 02:55:10.576351: verified client signature for cmd 0----->1
+2021-10-18 02:55:10.576724: Received Client Request from 1
+2021-10-18 02:55:10.577177: verified client signature for cmd 1----->1
+2021-10-18 02:55:10.577855: Received local timeout
+2021-10-18 02:55:10.578088: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37b810> of type timeout_message
+2021-10-18 02:55:10.578295: Started processing timeout message.
+2021-10-18 02:55:10.578491: Started process certificate qc
+2021-10-18 02:55:10.590525: Advancing round based on qc
+2021-10-18 02:55:10.590911: Started process certificate qc
+2021-10-18 02:55:10.591126: Advancing round based on qc
+2021-10-18 02:55:10.591401: Advancing round based on tc
+2021-10-18 02:55:10.591608: Processing remote time out
+2021-10-18 02:55:10.591813: Generating a timeout certificate
+2021-10-18 02:55:10.592010: Advancing round based on tc
+2021-10-18 02:55:10.592231: Stopping round in PaceMaker
+2021-10-18 02:55:10.592443: Started round in PaceMaker
+2021-10-18 02:55:10.593070: Started processing new round event 
+2021-10-18 02:55:10.593454: Generating Block
+2021-10-18 02:55:10.593736: Sending Proposal message to all replicas containing block ->Block Author :2 Transactions :1----->0
+2021-10-18 02:55:10.594125: Sending new round event 
+2021-10-18 02:55:10.596143: Received local timeout
+2021-10-18 02:55:10.596379: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37d110> of type timeout_message
+2021-10-18 02:55:10.596583: Started processing timeout message.
+2021-10-18 02:55:10.596820: Started process certificate qc
+2021-10-18 02:55:10.597053: Advancing round based on qc
+2021-10-18 02:55:10.597258: Started process certificate qc
+2021-10-18 02:55:10.597475: Advancing round based on qc
+2021-10-18 02:55:10.597693: Advancing round based on tc
+2021-10-18 02:55:10.597894: Processing remote time out
+2021-10-18 02:55:10.598354: Received local timeout
+2021-10-18 02:55:10.598826: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37bc50> of type timeout_message
+2021-10-18 02:55:10.599032: Started processing timeout message.
+2021-10-18 02:55:10.599228: Started process certificate qc
+2021-10-18 02:55:10.599429: Advancing round based on qc
+2021-10-18 02:55:10.599628: Started process certificate qc
+2021-10-18 02:55:10.599837: Advancing round based on qc
+2021-10-18 02:55:10.600032: Advancing round based on tc
+2021-10-18 02:55:10.600845: Processing remote time out
+2021-10-18 02:55:10.601862: Received local timeout
+2021-10-18 02:55:10.602101: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37dd90> of type timeout_message
+2021-10-18 02:55:10.602330: Started processing timeout message.
+2021-10-18 02:55:10.603428: Started process certificate qc
+2021-10-18 02:55:10.604804: Advancing round based on qc
+2021-10-18 02:55:10.605390: Started process certificate qc
+2021-10-18 02:55:10.606013: Advancing round based on qc
+2021-10-18 02:55:10.606799: Advancing round based on tc
+2021-10-18 02:55:10.607501: Processing remote time out
+2021-10-18 02:55:10.609451: Received local timeout
+2021-10-18 02:55:10.610172: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37d390> of type timeout_message
+2021-10-18 02:55:10.610484: Started processing timeout message.
+2021-10-18 02:55:10.612213: Started process certificate qc
+2021-10-18 02:55:10.612727: Advancing round based on qc
+2021-10-18 02:55:10.613011: Started process certificate qc
+2021-10-18 02:55:10.613213: Advancing round based on qc
+2021-10-18 02:55:10.613413: Advancing round based on tc
+2021-10-18 02:55:10.613643: Processing remote time out
+2021-10-18 02:55:10.613876: Received local timeout
+2021-10-18 02:55:10.614083: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e3772d0> of type timeout_message
+2021-10-18 02:55:10.614292: Started processing timeout message.
+2021-10-18 02:55:10.614505: Started process certificate qc
+2021-10-18 02:55:10.614718: Advancing round based on qc
+2021-10-18 02:55:10.614939: Started process certificate qc
+2021-10-18 02:55:10.615221: Advancing round based on qc
+2021-10-18 02:55:10.615432: Advancing round based on tc
+2021-10-18 02:55:10.615647: Processing remote time out
+2021-10-18 02:55:10.615881: Received local timeout
+2021-10-18 02:55:10.616124: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e376210> of type timeout_message
+2021-10-18 02:55:10.616348: Started processing timeout message.
+2021-10-18 02:55:10.616549: Started process certificate qc
+2021-10-18 02:55:10.616779: Advancing round based on qc
+2021-10-18 02:55:10.616986: Started process certificate qc
+2021-10-18 02:55:10.617220: Advancing round based on qc
+2021-10-18 02:55:10.617418: Advancing round based on tc
+2021-10-18 02:55:10.617624: Processing remote time out
+2021-10-18 02:55:10.617850: Received local timeout
+2021-10-18 02:55:10.618050: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e381dd0> of type timeout_message
+2021-10-18 02:55:10.618281: Started processing timeout message.
+2021-10-18 02:55:10.618479: Started process certificate qc
+2021-10-18 02:55:10.618691: Advancing round based on qc
+2021-10-18 02:55:10.618893: Started process certificate qc
+2021-10-18 02:55:10.619097: Advancing round based on qc
+2021-10-18 02:55:10.619324: Advancing round based on tc
+2021-10-18 02:55:10.619529: Processing remote time out
+2021-10-18 02:55:10.619746: Received local timeout
+2021-10-18 02:55:10.619974: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e383490> of type timeout_message
+2021-10-18 02:55:10.620249: Started processing timeout message.
+2021-10-18 02:55:10.620476: Started process certificate qc
+2021-10-18 02:55:10.620683: Advancing round based on qc
+2021-10-18 02:55:10.620897: Started process certificate qc
+2021-10-18 02:55:10.621099: Advancing round based on qc
+2021-10-18 02:55:10.621326: Advancing round based on tc
+2021-10-18 02:55:10.621533: Processing remote time out
+2021-10-18 02:55:10.621780: Received local timeout
+2021-10-18 02:55:10.621986: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37b450> of type timeout_message
+2021-10-18 02:55:10.622198: Started processing timeout message.
+2021-10-18 02:55:10.622409: Started process certificate qc
+2021-10-18 02:55:10.622618: Advancing round based on qc
+2021-10-18 02:55:10.622827: Started process certificate qc
+2021-10-18 02:55:10.623035: Advancing round based on qc
+2021-10-18 02:55:10.623250: Advancing round based on tc
+2021-10-18 02:55:10.623474: Processing remote time out
+2021-10-18 02:55:10.623702: Received local timeout
+2021-10-18 02:55:10.623929: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37b690> of type timeout_message
+2021-10-18 02:55:10.624157: Started processing timeout message.
+2021-10-18 02:55:10.624389: Started process certificate qc
+2021-10-18 02:55:10.624657: Advancing round based on qc
+2021-10-18 02:55:10.624890: Started process certificate qc
+2021-10-18 02:55:10.625097: Advancing round based on qc
+2021-10-18 02:55:10.625319: Advancing round based on tc
+2021-10-18 02:55:10.625555: Processing remote time out
+2021-10-18 02:55:10.629142: Received local timeout
+2021-10-18 02:55:10.629388: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e42e910> of type timeout_message
+2021-10-18 02:55:10.629704: Started processing timeout message.
+2021-10-18 02:55:10.630633: Started process certificate qc
+2021-10-18 02:55:10.631063: Advancing round based on qc
+2021-10-18 02:55:10.631280: Started process certificate qc
+2021-10-18 02:55:10.631496: Advancing round based on qc
+2021-10-18 02:55:10.631701: Advancing round based on tc
+2021-10-18 02:55:10.631929: Processing remote time out
+2021-10-18 02:55:10.632220: Received local timeout
+2021-10-18 02:55:10.632465: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e42ea90> of type timeout_message
+2021-10-18 02:55:10.632686: Started processing timeout message.
+2021-10-18 02:55:10.632905: Started process certificate qc
+2021-10-18 02:55:10.633119: Advancing round based on qc
+2021-10-18 02:55:10.633338: Started process certificate qc
+2021-10-18 02:55:10.633549: Advancing round based on qc
+2021-10-18 02:55:10.633760: Advancing round based on tc
+2021-10-18 02:55:10.633978: Processing remote time out
+2021-10-18 02:55:10.634778: Received local timeout
+2021-10-18 02:55:10.635182: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4311d0> of type timeout_message
+2021-10-18 02:55:10.635404: Started processing timeout message.
+2021-10-18 02:55:10.635610: Started process certificate qc
+2021-10-18 02:55:10.635976: Advancing round based on qc
+2021-10-18 02:55:10.636438: Started process certificate qc
+2021-10-18 02:55:10.636686: Advancing round based on qc
+2021-10-18 02:55:10.636888: Advancing round based on tc
+2021-10-18 02:55:10.637104: Processing remote time out
+2021-10-18 02:55:10.637319: Received local timeout
+2021-10-18 02:55:10.637530: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e431790> of type timeout_message
+2021-10-18 02:55:10.637745: Started processing timeout message.
+2021-10-18 02:55:10.637966: Started process certificate qc
+2021-10-18 02:55:10.638165: Advancing round based on qc
+2021-10-18 02:55:10.638370: Started process certificate qc
+2021-10-18 02:55:10.638601: Advancing round based on qc
+2021-10-18 02:55:10.638813: Advancing round based on tc
+2021-10-18 02:55:10.639011: Processing remote time out
+2021-10-18 02:55:10.639215: Received local timeout
+2021-10-18 02:55:10.639432: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e42eb90> of type timeout_message
+2021-10-18 02:55:10.639630: Started processing timeout message.
+2021-10-18 02:55:10.639841: Started process certificate qc
+2021-10-18 02:55:10.640042: Advancing round based on qc
+2021-10-18 02:55:10.640241: Started process certificate qc
+2021-10-18 02:55:10.640476: Advancing round based on qc
+2021-10-18 02:55:10.640680: Advancing round based on tc
+2021-10-18 02:55:10.640936: Processing remote time out
+2021-10-18 02:55:10.641151: Received local timeout
+2021-10-18 02:55:10.641361: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e431b90> of type timeout_message
+2021-10-18 02:55:10.641577: Started processing timeout message.
+2021-10-18 02:55:10.641826: Started process certificate qc
+2021-10-18 02:55:10.642030: Advancing round based on qc
+2021-10-18 02:55:10.642757: Started process certificate qc
+2021-10-18 02:55:10.642980: Advancing round based on qc
+2021-10-18 02:55:10.643217: Advancing round based on tc
+2021-10-18 02:55:10.643485: Processing remote time out
+2021-10-18 02:55:10.643757: Received local timeout
+2021-10-18 02:55:10.643993: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e431510> of type timeout_message
+2021-10-18 02:55:10.644218: Started processing timeout message.
+2021-10-18 02:55:10.644424: Started process certificate qc
+2021-10-18 02:55:10.644641: Advancing round based on qc
+2021-10-18 02:55:10.644888: Started process certificate qc
+2021-10-18 02:55:10.645275: Advancing round based on qc
+2021-10-18 02:55:10.645753: Advancing round based on tc
+2021-10-18 02:55:10.647056: Processing remote time out
+2021-10-18 02:55:10.647311: Received local timeout
+2021-10-18 02:55:10.647541: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e431b50> of type timeout_message
+2021-10-18 02:55:10.647760: Started processing timeout message.
+2021-10-18 02:55:10.648059: Started process certificate qc
+2021-10-18 02:55:10.648271: Advancing round based on qc
+2021-10-18 02:55:10.648482: Started process certificate qc
+2021-10-18 02:55:10.648731: Advancing round based on qc
+2021-10-18 02:55:10.648957: Advancing round based on tc
+2021-10-18 02:55:10.649184: Processing remote time out
+2021-10-18 02:55:10.649425: Received local timeout
+2021-10-18 02:55:10.649650: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e383f50> of type timeout_message
+2021-10-18 02:55:10.649870: Started processing timeout message.
+2021-10-18 02:55:10.650130: Started process certificate qc
+2021-10-18 02:55:10.650349: Advancing round based on qc
+2021-10-18 02:55:10.650561: Started process certificate qc
+2021-10-18 02:55:10.650775: Advancing round based on qc
+2021-10-18 02:55:10.650989: Advancing round based on tc
+2021-10-18 02:55:10.651197: Processing remote time out
+2021-10-18 02:55:10.651435: Received proposal message from 2 containing block ->Block Author :2 Transactions :1----->0
+2021-10-18 02:55:10.651650: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e3839d0> of type proposal_message
+2021-10-18 02:55:10.651864: Started event processing
+2021-10-18 02:55:10.652079: Started process certificate qc
+2021-10-18 02:55:10.652291: Advancing round based on qc
+2021-10-18 02:55:10.652497: Started process certificate qc
+2021-10-18 02:55:10.652714: Advancing round based on qc
+2021-10-18 02:55:10.652936: Advancing round based on tc
+2021-10-18 02:55:10.653149: Executing and Inserting
+2021-10-18 02:55:10.653372: Adding block with 4742105767116056398 in ledger pending_map
+2021-10-18 02:55:10.653603: Started make vote
+2021-10-18 02:55:10.653836: Finished make vote 
+2021-10-18 02:55:10.654059: Received local timeout
+2021-10-18 02:55:10.654297: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e3836d0> of type timeout_message
+2021-10-18 02:55:10.654545: Started processing timeout message.
+2021-10-18 02:55:10.654781: Started process certificate qc
+2021-10-18 02:55:10.655020: Advancing round based on qc
+2021-10-18 02:55:10.655271: Started process certificate qc
+2021-10-18 02:55:10.655507: Advancing round based on qc
+2021-10-18 02:55:10.655721: Advancing round based on tc
+2021-10-18 02:55:10.655949: Processing remote time out
+2021-10-18 02:55:10.656383: Received local timeout
+2021-10-18 02:55:10.656595: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e376850> of type timeout_message
+2021-10-18 02:55:10.656809: Started processing timeout message.
+2021-10-18 02:55:10.657625: Started process certificate qc
+2021-10-18 02:55:10.658357: Advancing round based on qc
+2021-10-18 02:55:10.658979: Started process certificate qc
+2021-10-18 02:55:10.659186: Advancing round based on qc
+2021-10-18 02:55:10.659413: Advancing round based on tc
+2021-10-18 02:55:10.659606: Processing remote time out
+2021-10-18 02:55:11.515939: Received local timeout
+2021-10-18 02:55:11.516228: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e435750> of type timeout_message
+2021-10-18 02:55:11.516432: Started processing timeout message.
+2021-10-18 02:55:11.516855: Started process certificate qc
+2021-10-18 02:55:11.517294: Advancing round based on qc
+2021-10-18 02:55:11.517566: Started process certificate qc
+2021-10-18 02:55:11.517797: Advancing round based on qc
+2021-10-18 02:55:11.518007: Advancing round based on tc
+2021-10-18 02:55:11.518196: Processing remote time out
+2021-10-18 02:55:11.518417: Creating a local timeout at 2
+2021-10-18 02:55:11.518626: Stopping round in PaceMaker
+2021-10-18 02:55:11.518839: Calling make_timeout
+2021-10-18 02:55:11.519029: Generating signature for replica, 2
+2021-10-18 02:55:11.520166: Received local timeout
+2021-10-18 02:55:11.520391: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e435750> of type timeout_message
+2021-10-18 02:55:11.520593: Started processing timeout message.
+2021-10-18 02:55:11.520791: Started process certificate qc
+2021-10-18 02:55:11.521005: Advancing round based on qc
+2021-10-18 02:55:11.521226: Started process certificate qc
+2021-10-18 02:55:11.521433: Advancing round based on qc
+2021-10-18 02:55:11.521646: Advancing round based on tc
+2021-10-18 02:55:11.521863: Processing remote time out
+2021-10-18 02:55:11.522075: Stopping round in PaceMaker
+2021-10-18 02:55:11.522291: Creating a local timeout at 2
+2021-10-18 02:55:11.522505: Stopping round in PaceMaker
+2021-10-18 02:55:11.522717: Calling make_timeout
+2021-10-18 02:55:11.522939: Generating signature for replica, 2
+2021-10-18 02:55:11.524027: Received local timeout
+2021-10-18 02:55:11.524453: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e383490> of type timeout_message
+2021-10-18 02:55:11.524652: Started processing timeout message.
+2021-10-18 02:55:11.524855: Started process certificate qc
+2021-10-18 02:55:11.525066: Advancing round based on qc
+2021-10-18 02:55:11.525277: Started process certificate qc
+2021-10-18 02:55:11.525490: Advancing round based on qc
+2021-10-18 02:55:11.525702: Advancing round based on tc
+2021-10-18 02:55:11.525906: Processing remote time out
+2021-10-18 02:55:11.526112: Stopping round in PaceMaker
+2021-10-18 02:55:11.526378: Creating a local timeout at 2
+2021-10-18 02:55:11.526573: Stopping round in PaceMaker
+2021-10-18 02:55:11.526785: Calling make_timeout
+2021-10-18 02:55:11.526998: Generating signature for replica, 2
+2021-10-18 02:55:11.528598: Received local timeout
+2021-10-18 02:55:11.528966: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e370b50> of type timeout_message
+2021-10-18 02:55:11.529190: Started processing timeout message.
+2021-10-18 02:55:11.529419: Started process certificate qc
+2021-10-18 02:55:11.529636: Advancing round based on qc
+2021-10-18 02:55:11.529837: Started process certificate qc
+2021-10-18 02:55:11.530047: Advancing round based on qc
+2021-10-18 02:55:11.530259: Advancing round based on tc
+2021-10-18 02:55:11.530468: Processing remote time out
+2021-10-18 02:55:11.530683: Stopping round in PaceMaker
+2021-10-18 02:55:11.530902: Creating a local timeout at 2
+2021-10-18 02:55:11.531108: Stopping round in PaceMaker
+2021-10-18 02:55:11.531319: Calling make_timeout
+2021-10-18 02:55:11.531529: Generating signature for replica, 2
+2021-10-18 02:55:11.532516: Received local timeout
+2021-10-18 02:55:11.533000: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e383910> of type timeout_message
+2021-10-18 02:55:11.533599: Started processing timeout message.
+2021-10-18 02:55:11.533849: Started process certificate qc
+2021-10-18 02:55:11.534086: Advancing round based on qc
+2021-10-18 02:55:11.534315: Started process certificate qc
+2021-10-18 02:55:11.534551: Advancing round based on qc
+2021-10-18 02:55:11.534918: Advancing round based on tc
+2021-10-18 02:55:11.535134: Processing remote time out
+2021-10-18 02:55:11.535871: Stopping round in PaceMaker
+2021-10-18 02:55:11.536900: Creating a local timeout at 2
+2021-10-18 02:55:11.537869: Stopping round in PaceMaker
+2021-10-18 02:55:11.538103: Calling make_timeout
+2021-10-18 02:55:11.538317: Generating signature for replica, 2
+2021-10-18 02:55:11.541934: Received local timeout
+2021-10-18 02:55:11.542170: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37d5d0> of type timeout_message
+2021-10-18 02:55:11.542396: Started processing timeout message.
+2021-10-18 02:55:11.542623: Started process certificate qc
+2021-10-18 02:55:11.543253: Advancing round based on qc
+2021-10-18 02:55:11.543740: Started process certificate qc
+2021-10-18 02:55:11.543958: Advancing round based on qc
+2021-10-18 02:55:11.544239: Advancing round based on tc
+2021-10-18 02:55:11.544445: Processing remote time out
+2021-10-18 02:55:11.544662: Generating a timeout certificate
+2021-10-18 02:55:11.545034: Advancing round based on tc
+2021-10-18 02:55:11.545276: Stopping round in PaceMaker
+2021-10-18 02:55:11.545505: Started round in PaceMaker
+2021-10-18 02:55:11.545894: Started processing new round event 
+2021-10-18 02:55:11.546124: Received local timeout
+2021-10-18 02:55:11.546340: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4319d0> of type timeout_message
+2021-10-18 02:55:11.546548: Started processing timeout message.
+2021-10-18 02:55:11.546839: Started process certificate qc
+2021-10-18 02:55:11.547084: Advancing round based on qc
+2021-10-18 02:55:11.547358: Started process certificate qc
+2021-10-18 02:55:11.547637: Advancing round based on qc
+2021-10-18 02:55:11.547891: Advancing round based on tc
+2021-10-18 02:55:11.548199: Processing remote time out
+2021-10-18 02:55:11.548411: Received local timeout
+2021-10-18 02:55:11.548634: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e389150> of type timeout_message
+2021-10-18 02:55:11.548883: Started processing timeout message.
+2021-10-18 02:55:11.549215: Started process certificate qc
+2021-10-18 02:55:11.549424: Advancing round based on qc
+2021-10-18 02:55:11.549632: Started process certificate qc
+2021-10-18 02:55:11.549885: Advancing round based on qc
+2021-10-18 02:55:11.550096: Advancing round based on tc
+2021-10-18 02:55:11.550305: Processing remote time out
+2021-10-18 02:55:11.550530: Received local timeout
+2021-10-18 02:55:11.550728: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37dd90> of type timeout_message
+2021-10-18 02:55:11.550941: Started processing timeout message.
+2021-10-18 02:55:11.551158: Started process certificate qc
+2021-10-18 02:55:11.551403: Advancing round based on qc
+2021-10-18 02:55:11.551622: Started process certificate qc
+2021-10-18 02:55:11.551864: Advancing round based on qc
+2021-10-18 02:55:11.552082: Advancing round based on tc
+2021-10-18 02:55:11.552285: Processing remote time out
+2021-10-18 02:55:11.552603: Received local timeout
+2021-10-18 02:55:11.552849: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e3811d0> of type timeout_message
+2021-10-18 02:55:11.553204: Started processing timeout message.
+2021-10-18 02:55:11.553448: Started process certificate qc
+2021-10-18 02:55:11.553663: Advancing round based on qc
+2021-10-18 02:55:11.553875: Started process certificate qc
+2021-10-18 02:55:11.554085: Advancing round based on qc
+2021-10-18 02:55:11.554403: Advancing round based on tc
+2021-10-18 02:55:11.554623: Processing remote time out
+2021-10-18 02:55:11.554834: Received local timeout
+2021-10-18 02:55:11.555073: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37d890> of type timeout_message
+2021-10-18 02:55:11.555303: Started processing timeout message.
+2021-10-18 02:55:11.555543: Started process certificate qc
+2021-10-18 02:55:11.555880: Advancing round based on qc
+2021-10-18 02:55:11.556088: Started process certificate qc
+2021-10-18 02:55:11.556350: Advancing round based on qc
+2021-10-18 02:55:11.556604: Advancing round based on tc
+2021-10-18 02:55:11.556823: Processing remote time out
+2021-10-18 02:55:11.557036: Received local timeout
+2021-10-18 02:55:11.557285: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e439810> of type timeout_message
+2021-10-18 02:55:11.557503: Started processing timeout message.
+2021-10-18 02:55:11.557702: Started process certificate qc
+2021-10-18 02:55:11.557962: Advancing round based on qc
+2021-10-18 02:55:11.558177: Started process certificate qc
+2021-10-18 02:55:11.558421: Advancing round based on qc
+2021-10-18 02:55:11.558672: Advancing round based on tc
+2021-10-18 02:55:11.558877: Processing remote time out
+2021-10-18 02:55:11.559095: Received local timeout
+2021-10-18 02:55:11.559333: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e381250> of type timeout_message
+2021-10-18 02:55:11.559558: Started processing timeout message.
+2021-10-18 02:55:11.560281: Started process certificate qc
+2021-10-18 02:55:11.560930: Advancing round based on qc
+2021-10-18 02:55:11.561195: Started process certificate qc
+2021-10-18 02:55:11.561520: Advancing round based on qc
+2021-10-18 02:55:11.561870: Advancing round based on tc
+2021-10-18 02:55:11.562119: Processing remote time out
+2021-10-18 02:55:11.562562: Received local timeout
+2021-10-18 02:55:11.562776: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e439750> of type timeout_message
+2021-10-18 02:55:11.562999: Started processing timeout message.
+2021-10-18 02:55:11.563204: Started process certificate qc
+2021-10-18 02:55:11.563430: Advancing round based on qc
+2021-10-18 02:55:11.563692: Started process certificate qc
+2021-10-18 02:55:11.563927: Advancing round based on qc
+2021-10-18 02:55:11.564236: Advancing round based on tc
+2021-10-18 02:55:11.564716: Processing remote time out
+2021-10-18 02:55:11.564970: Received local timeout
+2021-10-18 02:55:11.565368: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e439f90> of type timeout_message
+2021-10-18 02:55:11.565595: Started processing timeout message.
+2021-10-18 02:55:11.565814: Started process certificate qc
+2021-10-18 02:55:11.566020: Advancing round based on qc
+2021-10-18 02:55:11.566222: Started process certificate qc
+2021-10-18 02:55:11.566442: Advancing round based on qc
+2021-10-18 02:55:11.566664: Advancing round based on tc
+2021-10-18 02:55:11.566910: Processing remote time out
+2021-10-18 02:55:11.567698: Received Client Request from 1
+2021-10-18 02:55:11.568186: verified client signature for cmd 1----->2
+2021-10-18 02:55:11.569431: Received Client Request from 0
+2021-10-18 02:55:11.570246: verified client signature for cmd 0----->2
+2021-10-18 02:55:11.572925: Received proposal message from 3 containing block ->Block Author :3 Transactions :1----->1
+2021-10-18 02:55:11.574637: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e381150> of type proposal_message
+2021-10-18 02:55:11.574851: Started event processing
+2021-10-18 02:55:11.575062: Started process certificate qc
+2021-10-18 02:55:11.575392: Advancing round based on qc
+2021-10-18 02:55:11.575598: Started process certificate qc
+2021-10-18 02:55:11.575802: Advancing round based on qc
+2021-10-18 02:55:11.576048: Advancing round based on tc
+2021-10-18 02:55:11.576262: Executing and Inserting
+2021-10-18 02:55:11.576488: Adding block with 4996839595668479713 in ledger pending_map
+2021-10-18 02:55:11.576701: Started make vote
+2021-10-18 02:55:11.576924: Finished make vote 
+2021-10-18 02:55:12.520330: Received local timeout
+2021-10-18 02:55:12.520571: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37d210> of type timeout_message
+2021-10-18 02:55:12.521260: Started processing timeout message.
+2021-10-18 02:55:12.521522: Started process certificate qc
+2021-10-18 02:55:12.521774: Advancing round based on qc
+2021-10-18 02:55:12.522036: Started process certificate qc
+2021-10-18 02:55:12.522391: Advancing round based on qc
+2021-10-18 02:55:12.522688: Advancing round based on tc
+2021-10-18 02:55:12.522918: Processing remote time out
+2021-10-18 02:55:12.523147: Creating a local timeout at 2
+2021-10-18 02:55:12.523373: Stopping round in PaceMaker
+2021-10-18 02:55:12.523604: Calling make_timeout
+2021-10-18 02:55:12.523806: Generating signature for replica, 2
+2021-10-18 02:55:12.525023: Received local timeout
+2021-10-18 02:55:12.525361: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e381250> of type timeout_message
+2021-10-18 02:55:12.525587: Started processing timeout message.
+2021-10-18 02:55:12.525882: Started process certificate qc
+2021-10-18 02:55:12.526105: Advancing round based on qc
+2021-10-18 02:55:12.526330: Started process certificate qc
+2021-10-18 02:55:12.526873: Advancing round based on qc
+2021-10-18 02:55:12.527096: Advancing round based on tc
+2021-10-18 02:55:12.527309: Processing remote time out
+2021-10-18 02:55:12.527540: Stopping round in PaceMaker
+2021-10-18 02:55:12.527766: Creating a local timeout at 2
+2021-10-18 02:55:12.527998: Stopping round in PaceMaker
+2021-10-18 02:55:12.528240: Calling make_timeout
+2021-10-18 02:55:12.528536: Generating signature for replica, 2
+2021-10-18 02:55:12.529934: Received local timeout
+2021-10-18 02:55:12.530150: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4392d0> of type timeout_message
+2021-10-18 02:55:12.530355: Started processing timeout message.
+2021-10-18 02:55:12.530563: Started process certificate qc
+2021-10-18 02:55:12.530797: Advancing round based on qc
+2021-10-18 02:55:12.531046: Started process certificate qc
+2021-10-18 02:55:12.531249: Advancing round based on qc
+2021-10-18 02:55:12.531464: Advancing round based on tc
+2021-10-18 02:55:12.531677: Processing remote time out
+2021-10-18 02:55:12.531898: Stopping round in PaceMaker
+2021-10-18 02:55:12.532195: Creating a local timeout at 2
+2021-10-18 02:55:12.532404: Stopping round in PaceMaker
+2021-10-18 02:55:12.532659: Calling make_timeout
+2021-10-18 02:55:12.532857: Generating signature for replica, 2
+2021-10-18 02:55:12.534229: Received local timeout
+2021-10-18 02:55:12.534667: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e381bd0> of type timeout_message
+2021-10-18 02:55:12.534909: Started processing timeout message.
+2021-10-18 02:55:12.535129: Started process certificate qc
+2021-10-18 02:55:12.535358: Advancing round based on qc
+2021-10-18 02:55:12.535682: Started process certificate qc
+2021-10-18 02:55:12.535891: Advancing round based on qc
+2021-10-18 02:55:12.536156: Advancing round based on tc
+2021-10-18 02:55:12.536385: Processing remote time out
+2021-10-18 02:55:12.536636: Stopping round in PaceMaker
+2021-10-18 02:55:12.536872: Creating a local timeout at 2
+2021-10-18 02:55:12.537125: Stopping round in PaceMaker
+2021-10-18 02:55:12.537368: Calling make_timeout
+2021-10-18 02:55:12.537881: Generating signature for replica, 2
+2021-10-18 02:55:12.538900: Received local timeout
+2021-10-18 02:55:12.539197: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e3816d0> of type timeout_message
+2021-10-18 02:55:12.539408: Started processing timeout message.
+2021-10-18 02:55:12.539644: Started process certificate qc
+2021-10-18 02:55:12.539895: Advancing round based on qc
+2021-10-18 02:55:12.540110: Started process certificate qc
+2021-10-18 02:55:12.540498: Advancing round based on qc
+2021-10-18 02:55:12.540757: Advancing round based on tc
+2021-10-18 02:55:12.540981: Processing remote time out
+2021-10-18 02:55:12.541202: Stopping round in PaceMaker
+2021-10-18 02:55:12.541494: Creating a local timeout at 2
+2021-10-18 02:55:12.541718: Stopping round in PaceMaker
+2021-10-18 02:55:12.541936: Calling make_timeout
+2021-10-18 02:55:12.542369: Generating signature for replica, 2
+2021-10-18 02:55:12.545445: Received local timeout
+2021-10-18 02:55:12.546265: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37e590> of type timeout_message
+2021-10-18 02:55:12.546548: Started processing timeout message.
+2021-10-18 02:55:12.546929: Started process certificate qc
+2021-10-18 02:55:12.547140: Advancing round based on qc
+2021-10-18 02:55:12.547364: Started process certificate qc
+2021-10-18 02:55:12.547579: Advancing round based on qc
+2021-10-18 02:55:12.548267: Advancing round based on tc
+2021-10-18 02:55:12.548601: Processing remote time out
+2021-10-18 02:55:12.549003: Stopping round in PaceMaker
+2021-10-18 02:55:12.549226: Creating a local timeout at 2
+2021-10-18 02:55:12.549431: Stopping round in PaceMaker
+2021-10-18 02:55:12.549838: Calling make_timeout
+2021-10-18 02:55:12.550040: Generating signature for replica, 2
+2021-10-18 02:55:12.551070: Received local timeout
+2021-10-18 02:55:12.551276: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e3816d0> of type timeout_message
+2021-10-18 02:55:12.551473: Started processing timeout message.
+2021-10-18 02:55:12.551753: Started process certificate qc
+2021-10-18 02:55:12.551965: Advancing round based on qc
+2021-10-18 02:55:12.552157: Started process certificate qc
+2021-10-18 02:55:12.552355: Advancing round based on qc
+2021-10-18 02:55:12.552718: Advancing round based on tc
+2021-10-18 02:55:12.552918: Processing remote time out
+2021-10-18 02:55:12.553124: Generating a timeout certificate
+2021-10-18 02:55:12.553365: Advancing round based on tc
+2021-10-18 02:55:12.553584: Stopping round in PaceMaker
+2021-10-18 02:55:12.553787: Started round in PaceMaker
+2021-10-18 02:55:12.554120: Started processing new round event 
+2021-10-18 02:55:12.554372: Received local timeout
+2021-10-18 02:55:12.554572: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e433b50> of type timeout_message
+2021-10-18 02:55:12.554788: Started processing timeout message.
+2021-10-18 02:55:12.555050: Started process certificate qc
+2021-10-18 02:55:12.555299: Advancing round based on qc
+2021-10-18 02:55:12.555515: Started process certificate qc
+2021-10-18 02:55:12.555706: Advancing round based on qc
+2021-10-18 02:55:12.555919: Advancing round based on tc
+2021-10-18 02:55:12.556119: Processing remote time out
+2021-10-18 02:55:12.556323: Received local timeout
+2021-10-18 02:55:12.556537: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e434c90> of type timeout_message
+2021-10-18 02:55:12.557002: Started processing timeout message.
+2021-10-18 02:55:12.557224: Started process certificate qc
+2021-10-18 02:55:12.557514: Advancing round based on qc
+2021-10-18 02:55:12.557746: Started process certificate qc
+2021-10-18 02:55:12.557942: Advancing round based on qc
+2021-10-18 02:55:12.558162: Advancing round based on tc
+2021-10-18 02:55:12.558393: Processing remote time out
+2021-10-18 02:55:12.558614: Received local timeout
+2021-10-18 02:55:12.558813: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e434dd0> of type timeout_message
+2021-10-18 02:55:12.559043: Started processing timeout message.
+2021-10-18 02:55:12.559237: Started process certificate qc
+2021-10-18 02:55:12.559475: Advancing round based on qc
+2021-10-18 02:55:12.559692: Started process certificate qc
+2021-10-18 02:55:12.559902: Advancing round based on qc
+2021-10-18 02:55:12.560097: Advancing round based on tc
+2021-10-18 02:55:12.560301: Processing remote time out
+2021-10-18 02:55:12.560583: Received local timeout
+2021-10-18 02:55:12.561006: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37e750> of type timeout_message
+2021-10-18 02:55:12.561240: Started processing timeout message.
+2021-10-18 02:55:12.561457: Started process certificate qc
+2021-10-18 02:55:12.561722: Advancing round based on qc
+2021-10-18 02:55:12.561978: Started process certificate qc
+2021-10-18 02:55:12.562420: Advancing round based on qc
+2021-10-18 02:55:12.562625: Advancing round based on tc
+2021-10-18 02:55:12.562874: Processing remote time out
+2021-10-18 02:55:12.563122: Received local timeout
+2021-10-18 02:55:12.563526: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37e910> of type timeout_message
+2021-10-18 02:55:12.563798: Started processing timeout message.
+2021-10-18 02:55:12.564006: Started process certificate qc
+2021-10-18 02:55:12.564207: Advancing round based on qc
+2021-10-18 02:55:12.564412: Started process certificate qc
+2021-10-18 02:55:12.564618: Advancing round based on qc
+2021-10-18 02:55:12.565031: Advancing round based on tc
+2021-10-18 02:55:12.565241: Processing remote time out
+2021-10-18 02:55:12.568702: Received local timeout
+2021-10-18 02:55:12.569113: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43a710> of type timeout_message
+2021-10-18 02:55:12.569317: Started processing timeout message.
+2021-10-18 02:55:12.569588: Started process certificate qc
+2021-10-18 02:55:12.569811: Advancing round based on qc
+2021-10-18 02:55:12.570229: Started process certificate qc
+2021-10-18 02:55:12.570454: Advancing round based on qc
+2021-10-18 02:55:12.570719: Advancing round based on tc
+2021-10-18 02:55:12.570925: Processing remote time out
+2021-10-18 02:55:12.571253: Received Client Request from 1
+2021-10-18 02:55:12.571893: verified client signature for cmd 1----->3
+2021-10-18 02:55:12.572351: Received Client Request from 0
+2021-10-18 02:55:12.573040: verified client signature for cmd 0----->3
+2021-10-18 02:55:12.573675: Received local timeout
+2021-10-18 02:55:12.574005: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e433910> of type timeout_message
+2021-10-18 02:55:12.574241: Started processing timeout message.
+2021-10-18 02:55:12.574458: Started process certificate qc
+2021-10-18 02:55:12.574688: Advancing round based on qc
+2021-10-18 02:55:12.574919: Started process certificate qc
+2021-10-18 02:55:12.575127: Advancing round based on qc
+2021-10-18 02:55:12.575327: Advancing round based on tc
+2021-10-18 02:55:12.575530: Processing remote time out
+2021-10-18 02:55:12.575740: Received local timeout
+2021-10-18 02:55:12.576068: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37d650> of type timeout_message
+2021-10-18 02:55:12.576286: Started processing timeout message.
+2021-10-18 02:55:12.576492: Started process certificate qc
+2021-10-18 02:55:12.576758: Advancing round based on qc
+2021-10-18 02:55:12.576975: Started process certificate qc
+2021-10-18 02:55:12.577250: Advancing round based on qc
+2021-10-18 02:55:12.577460: Advancing round based on tc
+2021-10-18 02:55:12.577667: Processing remote time out
+2021-10-18 02:55:12.577894: Received local timeout
+2021-10-18 02:55:12.578151: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43c9d0> of type timeout_message
+2021-10-18 02:55:12.578357: Started processing timeout message.
+2021-10-18 02:55:12.578566: Started process certificate qc
+2021-10-18 02:55:12.578788: Advancing round based on qc
+2021-10-18 02:55:12.578990: Started process certificate qc
+2021-10-18 02:55:12.579193: Advancing round based on qc
+2021-10-18 02:55:12.579401: Advancing round based on tc
+2021-10-18 02:55:12.579685: Processing remote time out
+2021-10-18 02:55:12.579939: Received local timeout
+2021-10-18 02:55:12.580192: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43c390> of type timeout_message
+2021-10-18 02:55:12.580407: Started processing timeout message.
+2021-10-18 02:55:12.580626: Started process certificate qc
+2021-10-18 02:55:12.580856: Advancing round based on qc
+2021-10-18 02:55:12.581118: Started process certificate qc
+2021-10-18 02:55:12.581334: Advancing round based on qc
+2021-10-18 02:55:12.581611: Advancing round based on tc
+2021-10-18 02:55:12.581822: Processing remote time out
+2021-10-18 02:55:12.582053: Received local timeout
+2021-10-18 02:55:12.582283: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43c2d0> of type timeout_message
+2021-10-18 02:55:12.582502: Started processing timeout message.
+2021-10-18 02:55:12.583218: Started process certificate qc
+2021-10-18 02:55:12.584009: Advancing round based on qc
+2021-10-18 02:55:12.594099: Started process certificate qc
+2021-10-18 02:55:12.594390: Advancing round based on qc
+2021-10-18 02:55:12.594735: Advancing round based on tc
+2021-10-18 02:55:12.594996: Processing remote time out
+2021-10-18 02:55:12.595311: Received local timeout
+2021-10-18 02:55:12.595535: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e433e10> of type timeout_message
+2021-10-18 02:55:12.595736: Started processing timeout message.
+2021-10-18 02:55:12.595935: Started process certificate qc
+2021-10-18 02:55:12.596137: Advancing round based on qc
+2021-10-18 02:55:12.596328: Started process certificate qc
+2021-10-18 02:55:12.596909: Advancing round based on qc
+2021-10-18 02:55:12.597130: Advancing round based on tc
+2021-10-18 02:55:12.597353: Processing remote time out
+2021-10-18 02:55:12.597600: Received local timeout
+2021-10-18 02:55:12.597870: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43cd10> of type timeout_message
+2021-10-18 02:55:12.598137: Started processing timeout message.
+2021-10-18 02:55:12.598359: Started process certificate qc
+2021-10-18 02:55:12.598729: Advancing round based on qc
+2021-10-18 02:55:12.599197: Started process certificate qc
+2021-10-18 02:55:12.599443: Advancing round based on qc
+2021-10-18 02:55:12.599979: Advancing round based on tc
+2021-10-18 02:55:12.600275: Processing remote time out
+2021-10-18 02:55:12.600551: Received local timeout
+2021-10-18 02:55:12.600786: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e433f50> of type timeout_message
+2021-10-18 02:55:12.601011: Started processing timeout message.
+2021-10-18 02:55:12.601249: Started process certificate qc
+2021-10-18 02:55:12.601454: Advancing round based on qc
+2021-10-18 02:55:12.601702: Started process certificate qc
+2021-10-18 02:55:12.601914: Advancing round based on qc
+2021-10-18 02:55:12.602173: Advancing round based on tc
+2021-10-18 02:55:12.602435: Processing remote time out
+2021-10-18 02:55:12.602715: Received local timeout
+2021-10-18 02:55:12.602919: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e434650> of type timeout_message
+2021-10-18 02:55:12.603160: Started processing timeout message.
+2021-10-18 02:55:12.603448: Started process certificate qc
+2021-10-18 02:55:12.603652: Advancing round based on qc
+2021-10-18 02:55:12.603862: Started process certificate qc
+2021-10-18 02:55:12.604105: Advancing round based on qc
+2021-10-18 02:55:12.604356: Advancing round based on tc
+2021-10-18 02:55:12.604595: Processing remote time out
+2021-10-18 02:55:12.605081: Received proposal message from 0 containing block ->Block Author :0 Transactions :0----->1
+2021-10-18 02:55:12.605378: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e37d650> of type proposal_message
+2021-10-18 02:55:12.605642: Started event processing
+2021-10-18 02:55:12.605850: Started process certificate qc
+2021-10-18 02:55:12.606168: Advancing round based on qc
+2021-10-18 02:55:12.606387: Started process certificate qc
+2021-10-18 02:55:12.606668: Advancing round based on qc
+2021-10-18 02:55:12.606870: Advancing round based on tc
+2021-10-18 02:55:12.607095: Executing and Inserting
+2021-10-18 02:55:12.607309: Adding block with 842927513195630101 in ledger pending_map
+2021-10-18 02:55:12.607512: Started make vote
+2021-10-18 02:55:12.607736: Finished make vote 
+2021-10-18 02:55:13.522875: Received local timeout
+2021-10-18 02:55:13.523255: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43c550> of type timeout_message
+2021-10-18 02:55:13.523494: Started processing timeout message.
+2021-10-18 02:55:13.523778: Started process certificate qc
+2021-10-18 02:55:13.523985: Advancing round based on qc
+2021-10-18 02:55:13.524186: Started process certificate qc
+2021-10-18 02:55:13.524434: Advancing round based on qc
+2021-10-18 02:55:13.524676: Advancing round based on tc
+2021-10-18 02:55:13.524909: Processing remote time out
+2021-10-18 02:55:13.525121: Creating a local timeout at 2
+2021-10-18 02:55:13.525316: Stopping round in PaceMaker
+2021-10-18 02:55:13.525559: Calling make_timeout
+2021-10-18 02:55:13.525807: Generating signature for replica, 2
+2021-10-18 02:55:13.526914: Received local timeout
+2021-10-18 02:55:13.527140: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43c550> of type timeout_message
+2021-10-18 02:55:13.527390: Started processing timeout message.
+2021-10-18 02:55:13.527591: Started process certificate qc
+2021-10-18 02:55:13.527796: Advancing round based on qc
+2021-10-18 02:55:13.528016: Started process certificate qc
+2021-10-18 02:55:13.528216: Advancing round based on qc
+2021-10-18 02:55:13.528433: Advancing round based on tc
+2021-10-18 02:55:13.528654: Processing remote time out
+2021-10-18 02:55:13.528876: Stopping round in PaceMaker
+2021-10-18 02:55:13.529115: Creating a local timeout at 2
+2021-10-18 02:55:13.529380: Stopping round in PaceMaker
+2021-10-18 02:55:13.529600: Calling make_timeout
+2021-10-18 02:55:13.529805: Generating signature for replica, 2
+2021-10-18 02:55:13.531381: Received local timeout
+2021-10-18 02:55:13.531661: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43ba90> of type timeout_message
+2021-10-18 02:55:13.531890: Started processing timeout message.
+2021-10-18 02:55:13.532167: Started process certificate qc
+2021-10-18 02:55:13.532378: Advancing round based on qc
+2021-10-18 02:55:13.532583: Started process certificate qc
+2021-10-18 02:55:13.532787: Advancing round based on qc
+2021-10-18 02:55:13.533003: Advancing round based on tc
+2021-10-18 02:55:13.533253: Processing remote time out
+2021-10-18 02:55:13.533461: Stopping round in PaceMaker
+2021-10-18 02:55:13.533703: Creating a local timeout at 2
+2021-10-18 02:55:13.533966: Stopping round in PaceMaker
+2021-10-18 02:55:13.534183: Calling make_timeout
+2021-10-18 02:55:13.534387: Generating signature for replica, 2
+2021-10-18 02:55:13.535439: Received local timeout
+2021-10-18 02:55:13.535650: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43aa90> of type timeout_message
+2021-10-18 02:55:13.536200: Started processing timeout message.
+2021-10-18 02:55:13.536408: Started process certificate qc
+2021-10-18 02:55:13.536959: Advancing round based on qc
+2021-10-18 02:55:13.537497: Started process certificate qc
+2021-10-18 02:55:13.537761: Advancing round based on qc
+2021-10-18 02:55:13.538157: Advancing round based on tc
+2021-10-18 02:55:13.538580: Processing remote time out
+2021-10-18 02:55:13.538924: Stopping round in PaceMaker
+2021-10-18 02:55:13.539347: Creating a local timeout at 2
+2021-10-18 02:55:13.539587: Stopping round in PaceMaker
+2021-10-18 02:55:13.539815: Calling make_timeout
+2021-10-18 02:55:13.540048: Generating signature for replica, 2
+2021-10-18 02:55:13.543125: Received local timeout
+2021-10-18 02:55:13.543367: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43b550> of type timeout_message
+2021-10-18 02:55:13.543601: Started processing timeout message.
+2021-10-18 02:55:13.543829: Started process certificate qc
+2021-10-18 02:55:13.544116: Advancing round based on qc
+2021-10-18 02:55:13.544325: Started process certificate qc
+2021-10-18 02:55:13.544608: Advancing round based on qc
+2021-10-18 02:55:13.544818: Advancing round based on tc
+2021-10-18 02:55:13.545106: Processing remote time out
+2021-10-18 02:55:13.545576: Stopping round in PaceMaker
+2021-10-18 02:55:13.545797: Creating a local timeout at 2
+2021-10-18 02:55:13.546040: Stopping round in PaceMaker
+2021-10-18 02:55:13.546265: Calling make_timeout
+2021-10-18 02:55:13.546467: Generating signature for replica, 2
+2021-10-18 02:55:13.547495: Received local timeout
+2021-10-18 02:55:13.547971: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e376450> of type timeout_message
+2021-10-18 02:55:13.548183: Started processing timeout message.
+2021-10-18 02:55:13.548401: Started process certificate qc
+2021-10-18 02:55:13.548698: Advancing round based on qc
+2021-10-18 02:55:13.548964: Started process certificate qc
+2021-10-18 02:55:13.549178: Advancing round based on qc
+2021-10-18 02:55:13.549428: Advancing round based on tc
+2021-10-18 02:55:13.549663: Processing remote time out
+2021-10-18 02:55:13.549871: Stopping round in PaceMaker
+2021-10-18 02:55:13.550073: Creating a local timeout at 2
+2021-10-18 02:55:13.550304: Stopping round in PaceMaker
+2021-10-18 02:55:13.550623: Calling make_timeout
+2021-10-18 02:55:13.550840: Generating signature for replica, 2
+2021-10-18 02:55:13.551959: Received local timeout
+2021-10-18 02:55:13.552225: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43a650> of type timeout_message
+2021-10-18 02:55:13.552577: Started processing timeout message.
+2021-10-18 02:55:13.552789: Started process certificate qc
+2021-10-18 02:55:13.552990: Advancing round based on qc
+2021-10-18 02:55:13.553184: Started process certificate qc
+2021-10-18 02:55:13.553425: Advancing round based on qc
+2021-10-18 02:55:13.553663: Advancing round based on tc
+2021-10-18 02:55:13.553875: Processing remote time out
+2021-10-18 02:55:13.554185: Generating a timeout certificate
+2021-10-18 02:55:13.554391: Advancing round based on tc
+2021-10-18 02:55:13.554600: Stopping round in PaceMaker
+2021-10-18 02:55:13.554811: Started round in PaceMaker
+2021-10-18 02:55:13.555179: Started processing new round event 
+2021-10-18 02:55:13.555394: Received local timeout
+2021-10-18 02:55:13.555609: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e439190> of type timeout_message
+2021-10-18 02:55:13.555818: Started processing timeout message.
+2021-10-18 02:55:13.556029: Started process certificate qc
+2021-10-18 02:55:13.556622: Advancing round based on qc
+2021-10-18 02:55:13.556874: Started process certificate qc
+2021-10-18 02:55:13.557085: Advancing round based on qc
+2021-10-18 02:55:13.557323: Advancing round based on tc
+2021-10-18 02:55:13.557594: Processing remote time out
+2021-10-18 02:55:13.561772: Received local timeout
+2021-10-18 02:55:13.562066: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37e590> of type timeout_message
+2021-10-18 02:55:13.562277: Started processing timeout message.
+2021-10-18 02:55:13.562539: Started process certificate qc
+2021-10-18 02:55:13.562749: Advancing round based on qc
+2021-10-18 02:55:13.563011: Started process certificate qc
+2021-10-18 02:55:13.563386: Advancing round based on qc
+2021-10-18 02:55:13.563600: Advancing round based on tc
+2021-10-18 02:55:13.563802: Processing remote time out
+2021-10-18 02:55:13.564035: Received local timeout
+2021-10-18 02:55:13.564237: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43d810> of type timeout_message
+2021-10-18 02:55:13.564604: Started processing timeout message.
+2021-10-18 02:55:13.565109: Started process certificate qc
+2021-10-18 02:55:13.565388: Advancing round based on qc
+2021-10-18 02:55:13.565767: Started process certificate qc
+2021-10-18 02:55:13.566026: Advancing round based on qc
+2021-10-18 02:55:13.566323: Advancing round based on tc
+2021-10-18 02:55:13.566535: Processing remote time out
+2021-10-18 02:55:13.566932: Received local timeout
+2021-10-18 02:55:13.567731: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e434f10> of type timeout_message
+2021-10-18 02:55:13.572270: Started processing timeout message.
+2021-10-18 02:55:13.572538: Started process certificate qc
+2021-10-18 02:55:13.572816: Advancing round based on qc
+2021-10-18 02:55:13.573056: Started process certificate qc
+2021-10-18 02:55:13.573305: Advancing round based on qc
+2021-10-18 02:55:13.573582: Advancing round based on tc
+2021-10-18 02:55:13.573779: Processing remote time out
+2021-10-18 02:55:13.574032: Received local timeout
+2021-10-18 02:55:13.574259: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e434f90> of type timeout_message
+2021-10-18 02:55:13.574499: Started processing timeout message.
+2021-10-18 02:55:13.574822: Started process certificate qc
+2021-10-18 02:55:13.575082: Advancing round based on qc
+2021-10-18 02:55:13.575288: Started process certificate qc
+2021-10-18 02:55:13.575515: Advancing round based on qc
+2021-10-18 02:55:13.575746: Advancing round based on tc
+2021-10-18 02:55:13.575973: Processing remote time out
+2021-10-18 02:55:13.576195: Received local timeout
+2021-10-18 02:55:13.576413: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43ded0> of type timeout_message
+2021-10-18 02:55:13.576615: Started processing timeout message.
+2021-10-18 02:55:13.576822: Started process certificate qc
+2021-10-18 02:55:13.577041: Advancing round based on qc
+2021-10-18 02:55:13.577262: Started process certificate qc
+2021-10-18 02:55:13.577472: Advancing round based on qc
+2021-10-18 02:55:13.577729: Advancing round based on tc
+2021-10-18 02:55:13.577999: Processing remote time out
+2021-10-18 02:55:13.578291: Received local timeout
+2021-10-18 02:55:13.578527: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e441c90> of type timeout_message
+2021-10-18 02:55:13.578761: Started processing timeout message.
+2021-10-18 02:55:13.579010: Started process certificate qc
+2021-10-18 02:55:13.579248: Advancing round based on qc
+2021-10-18 02:55:13.579467: Started process certificate qc
+2021-10-18 02:55:13.579773: Advancing round based on qc
+2021-10-18 02:55:13.580033: Advancing round based on tc
+2021-10-18 02:55:13.580241: Processing remote time out
+2021-10-18 02:55:13.580445: Received local timeout
+2021-10-18 02:55:13.580761: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e443f50> of type timeout_message
+2021-10-18 02:55:13.580987: Started processing timeout message.
+2021-10-18 02:55:13.581195: Started process certificate qc
+2021-10-18 02:55:13.581469: Advancing round based on qc
+2021-10-18 02:55:13.581758: Started process certificate qc
+2021-10-18 02:55:13.581995: Advancing round based on qc
+2021-10-18 02:55:13.582240: Advancing round based on tc
+2021-10-18 02:55:13.582501: Processing remote time out
+2021-10-18 02:55:13.582761: Received local timeout
+2021-10-18 02:55:13.583010: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43da90> of type timeout_message
+2021-10-18 02:55:13.583404: Started processing timeout message.
+2021-10-18 02:55:13.583624: Started process certificate qc
+2021-10-18 02:55:13.583940: Advancing round based on qc
+2021-10-18 02:55:13.584266: Started process certificate qc
+2021-10-18 02:55:13.584477: Advancing round based on qc
+2021-10-18 02:55:13.584690: Advancing round based on tc
+2021-10-18 02:55:13.584952: Processing remote time out
+2021-10-18 02:55:13.585188: Received local timeout
+2021-10-18 02:55:13.585399: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e445150> of type timeout_message
+2021-10-18 02:55:13.585619: Started processing timeout message.
+2021-10-18 02:55:13.585850: Started process certificate qc
+2021-10-18 02:55:13.586049: Advancing round based on qc
+2021-10-18 02:55:13.586288: Started process certificate qc
+2021-10-18 02:55:13.586507: Advancing round based on qc
+2021-10-18 02:55:13.587094: Advancing round based on tc
+2021-10-18 02:55:13.587662: Processing remote time out
+2021-10-18 02:55:13.587924: Received local timeout
+2021-10-18 02:55:13.588295: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e441510> of type timeout_message
+2021-10-18 02:55:13.588510: Started processing timeout message.
+2021-10-18 02:55:13.588722: Started process certificate qc
+2021-10-18 02:55:13.588946: Advancing round based on qc
+2021-10-18 02:55:13.589263: Started process certificate qc
+2021-10-18 02:55:13.589503: Advancing round based on qc
+2021-10-18 02:55:13.589712: Advancing round based on tc
+2021-10-18 02:55:13.589909: Processing remote time out
+2021-10-18 02:55:13.590282: Received local timeout
+2021-10-18 02:55:13.590579: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43d550> of type timeout_message
+2021-10-18 02:55:13.590799: Started processing timeout message.
+2021-10-18 02:55:13.590997: Started process certificate qc
+2021-10-18 02:55:13.591205: Advancing round based on qc
+2021-10-18 02:55:13.591419: Started process certificate qc
+2021-10-18 02:55:13.591626: Advancing round based on qc
+2021-10-18 02:55:13.591834: Advancing round based on tc
+2021-10-18 02:55:13.592082: Processing remote time out
+2021-10-18 02:55:13.592320: Received local timeout
+2021-10-18 02:55:13.592552: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e448190> of type timeout_message
+2021-10-18 02:55:13.592842: Started processing timeout message.
+2021-10-18 02:55:13.593059: Started process certificate qc
+2021-10-18 02:55:13.593267: Advancing round based on qc
+2021-10-18 02:55:13.593518: Started process certificate qc
+2021-10-18 02:55:13.593763: Advancing round based on qc
+2021-10-18 02:55:13.593982: Advancing round based on tc
+2021-10-18 02:55:13.594200: Processing remote time out
+2021-10-18 02:55:13.595236: Received proposal message from 1 containing block ->Block Author :1 Transactions :1----->2
+2021-10-18 02:55:13.595457: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e443910> of type proposal_message
+2021-10-18 02:55:13.595672: Started event processing
+2021-10-18 02:55:13.596014: Started process certificate qc
+2021-10-18 02:55:13.596254: Advancing round based on qc
+2021-10-18 02:55:13.596475: Started process certificate qc
+2021-10-18 02:55:13.596713: Advancing round based on qc
+2021-10-18 02:55:13.596938: Advancing round based on tc
+2021-10-18 02:55:13.597191: Executing and Inserting
+2021-10-18 02:55:13.597407: Adding block with -5818349459439393024 in ledger pending_map
+2021-10-18 02:55:13.597734: Started make vote
+2021-10-18 02:55:13.598055: Finished make vote 
+2021-10-18 02:55:13.598275: Received local timeout
+2021-10-18 02:55:13.598480: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e443810> of type timeout_message
+2021-10-18 02:55:13.598699: Started processing timeout message.
+2021-10-18 02:55:13.598961: Started process certificate qc
+2021-10-18 02:55:13.599218: Advancing round based on qc
+2021-10-18 02:55:13.599462: Started process certificate qc
+2021-10-18 02:55:13.599769: Advancing round based on qc
+2021-10-18 02:55:13.600068: Advancing round based on tc
+2021-10-18 02:55:13.600315: Processing remote time out
+2021-10-18 02:55:13.600530: Received local timeout
+2021-10-18 02:55:13.600732: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e443b90> of type timeout_message
+2021-10-18 02:55:13.600957: Started processing timeout message.
+2021-10-18 02:55:13.601165: Started process certificate qc
+2021-10-18 02:55:13.601386: Advancing round based on qc
+2021-10-18 02:55:13.601619: Started process certificate qc
+2021-10-18 02:55:13.601818: Advancing round based on qc
+2021-10-18 02:55:13.602022: Advancing round based on tc
+2021-10-18 02:55:13.602247: Processing remote time out
+2021-10-18 02:55:14.526016: Received local timeout
+2021-10-18 02:55:14.526264: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e441c90> of type timeout_message
+2021-10-18 02:55:14.526549: Started processing timeout message.
+2021-10-18 02:55:14.526756: Started process certificate qc
+2021-10-18 02:55:14.526959: Advancing round based on qc
+2021-10-18 02:55:14.527215: Started process certificate qc
+2021-10-18 02:55:14.527412: Advancing round based on qc
+2021-10-18 02:55:14.527645: Advancing round based on tc
+2021-10-18 02:55:14.527835: Processing remote time out
+2021-10-18 02:55:14.528053: Creating a local timeout at 2
+2021-10-18 02:55:14.528246: Stopping round in PaceMaker
+2021-10-18 02:55:14.528459: Calling make_timeout
+2021-10-18 02:55:14.528651: Generating signature for replica, 2
+2021-10-18 02:55:14.529718: Received local timeout
+2021-10-18 02:55:14.529949: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e443610> of type timeout_message
+2021-10-18 02:55:14.530154: Started processing timeout message.
+2021-10-18 02:55:14.530357: Started process certificate qc
+2021-10-18 02:55:14.530603: Advancing round based on qc
+2021-10-18 02:55:14.530801: Started process certificate qc
+2021-10-18 02:55:14.531042: Advancing round based on qc
+2021-10-18 02:55:14.531235: Advancing round based on tc
+2021-10-18 02:55:14.531426: Processing remote time out
+2021-10-18 02:55:14.531618: Stopping round in PaceMaker
+2021-10-18 02:55:14.531987: Creating a local timeout at 2
+2021-10-18 02:55:14.532181: Stopping round in PaceMaker
+2021-10-18 02:55:14.532417: Calling make_timeout
+2021-10-18 02:55:14.532649: Generating signature for replica, 2
+2021-10-18 02:55:14.533832: Received local timeout
+2021-10-18 02:55:14.534074: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e443b90> of type timeout_message
+2021-10-18 02:55:14.534291: Started processing timeout message.
+2021-10-18 02:55:14.534486: Started process certificate qc
+2021-10-18 02:55:14.534679: Advancing round based on qc
+2021-10-18 02:55:14.534869: Started process certificate qc
+2021-10-18 02:55:14.535064: Advancing round based on qc
+2021-10-18 02:55:14.535299: Advancing round based on tc
+2021-10-18 02:55:14.535501: Processing remote time out
+2021-10-18 02:55:14.535720: Stopping round in PaceMaker
+2021-10-18 02:55:14.535927: Creating a local timeout at 2
+2021-10-18 02:55:14.536115: Stopping round in PaceMaker
+2021-10-18 02:55:14.536309: Calling make_timeout
+2021-10-18 02:55:14.536585: Generating signature for replica, 2
+2021-10-18 02:55:14.537856: Received local timeout
+2021-10-18 02:55:14.538308: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43e810> of type timeout_message
+2021-10-18 02:55:14.538574: Started processing timeout message.
+2021-10-18 02:55:14.538795: Started process certificate qc
+2021-10-18 02:55:14.539012: Advancing round based on qc
+2021-10-18 02:55:14.539669: Started process certificate qc
+2021-10-18 02:55:14.540365: Advancing round based on qc
+2021-10-18 02:55:14.540573: Advancing round based on tc
+2021-10-18 02:55:14.540838: Processing remote time out
+2021-10-18 02:55:14.541055: Stopping round in PaceMaker
+2021-10-18 02:55:14.541344: Creating a local timeout at 2
+2021-10-18 02:55:14.541544: Stopping round in PaceMaker
+2021-10-18 02:55:14.541821: Calling make_timeout
+2021-10-18 02:55:14.542029: Generating signature for replica, 2
+2021-10-18 02:55:14.543780: Received local timeout
+2021-10-18 02:55:14.544001: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43e310> of type timeout_message
+2021-10-18 02:55:14.544197: Started processing timeout message.
+2021-10-18 02:55:14.544394: Started process certificate qc
+2021-10-18 02:55:14.544651: Advancing round based on qc
+2021-10-18 02:55:14.544855: Started process certificate qc
+2021-10-18 02:55:14.545055: Advancing round based on qc
+2021-10-18 02:55:14.545330: Advancing round based on tc
+2021-10-18 02:55:14.545575: Processing remote time out
+2021-10-18 02:55:14.545815: Stopping round in PaceMaker
+2021-10-18 02:55:14.546052: Creating a local timeout at 2
+2021-10-18 02:55:14.546255: Stopping round in PaceMaker
+2021-10-18 02:55:14.546466: Calling make_timeout
+2021-10-18 02:55:14.546666: Generating signature for replica, 2
+2021-10-18 02:55:14.548800: Received local timeout
+2021-10-18 02:55:14.549089: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37d3d0> of type timeout_message
+2021-10-18 02:55:14.549292: Started processing timeout message.
+2021-10-18 02:55:14.549490: Started process certificate qc
+2021-10-18 02:55:14.549712: Advancing round based on qc
+2021-10-18 02:55:14.549951: Started process certificate qc
+2021-10-18 02:55:14.550152: Advancing round based on qc
+2021-10-18 02:55:14.550350: Advancing round based on tc
+2021-10-18 02:55:14.550539: Processing remote time out
+2021-10-18 02:55:14.550795: Stopping round in PaceMaker
+2021-10-18 02:55:14.551040: Creating a local timeout at 2
+2021-10-18 02:55:14.551233: Stopping round in PaceMaker
+2021-10-18 02:55:14.551594: Calling make_timeout
+2021-10-18 02:55:14.551890: Generating signature for replica, 2
+2021-10-18 02:55:14.552711: Received local timeout
+2021-10-18 02:55:14.555165: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e441910> of type timeout_message
+2021-10-18 02:55:14.556206: Started processing timeout message.
+2021-10-18 02:55:14.556672: Started process certificate qc
+2021-10-18 02:55:14.556876: Advancing round based on qc
+2021-10-18 02:55:14.557291: Started process certificate qc
+2021-10-18 02:55:14.557491: Advancing round based on qc
+2021-10-18 02:55:14.557693: Advancing round based on tc
+2021-10-18 02:55:14.557968: Processing remote time out
+2021-10-18 02:55:14.558172: Stopping round in PaceMaker
+2021-10-18 02:55:14.558383: Creating a local timeout at 2
+2021-10-18 02:55:14.558595: Stopping round in PaceMaker
+2021-10-18 02:55:14.558814: Calling make_timeout
+2021-10-18 02:55:14.559017: Generating signature for replica, 2
+2021-10-18 02:55:14.560227: Received local timeout
+2021-10-18 02:55:14.560503: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e448190> of type timeout_message
+2021-10-18 02:55:14.560833: Started processing timeout message.
+2021-10-18 02:55:14.561303: Started process certificate qc
+2021-10-18 02:55:14.561633: Advancing round based on qc
+2021-10-18 02:55:14.561866: Started process certificate qc
+2021-10-18 02:55:14.562075: Advancing round based on qc
+2021-10-18 02:55:14.562412: Advancing round based on tc
+2021-10-18 02:55:14.562613: Processing remote time out
+2021-10-18 02:55:14.562820: Stopping round in PaceMaker
+2021-10-18 02:55:14.563655: Creating a local timeout at 2
+2021-10-18 02:55:14.563971: Stopping round in PaceMaker
+2021-10-18 02:55:14.564184: Calling make_timeout
+2021-10-18 02:55:14.564432: Generating signature for replica, 2
+2021-10-18 02:55:14.566064: Received local timeout
+2021-10-18 02:55:14.566772: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e448590> of type timeout_message
+2021-10-18 02:55:14.567017: Started processing timeout message.
+2021-10-18 02:55:14.567259: Started process certificate qc
+2021-10-18 02:55:14.567480: Advancing round based on qc
+2021-10-18 02:55:14.567745: Started process certificate qc
+2021-10-18 02:55:14.567981: Advancing round based on qc
+2021-10-18 02:55:14.568205: Advancing round based on tc
+2021-10-18 02:55:14.568437: Processing remote time out
+2021-10-18 02:55:14.568663: Stopping round in PaceMaker
+2021-10-18 02:55:14.568859: Creating a local timeout at 2
+2021-10-18 02:55:14.569287: Stopping round in PaceMaker
+2021-10-18 02:55:14.569536: Calling make_timeout
+2021-10-18 02:55:14.569783: Generating signature for replica, 2
+2021-10-18 02:55:14.573772: Received local timeout
+2021-10-18 02:55:14.574289: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44a950> of type timeout_message
+2021-10-18 02:55:14.574817: Started processing timeout message.
+2021-10-18 02:55:14.575069: Started process certificate qc
+2021-10-18 02:55:14.575290: Advancing round based on qc
+2021-10-18 02:55:14.575531: Started process certificate qc
+2021-10-18 02:55:14.575741: Advancing round based on qc
+2021-10-18 02:55:14.575973: Advancing round based on tc
+2021-10-18 02:55:14.576211: Processing remote time out
+2021-10-18 02:55:14.576419: Generating a timeout certificate
+2021-10-18 02:55:14.576625: Advancing round based on tc
+2021-10-18 02:55:14.576839: Stopping round in PaceMaker
+2021-10-18 02:55:14.577291: Started round in PaceMaker
+2021-10-18 02:55:14.577625: Started processing new round event 
+2021-10-18 02:55:14.577841: Generating Block
+2021-10-18 02:55:14.578318: Sending Proposal message to all replicas containing block ->Block Author :2 Transactions :0----->2
+2021-10-18 02:55:14.578544: Sending new round event 
+2021-10-18 02:55:14.579352: Received local timeout
+2021-10-18 02:55:14.579652: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4456d0> of type timeout_message
+2021-10-18 02:55:14.579864: Started processing timeout message.
+2021-10-18 02:55:14.580087: Started process certificate qc
+2021-10-18 02:55:14.580285: Advancing round based on qc
+2021-10-18 02:55:14.580497: Started process certificate qc
+2021-10-18 02:55:14.580702: Advancing round based on qc
+2021-10-18 02:55:14.580916: Advancing round based on tc
+2021-10-18 02:55:14.581127: Processing remote time out
+2021-10-18 02:55:14.581331: Received local timeout
+2021-10-18 02:55:14.581816: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e447090> of type timeout_message
+2021-10-18 02:55:14.582064: Started processing timeout message.
+2021-10-18 02:55:14.582262: Started process certificate qc
+2021-10-18 02:55:14.582479: Advancing round based on qc
+2021-10-18 02:55:14.582821: Started process certificate qc
+2021-10-18 02:55:14.583029: Advancing round based on qc
+2021-10-18 02:55:14.583228: Advancing round based on tc
+2021-10-18 02:55:14.583490: Processing remote time out
+2021-10-18 02:55:14.583707: Received local timeout
+2021-10-18 02:55:14.583950: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e448c10> of type timeout_message
+2021-10-18 02:55:14.584158: Started processing timeout message.
+2021-10-18 02:55:14.584356: Started process certificate qc
+2021-10-18 02:55:14.584566: Advancing round based on qc
+2021-10-18 02:55:14.584771: Started process certificate qc
+2021-10-18 02:55:14.585014: Advancing round based on qc
+2021-10-18 02:55:14.585211: Advancing round based on tc
+2021-10-18 02:55:14.585613: Processing remote time out
+2021-10-18 02:55:14.585887: Received local timeout
+2021-10-18 02:55:14.586156: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4479d0> of type timeout_message
+2021-10-18 02:55:14.586374: Started processing timeout message.
+2021-10-18 02:55:14.586748: Started process certificate qc
+2021-10-18 02:55:14.587341: Advancing round based on qc
+2021-10-18 02:55:14.587648: Started process certificate qc
+2021-10-18 02:55:14.587922: Advancing round based on qc
+2021-10-18 02:55:14.588159: Advancing round based on tc
+2021-10-18 02:55:14.588377: Processing remote time out
+2021-10-18 02:55:14.588667: Received local timeout
+2021-10-18 02:55:14.588870: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4457d0> of type timeout_message
+2021-10-18 02:55:14.589112: Started processing timeout message.
+2021-10-18 02:55:14.589339: Started process certificate qc
+2021-10-18 02:55:14.589554: Advancing round based on qc
+2021-10-18 02:55:14.589865: Started process certificate qc
+2021-10-18 02:55:14.590847: Advancing round based on qc
+2021-10-18 02:55:14.591341: Advancing round based on tc
+2021-10-18 02:55:14.591628: Processing remote time out
+2021-10-18 02:55:14.591959: Received local timeout
+2021-10-18 02:55:14.592202: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e43dbd0> of type timeout_message
+2021-10-18 02:55:14.592408: Started processing timeout message.
+2021-10-18 02:55:14.592617: Started process certificate qc
+2021-10-18 02:55:14.592854: Advancing round based on qc
+2021-10-18 02:55:14.593095: Started process certificate qc
+2021-10-18 02:55:14.593300: Advancing round based on qc
+2021-10-18 02:55:14.593497: Advancing round based on tc
+2021-10-18 02:55:14.593799: Processing remote time out
+2021-10-18 02:55:14.594005: Received local timeout
+2021-10-18 02:55:14.594262: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e448e50> of type timeout_message
+2021-10-18 02:55:14.594465: Started processing timeout message.
+2021-10-18 02:55:14.594929: Started process certificate qc
+2021-10-18 02:55:14.595166: Advancing round based on qc
+2021-10-18 02:55:14.595364: Started process certificate qc
+2021-10-18 02:55:14.595718: Advancing round based on qc
+2021-10-18 02:55:14.595939: Advancing round based on tc
+2021-10-18 02:55:14.596134: Processing remote time out
+2021-10-18 02:55:14.596369: Received local timeout
+2021-10-18 02:55:14.596630: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44c3d0> of type timeout_message
+2021-10-18 02:55:14.596847: Started processing timeout message.
+2021-10-18 02:55:14.597088: Started process certificate qc
+2021-10-18 02:55:14.597287: Advancing round based on qc
+2021-10-18 02:55:14.597477: Started process certificate qc
+2021-10-18 02:55:14.597723: Advancing round based on qc
+2021-10-18 02:55:14.597922: Advancing round based on tc
+2021-10-18 02:55:14.598157: Processing remote time out
+2021-10-18 02:55:14.598359: Received local timeout
+2021-10-18 02:55:14.598560: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44a690> of type timeout_message
+2021-10-18 02:55:14.598754: Started processing timeout message.
+2021-10-18 02:55:14.598951: Started process certificate qc
+2021-10-18 02:55:14.599150: Advancing round based on qc
+2021-10-18 02:55:14.599375: Started process certificate qc
+2021-10-18 02:55:14.599570: Advancing round based on qc
+2021-10-18 02:55:14.599802: Advancing round based on tc
+2021-10-18 02:55:14.600006: Processing remote time out
+2021-10-18 02:55:14.600217: Received local timeout
+2021-10-18 02:55:14.600409: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e446650> of type timeout_message
+2021-10-18 02:55:14.600612: Started processing timeout message.
+2021-10-18 02:55:14.600830: Started process certificate qc
+2021-10-18 02:55:14.601081: Advancing round based on qc
+2021-10-18 02:55:14.601330: Started process certificate qc
+2021-10-18 02:55:14.601543: Advancing round based on qc
+2021-10-18 02:55:14.601832: Advancing round based on tc
+2021-10-18 02:55:14.602088: Processing remote time out
+2021-10-18 02:55:14.602293: Received local timeout
+2021-10-18 02:55:14.602550: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e445390> of type timeout_message
+2021-10-18 02:55:14.602741: Started processing timeout message.
+2021-10-18 02:55:14.602979: Started process certificate qc
+2021-10-18 02:55:14.603209: Advancing round based on qc
+2021-10-18 02:55:14.603468: Started process certificate qc
+2021-10-18 02:55:14.603669: Advancing round based on qc
+2021-10-18 02:55:14.603861: Advancing round based on tc
+2021-10-18 02:55:14.604298: Processing remote time out
+2021-10-18 02:55:14.604500: Received local timeout
+2021-10-18 02:55:14.604759: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44a6d0> of type timeout_message
+2021-10-18 02:55:14.605007: Started processing timeout message.
+2021-10-18 02:55:14.605215: Started process certificate qc
+2021-10-18 02:55:14.605422: Advancing round based on qc
+2021-10-18 02:55:14.605629: Started process certificate qc
+2021-10-18 02:55:14.605874: Advancing round based on qc
+2021-10-18 02:55:14.606122: Advancing round based on tc
+2021-10-18 02:55:14.606398: Processing remote time out
+2021-10-18 02:55:14.606607: Received local timeout
+2021-10-18 02:55:14.606837: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e441910> of type timeout_message
+2021-10-18 02:55:14.607026: Started processing timeout message.
+2021-10-18 02:55:14.607243: Started process certificate qc
+2021-10-18 02:55:14.607441: Advancing round based on qc
+2021-10-18 02:55:14.607701: Started process certificate qc
+2021-10-18 02:55:14.607942: Advancing round based on qc
+2021-10-18 02:55:14.608147: Advancing round based on tc
+2021-10-18 02:55:14.608343: Processing remote time out
+2021-10-18 02:55:14.611500: Received local timeout
+2021-10-18 02:55:14.611738: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e457f10> of type timeout_message
+2021-10-18 02:55:14.611986: Started processing timeout message.
+2021-10-18 02:55:14.612216: Started process certificate qc
+2021-10-18 02:55:14.612883: Advancing round based on qc
+2021-10-18 02:55:14.613182: Started process certificate qc
+2021-10-18 02:55:14.613431: Advancing round based on qc
+2021-10-18 02:55:14.613672: Advancing round based on tc
+2021-10-18 02:55:14.614001: Processing remote time out
+2021-10-18 02:55:14.614235: Received local timeout
+2021-10-18 02:55:14.614450: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e457e50> of type timeout_message
+2021-10-18 02:55:14.614707: Started processing timeout message.
+2021-10-18 02:55:14.614907: Started process certificate qc
+2021-10-18 02:55:14.615226: Advancing round based on qc
+2021-10-18 02:55:14.615450: Started process certificate qc
+2021-10-18 02:55:14.615686: Advancing round based on qc
+2021-10-18 02:55:14.615920: Advancing round based on tc
+2021-10-18 02:55:14.616163: Processing remote time out
+2021-10-18 02:55:14.616434: Received local timeout
+2021-10-18 02:55:14.616660: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e457950> of type timeout_message
+2021-10-18 02:55:14.616898: Started processing timeout message.
+2021-10-18 02:55:14.617125: Started process certificate qc
+2021-10-18 02:55:14.617370: Advancing round based on qc
+2021-10-18 02:55:14.617590: Started process certificate qc
+2021-10-18 02:55:14.617806: Advancing round based on qc
+2021-10-18 02:55:14.618017: Advancing round based on tc
+2021-10-18 02:55:14.618220: Processing remote time out
+2021-10-18 02:55:14.618431: Received local timeout
+2021-10-18 02:55:14.618645: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e457c50> of type timeout_message
+2021-10-18 02:55:14.618835: Started processing timeout message.
+2021-10-18 02:55:14.619038: Started process certificate qc
+2021-10-18 02:55:14.619249: Advancing round based on qc
+2021-10-18 02:55:14.619472: Started process certificate qc
+2021-10-18 02:55:14.619698: Advancing round based on qc
+2021-10-18 02:55:14.620030: Advancing round based on tc
+2021-10-18 02:55:14.620240: Processing remote time out
+2021-10-18 02:55:14.620485: Received local timeout
+2021-10-18 02:55:14.620839: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e457d50> of type timeout_message
+2021-10-18 02:55:14.621047: Started processing timeout message.
+2021-10-18 02:55:14.621269: Started process certificate qc
+2021-10-18 02:55:14.621489: Advancing round based on qc
+2021-10-18 02:55:14.621700: Started process certificate qc
+2021-10-18 02:55:14.621901: Advancing round based on qc
+2021-10-18 02:55:14.622109: Advancing round based on tc
+2021-10-18 02:55:14.622323: Processing remote time out
+2021-10-18 02:55:14.627397: Received proposal message from 2 containing block ->Block Author :2 Transactions :0----->2
+2021-10-18 02:55:14.627657: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e44a550> of type proposal_message
+2021-10-18 02:55:14.627917: Started event processing
+2021-10-18 02:55:14.628137: Started process certificate qc
+2021-10-18 02:55:14.628351: Advancing round based on qc
+2021-10-18 02:55:14.628595: Started process certificate qc
+2021-10-18 02:55:14.629069: Advancing round based on qc
+2021-10-18 02:55:14.629363: Advancing round based on tc
+2021-10-18 02:55:14.629665: Executing and Inserting
+2021-10-18 02:55:14.629899: Adding block with 5856801664433130845 in ledger pending_map
+2021-10-18 02:55:14.630161: Started make vote
+2021-10-18 02:55:14.630410: Finished make vote 
+2021-10-18 02:55:14.631010: Received local timeout
+2021-10-18 02:55:14.631253: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44f050> of type timeout_message
+2021-10-18 02:55:14.631486: Started processing timeout message.
+2021-10-18 02:55:14.631800: Started process certificate qc
+2021-10-18 02:55:14.632048: Advancing round based on qc
+2021-10-18 02:55:14.632443: Started process certificate qc
+2021-10-18 02:55:14.632898: Advancing round based on qc
+2021-10-18 02:55:14.633533: Advancing round based on tc
+2021-10-18 02:55:14.633947: Processing remote time out
+2021-10-18 02:55:14.634171: Received local timeout
+2021-10-18 02:55:14.634379: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44ab50> of type timeout_message
+2021-10-18 02:55:14.634592: Started processing timeout message.
+2021-10-18 02:55:14.634805: Started process certificate qc
+2021-10-18 02:55:14.635025: Advancing round based on qc
+2021-10-18 02:55:14.635257: Started process certificate qc
+2021-10-18 02:55:14.635477: Advancing round based on qc
+2021-10-18 02:55:14.635691: Advancing round based on tc
+2021-10-18 02:55:14.635920: Processing remote time out
+2021-10-18 02:55:14.636161: Received local timeout
+2021-10-18 02:55:14.636406: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44af90> of type timeout_message
+2021-10-18 02:55:14.636662: Started processing timeout message.
+2021-10-18 02:55:14.636992: Started process certificate qc
+2021-10-18 02:55:14.637227: Advancing round based on qc
+2021-10-18 02:55:14.637445: Started process certificate qc
+2021-10-18 02:55:14.637652: Advancing round based on qc
+2021-10-18 02:55:14.637852: Advancing round based on tc
+2021-10-18 02:55:14.638076: Processing remote time out
+2021-10-18 02:55:14.638446: Received local timeout
+2021-10-18 02:55:14.638850: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37ed90> of type timeout_message
+2021-10-18 02:55:14.639294: Started processing timeout message.
+2021-10-18 02:55:14.639526: Started process certificate qc
+2021-10-18 02:55:14.639756: Advancing round based on qc
+2021-10-18 02:55:14.640001: Started process certificate qc
+2021-10-18 02:55:14.640252: Advancing round based on qc
+2021-10-18 02:55:14.640464: Advancing round based on tc
+2021-10-18 02:55:14.640678: Processing remote time out
+2021-10-18 02:55:14.641063: Received local timeout
+2021-10-18 02:55:14.641293: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e447a90> of type timeout_message
+2021-10-18 02:55:14.641512: Started processing timeout message.
+2021-10-18 02:55:14.641756: Started process certificate qc
+2021-10-18 02:55:14.642127: Advancing round based on qc
+2021-10-18 02:55:14.642342: Started process certificate qc
+2021-10-18 02:55:14.643365: Advancing round based on qc
+2021-10-18 02:55:14.643895: Advancing round based on tc
+2021-10-18 02:55:14.644157: Processing remote time out
+2021-10-18 02:55:15.530956: Creating a local timeout at 2
+2021-10-18 02:55:15.531873: Stopping round in PaceMaker
+2021-10-18 02:55:15.532576: Calling make_timeout
+2021-10-18 02:55:15.533361: Generating signature for replica, 2
+2021-10-18 02:55:15.535202: Received local timeout
+2021-10-18 02:55:15.535461: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e447910> of type timeout_message
+2021-10-18 02:55:15.535685: Started processing timeout message.
+2021-10-18 02:55:15.535885: Started process certificate qc
+2021-10-18 02:55:15.536085: Advancing round based on qc
+2021-10-18 02:55:15.536282: Started process certificate qc
+2021-10-18 02:55:15.536479: Advancing round based on qc
+2021-10-18 02:55:15.536675: Advancing round based on tc
+2021-10-18 02:55:15.536888: Processing remote time out
+2021-10-18 02:55:15.537093: Received local timeout
+2021-10-18 02:55:15.537289: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e447a90> of type timeout_message
+2021-10-18 02:55:15.537484: Started processing timeout message.
+2021-10-18 02:55:15.537681: Started process certificate qc
+2021-10-18 02:55:15.537875: Advancing round based on qc
+2021-10-18 02:55:15.538072: Started process certificate qc
+2021-10-18 02:55:15.538274: Advancing round based on qc
+2021-10-18 02:55:15.538465: Advancing round based on tc
+2021-10-18 02:55:15.538661: Processing remote time out
+2021-10-18 02:55:15.538859: Stopping round in PaceMaker
+2021-10-18 02:55:15.539061: Creating a local timeout at 2
+2021-10-18 02:55:15.539257: Stopping round in PaceMaker
+2021-10-18 02:55:15.540034: Calling make_timeout
+2021-10-18 02:55:15.540288: Generating signature for replica, 2
+2021-10-18 02:55:15.541625: Received local timeout
+2021-10-18 02:55:15.541856: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e37ed90> of type timeout_message
+2021-10-18 02:55:15.542055: Started processing timeout message.
+2021-10-18 02:55:15.542261: Started process certificate qc
+2021-10-18 02:55:15.542466: Advancing round based on qc
+2021-10-18 02:55:15.542802: Started process certificate qc
+2021-10-18 02:55:15.543138: Advancing round based on qc
+2021-10-18 02:55:15.543355: Advancing round based on tc
+2021-10-18 02:55:15.543560: Processing remote time out
+2021-10-18 02:55:15.543759: Stopping round in PaceMaker
+2021-10-18 02:55:15.543966: Creating a local timeout at 2
+2021-10-18 02:55:15.544160: Stopping round in PaceMaker
+2021-10-18 02:55:15.544354: Calling make_timeout
+2021-10-18 02:55:15.544558: Generating signature for replica, 2
+2021-10-18 02:55:15.547504: Received local timeout
+2021-10-18 02:55:15.548346: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44cd10> of type timeout_message
+2021-10-18 02:55:15.548880: Started processing timeout message.
+2021-10-18 02:55:15.549257: Started process certificate qc
+2021-10-18 02:55:15.549621: Advancing round based on qc
+2021-10-18 02:55:15.549849: Started process certificate qc
+2021-10-18 02:55:15.550056: Advancing round based on qc
+2021-10-18 02:55:15.550281: Advancing round based on tc
+2021-10-18 02:55:15.551011: Processing remote time out
+2021-10-18 02:55:15.551242: Stopping round in PaceMaker
+2021-10-18 02:55:15.551456: Creating a local timeout at 2
+2021-10-18 02:55:15.551668: Stopping round in PaceMaker
+2021-10-18 02:55:15.551902: Calling make_timeout
+2021-10-18 02:55:15.552105: Generating signature for replica, 2
+2021-10-18 02:55:15.554755: Received local timeout
+2021-10-18 02:55:15.555211: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e459710> of type timeout_message
+2021-10-18 02:55:15.555422: Started processing timeout message.
+2021-10-18 02:55:15.555625: Started process certificate qc
+2021-10-18 02:55:15.556288: Advancing round based on qc
+2021-10-18 02:55:15.556478: Started process certificate qc
+2021-10-18 02:55:15.556672: Advancing round based on qc
+2021-10-18 02:55:15.556903: Advancing round based on tc
+2021-10-18 02:55:15.557143: Processing remote time out
+2021-10-18 02:55:15.557395: Stopping round in PaceMaker
+2021-10-18 02:55:15.557615: Creating a local timeout at 2
+2021-10-18 02:55:15.557833: Stopping round in PaceMaker
+2021-10-18 02:55:15.558059: Calling make_timeout
+2021-10-18 02:55:15.558304: Generating signature for replica, 2
+2021-10-18 02:55:15.560453: Received local timeout
+2021-10-18 02:55:15.560945: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44f950> of type timeout_message
+2021-10-18 02:55:15.561161: Started processing timeout message.
+2021-10-18 02:55:15.561582: Started process certificate qc
+2021-10-18 02:55:15.561913: Advancing round based on qc
+2021-10-18 02:55:15.562577: Started process certificate qc
+2021-10-18 02:55:15.562915: Advancing round based on qc
+2021-10-18 02:55:15.563365: Advancing round based on tc
+2021-10-18 02:55:15.564816: Processing remote time out
+2021-10-18 02:55:15.565038: Stopping round in PaceMaker
+2021-10-18 02:55:15.565251: Creating a local timeout at 2
+2021-10-18 02:55:15.565453: Stopping round in PaceMaker
+2021-10-18 02:55:15.566203: Calling make_timeout
+2021-10-18 02:55:15.566636: Generating signature for replica, 2
+2021-10-18 02:55:15.567539: Received local timeout
+2021-10-18 02:55:15.567759: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e445210> of type timeout_message
+2021-10-18 02:55:15.568021: Started processing timeout message.
+2021-10-18 02:55:15.569361: Started process certificate qc
+2021-10-18 02:55:15.570010: Advancing round based on qc
+2021-10-18 02:55:15.570232: Started process certificate qc
+2021-10-18 02:55:15.570430: Advancing round based on qc
+2021-10-18 02:55:15.570657: Advancing round based on tc
+2021-10-18 02:55:15.570878: Processing remote time out
+2021-10-18 02:55:15.571117: Generating a timeout certificate
+2021-10-18 02:55:15.571375: Advancing round based on tc
+2021-10-18 02:55:15.571571: Stopping round in PaceMaker
+2021-10-18 02:55:15.572225: Started round in PaceMaker
+2021-10-18 02:55:15.572624: Started processing new round event 
+2021-10-18 02:55:15.573215: Received local timeout
+2021-10-18 02:55:15.573434: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4463d0> of type timeout_message
+2021-10-18 02:55:15.573633: Started processing timeout message.
+2021-10-18 02:55:15.573833: Started process certificate qc
+2021-10-18 02:55:15.574024: Advancing round based on qc
+2021-10-18 02:55:15.574220: Started process certificate qc
+2021-10-18 02:55:15.574408: Advancing round based on qc
+2021-10-18 02:55:15.584277: Advancing round based on tc
+2021-10-18 02:55:15.584676: Processing remote time out
+2021-10-18 02:55:15.584916: Received local timeout
+2021-10-18 02:55:15.585145: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44c3d0> of type timeout_message
+2021-10-18 02:55:15.585369: Started processing timeout message.
+2021-10-18 02:55:15.585579: Started process certificate qc
+2021-10-18 02:55:15.585794: Advancing round based on qc
+2021-10-18 02:55:15.586014: Started process certificate qc
+2021-10-18 02:55:15.586237: Advancing round based on qc
+2021-10-18 02:55:15.586447: Advancing round based on tc
+2021-10-18 02:55:15.586671: Processing remote time out
+2021-10-18 02:55:15.589604: Received local timeout
+2021-10-18 02:55:15.589866: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e450dd0> of type timeout_message
+2021-10-18 02:55:15.590092: Started processing timeout message.
+2021-10-18 02:55:15.591054: Started process certificate qc
+2021-10-18 02:55:15.591518: Advancing round based on qc
+2021-10-18 02:55:15.591732: Started process certificate qc
+2021-10-18 02:55:15.591969: Advancing round based on qc
+2021-10-18 02:55:15.592197: Advancing round based on tc
+2021-10-18 02:55:15.592394: Processing remote time out
+2021-10-18 02:55:15.592620: Received local timeout
+2021-10-18 02:55:15.592827: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44e9d0> of type timeout_message
+2021-10-18 02:55:15.593032: Started processing timeout message.
+2021-10-18 02:55:15.593246: Started process certificate qc
+2021-10-18 02:55:15.593463: Advancing round based on qc
+2021-10-18 02:55:15.593667: Started process certificate qc
+2021-10-18 02:55:15.593871: Advancing round based on qc
+2021-10-18 02:55:15.594073: Advancing round based on tc
+2021-10-18 02:55:15.594289: Processing remote time out
+2021-10-18 02:55:15.594506: Received local timeout
+2021-10-18 02:55:15.594732: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44e810> of type timeout_message
+2021-10-18 02:55:15.594936: Started processing timeout message.
+2021-10-18 02:55:15.595140: Started process certificate qc
+2021-10-18 02:55:15.595357: Advancing round based on qc
+2021-10-18 02:55:15.595598: Started process certificate qc
+2021-10-18 02:55:15.595812: Advancing round based on qc
+2021-10-18 02:55:15.596192: Advancing round based on tc
+2021-10-18 02:55:15.596798: Processing remote time out
+2021-10-18 02:55:15.597279: Received local timeout
+2021-10-18 02:55:15.597516: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e45b5d0> of type timeout_message
+2021-10-18 02:55:15.597721: Started processing timeout message.
+2021-10-18 02:55:15.597950: Started process certificate qc
+2021-10-18 02:55:15.598382: Advancing round based on qc
+2021-10-18 02:55:15.599031: Started process certificate qc
+2021-10-18 02:55:15.599277: Advancing round based on qc
+2021-10-18 02:55:15.599477: Advancing round based on tc
+2021-10-18 02:55:15.599839: Processing remote time out
+2021-10-18 02:55:15.600064: Received local timeout
+2021-10-18 02:55:15.600271: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e459810> of type timeout_message
+2021-10-18 02:55:15.600497: Started processing timeout message.
+2021-10-18 02:55:15.600712: Started process certificate qc
+2021-10-18 02:55:15.600922: Advancing round based on qc
+2021-10-18 02:55:15.601145: Started process certificate qc
+2021-10-18 02:55:15.601361: Advancing round based on qc
+2021-10-18 02:55:15.601586: Advancing round based on tc
+2021-10-18 02:55:15.601800: Processing remote time out
+2021-10-18 02:55:15.602038: Received local timeout
+2021-10-18 02:55:15.602465: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e450550> of type timeout_message
+2021-10-18 02:55:15.602672: Started processing timeout message.
+2021-10-18 02:55:15.602914: Started process certificate qc
+2021-10-18 02:55:15.603147: Advancing round based on qc
+2021-10-18 02:55:15.603376: Started process certificate qc
+2021-10-18 02:55:15.603578: Advancing round based on qc
+2021-10-18 02:55:15.603802: Advancing round based on tc
+2021-10-18 02:55:15.604286: Processing remote time out
+2021-10-18 02:55:15.604892: Received local timeout
+2021-10-18 02:55:15.605101: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e45bd10> of type timeout_message
+2021-10-18 02:55:15.605352: Started processing timeout message.
+2021-10-18 02:55:15.605600: Started process certificate qc
+2021-10-18 02:55:15.605826: Advancing round based on qc
+2021-10-18 02:55:15.606027: Started process certificate qc
+2021-10-18 02:55:15.606309: Advancing round based on qc
+2021-10-18 02:55:15.606650: Advancing round based on tc
+2021-10-18 02:55:15.607633: Processing remote time out
+2021-10-18 02:55:15.608560: Received local timeout
+2021-10-18 02:55:15.608917: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e454090> of type timeout_message
+2021-10-18 02:55:15.609321: Started processing timeout message.
+2021-10-18 02:55:15.609549: Started process certificate qc
+2021-10-18 02:55:15.609766: Advancing round based on qc
+2021-10-18 02:55:15.609984: Started process certificate qc
+2021-10-18 02:55:15.610188: Advancing round based on qc
+2021-10-18 02:55:15.610415: Advancing round based on tc
+2021-10-18 02:55:15.610624: Processing remote time out
+2021-10-18 02:55:15.610843: Received local timeout
+2021-10-18 02:55:15.611058: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e453b90> of type timeout_message
+2021-10-18 02:55:15.611277: Started processing timeout message.
+2021-10-18 02:55:15.611495: Started process certificate qc
+2021-10-18 02:55:15.611712: Advancing round based on qc
+2021-10-18 02:55:15.612474: Started process certificate qc
+2021-10-18 02:55:15.613364: Advancing round based on qc
+2021-10-18 02:55:15.613737: Advancing round based on tc
+2021-10-18 02:55:15.613970: Processing remote time out
+2021-10-18 02:55:15.614191: Received local timeout
+2021-10-18 02:55:15.614454: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e459350> of type timeout_message
+2021-10-18 02:55:15.615191: Started processing timeout message.
+2021-10-18 02:55:15.615884: Started process certificate qc
+2021-10-18 02:55:15.616115: Advancing round based on qc
+2021-10-18 02:55:15.616376: Started process certificate qc
+2021-10-18 02:55:15.616585: Advancing round based on qc
+2021-10-18 02:55:15.617002: Advancing round based on tc
+2021-10-18 02:55:15.617209: Processing remote time out
+2021-10-18 02:55:15.617456: Received proposal message from 3 containing block ->Block Author :3 Transactions :1----->3
+2021-10-18 02:55:15.617754: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e453090> of type proposal_message
+2021-10-18 02:55:15.618249: Started event processing
+2021-10-18 02:55:15.618628: Started process certificate qc
+2021-10-18 02:55:15.618846: Advancing round based on qc
+2021-10-18 02:55:15.619046: Started process certificate qc
+2021-10-18 02:55:15.619329: Advancing round based on qc
+2021-10-18 02:55:15.619806: Advancing round based on tc
+2021-10-18 02:55:15.620032: Executing and Inserting
+2021-10-18 02:55:15.620246: Adding block with -7000566518052368242 in ledger pending_map
+2021-10-18 02:55:15.620875: Started make vote
+2021-10-18 02:55:15.621089: Finished make vote 
+2021-10-18 02:55:15.621507: Received local timeout
+2021-10-18 02:55:15.621744: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e446f90> of type timeout_message
+2021-10-18 02:55:15.621960: Started processing timeout message.
+2021-10-18 02:55:15.622381: Started process certificate qc
+2021-10-18 02:55:15.622601: Advancing round based on qc
+2021-10-18 02:55:15.622953: Started process certificate qc
+2021-10-18 02:55:15.623315: Advancing round based on qc
+2021-10-18 02:55:15.623718: Advancing round based on tc
+2021-10-18 02:55:15.623936: Processing remote time out
+2021-10-18 02:55:15.625325: Received local timeout
+2021-10-18 02:55:15.625552: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44fed0> of type timeout_message
+2021-10-18 02:55:15.625754: Started processing timeout message.
+2021-10-18 02:55:15.625957: Started process certificate qc
+2021-10-18 02:55:15.626361: Advancing round based on qc
+2021-10-18 02:55:15.626583: Started process certificate qc
+2021-10-18 02:55:15.626983: Advancing round based on qc
+2021-10-18 02:55:15.627213: Advancing round based on tc
+2021-10-18 02:55:15.627434: Processing remote time out
+2021-10-18 02:55:16.535107: Received local timeout
+2021-10-18 02:55:16.535332: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e453090> of type timeout_message
+2021-10-18 02:55:16.535567: Started processing timeout message.
+2021-10-18 02:55:16.535930: Started process certificate qc
+2021-10-18 02:55:16.536141: Advancing round based on qc
+2021-10-18 02:55:16.536340: Started process certificate qc
+2021-10-18 02:55:16.536532: Advancing round based on qc
+2021-10-18 02:55:16.536726: Advancing round based on tc
+2021-10-18 02:55:16.536930: Processing remote time out
+2021-10-18 02:55:16.537134: Creating a local timeout at 2
+2021-10-18 02:55:16.537319: Stopping round in PaceMaker
+2021-10-18 02:55:16.537549: Calling make_timeout
+2021-10-18 02:55:16.537757: Generating signature for replica, 2
+2021-10-18 02:55:16.538844: Received local timeout
+2021-10-18 02:55:16.539046: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e445e50> of type timeout_message
+2021-10-18 02:55:16.539254: Started processing timeout message.
+2021-10-18 02:55:16.539461: Started process certificate qc
+2021-10-18 02:55:16.539656: Advancing round based on qc
+2021-10-18 02:55:16.539860: Started process certificate qc
+2021-10-18 02:55:16.540072: Advancing round based on qc
+2021-10-18 02:55:16.540340: Advancing round based on tc
+2021-10-18 02:55:16.540540: Processing remote time out
+2021-10-18 02:55:16.540771: Stopping round in PaceMaker
+2021-10-18 02:55:16.540968: Creating a local timeout at 2
+2021-10-18 02:55:16.541176: Stopping round in PaceMaker
+2021-10-18 02:55:16.541437: Calling make_timeout
+2021-10-18 02:55:16.541631: Generating signature for replica, 2
+2021-10-18 02:55:16.542932: Received local timeout
+2021-10-18 02:55:16.543167: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e45b350> of type timeout_message
+2021-10-18 02:55:16.543387: Started processing timeout message.
+2021-10-18 02:55:16.543840: Started process certificate qc
+2021-10-18 02:55:16.544043: Advancing round based on qc
+2021-10-18 02:55:16.544248: Started process certificate qc
+2021-10-18 02:55:16.544462: Advancing round based on qc
+2021-10-18 02:55:16.544670: Advancing round based on tc
+2021-10-18 02:55:16.544869: Processing remote time out
+2021-10-18 02:55:16.545065: Stopping round in PaceMaker
+2021-10-18 02:55:16.545268: Creating a local timeout at 2
+2021-10-18 02:55:16.545460: Stopping round in PaceMaker
+2021-10-18 02:55:16.545660: Calling make_timeout
+2021-10-18 02:55:16.545945: Generating signature for replica, 2
+2021-10-18 02:55:16.547258: Received local timeout
+2021-10-18 02:55:16.547685: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44fd50> of type timeout_message
+2021-10-18 02:55:16.547889: Started processing timeout message.
+2021-10-18 02:55:16.548078: Started process certificate qc
+2021-10-18 02:55:16.548312: Advancing round based on qc
+2021-10-18 02:55:16.548585: Started process certificate qc
+2021-10-18 02:55:16.548835: Advancing round based on qc
+2021-10-18 02:55:16.549027: Advancing round based on tc
+2021-10-18 02:55:16.549275: Processing remote time out
+2021-10-18 02:55:16.549580: Stopping round in PaceMaker
+2021-10-18 02:55:16.549787: Creating a local timeout at 2
+2021-10-18 02:55:16.549999: Stopping round in PaceMaker
+2021-10-18 02:55:16.550259: Calling make_timeout
+2021-10-18 02:55:16.550480: Generating signature for replica, 2
+2021-10-18 02:55:16.551345: Received local timeout
+2021-10-18 02:55:16.551554: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44fc50> of type timeout_message
+2021-10-18 02:55:16.551742: Started processing timeout message.
+2021-10-18 02:55:16.552392: Started process certificate qc
+2021-10-18 02:55:16.553388: Advancing round based on qc
+2021-10-18 02:55:16.557424: Started process certificate qc
+2021-10-18 02:55:16.557664: Advancing round based on qc
+2021-10-18 02:55:16.558007: Advancing round based on tc
+2021-10-18 02:55:16.558202: Processing remote time out
+2021-10-18 02:55:16.558482: Stopping round in PaceMaker
+2021-10-18 02:55:16.558766: Creating a local timeout at 2
+2021-10-18 02:55:16.559044: Stopping round in PaceMaker
+2021-10-18 02:55:16.559559: Calling make_timeout
+2021-10-18 02:55:16.559951: Generating signature for replica, 2
+2021-10-18 02:55:16.563554: Received local timeout
+2021-10-18 02:55:16.563773: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e450a90> of type timeout_message
+2021-10-18 02:55:16.564047: Started processing timeout message.
+2021-10-18 02:55:16.564254: Started process certificate qc
+2021-10-18 02:55:16.564464: Advancing round based on qc
+2021-10-18 02:55:16.564662: Started process certificate qc
+2021-10-18 02:55:16.564898: Advancing round based on qc
+2021-10-18 02:55:16.565372: Advancing round based on tc
+2021-10-18 02:55:16.565605: Processing remote time out
+2021-10-18 02:55:16.565838: Stopping round in PaceMaker
+2021-10-18 02:55:16.566117: Creating a local timeout at 2
+2021-10-18 02:55:16.566487: Stopping round in PaceMaker
+2021-10-18 02:55:16.566724: Calling make_timeout
+2021-10-18 02:55:16.566968: Generating signature for replica, 2
+2021-10-18 02:55:16.568338: Received local timeout
+2021-10-18 02:55:16.568749: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4593d0> of type timeout_message
+2021-10-18 02:55:16.568959: Started processing timeout message.
+2021-10-18 02:55:16.569301: Started process certificate qc
+2021-10-18 02:55:16.569583: Advancing round based on qc
+2021-10-18 02:55:16.569839: Started process certificate qc
+2021-10-18 02:55:16.570059: Advancing round based on qc
+2021-10-18 02:55:16.570283: Advancing round based on tc
+2021-10-18 02:55:16.570494: Processing remote time out
+2021-10-18 02:55:16.570750: Generating a timeout certificate
+2021-10-18 02:55:16.570957: Advancing round based on tc
+2021-10-18 02:55:16.571244: Stopping round in PaceMaker
+2021-10-18 02:55:16.571497: Started round in PaceMaker
+2021-10-18 02:55:16.571803: Started processing new round event 
+2021-10-18 02:55:16.572339: Received local timeout
+2021-10-18 02:55:16.572657: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e450ad0> of type timeout_message
+2021-10-18 02:55:16.572877: Started processing timeout message.
+2021-10-18 02:55:16.573072: Started process certificate qc
+2021-10-18 02:55:16.573277: Advancing round based on qc
+2021-10-18 02:55:16.573539: Started process certificate qc
+2021-10-18 02:55:16.573780: Advancing round based on qc
+2021-10-18 02:55:16.573999: Advancing round based on tc
+2021-10-18 02:55:16.574213: Processing remote time out
+2021-10-18 02:55:16.574452: Received local timeout
+2021-10-18 02:55:16.574673: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e446b10> of type timeout_message
+2021-10-18 02:55:16.574929: Started processing timeout message.
+2021-10-18 02:55:16.575125: Started process certificate qc
+2021-10-18 02:55:16.575329: Advancing round based on qc
+2021-10-18 02:55:16.575572: Started process certificate qc
+2021-10-18 02:55:16.575781: Advancing round based on qc
+2021-10-18 02:55:16.576060: Advancing round based on tc
+2021-10-18 02:55:16.576266: Processing remote time out
+2021-10-18 02:55:16.576539: Received local timeout
+2021-10-18 02:55:16.577058: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e459410> of type timeout_message
+2021-10-18 02:55:16.577497: Started processing timeout message.
+2021-10-18 02:55:16.577707: Started process certificate qc
+2021-10-18 02:55:16.577901: Advancing round based on qc
+2021-10-18 02:55:16.578168: Started process certificate qc
+2021-10-18 02:55:16.578366: Advancing round based on qc
+2021-10-18 02:55:16.578574: Advancing round based on tc
+2021-10-18 02:55:16.578841: Processing remote time out
+2021-10-18 02:55:16.579059: Received local timeout
+2021-10-18 02:55:16.579255: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e45b990> of type timeout_message
+2021-10-18 02:55:16.579449: Started processing timeout message.
+2021-10-18 02:55:16.579689: Started process certificate qc
+2021-10-18 02:55:16.579965: Advancing round based on qc
+2021-10-18 02:55:16.580162: Started process certificate qc
+2021-10-18 02:55:16.580403: Advancing round based on qc
+2021-10-18 02:55:16.580606: Advancing round based on tc
+2021-10-18 02:55:16.580825: Processing remote time out
+2021-10-18 02:55:16.581100: Received local timeout
+2021-10-18 02:55:16.581328: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e45bed0> of type timeout_message
+2021-10-18 02:55:16.581545: Started processing timeout message.
+2021-10-18 02:55:16.581788: Started process certificate qc
+2021-10-18 02:55:16.582036: Advancing round based on qc
+2021-10-18 02:55:16.582273: Started process certificate qc
+2021-10-18 02:55:16.582497: Advancing round based on qc
+2021-10-18 02:55:16.582711: Advancing round based on tc
+2021-10-18 02:55:16.582908: Processing remote time out
+2021-10-18 02:55:16.583116: Received local timeout
+2021-10-18 02:55:16.583348: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4470d0> of type timeout_message
+2021-10-18 02:55:16.583745: Started processing timeout message.
+2021-10-18 02:55:16.583949: Started process certificate qc
+2021-10-18 02:55:16.584703: Advancing round based on qc
+2021-10-18 02:55:16.584925: Started process certificate qc
+2021-10-18 02:55:16.585282: Advancing round based on qc
+2021-10-18 02:55:16.585541: Advancing round based on tc
+2021-10-18 02:55:16.585828: Processing remote time out
+2021-10-18 02:55:16.587805: Received local timeout
+2021-10-18 02:55:16.588084: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e454e50> of type timeout_message
+2021-10-18 02:55:16.588313: Started processing timeout message.
+2021-10-18 02:55:16.588600: Started process certificate qc
+2021-10-18 02:55:16.588794: Advancing round based on qc
+2021-10-18 02:55:16.589222: Started process certificate qc
+2021-10-18 02:55:16.589461: Advancing round based on qc
+2021-10-18 02:55:16.589684: Advancing round based on tc
+2021-10-18 02:55:16.589900: Processing remote time out
+2021-10-18 02:55:16.590122: Received local timeout
+2021-10-18 02:55:16.590332: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e454b50> of type timeout_message
+2021-10-18 02:55:16.590607: Started processing timeout message.
+2021-10-18 02:55:16.590897: Started process certificate qc
+2021-10-18 02:55:16.591137: Advancing round based on qc
+2021-10-18 02:55:16.591362: Started process certificate qc
+2021-10-18 02:55:16.591696: Advancing round based on qc
+2021-10-18 02:55:16.591934: Advancing round based on tc
+2021-10-18 02:55:16.592140: Processing remote time out
+2021-10-18 02:55:16.592382: Received local timeout
+2021-10-18 02:55:16.592668: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e454610> of type timeout_message
+2021-10-18 02:55:16.593112: Started processing timeout message.
+2021-10-18 02:55:16.593318: Started process certificate qc
+2021-10-18 02:55:16.593556: Advancing round based on qc
+2021-10-18 02:55:16.593806: Started process certificate qc
+2021-10-18 02:55:16.594003: Advancing round based on qc
+2021-10-18 02:55:16.594236: Advancing round based on tc
+2021-10-18 02:55:16.594457: Processing remote time out
+2021-10-18 02:55:16.594668: Received local timeout
+2021-10-18 02:55:16.594945: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e454190> of type timeout_message
+2021-10-18 02:55:16.595160: Started processing timeout message.
+2021-10-18 02:55:16.595452: Started process certificate qc
+2021-10-18 02:55:16.595680: Advancing round based on qc
+2021-10-18 02:55:16.595877: Started process certificate qc
+2021-10-18 02:55:16.596113: Advancing round based on qc
+2021-10-18 02:55:16.596321: Advancing round based on tc
+2021-10-18 02:55:16.596534: Processing remote time out
+2021-10-18 02:55:16.596752: Received local timeout
+2021-10-18 02:55:16.596970: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4598d0> of type timeout_message
+2021-10-18 02:55:16.597218: Started processing timeout message.
+2021-10-18 02:55:16.597458: Started process certificate qc
+2021-10-18 02:55:16.597690: Advancing round based on qc
+2021-10-18 02:55:16.597907: Started process certificate qc
+2021-10-18 02:55:16.598458: Advancing round based on qc
+2021-10-18 02:55:16.598687: Advancing round based on tc
+2021-10-18 02:55:16.599160: Processing remote time out
+2021-10-18 02:55:16.599377: Received local timeout
+2021-10-18 02:55:16.599577: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e445e50> of type timeout_message
+2021-10-18 02:55:16.599785: Started processing timeout message.
+2021-10-18 02:55:16.600023: Started process certificate qc
+2021-10-18 02:55:16.600233: Advancing round based on qc
+2021-10-18 02:55:16.600432: Started process certificate qc
+2021-10-18 02:55:16.600627: Advancing round based on qc
+2021-10-18 02:55:16.600889: Advancing round based on tc
+2021-10-18 02:55:16.601116: Processing remote time out
+2021-10-18 02:55:16.601325: Received local timeout
+2021-10-18 02:55:16.601527: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44a490> of type timeout_message
+2021-10-18 02:55:16.601769: Started processing timeout message.
+2021-10-18 02:55:16.601984: Started process certificate qc
+2021-10-18 02:55:16.602191: Advancing round based on qc
+2021-10-18 02:55:16.602393: Started process certificate qc
+2021-10-18 02:55:16.602610: Advancing round based on qc
+2021-10-18 02:55:16.602833: Advancing round based on tc
+2021-10-18 02:55:16.603053: Processing remote time out
+2021-10-18 02:55:16.604001: Received local timeout
+2021-10-18 02:55:16.604277: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e447150> of type timeout_message
+2021-10-18 02:55:16.604480: Started processing timeout message.
+2021-10-18 02:55:16.604683: Started process certificate qc
+2021-10-18 02:55:16.604874: Advancing round based on qc
+2021-10-18 02:55:16.605115: Started process certificate qc
+2021-10-18 02:55:16.605335: Advancing round based on qc
+2021-10-18 02:55:16.605527: Advancing round based on tc
+2021-10-18 02:55:16.605785: Processing remote time out
+2021-10-18 02:55:16.606114: Received local timeout
+2021-10-18 02:55:16.606370: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e445210> of type timeout_message
+2021-10-18 02:55:16.606875: Started processing timeout message.
+2021-10-18 02:55:16.607073: Started process certificate qc
+2021-10-18 02:55:16.607282: Advancing round based on qc
+2021-10-18 02:55:16.607478: Started process certificate qc
+2021-10-18 02:55:16.607929: Advancing round based on qc
+2021-10-18 02:55:16.608150: Advancing round based on tc
+2021-10-18 02:55:16.608464: Processing remote time out
+2021-10-18 02:55:16.608724: Received proposal message from 0 containing block ->Block Author :0 Transactions :0----->3
+2021-10-18 02:55:16.608935: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e44a690> of type proposal_message
+2021-10-18 02:55:16.609227: Started event processing
+2021-10-18 02:55:16.609633: Started process certificate qc
+2021-10-18 02:55:16.609868: Advancing round based on qc
+2021-10-18 02:55:16.610197: Started process certificate qc
+2021-10-18 02:55:16.610401: Advancing round based on qc
+2021-10-18 02:55:16.610636: Advancing round based on tc
+2021-10-18 02:55:16.610859: Executing and Inserting
+2021-10-18 02:55:16.611071: Adding block with -7496456747758236492 in ledger pending_map
+2021-10-18 02:55:16.611268: Started make vote
+2021-10-18 02:55:16.611585: Finished make vote 
+2021-10-18 02:55:17.538439: Received local timeout
+2021-10-18 02:55:17.538668: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e459a50> of type timeout_message
+2021-10-18 02:55:17.538879: Started processing timeout message.
+2021-10-18 02:55:17.539091: Started process certificate qc
+2021-10-18 02:55:17.539301: Advancing round based on qc
+2021-10-18 02:55:17.539510: Started process certificate qc
+2021-10-18 02:55:17.539725: Advancing round based on qc
+2021-10-18 02:55:17.539927: Advancing round based on tc
+2021-10-18 02:55:17.540163: Processing remote time out
+2021-10-18 02:55:17.540374: Creating a local timeout at 2
+2021-10-18 02:55:17.540560: Stopping round in PaceMaker
+2021-10-18 02:55:17.540767: Calling make_timeout
+2021-10-18 02:55:17.540958: Generating signature for replica, 2
+2021-10-18 02:55:17.542019: Received local timeout
+2021-10-18 02:55:17.542236: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e446850> of type timeout_message
+2021-10-18 02:55:17.542446: Started processing timeout message.
+2021-10-18 02:55:17.542663: Started process certificate qc
+2021-10-18 02:55:17.542877: Advancing round based on qc
+2021-10-18 02:55:17.543086: Started process certificate qc
+2021-10-18 02:55:17.543354: Advancing round based on qc
+2021-10-18 02:55:17.543616: Advancing round based on tc
+2021-10-18 02:55:17.543813: Processing remote time out
+2021-10-18 02:55:17.544005: Stopping round in PaceMaker
+2021-10-18 02:55:17.544231: Creating a local timeout at 2
+2021-10-18 02:55:17.544433: Stopping round in PaceMaker
+2021-10-18 02:55:17.544625: Calling make_timeout
+2021-10-18 02:55:17.544852: Generating signature for replica, 2
+2021-10-18 02:55:17.546084: Received local timeout
+2021-10-18 02:55:17.546284: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e447310> of type timeout_message
+2021-10-18 02:55:17.546472: Started processing timeout message.
+2021-10-18 02:55:17.546671: Started process certificate qc
+2021-10-18 02:55:17.546871: Advancing round based on qc
+2021-10-18 02:55:17.547076: Started process certificate qc
+2021-10-18 02:55:17.547280: Advancing round based on qc
+2021-10-18 02:55:17.547468: Advancing round based on tc
+2021-10-18 02:55:17.547659: Processing remote time out
+2021-10-18 02:55:17.547887: Stopping round in PaceMaker
+2021-10-18 02:55:17.548094: Creating a local timeout at 2
+2021-10-18 02:55:17.548293: Stopping round in PaceMaker
+2021-10-18 02:55:17.548514: Calling make_timeout
+2021-10-18 02:55:17.548716: Generating signature for replica, 2
+2021-10-18 02:55:17.549959: Received local timeout
+2021-10-18 02:55:17.550166: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4598d0> of type timeout_message
+2021-10-18 02:55:17.550586: Started processing timeout message.
+2021-10-18 02:55:17.550807: Started process certificate qc
+2021-10-18 02:55:17.551091: Advancing round based on qc
+2021-10-18 02:55:17.551332: Started process certificate qc
+2021-10-18 02:55:17.551570: Advancing round based on qc
+2021-10-18 02:55:17.551802: Advancing round based on tc
+2021-10-18 02:55:17.552017: Processing remote time out
+2021-10-18 02:55:17.552217: Stopping round in PaceMaker
+2021-10-18 02:55:17.552414: Creating a local timeout at 2
+2021-10-18 02:55:17.552625: Stopping round in PaceMaker
+2021-10-18 02:55:17.552860: Calling make_timeout
+2021-10-18 02:55:17.553122: Generating signature for replica, 2
+2021-10-18 02:55:17.554748: Received local timeout
+2021-10-18 02:55:17.555048: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4469d0> of type timeout_message
+2021-10-18 02:55:17.555262: Started processing timeout message.
+2021-10-18 02:55:17.555458: Started process certificate qc
+2021-10-18 02:55:17.555667: Advancing round based on qc
+2021-10-18 02:55:17.555966: Started process certificate qc
+2021-10-18 02:55:17.556451: Advancing round based on qc
+2021-10-18 02:55:17.556849: Advancing round based on tc
+2021-10-18 02:55:17.557177: Processing remote time out
+2021-10-18 02:55:17.557580: Stopping round in PaceMaker
+2021-10-18 02:55:17.557811: Creating a local timeout at 2
+2021-10-18 02:55:17.558007: Stopping round in PaceMaker
+2021-10-18 02:55:17.558260: Calling make_timeout
+2021-10-18 02:55:17.558510: Generating signature for replica, 2
+2021-10-18 02:55:17.560640: Received local timeout
+2021-10-18 02:55:17.560941: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e459d10> of type timeout_message
+2021-10-18 02:55:17.561232: Started processing timeout message.
+2021-10-18 02:55:17.561442: Started process certificate qc
+2021-10-18 02:55:17.561640: Advancing round based on qc
+2021-10-18 02:55:17.561841: Started process certificate qc
+2021-10-18 02:55:17.562064: Advancing round based on qc
+2021-10-18 02:55:17.562275: Advancing round based on tc
+2021-10-18 02:55:17.562552: Processing remote time out
+2021-10-18 02:55:17.562791: Stopping round in PaceMaker
+2021-10-18 02:55:17.563032: Creating a local timeout at 2
+2021-10-18 02:55:17.563234: Stopping round in PaceMaker
+2021-10-18 02:55:17.563495: Calling make_timeout
+2021-10-18 02:55:17.563908: Generating signature for replica, 2
+2021-10-18 02:55:17.564949: Received local timeout
+2021-10-18 02:55:17.565164: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4576d0> of type timeout_message
+2021-10-18 02:55:17.565370: Started processing timeout message.
+2021-10-18 02:55:17.565612: Started process certificate qc
+2021-10-18 02:55:17.565824: Advancing round based on qc
+2021-10-18 02:55:17.566123: Started process certificate qc
+2021-10-18 02:55:17.566328: Advancing round based on qc
+2021-10-18 02:55:17.566533: Advancing round based on tc
+2021-10-18 02:55:17.566883: Processing remote time out
+2021-10-18 02:55:17.567093: Stopping round in PaceMaker
+2021-10-18 02:55:17.567362: Creating a local timeout at 2
+2021-10-18 02:55:17.567566: Stopping round in PaceMaker
+2021-10-18 02:55:17.567763: Calling make_timeout
+2021-10-18 02:55:17.567998: Generating signature for replica, 2
+2021-10-18 02:55:17.568952: Received local timeout
+2021-10-18 02:55:17.569169: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4470d0> of type timeout_message
+2021-10-18 02:55:17.569579: Started processing timeout message.
+2021-10-18 02:55:17.569782: Started process certificate qc
+2021-10-18 02:55:17.570054: Advancing round based on qc
+2021-10-18 02:55:17.570266: Started process certificate qc
+2021-10-18 02:55:17.570534: Advancing round based on qc
+2021-10-18 02:55:17.570744: Advancing round based on tc
+2021-10-18 02:55:17.571151: Processing remote time out
+2021-10-18 02:55:17.571354: Stopping round in PaceMaker
+2021-10-18 02:55:17.571557: Creating a local timeout at 2
+2021-10-18 02:55:17.571786: Stopping round in PaceMaker
+2021-10-18 02:55:17.572017: Calling make_timeout
+2021-10-18 02:55:17.572230: Generating signature for replica, 2
+2021-10-18 02:55:17.573056: Received local timeout
+2021-10-18 02:55:17.573268: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e459bd0> of type timeout_message
+2021-10-18 02:55:17.573526: Started processing timeout message.
+2021-10-18 02:55:17.573738: Started process certificate qc
+2021-10-18 02:55:17.573939: Advancing round based on qc
+2021-10-18 02:55:17.574138: Started process certificate qc
+2021-10-18 02:55:17.574342: Advancing round based on qc
+2021-10-18 02:55:17.574570: Advancing round based on tc
+2021-10-18 02:55:17.574975: Processing remote time out
+2021-10-18 02:55:17.575360: Stopping round in PaceMaker
+2021-10-18 02:55:17.575648: Creating a local timeout at 2
+2021-10-18 02:55:17.575846: Stopping round in PaceMaker
+2021-10-18 02:55:17.576095: Calling make_timeout
+2021-10-18 02:55:17.576302: Generating signature for replica, 2
+2021-10-18 02:55:17.581208: Received local timeout
+2021-10-18 02:55:17.581436: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4470d0> of type timeout_message
+2021-10-18 02:55:17.581808: Started processing timeout message.
+2021-10-18 02:55:17.582190: Started process certificate qc
+2021-10-18 02:55:17.582475: Advancing round based on qc
+2021-10-18 02:55:17.582957: Started process certificate qc
+2021-10-18 02:55:17.583172: Advancing round based on qc
+2021-10-18 02:55:17.583415: Advancing round based on tc
+2021-10-18 02:55:17.583641: Processing remote time out
+2021-10-18 02:55:17.583857: Stopping round in PaceMaker
+2021-10-18 02:55:17.584152: Creating a local timeout at 2
+2021-10-18 02:55:17.584367: Stopping round in PaceMaker
+2021-10-18 02:55:17.584877: Calling make_timeout
+2021-10-18 02:55:17.585094: Generating signature for replica, 2
+2021-10-18 02:55:17.585956: Received local timeout
+2021-10-18 02:55:17.586166: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44e3d0> of type timeout_message
+2021-10-18 02:55:17.586377: Started processing timeout message.
+2021-10-18 02:55:17.586617: Started process certificate qc
+2021-10-18 02:55:17.586849: Advancing round based on qc
+2021-10-18 02:55:17.587102: Started process certificate qc
+2021-10-18 02:55:17.587468: Advancing round based on qc
+2021-10-18 02:55:17.587677: Advancing round based on tc
+2021-10-18 02:55:17.587934: Processing remote time out
+2021-10-18 02:55:17.588177: Generating a timeout certificate
+2021-10-18 02:55:17.588375: Advancing round based on tc
+2021-10-18 02:55:17.588591: Stopping round in PaceMaker
+2021-10-18 02:55:17.588793: Started round in PaceMaker
+2021-10-18 02:55:17.589297: Started processing new round event 
+2021-10-18 02:55:17.589517: Received local timeout
+2021-10-18 02:55:17.589739: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e464b10> of type timeout_message
+2021-10-18 02:55:17.589944: Started processing timeout message.
+2021-10-18 02:55:17.590165: Started process certificate qc
+2021-10-18 02:55:17.590390: Advancing round based on qc
+2021-10-18 02:55:17.590597: Started process certificate qc
+2021-10-18 02:55:17.590790: Advancing round based on qc
+2021-10-18 02:55:17.590981: Advancing round based on tc
+2021-10-18 02:55:17.591167: Processing remote time out
+2021-10-18 02:55:17.591358: Received local timeout
+2021-10-18 02:55:17.591797: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e464c10> of type timeout_message
+2021-10-18 02:55:17.592007: Started processing timeout message.
+2021-10-18 02:55:17.592219: Started process certificate qc
+2021-10-18 02:55:17.592452: Advancing round based on qc
+2021-10-18 02:55:17.592716: Started process certificate qc
+2021-10-18 02:55:17.592965: Advancing round based on qc
+2021-10-18 02:55:17.593243: Advancing round based on tc
+2021-10-18 02:55:17.593479: Processing remote time out
+2021-10-18 02:55:17.593746: Received local timeout
+2021-10-18 02:55:17.593957: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44e690> of type timeout_message
+2021-10-18 02:55:17.594246: Started processing timeout message.
+2021-10-18 02:55:17.594444: Started process certificate qc
+2021-10-18 02:55:17.594665: Advancing round based on qc
+2021-10-18 02:55:17.594870: Started process certificate qc
+2021-10-18 02:55:17.595155: Advancing round based on qc
+2021-10-18 02:55:17.595481: Advancing round based on tc
+2021-10-18 02:55:17.595690: Processing remote time out
+2021-10-18 02:55:17.595947: Received local timeout
+2021-10-18 02:55:17.596164: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44a250> of type timeout_message
+2021-10-18 02:55:17.596366: Started processing timeout message.
+2021-10-18 02:55:17.596637: Started process certificate qc
+2021-10-18 02:55:17.596848: Advancing round based on qc
+2021-10-18 02:55:17.597113: Started process certificate qc
+2021-10-18 02:55:17.597383: Advancing round based on qc
+2021-10-18 02:55:17.597686: Advancing round based on tc
+2021-10-18 02:55:17.597886: Processing remote time out
+2021-10-18 02:55:17.598097: Received local timeout
+2021-10-18 02:55:17.598352: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e446850> of type timeout_message
+2021-10-18 02:55:17.598558: Started processing timeout message.
+2021-10-18 02:55:17.598750: Started process certificate qc
+2021-10-18 02:55:17.598944: Advancing round based on qc
+2021-10-18 02:55:17.599535: Started process certificate qc
+2021-10-18 02:55:17.599800: Advancing round based on qc
+2021-10-18 02:55:17.600030: Advancing round based on tc
+2021-10-18 02:55:17.600236: Processing remote time out
+2021-10-18 02:55:17.600456: Received local timeout
+2021-10-18 02:55:17.600687: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e464550> of type timeout_message
+2021-10-18 02:55:17.600893: Started processing timeout message.
+2021-10-18 02:55:17.601095: Started process certificate qc
+2021-10-18 02:55:17.601305: Advancing round based on qc
+2021-10-18 02:55:17.601774: Started process certificate qc
+2021-10-18 02:55:17.602020: Advancing round based on qc
+2021-10-18 02:55:17.602241: Advancing round based on tc
+2021-10-18 02:55:17.602481: Processing remote time out
+2021-10-18 02:55:17.602711: Received local timeout
+2021-10-18 02:55:17.602932: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e45b390> of type timeout_message
+2021-10-18 02:55:17.603125: Started processing timeout message.
+2021-10-18 02:55:17.603342: Started process certificate qc
+2021-10-18 02:55:17.603653: Advancing round based on qc
+2021-10-18 02:55:17.603897: Started process certificate qc
+2021-10-18 02:55:17.604118: Advancing round based on qc
+2021-10-18 02:55:17.604816: Advancing round based on tc
+2021-10-18 02:55:17.605183: Processing remote time out
+2021-10-18 02:55:17.605577: Received local timeout
+2021-10-18 02:55:17.605858: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44e610> of type timeout_message
+2021-10-18 02:55:17.606069: Started processing timeout message.
+2021-10-18 02:55:17.606335: Started process certificate qc
+2021-10-18 02:55:17.606550: Advancing round based on qc
+2021-10-18 02:55:17.606759: Started process certificate qc
+2021-10-18 02:55:17.607016: Advancing round based on qc
+2021-10-18 02:55:17.607290: Advancing round based on tc
+2021-10-18 02:55:17.607506: Processing remote time out
+2021-10-18 02:55:17.607722: Received local timeout
+2021-10-18 02:55:17.607955: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e446b10> of type timeout_message
+2021-10-18 02:55:17.608293: Started processing timeout message.
+2021-10-18 02:55:17.608509: Started process certificate qc
+2021-10-18 02:55:17.608760: Advancing round based on qc
+2021-10-18 02:55:17.608962: Started process certificate qc
+2021-10-18 02:55:17.609386: Advancing round based on qc
+2021-10-18 02:55:17.609661: Advancing round based on tc
+2021-10-18 02:55:17.609866: Processing remote time out
+2021-10-18 02:55:17.610139: Received local timeout
+2021-10-18 02:55:17.610363: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e459410> of type timeout_message
+2021-10-18 02:55:17.610598: Started processing timeout message.
+2021-10-18 02:55:17.610835: Started process certificate qc
+2021-10-18 02:55:17.611091: Advancing round based on qc
+2021-10-18 02:55:17.611307: Started process certificate qc
+2021-10-18 02:55:17.611540: Advancing round based on qc
+2021-10-18 02:55:17.611808: Advancing round based on tc
+2021-10-18 02:55:17.612051: Processing remote time out
+2021-10-18 02:55:17.612862: Received local timeout
+2021-10-18 02:55:17.613671: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e45b950> of type timeout_message
+2021-10-18 02:55:17.616682: Started processing timeout message.
+2021-10-18 02:55:17.616918: Started process certificate qc
+2021-10-18 02:55:17.617141: Advancing round based on qc
+2021-10-18 02:55:17.617382: Started process certificate qc
+2021-10-18 02:55:17.617590: Advancing round based on qc
+2021-10-18 02:55:17.617804: Advancing round based on tc
+2021-10-18 02:55:17.618016: Processing remote time out
+2021-10-18 02:55:17.618226: Received local timeout
+2021-10-18 02:55:17.618557: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e45b290> of type timeout_message
+2021-10-18 02:55:17.618824: Started processing timeout message.
+2021-10-18 02:55:17.619040: Started process certificate qc
+2021-10-18 02:55:17.619240: Advancing round based on qc
+2021-10-18 02:55:17.619478: Started process certificate qc
+2021-10-18 02:55:17.619745: Advancing round based on qc
+2021-10-18 02:55:17.619959: Advancing round based on tc
+2021-10-18 02:55:17.620158: Processing remote time out
+2021-10-18 02:55:17.623891: Received local timeout
+2021-10-18 02:55:17.624098: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e468250> of type timeout_message
+2021-10-18 02:55:17.624296: Started processing timeout message.
+2021-10-18 02:55:17.624508: Started process certificate qc
+2021-10-18 02:55:17.624714: Advancing round based on qc
+2021-10-18 02:55:17.624964: Started process certificate qc
+2021-10-18 02:55:17.625171: Advancing round based on qc
+2021-10-18 02:55:17.625379: Advancing round based on tc
+2021-10-18 02:55:17.625667: Processing remote time out
+2021-10-18 02:55:17.625912: Received local timeout
+2021-10-18 02:55:17.626132: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4682d0> of type timeout_message
+2021-10-18 02:55:17.626370: Started processing timeout message.
+2021-10-18 02:55:17.626731: Started process certificate qc
+2021-10-18 02:55:17.626940: Advancing round based on qc
+2021-10-18 02:55:17.627308: Started process certificate qc
+2021-10-18 02:55:17.627572: Advancing round based on qc
+2021-10-18 02:55:17.627831: Advancing round based on tc
+2021-10-18 02:55:17.628038: Processing remote time out
+2021-10-18 02:55:17.628243: Received local timeout
+2021-10-18 02:55:17.628442: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4598d0> of type timeout_message
+2021-10-18 02:55:17.628653: Started processing timeout message.
+2021-10-18 02:55:17.629285: Started process certificate qc
+2021-10-18 02:55:17.629638: Advancing round based on qc
+2021-10-18 02:55:17.629892: Started process certificate qc
+2021-10-18 02:55:17.630391: Advancing round based on qc
+2021-10-18 02:55:17.630622: Advancing round based on tc
+2021-10-18 02:55:17.630888: Processing remote time out
+2021-10-18 02:55:17.631476: Received local timeout
+2021-10-18 02:55:17.631707: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e459fd0> of type timeout_message
+2021-10-18 02:55:17.631968: Started processing timeout message.
+2021-10-18 02:55:17.632211: Started process certificate qc
+2021-10-18 02:55:17.632478: Advancing round based on qc
+2021-10-18 02:55:17.632677: Started process certificate qc
+2021-10-18 02:55:17.632877: Advancing round based on qc
+2021-10-18 02:55:17.633141: Advancing round based on tc
+2021-10-18 02:55:17.633393: Processing remote time out
+2021-10-18 02:55:17.633597: Received local timeout
+2021-10-18 02:55:17.633805: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e459410> of type timeout_message
+2021-10-18 02:55:17.634076: Started processing timeout message.
+2021-10-18 02:55:17.634292: Started process certificate qc
+2021-10-18 02:55:17.634570: Advancing round based on qc
+2021-10-18 02:55:17.634809: Started process certificate qc
+2021-10-18 02:55:17.635008: Advancing round based on qc
+2021-10-18 02:55:17.635208: Advancing round based on tc
+2021-10-18 02:55:17.635410: Processing remote time out
+2021-10-18 02:55:17.635630: Received local timeout
+2021-10-18 02:55:17.635841: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e453110> of type timeout_message
+2021-10-18 02:55:17.636173: Started processing timeout message.
+2021-10-18 02:55:17.636372: Started process certificate qc
+2021-10-18 02:55:17.636671: Advancing round based on qc
+2021-10-18 02:55:17.636892: Started process certificate qc
+2021-10-18 02:55:17.637092: Advancing round based on qc
+2021-10-18 02:55:17.637306: Advancing round based on tc
+2021-10-18 02:55:17.637516: Processing remote time out
+2021-10-18 02:55:17.637728: Received local timeout
+2021-10-18 02:55:17.637939: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4576d0> of type timeout_message
+2021-10-18 02:55:17.638153: Started processing timeout message.
+2021-10-18 02:55:17.638449: Started process certificate qc
+2021-10-18 02:55:17.638682: Advancing round based on qc
+2021-10-18 02:55:17.638951: Started process certificate qc
+2021-10-18 02:55:17.639188: Advancing round based on qc
+2021-10-18 02:55:17.639398: Advancing round based on tc
+2021-10-18 02:55:17.639685: Processing remote time out
+2021-10-18 02:55:17.639890: Received local timeout
+2021-10-18 02:55:17.640129: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e446b10> of type timeout_message
+2021-10-18 02:55:17.640322: Started processing timeout message.
+2021-10-18 02:55:17.640514: Started process certificate qc
+2021-10-18 02:55:17.640707: Advancing round based on qc
+2021-10-18 02:55:17.640912: Started process certificate qc
+2021-10-18 02:55:17.641120: Advancing round based on qc
+2021-10-18 02:55:17.641318: Advancing round based on tc
+2021-10-18 02:55:17.641547: Processing remote time out
+2021-10-18 02:55:17.641851: Received local timeout
+2021-10-18 02:55:17.642166: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44f950> of type timeout_message
+2021-10-18 02:55:17.642416: Started processing timeout message.
+2021-10-18 02:55:17.642684: Started process certificate qc
+2021-10-18 02:55:17.642919: Advancing round based on qc
+2021-10-18 02:55:17.643129: Started process certificate qc
+2021-10-18 02:55:17.643327: Advancing round based on qc
+2021-10-18 02:55:17.643608: Advancing round based on tc
+2021-10-18 02:55:17.643801: Processing remote time out
+2021-10-18 02:55:17.644038: Received local timeout
+2021-10-18 02:55:17.644249: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e457e10> of type timeout_message
+2021-10-18 02:55:17.644445: Started processing timeout message.
+2021-10-18 02:55:17.644709: Started process certificate qc
+2021-10-18 02:55:17.644914: Advancing round based on qc
+2021-10-18 02:55:17.645120: Started process certificate qc
+2021-10-18 02:55:17.645312: Advancing round based on qc
+2021-10-18 02:55:17.645512: Advancing round based on tc
+2021-10-18 02:55:17.645722: Processing remote time out
+2021-10-18 02:55:17.645922: Received local timeout
+2021-10-18 02:55:17.646177: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4501d0> of type timeout_message
+2021-10-18 02:55:17.646404: Started processing timeout message.
+2021-10-18 02:55:17.646632: Started process certificate qc
+2021-10-18 02:55:17.646841: Advancing round based on qc
+2021-10-18 02:55:17.647074: Started process certificate qc
+2021-10-18 02:55:17.647286: Advancing round based on qc
+2021-10-18 02:55:17.647529: Advancing round based on tc
+2021-10-18 02:55:17.647753: Processing remote time out
+2021-10-18 02:55:17.648088: Received local timeout
+2021-10-18 02:55:17.648368: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4537d0> of type timeout_message
+2021-10-18 02:55:17.648636: Started processing timeout message.
+2021-10-18 02:55:17.648839: Started process certificate qc
+2021-10-18 02:55:17.649044: Advancing round based on qc
+2021-10-18 02:55:17.649381: Started process certificate qc
+2021-10-18 02:55:17.649616: Advancing round based on qc
+2021-10-18 02:55:17.649817: Advancing round based on tc
+2021-10-18 02:55:17.650035: Processing remote time out
+2021-10-18 02:55:17.650285: Received local timeout
+2021-10-18 02:55:17.650518: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44ec90> of type timeout_message
+2021-10-18 02:55:17.650740: Started processing timeout message.
+2021-10-18 02:55:17.650938: Started process certificate qc
+2021-10-18 02:55:17.651198: Advancing round based on qc
+2021-10-18 02:55:17.651418: Started process certificate qc
+2021-10-18 02:55:17.651735: Advancing round based on qc
+2021-10-18 02:55:17.652055: Advancing round based on tc
+2021-10-18 02:55:17.652260: Processing remote time out
+2021-10-18 02:55:17.652597: Received local timeout
+2021-10-18 02:55:17.652863: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e468cd0> of type timeout_message
+2021-10-18 02:55:17.653073: Started processing timeout message.
+2021-10-18 02:55:17.653283: Started process certificate qc
+2021-10-18 02:55:17.653495: Advancing round based on qc
+2021-10-18 02:55:17.653696: Started process certificate qc
+2021-10-18 02:55:17.654057: Advancing round based on qc
+2021-10-18 02:55:17.654466: Advancing round based on tc
+2021-10-18 02:55:17.654757: Processing remote time out
+2021-10-18 02:55:17.654986: Received local timeout
+2021-10-18 02:55:17.655188: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4592d0> of type timeout_message
+2021-10-18 02:55:17.655391: Started processing timeout message.
+2021-10-18 02:55:17.655596: Started process certificate qc
+2021-10-18 02:55:17.655827: Advancing round based on qc
+2021-10-18 02:55:17.656212: Started process certificate qc
+2021-10-18 02:55:17.656438: Advancing round based on qc
+2021-10-18 02:55:17.656660: Advancing round based on tc
+2021-10-18 02:55:17.656915: Processing remote time out
+2021-10-18 02:55:18.543087: Creating a local timeout at 2
+2021-10-18 02:55:18.543426: Stopping round in PaceMaker
+2021-10-18 02:55:18.544021: Calling make_timeout
+2021-10-18 02:55:18.544241: Generating signature for replica, 2
+2021-10-18 02:55:18.545503: Received local timeout
+2021-10-18 02:55:18.545718: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4469d0> of type timeout_message
+2021-10-18 02:55:18.545917: Started processing timeout message.
+2021-10-18 02:55:18.546115: Started process certificate qc
+2021-10-18 02:55:18.546349: Advancing round based on qc
+2021-10-18 02:55:18.546577: Started process certificate qc
+2021-10-18 02:55:18.546821: Advancing round based on qc
+2021-10-18 02:55:18.547017: Advancing round based on tc
+2021-10-18 02:55:18.547211: Processing remote time out
+2021-10-18 02:55:19.546552: Creating a local timeout at 2
+2021-10-18 02:55:19.546930: Stopping round in PaceMaker
+2021-10-18 02:55:19.547427: Calling make_timeout
+2021-10-18 02:55:19.547672: Generating signature for replica, 2
+2021-10-18 02:55:19.548954: Received local timeout
+2021-10-18 02:55:19.549281: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e446b10> of type timeout_message
+2021-10-18 02:55:19.549507: Started processing timeout message.
+2021-10-18 02:55:19.549736: Started process certificate qc
+2021-10-18 02:55:19.549959: Advancing round based on qc
+2021-10-18 02:55:19.550174: Started process certificate qc
+2021-10-18 02:55:19.550384: Advancing round based on qc
+2021-10-18 02:55:19.550626: Advancing round based on tc
+2021-10-18 02:55:19.550871: Processing remote time out
+2021-10-18 02:55:20.550015: Creating a local timeout at 2
+2021-10-18 02:55:20.550394: Stopping round in PaceMaker
+2021-10-18 02:55:20.550910: Calling make_timeout
+2021-10-18 02:55:20.551116: Generating signature for replica, 2
+2021-10-18 02:55:20.552307: Received local timeout
+2021-10-18 02:55:20.552519: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e457e10> of type timeout_message
+2021-10-18 02:55:20.552728: Started processing timeout message.
+2021-10-18 02:55:20.552932: Started process certificate qc
+2021-10-18 02:55:20.553137: Advancing round based on qc
+2021-10-18 02:55:20.553340: Started process certificate qc
+2021-10-18 02:55:20.553538: Advancing round based on qc
+2021-10-18 02:55:20.553742: Advancing round based on tc
+2021-10-18 02:55:20.553941: Processing remote time out
+2021-10-18 02:55:21.553410: Creating a local timeout at 2
+2021-10-18 02:55:21.553781: Stopping round in PaceMaker
+2021-10-18 02:55:21.554296: Calling make_timeout
+2021-10-18 02:55:21.554527: Generating signature for replica, 2
+2021-10-18 02:55:21.555822: Received local timeout
+2021-10-18 02:55:21.556048: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e446b10> of type timeout_message
+2021-10-18 02:55:21.556283: Started processing timeout message.
+2021-10-18 02:55:21.556678: Started process certificate qc
+2021-10-18 02:55:21.557535: Advancing round based on qc
+2021-10-18 02:55:21.557767: Started process certificate qc
+2021-10-18 02:55:21.557971: Advancing round based on qc
+2021-10-18 02:55:21.558192: Advancing round based on tc
+2021-10-18 02:55:21.558415: Processing remote time out
+2021-10-18 02:55:22.556816: Creating a local timeout at 2
+2021-10-18 02:55:22.557133: Stopping round in PaceMaker
+2021-10-18 02:55:22.557421: Calling make_timeout
+2021-10-18 02:55:22.557656: Generating signature for replica, 2
+2021-10-18 02:55:22.558828: Received local timeout
+2021-10-18 02:55:22.559042: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4469d0> of type timeout_message
+2021-10-18 02:55:22.559242: Started processing timeout message.
+2021-10-18 02:55:22.559510: Started process certificate qc
+2021-10-18 02:55:22.559717: Advancing round based on qc
+2021-10-18 02:55:22.559914: Started process certificate qc
+2021-10-18 02:55:22.560115: Advancing round based on qc
+2021-10-18 02:55:22.560315: Advancing round based on tc
+2021-10-18 02:55:22.560508: Processing remote time out
+2021-10-18 02:55:23.559864: Creating a local timeout at 2
+2021-10-18 02:55:23.560184: Stopping round in PaceMaker
+2021-10-18 02:55:23.560470: Calling make_timeout
+2021-10-18 02:55:23.560710: Generating signature for replica, 2
+2021-10-18 02:55:23.562063: Received local timeout
+2021-10-18 02:55:23.562359: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e457e10> of type timeout_message
+2021-10-18 02:55:23.562589: Started processing timeout message.
+2021-10-18 02:55:23.562863: Started process certificate qc
+2021-10-18 02:55:23.563091: Advancing round based on qc
+2021-10-18 02:55:23.563291: Started process certificate qc
+2021-10-18 02:55:23.563498: Advancing round based on qc
+2021-10-18 02:55:23.563695: Advancing round based on tc
+2021-10-18 02:55:23.563897: Processing remote time out
+2021-10-18 02:55:24.563000: Creating a local timeout at 2
+2021-10-18 02:55:24.563317: Stopping round in PaceMaker
+2021-10-18 02:55:24.563600: Calling make_timeout
+2021-10-18 02:55:24.563807: Generating signature for replica, 2
+2021-10-18 02:55:24.565420: Received local timeout
+2021-10-18 02:55:24.565662: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4576d0> of type timeout_message
+2021-10-18 02:55:24.565868: Started processing timeout message.
+2021-10-18 02:55:24.566062: Started process certificate qc
+2021-10-18 02:55:24.566332: Advancing round based on qc
+2021-10-18 02:55:24.566524: Started process certificate qc
+2021-10-18 02:55:24.566719: Advancing round based on qc
+2021-10-18 02:55:24.566946: Advancing round based on tc
+2021-10-18 02:55:24.567189: Processing remote time out
+2021-10-18 02:55:25.566424: Creating a local timeout at 2
+2021-10-18 02:55:25.566743: Stopping round in PaceMaker
+2021-10-18 02:55:25.567046: Calling make_timeout
+2021-10-18 02:55:25.567329: Generating signature for replica, 2
+2021-10-18 02:55:25.568636: Received local timeout
+2021-10-18 02:55:25.568901: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4576d0> of type timeout_message
+2021-10-18 02:55:25.569269: Started processing timeout message.
+2021-10-18 02:55:25.569854: Started process certificate qc
+2021-10-18 02:55:25.570062: Advancing round based on qc
+2021-10-18 02:55:25.570906: Started process certificate qc
+2021-10-18 02:55:25.571291: Advancing round based on qc
+2021-10-18 02:55:25.571849: Advancing round based on tc
+2021-10-18 02:55:25.572067: Processing remote time out
+2021-10-18 02:55:25.596491: Received local timeout
+2021-10-18 02:55:25.597032: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4598d0> of type timeout_message
+2021-10-18 02:55:25.597282: Started processing timeout message.
+2021-10-18 02:55:25.597490: Started process certificate qc
+2021-10-18 02:55:25.597709: Advancing round based on qc
+2021-10-18 02:55:25.597942: Started process certificate qc
+2021-10-18 02:55:25.598171: Advancing round based on qc
+2021-10-18 02:55:25.598458: Advancing round based on tc
+2021-10-18 02:55:25.598675: Processing remote time out
+2021-10-18 02:55:25.598896: Stopping round in PaceMaker
+2021-10-18 02:55:25.599123: Creating a local timeout at 2
+2021-10-18 02:55:25.599332: Stopping round in PaceMaker
+2021-10-18 02:55:25.605223: Calling make_timeout
+2021-10-18 02:55:25.605542: Generating signature for replica, 2
+2021-10-18 02:55:25.608085: Received local timeout
+2021-10-18 02:55:25.608813: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e446850> of type timeout_message
+2021-10-18 02:55:25.609625: Started processing timeout message.
+2021-10-18 02:55:25.611979: Started process certificate qc
+2021-10-18 02:55:25.612846: Advancing round based on qc
+2021-10-18 02:55:25.613136: Started process certificate qc
+2021-10-18 02:55:25.613364: Advancing round based on qc
+2021-10-18 02:55:25.613577: Advancing round based on tc
+2021-10-18 02:55:25.613798: Processing remote time out
+2021-10-18 02:55:25.614036: Stopping round in PaceMaker
+2021-10-18 02:55:25.614275: Creating a local timeout at 2
+2021-10-18 02:55:25.614739: Stopping round in PaceMaker
+2021-10-18 02:55:25.614964: Calling make_timeout
+2021-10-18 02:55:25.615286: Generating signature for replica, 2
+2021-10-18 02:55:25.617271: Received local timeout
+2021-10-18 02:55:25.617539: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e459450> of type timeout_message
+2021-10-18 02:55:25.617924: Started processing timeout message.
+2021-10-18 02:55:25.618441: Started process certificate qc
+2021-10-18 02:55:25.618676: Advancing round based on qc
+2021-10-18 02:55:25.619183: Started process certificate qc
+2021-10-18 02:55:25.619764: Advancing round based on qc
+2021-10-18 02:55:25.619987: Advancing round based on tc
+2021-10-18 02:55:25.620198: Processing remote time out
+2021-10-18 02:55:25.620416: Generating a timeout certificate
+2021-10-18 02:55:25.620637: Advancing round based on tc
+2021-10-18 02:55:25.620879: Stopping round in PaceMaker
+2021-10-18 02:55:25.621163: Started round in PaceMaker
+2021-10-18 02:55:25.621782: Started processing new round event 
+2021-10-18 02:55:25.622684: Received local timeout
+2021-10-18 02:55:25.622903: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e446d10> of type timeout_message
+2021-10-18 02:55:25.623115: Started processing timeout message.
+2021-10-18 02:55:25.623329: Started process certificate qc
+2021-10-18 02:55:25.623557: Advancing round based on qc
+2021-10-18 02:55:25.623755: Started process certificate qc
+2021-10-18 02:55:25.623963: Advancing round based on qc
+2021-10-18 02:55:25.624185: Advancing round based on tc
+2021-10-18 02:55:25.624454: Processing remote time out
+2021-10-18 02:55:25.625011: Received local timeout
+2021-10-18 02:55:25.625957: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e445e50> of type timeout_message
+2021-10-18 02:55:25.626345: Started processing timeout message.
+2021-10-18 02:55:25.626556: Started process certificate qc
+2021-10-18 02:55:25.626764: Advancing round based on qc
+2021-10-18 02:55:25.626973: Started process certificate qc
+2021-10-18 02:55:25.627187: Advancing round based on qc
+2021-10-18 02:55:25.627398: Advancing round based on tc
+2021-10-18 02:55:25.627613: Processing remote time out
+2021-10-18 02:55:25.627848: Received local timeout
+2021-10-18 02:55:25.628062: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e453ad0> of type timeout_message
+2021-10-18 02:55:25.628271: Started processing timeout message.
+2021-10-18 02:55:25.628584: Started process certificate qc
+2021-10-18 02:55:25.629067: Advancing round based on qc
+2021-10-18 02:55:25.629297: Started process certificate qc
+2021-10-18 02:55:25.629558: Advancing round based on qc
+2021-10-18 02:55:25.629858: Advancing round based on tc
+2021-10-18 02:55:25.630208: Processing remote time out
+2021-10-18 02:55:33.623944: Creating a local timeout at 2
+2021-10-18 02:55:33.624304: Stopping round in PaceMaker
+2021-10-18 02:55:33.624629: Calling make_timeout
+2021-10-18 02:55:33.624877: Generating signature for replica, 2
+2021-10-18 02:55:33.626372: Received local timeout
+2021-10-18 02:55:33.626607: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e454810> of type timeout_message
+2021-10-18 02:55:33.626824: Started processing timeout message.
+2021-10-18 02:55:33.627032: Started process certificate qc
+2021-10-18 02:55:33.627242: Advancing round based on qc
+2021-10-18 02:55:33.627451: Started process certificate qc
+2021-10-18 02:55:33.627661: Advancing round based on qc
+2021-10-18 02:55:33.627867: Advancing round based on tc
+2021-10-18 02:55:33.628073: Processing remote time out
+2021-10-18 02:55:33.628568: Received local timeout
+2021-10-18 02:55:33.628798: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e454550> of type timeout_message
+2021-10-18 02:55:33.628999: Started processing timeout message.
+2021-10-18 02:55:33.629240: Started process certificate qc
+2021-10-18 02:55:33.629461: Advancing round based on qc
+2021-10-18 02:55:33.629688: Started process certificate qc
+2021-10-18 02:55:33.629887: Advancing round based on qc
+2021-10-18 02:55:33.630092: Advancing round based on tc
+2021-10-18 02:55:33.630323: Processing remote time out
+2021-10-18 02:55:33.630573: Stopping round in PaceMaker
+2021-10-18 02:55:33.630792: Creating a local timeout at 2
+2021-10-18 02:55:33.631020: Stopping round in PaceMaker
+2021-10-18 02:55:33.631215: Calling make_timeout
+2021-10-18 02:55:33.631415: Generating signature for replica, 2
+2021-10-18 02:55:33.633131: Received local timeout
+2021-10-18 02:55:33.633360: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e454550> of type timeout_message
+2021-10-18 02:55:33.633604: Started processing timeout message.
+2021-10-18 02:55:33.633808: Started process certificate qc
+2021-10-18 02:55:33.634033: Advancing round based on qc
+2021-10-18 02:55:33.634283: Started process certificate qc
+2021-10-18 02:55:33.634483: Advancing round based on qc
+2021-10-18 02:55:33.634698: Advancing round based on tc
+2021-10-18 02:55:33.634928: Processing remote time out
+2021-10-18 02:55:33.635232: Generating a timeout certificate
+2021-10-18 02:55:33.635439: Advancing round based on tc
+2021-10-18 02:55:33.635808: Stopping round in PaceMaker
+2021-10-18 02:55:33.636131: Started round in PaceMaker
+2021-10-18 02:55:33.636493: Started processing new round event 
+2021-10-18 02:55:33.636707: Received local timeout
+2021-10-18 02:55:33.637357: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e454990> of type timeout_message
+2021-10-18 02:55:33.637552: Started processing timeout message.
+2021-10-18 02:55:33.637744: Started process certificate qc
+2021-10-18 02:55:33.637938: Advancing round based on qc
+2021-10-18 02:55:33.638149: Started process certificate qc
+2021-10-18 02:55:33.638344: Advancing round based on qc
+2021-10-18 02:55:33.638545: Advancing round based on tc
+2021-10-18 02:55:33.638765: Processing remote time out
+2021-10-18 02:55:33.639706: Received local timeout
+2021-10-18 02:55:33.639965: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44e9d0> of type timeout_message
+2021-10-18 02:55:33.640166: Started processing timeout message.
+2021-10-18 02:55:33.640387: Started process certificate qc
+2021-10-18 02:55:33.640604: Advancing round based on qc
+2021-10-18 02:55:33.640802: Started process certificate qc
+2021-10-18 02:55:33.641005: Advancing round based on qc
+2021-10-18 02:55:33.641282: Advancing round based on tc
+2021-10-18 02:55:33.641525: Processing remote time out
+2021-10-18 02:55:33.641746: Received local timeout
+2021-10-18 02:55:33.641972: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e4592d0> of type timeout_message
+2021-10-18 02:55:33.642461: Started processing timeout message.
+2021-10-18 02:55:33.642702: Started process certificate qc
+2021-10-18 02:55:33.642900: Advancing round based on qc
+2021-10-18 02:55:33.643169: Started process certificate qc
+2021-10-18 02:55:33.643431: Advancing round based on qc
+2021-10-18 02:55:33.643670: Advancing round based on tc
+2021-10-18 02:55:33.644000: Processing remote time out
+2021-10-18 02:55:33.644204: Received local timeout
+2021-10-18 02:55:33.644401: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e448310> of type timeout_message
+2021-10-18 02:55:33.644600: Started processing timeout message.
+2021-10-18 02:55:33.644812: Started process certificate qc
+2021-10-18 02:55:33.645049: Advancing round based on qc
+2021-10-18 02:55:33.645262: Started process certificate qc
+2021-10-18 02:55:33.645761: Advancing round based on qc
+2021-10-18 02:55:33.646224: Advancing round based on tc
+2021-10-18 02:55:33.646469: Processing remote time out
+2021-10-18 02:55:33.646978: Received local timeout
+2021-10-18 02:55:33.647328: Started event processing for message <libra.Objects.TimeoutMsg object at 0x10e44e550> of type timeout_message
+2021-10-18 02:55:33.647536: Started processing timeout message.
+2021-10-18 02:55:33.647750: Started process certificate qc
+2021-10-18 02:55:33.647959: Advancing round based on qc
+2021-10-18 02:55:33.648269: Started process certificate qc
+2021-10-18 02:55:33.648470: Advancing round based on qc
+2021-10-18 02:55:33.648693: Advancing round based on tc
+2021-10-18 02:55:33.648899: Processing remote time out
+2021-10-18 02:55:41.642352: Creating a local timeout at 2
+2021-10-18 02:55:41.644020: Stopping round in PaceMaker
+2021-10-18 02:55:41.645059: Calling make_timeout
+2021-10-18 02:55:41.645982: Generating signature for replica, 2

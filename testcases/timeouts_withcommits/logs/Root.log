@@ -1,5 +1,10 @@
-2021-10-17 23:08:35.702426: Main process started
-2021-10-17 23:08:43.895952: All clients requested to send replicas empty block
-2021-10-17 23:08:43.896101: Root is sending :2--->dummy_txn0 to all replicas
-2021-10-17 23:08:43.916613: Root is sending :2--->dummy_txn1 to all replicas
-2021-10-17 23:08:44.010500: Main function is terminating
+2021-10-18 02:56:46.472965: Main process started
+2021-10-18 02:56:46.473095: Generating workload based on config file configTimeoutCommit.txt
+2021-10-18 02:56:46.473407: Generated workload based on config file configTimeoutCommit.txt
+2021-10-18 02:56:46.473911: Generated signature keys for replicas
+2021-10-18 02:56:46.474171: Generated signature keys for clients
+2021-10-18 02:56:46.544397: Running replicas with f timeout replicas
+2021-10-18 02:56:50.691854: All clients requested to send replicas empty block
+2021-10-18 02:56:50.692425: Root is sending :2--->dummy_txn0 to all replicas
+2021-10-18 02:56:50.706867: Root is sending :2--->dummy_txn1 to all replicas
+2021-10-18 02:56:50.786970: Main function is terminating

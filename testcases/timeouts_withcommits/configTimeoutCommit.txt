@@ -1,6 +1,5 @@
 
 test_case_name = test3
-
 number_of_procs = 4
 client_reqs = 4
 number_of_clients = 2
