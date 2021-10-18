@@ -143,7 +143,7 @@ class Replica(process):
     #     if vote msg 6= ⊥ then
     #     send vote msg to LeaderElection.get leader(current round + 1)
     def Main_process_proposal_msg(P):
-        Logger.log("Started event processing for message " + str(message.block.payload), logfile)
+        Logger.log("Started event processing", logfile)
         if  P.sender!=curr_pr:
             t = self.MemPool_get_transactions(P.block.payload)
         self.Main_process_certificate_qc(P.block.qc)
