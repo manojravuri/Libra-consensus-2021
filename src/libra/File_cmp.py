@@ -2,7 +2,7 @@ import filecmp
 import os
 
 def main():
-    Ledger_files=7
+    Ledger_files=4
     flag=True
     for i in range(Ledger_files-1):
         dir = os.path.dirname(os.path.dirname(os.getcwd())) + '/data/'

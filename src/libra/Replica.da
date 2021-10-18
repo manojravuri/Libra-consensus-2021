@@ -205,7 +205,7 @@ class Replica(process):
 
     def Ledger_pending_state(block_id):
         if (block_id in self.pending_map):
-                return hash(str( self.commit_state_id) +str(self.pending_map[block_id]["prev_block_id"]) )
+                return hash(str( self.commit_state_id) +str(self.pending_map[block_id]["block"].payload) )
         else:
             return None
 
@@ -222,19 +222,13 @@ class Replica(process):
                 file.close()
                 Logger.log("Committed txn : "+str(txn)+" to ledger",logfile)
                 send(('committed',txn,replica_id),to=request_map[txn])
-            self.Ledger_add_committed_block_to_Q(block_id)
+            self.commited_blocks[block_id]=self.pending_map[block_id].copy()
             self.pending_map.pop(block_id)
 
     def Ledger_committed_block(block_id):
-        a=None
         if block_id in self.commited_blocks :
-            a= self.commited_blocks[block_id]["block"]
-        return a
-
-    def Ledger_add_committed_block_to_Q(block_id):
-        # if len(self.commited_blocks) == self.exclude_size:
-        #     self.commited_blocks.popleft()
-        self.commited_blocks[block_id]=self.pending_map[block_id].copy()
+            return self.commited_blocks[block_id]["block"]
+        return None
 
     # ====== methods of Safety ======
 
