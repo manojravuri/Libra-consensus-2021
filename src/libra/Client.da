@@ -24,6 +24,13 @@ class Client(process):
         self.logfile="Client_"+str(client_id)+".log"
         Logger.log("Creating client "+str(client_id),logfile)
         self.replicas=replicas
+
+        self.attr="Attributes of client "+str(client_id)+":\n"
+
+        attr = attr +"number_of_requests :"+str(number_of_requests)+"\n"
+        attr = attr +"request_gap :"+str(request_gap)+"\n"
+        attr = attr +"faulty_client :"+str(faulty_client)
+
         self.number_of_requests = number_of_requests
         self.request_gap = request_gap
         self.f=f
@@ -36,6 +43,8 @@ class Client(process):
         self.req_root=False
         self.duplicate_requests=duplicate_requests
         self.faulty_client=faulty_client
+
+        Logger.log(attr,logfile)
 
     def broadcast_request(cmd,reps):
         c=logical_clock()

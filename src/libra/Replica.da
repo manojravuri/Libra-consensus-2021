@@ -28,33 +28,28 @@ class Replica(process):
 
         self.replica_id = replica_id
         self.logfile="Replica_"+str(replica_id)+".log"
-        Logger.log("creating replica "+str(replica_id),logfile)
+        Logger.log("Creating Replica "+str(replica_id),logfile)
         self.f = f
         self.replicas = ps
-        self.proposals = set()
-        self.processing_req = False
-        self.votes_received = 0
         self.replica_map=rep_map
         self.inv_map = {v: k for k, v in replica_map.items()}
         self.client_map=cl_map
         self.request_map={}
         self.terminate=False
         self.message_delay=message_delay
-        random.seed(6)
+        
+        self.attr="Attributes of Replica "+str(replica_id)+":\n"
 
         # ====== attributes of Main ======
 
-
         self.window_size = 1
-        self.replica_id = replica_id
-        self.win_sz = 1
+        attr = attr +"window_size :"+str(window_size)+"\n"
         self.curr_pr = curr_pr
 
         # ====== attributes of MemPool ======
 
         self.processed_transactions = []
-        self.mem_queue =  []
-        self.test_if_mem_queue_is_full = 0
+        self.mem_queue =  []   
 
         # ====== attributes of Ledger ======
         cur_path = os.getcwd()
@@ -89,17 +84,22 @@ class Replica(process):
         self.last_round_tc = None
         self.pending_timeouts = {}
         self.delta = 2
+        attr = attr +"delta :"+str(delta)+"\n"
         self.timer = threading.Timer(None, None)
         self.ps = ps
         self.timer_map={}
 
         # ====== attributes of LeaderElection ======
         self.exclude_size = f  # f to 2f
+        attr = attr +"exclude_size :" +str(exclude_size)+"\n"
+        attr = attr +"commit_state_id :"+str(commit_state_id)
+        
         self.reputation_leaders = {}
         self.init_replica_ids=[]
         for i in range (2*f+1):
             self.init_replica_ids.append(i+1)
 
+        Logger.log(attr,logfile)
     # ====== methods of Main ======
 
     #Will check if the current process is the leader for the current round
