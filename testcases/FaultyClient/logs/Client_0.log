@@ -1,0 +1,37 @@
+2021-10-17 23:54:32.135823: Creating client 0
+2021-10-17 23:54:33.141900: Client is sending :0----->0 to all replicas
+2021-10-17 23:54:38.147753: Client is sending :0----->1 to all replicas
+2021-10-17 23:54:39.150013: Client is sending :0----->2 to all replicas
+2021-10-17 23:54:39.151154: Received transaction :0----->0 committed message from replica 2
+2021-10-17 23:54:39.151375: Received transactions cnt :0,4
+2021-10-17 23:54:39.151579: Received transaction :0----->0 committed message from replica 1
+2021-10-17 23:54:39.151785: Received transactions cnt :0,4
+2021-10-17 23:54:39.151980: Received transaction :0----->0 committed message from replica 3
+2021-10-17 23:54:39.152177: Received transactions cnt :1,4
+2021-10-17 23:54:39.152391: Received transaction :0----->0 committed message from replica 0
+2021-10-17 23:54:39.152636: Received transactions cnt :1,4
+2021-10-17 23:54:39.152863: Received transaction :0----->1 committed message from replica 3
+2021-10-17 23:54:39.153079: Received transactions cnt :1,4
+2021-10-17 23:54:40.154734: Client is sending :0----->3 to all replicas
+2021-10-17 23:54:40.155857: Received transaction :0----->1 committed message from replica 1
+2021-10-17 23:54:40.156075: Received transactions cnt :1,4
+2021-10-17 23:54:40.156276: Received transaction :0----->1 committed message from replica 0
+2021-10-17 23:54:40.156473: Received transactions cnt :2,4
+2021-10-17 23:54:40.156667: Request root to send dummy txns to replicas
+2021-10-17 23:54:40.156964: Received transaction :0----->1 committed message from replica 2
+2021-10-17 23:54:40.157186: Received transactions cnt :2,4
+2021-10-17 23:54:40.157507: Received transaction :0----->2 committed message from replica 1
+2021-10-17 23:54:40.157716: Received transactions cnt :2,4
+2021-10-17 23:54:40.164362: Received transaction :0----->2 committed message from replica 0
+2021-10-17 23:54:40.165519: Received transactions cnt :2,4
+2021-10-17 23:54:40.172321: Received transaction :0----->2 committed message from replica 2
+2021-10-17 23:54:40.173260: Received transactions cnt :3,4
+2021-10-17 23:54:40.175660: Received transaction :0----->2 committed message from replica 3
+2021-10-17 23:54:40.175872: Received transactions cnt :3,4
+2021-10-17 23:54:40.244134: Received transaction :0----->3 committed message from replica 3
+2021-10-17 23:54:40.244383: Received transactions cnt :3,4
+2021-10-17 23:54:41.221056: Received transaction :0----->3 committed message from replica 2
+2021-10-17 23:54:41.221302: Received transactions cnt :3,4
+2021-10-17 23:54:41.222667: Received transaction :0----->3 committed message from replica 1
+2021-10-17 23:54:41.222891: Received transactions cnt :4,4
+2021-10-17 23:54:41.223099: Terminating client 0

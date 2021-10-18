@@ -1,5 +1,7 @@
 from libra.Replica import Replica
+from libra.ReplicaFI import ReplicaFI
 from libra.Client import Client
+from libra.ClientFI import ClientFI
 
 import os
 import sys, time
@@ -11,12 +13,12 @@ from libra.Logger import Logger
 
 config(clock='Lamport')
 
-# Root is the orchestrator for the whole process and it will setup the clients and replicas based on the config file.
+
 def main():
 
-    Logger.cleanup() # to initialise a new set of log and ledger files.
+    Logger.cleanup()
     logfile='Root.log'
-    Logger.log("Main process started",logfile) # starts a log file
+    Logger.log("Main process started",logfile)
     if len(sys.argv) > 1:
         config_file = sys.argv[1]
     else:
@@ -24,7 +26,7 @@ def main():
 
     """ reading config from file """
     config = {}
-    with open(os.path.join(os.path.abspath(''), 'libra/config', config_file), 'r') as input: # gets a config file and loads the input into config map.
+    with open(os.path.join(os.path.abspath(''), 'libra/config', config_file), 'r') as input:
         for line in input:
             if line[0] != '#':
                 (key, sep, val) = line.partition('=')
@@ -32,7 +34,7 @@ def main():
                     val = val.strip()
                     config[key.strip()] = int(val) if str.isdecimal(val) else val
 
-    # print(config)
+    print(config)
 
     # os._exit(-1)
     # number_of_procs = int(sys.argv[1]) if len(sys.argv) > 1 else 4
@@ -44,7 +46,6 @@ def main():
     replica_public_keys = []
     replica_private_keys = []
 
-    # generating keys for replicas
     for i in range(number_of_procs):
         signing_key = SigningKey.generate()
         verify_key = signing_key.verify_key
@@ -60,7 +61,6 @@ def main():
     client_private_keys = []
     client_public_keys = []
 
-    # generating keys for clients
     for i in range(number_of_clients):
         signing_key = SigningKey.generate()
         verify_key = signing_key.verify_key
@@ -71,6 +71,29 @@ def main():
 
     f=int((number_of_procs-1)/3)
     replicas = new(Replica, num= number_of_procs)
+
+
+    #print("config['time_out_commit']",config['time_out_commit'])
+    #print("config['time_out_TC']",config['time_out_TC'])
+
+
+    if(config['time_out_commit']=="True"):
+        #logging.log("Running replicas with f timeout replicas",logfile)
+        replicas = new(Replica, num=number_of_procs - f)
+
+        faulty_replicas = new(ReplicaFI, num=f)
+
+        replicas.update(faulty_replicas)
+    elif(config['time_out_TC']=="True"):
+        #logging.log("Running replicas with f+1 timeout replicas",logfile)
+        replicas = new(Replica, num=number_of_procs - f-1)
+
+        faulty_replicas = new(ReplicaFI, num=f+1)
+
+        replicas.update(faulty_replicas)
+    else:
+        #logging.log("Running replicas without faulty replicas",logfile)
+        replicas = new(Replica, num=number_of_procs)
 
     rep_map={}
     cl_map={}
@@ -86,7 +109,13 @@ def main():
 
     client_reqs=config['client_reqs']
     request_gap=config['request_gap']
-    cps=new(Client, num= number_of_clients)
+    if('faulty_client' in config and config['faulty_client']=='True'):
+        faulty_clients=int(number_of_clients/2)
+        cps = new(Client, num=faulty_clients)
+        cp1 = new(ClientFI, num=number_of_clients-faulty_clients)
+        cps.update(cp1)
+    else:
+        cps = new(Client, num=number_of_clients)
 
     i=0
     for cp in cps:
@@ -110,7 +139,7 @@ def main():
     await(len(setof(a,received(  ('send dummy txns',_), from_=a))) == number_of_clients)
     Logger.log("All clients requested to send replicas empty block",logfile)
 
-    # this loop is to send dummy transactions to ensure that all the required transactions are committed.
+
     for i in range(2):
         c=logical_clock()
         cmd=str(number_of_clients) + "--->" + 'dummy_txn'+str(i)

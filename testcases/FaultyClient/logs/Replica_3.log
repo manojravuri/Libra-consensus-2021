@@ -1,0 +1,131 @@
+2021-10-17 23:54:32.132077: creating replica 3
+2021-10-17 23:54:32.134060: Replica started 3
+2021-10-17 23:54:37.138124: Received Client Request from 0
+2021-10-17 23:54:37.142653: Received Client Request from 1
+2021-10-17 23:54:37.144355: Bad signature fromclient 1
+2021-10-17 23:54:37.167386: Received proposal message from 0 containing block ->Block Author :0 Transactions :0----->0
+2021-10-17 23:54:37.170973: Sending vote message to : 0
+2021-10-17 23:54:38.170891: Received Client Request from 0
+2021-10-17 23:54:38.173226: Received Client Request from 1
+2021-10-17 23:54:38.174374: Received Client Request from 1
+2021-10-17 23:54:38.174821: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.180625: Received Client Request from 1
+2021-10-17 23:54:38.181982: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.182994: Received Client Request from 1
+2021-10-17 23:54:38.183596: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.184030: Received Client Request from 1
+2021-10-17 23:54:38.184560: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.185108: Received Client Request from 1
+2021-10-17 23:54:38.185558: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.185902: Received Client Request from 1
+2021-10-17 23:54:38.186499: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.186869: Received Client Request from 1
+2021-10-17 23:54:38.187343: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.187660: Received Client Request from 1
+2021-10-17 23:54:38.188092: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.188471: Received Client Request from 1
+2021-10-17 23:54:38.189110: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.189439: Received proposal message from 1 containing block ->Block Author :1 Transactions :0----->1
+2021-10-17 23:54:38.190107: Sending vote message to : 1
+2021-10-17 23:54:38.190475: Received Client Request from 1
+2021-10-17 23:54:38.190920: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.191301: Received Client Request from 1
+2021-10-17 23:54:38.192011: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.192770: Received Client Request from 1
+2021-10-17 23:54:38.193603: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.194211: Received Client Request from 1
+2021-10-17 23:54:38.194779: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.195233: Received Client Request from 1
+2021-10-17 23:54:38.196215: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.196784: Received Client Request from 1
+2021-10-17 23:54:38.197348: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.198337: Received Client Request from 1
+2021-10-17 23:54:38.198789: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.199117: Received Client Request from 1
+2021-10-17 23:54:38.200286: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.200997: Received Client Request from 1
+2021-10-17 23:54:38.201450: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.201763: Received Client Request from 1
+2021-10-17 23:54:38.202304: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.202654: Received Client Request from 1
+2021-10-17 23:54:38.204160: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.204810: Received Client Request from 1
+2021-10-17 23:54:38.205319: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.205822: Received Client Request from 1
+2021-10-17 23:54:38.206293: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.206613: Received Client Request from 1
+2021-10-17 23:54:38.207050: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.207381: Received Client Request from 1
+2021-10-17 23:54:38.207821: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.208182: Received Client Request from 1
+2021-10-17 23:54:38.208689: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.209007: Received Client Request from 1
+2021-10-17 23:54:38.209471: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.209961: Received Client Request from 1
+2021-10-17 23:54:38.210458: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.210766: Received Client Request from 1
+2021-10-17 23:54:38.211231: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.212385: Received Client Request from 1
+2021-10-17 23:54:38.213620: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.214486: Received Client Request from 1
+2021-10-17 23:54:38.215131: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.215458: Received Client Request from 1
+2021-10-17 23:54:38.216180: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.216493: Received Client Request from 1
+2021-10-17 23:54:38.216931: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.217313: Received Client Request from 1
+2021-10-17 23:54:38.217774: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.218126: Received Client Request from 1
+2021-10-17 23:54:38.218573: Received duplicate 1----->0 which has been dropped
+2021-10-17 23:54:38.219362: Received proposal message from 2 containing block ->Block Author :2 Transactions :1----->0
+2021-10-17 23:54:38.219725: Committed txn : 0----->0 to ledger
+2021-10-17 23:54:38.222064: Sending vote message to : 2
+2021-10-17 23:54:38.222496: Received vote message from 2
+2021-10-17 23:54:38.223407: Received vote message from 1
+2021-10-17 23:54:38.223843: Received vote message from 3
+2021-10-17 23:54:38.224334: Committed txn : 0----->1 to ledger
+2021-10-17 23:54:38.225573: Received vote message from 0
+2021-10-17 23:54:39.152340: Received Client Request from 0
+2021-10-17 23:54:39.153801: Sending Proposal message to all replicas containing block ->Block Author :3 Transactions :0----->2
+2021-10-17 23:54:39.154736: Received proposal message from 3 containing block ->Block Author :3 Transactions :0----->2
+2021-10-17 23:54:39.155866: Sending vote message to : 3
+2021-10-17 23:54:39.204290: Received Client Request from 1
+2021-10-17 23:54:39.205319: Received proposal message from 0 containing block ->Block Author :0 Transactions :1----->1
+2021-10-17 23:54:39.205599: Committed txn : 1----->0 to ledger
+2021-10-17 23:54:39.207033: Sending vote message to : 0
+2021-10-17 23:54:39.207408: Received Client Request from 1
+2021-10-17 23:54:39.207836: Received duplicate 1----->1 which has been dropped
+2021-10-17 23:54:40.174035: Received Client Request from 0
+2021-10-17 23:54:40.174884: Received proposal message from 1 containing block ->Block Author :1 Transactions :0----->3
+2021-10-17 23:54:40.175158: Committed txn : 0----->2 to ledger
+2021-10-17 23:54:40.176464: Sending vote message to : 1
+2021-10-17 23:54:40.206760: Received Client Request from 1
+2021-10-17 23:54:40.207509: Received proposal message from 2 containing block ->Block Author :2 Transactions :1----->2
+2021-10-17 23:54:40.208123: Committed txn : 1----->1 to ledger
+2021-10-17 23:54:40.210100: Sending vote message to : 2
+2021-10-17 23:54:40.210561: Received vote message from 2
+2021-10-17 23:54:40.211395: Received Client Request from 1
+2021-10-17 23:54:40.211831: Received duplicate 1----->2 which has been dropped
+2021-10-17 23:54:40.212155: Received vote message from 3
+2021-10-17 23:54:40.242792: Received vote message from 0
+2021-10-17 23:54:40.243380: Committed txn : 0----->3 to ledger
+2021-10-17 23:54:40.244258: Received vote message from 1
+2021-10-17 23:54:41.206613: Received Client Request from 1
+2021-10-17 23:54:41.208973: Sending Proposal message to all replicas containing block ->Block Author :3 Transactions :1----->3
+2021-10-17 23:54:41.210095: Received Client Request from 1
+2021-10-17 23:54:41.210538: Received duplicate 1----->3 which has been dropped
+2021-10-17 23:54:41.210848: Received dummy txn Request from Root
+2021-10-17 23:54:41.211058: Sending ack back to Root
+2021-10-17 23:54:41.211510: Received proposal message from 3 containing block ->Block Author :3 Transactions :1----->3
+2021-10-17 23:54:41.212748: Sending vote message to : 3
+2021-10-17 23:54:41.235850: Received dummy txn Request from Root
+2021-10-17 23:54:41.236091: Sending ack back to Root
+2021-10-17 23:54:41.236430: Received proposal message from 0 containing block ->Block Author :0 Transactions :2--->dummy_txn0
+2021-10-17 23:54:41.236686: Committed txn : 1----->2 to ledger
+2021-10-17 23:54:41.238389: Sending vote message to : 0
+2021-10-17 23:54:41.247704: Received proposal message from 1 containing block ->Block Author :1 Transactions :2--->dummy_txn1
+2021-10-17 23:54:41.248012: Committed txn : 1----->3 to ledger
+2021-10-17 23:54:41.249653: Sending vote message to : 1
+2021-10-17 23:54:41.271622: Received Terminate signal from Root
+2021-10-17 23:54:41.272051: Terminate replica :3
+2021-10-17 23:54:41.272282: Replica 3 is terminated
