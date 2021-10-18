@@ -11,7 +11,7 @@ class Logger:
         dir = os.path.dirname(os.getcwd()) + '/data/'
         for f in os.listdir(dir):
             os.remove(os.path.join(dir, f))
-        
+
 
 
     @staticmethod
@@ -22,6 +22,3 @@ class Logger:
         file.write(str(datetime.now())+": "+msg+"\n")
         print(msg)
         file.close()
-
-
-
