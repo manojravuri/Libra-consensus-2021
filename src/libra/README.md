@@ -17,8 +17,7 @@ Used DistAlgo for the creation of async clients and message passing.
 
 PLATFORM
 OS: Mac OSX
-DistAlgo version: 1.0.9 TODO: change this version
-Python implementation: CPython TODO: change this
+DistAlgo version: 1.1.0b15
 Python version: 3.7.12
 
 INSTRUCTION
