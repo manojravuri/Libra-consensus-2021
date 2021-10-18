@@ -1,11 +1,10 @@
 PLATFORM
 OS: Mac OSX
-DistAlgo version: 1.0.9 TODO: change this version
-Python implementation: CPython TODO: change this
+DistAlgo version: 1.1.0b15
 Python version: 3.7.12
 
 INSTRUCTION
-1. Download the relevant python and distalgo release. TODO: update python and distalgo version values
+1. Download the relevant python (any of 3.5, 3.6, 3.7) and distalgo release(1.1.0b15).
 2. Unzip the release zip in your PC. Install the python requirements in requirements.txt using pip install -r requirements.txt.
 3. Put your config file in config folder.
 4. Open a command line terminal.
