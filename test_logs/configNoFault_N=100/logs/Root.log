@@ -1,0 +1,9 @@
+2021-10-18 02:50:23.922391: Main process started
+2021-10-18 02:50:23.922575: Generating workload based on config file configNoFault.txt
+2021-10-18 02:50:23.922806: Generated workload based on config file configNoFault.txt
+2021-10-18 02:50:23.923349: Generated signature keys for replicas
+2021-10-18 02:50:23.932273: Generated signature keys for clients
+2021-10-18 02:50:38.636230: All clients requested to send replicas empty block
+2021-10-18 02:50:38.637053: Root is sending :100--->dummy_txn0 to all replicas
+2021-10-18 02:50:38.668567: Root is sending :100--->dummy_txn1 to all replicas
+2021-10-18 02:50:48.559089: Main function is terminating

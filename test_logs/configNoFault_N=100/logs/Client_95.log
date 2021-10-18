@@ -1,0 +1,41 @@
+2021-10-18 02:50:26.617685: Creating client 95
+2021-10-18 02:50:26.618174: Attributes of client 95:
+number_of_requests :4
+request_gap :1
+faulty_client :False
+2021-10-18 02:50:27.713266: Client is sending :95----->0 to all replicas
+2021-10-18 02:50:28.960550: Client is sending :95----->1 to all replicas
+2021-10-18 02:50:29.963008: Client is sending :95----->2 to all replicas
+2021-10-18 02:50:30.966915: Client is sending :95----->3 to all replicas
+2021-10-18 02:50:33.167229: Received transaction :95----->0 committed message from replica 1
+2021-10-18 02:50:33.167586: Transactions committed count :0,4
+2021-10-18 02:50:33.182295: Received transaction :95----->0 committed message from replica 3
+2021-10-18 02:50:33.182653: Transactions committed count :0,4
+2021-10-18 02:50:33.201454: Received transaction :95----->0 committed message from replica 0
+2021-10-18 02:50:33.213904: Transactions committed count :1,4
+2021-10-18 02:50:33.215099: Received transaction :95----->0 committed message from replica 2
+2021-10-18 02:50:33.216002: Transactions committed count :1,4
+2021-10-18 02:50:38.517927: Received transaction :95----->1 committed message from replica 0
+2021-10-18 02:50:38.518305: Transactions committed count :1,4
+2021-10-18 02:50:38.541409: Received transaction :95----->1 committed message from replica 1
+2021-10-18 02:50:38.542399: Transactions committed count :1,4
+2021-10-18 02:50:38.556054: Received transaction :95----->1 committed message from replica 3
+2021-10-18 02:50:38.558365: Transactions committed count :2,4
+2021-10-18 02:50:38.558636: Request root to send dummy txns to replicas
+2021-10-18 02:50:38.560331: Received transaction :95----->1 committed message from replica 2
+2021-10-18 02:50:38.560566: Transactions committed count :2,4
+2021-10-18 02:50:43.601966: Received transaction :95----->2 committed message from replica 1
+2021-10-18 02:50:43.602390: Transactions committed count :2,4
+2021-10-18 02:50:43.618666: Received transaction :95----->2 committed message from replica 3
+2021-10-18 02:50:43.619307: Transactions committed count :2,4
+2021-10-18 02:50:43.620447: Received transaction :95----->2 committed message from replica 2
+2021-10-18 02:50:43.621334: Transactions committed count :3,4
+2021-10-18 02:50:43.623551: Received transaction :95----->2 committed message from replica 0
+2021-10-18 02:50:43.623842: Transactions committed count :3,4
+2021-10-18 02:50:48.520158: Received transaction :95----->3 committed message from replica 1
+2021-10-18 02:50:48.520473: Transactions committed count :3,4
+2021-10-18 02:50:48.533478: Received transaction :95----->3 committed message from replica 0
+2021-10-18 02:50:48.534712: Transactions committed count :3,4
+2021-10-18 02:50:48.535895: Received transaction :95----->3 committed message from replica 3
+2021-10-18 02:50:48.536764: Transactions committed count :4,4
+2021-10-18 02:50:48.537800: Terminating client 95

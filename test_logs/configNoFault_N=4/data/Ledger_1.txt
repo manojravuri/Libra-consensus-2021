@@ -1,0 +1,8 @@
+block-author:0 , block-round: 0 , payload: 1----->0
+block-author:1 , block-round: 1 , payload: 0----->0
+block-author:2 , block-round: 2 , payload: 1----->1
+block-author:3 , block-round: 3 , payload: 0----->1
+block-author:0 , block-round: 4 , payload: 0----->2
+block-author:1 , block-round: 5 , payload: 1----->2
+block-author:2 , block-round: 6 , payload: 0----->3
+block-author:3 , block-round: 7 , payload: 1----->3
