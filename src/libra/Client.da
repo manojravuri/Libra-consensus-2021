@@ -47,7 +47,6 @@ class Client(process):
         elif timeout(replica_timeout): broadcast_request(cmd,reps)
 
     def sign_cmd(cmd):
-        print("faulty",self.faulty_client)
         if not self.faulty_client:
             return Signature(self.client_id, self.private_key.sign(cmd.encode('utf-8')), 'client',None)
         else:

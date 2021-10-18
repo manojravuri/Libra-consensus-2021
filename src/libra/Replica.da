@@ -217,18 +217,17 @@ class Replica(process):
 	# // 2. When a replica has to remove the current processing transaction from its own cache of mem_queue
 
     def MemPool_get_transactions(txns=None):
-        if txns is not None:
+        if txns:
             self.processed_transactions.append(txns) # it means a leader is processing txns
 
         if not self.mem_queue:
             await(len(self.mem_queue)) # wait till some transaction is put in mem_queue
-        if txns is not None:
+        if txns:
             # // this statement will be acted upon in followers, so we have to remove the txns from the pending transactions in the current replica (mem_queue)
             # Remove txns from the mem_queue of current replica
             if txns in self.mem_queue:
                 index_of_txns = self.mem_queue.index(txns)
                 self.mem_queue.pop(index_of_txns)
-            return None
         else:
             # //this call will be done in leader
             # Get the earliest transaction present in mem_queue and send it to Main process to send a ProposalMsg
@@ -239,8 +238,6 @@ class Replica(process):
                     return self.MemPool_get_transactions()
                 self.processed_transactions.append(a)
                 return a
-            else:
-                Logger.log("Memqueue is empty",logfile)
         return None
 
     # This function will be called from the client to add the request in the replica’s mempool
@@ -263,11 +260,8 @@ class Replica(process):
     # find the pending state for the given block id or ⊥ if not present
     # Check if block_id is present in the pending_map and return the corresponding block data
     def Ledger_pending_state(block_id):
-        if (block_id in self.pending_map):
-            if (self.pending_map[block_id]["prev_block_id"] is not None):
-                return hash(str( self.commit_state_id) +str(self.pending_map[block_id]["prev_block_id"]) )
-            else:
-                return None
+        if block_id in self.pending_map and self.pending_map[block_id]["prev_block_id"]:
+            return hash(str( self.commit_state_id) +str(self.pending_map[block_id]["prev_block_id"]) )
         else:
             return None
 
@@ -292,7 +286,7 @@ class Replica(process):
                 file.close()
                 Logger.log("Committed txn : "+str(txn)+" to ledger",logfile)
                 send(('committed',txn,replica_id),to=request_map[txn])
-            self.Ledger_add_committed_block_to_Q(block_id)
+            self.commited_blocks[block_id]=self.pending_map[block_id].copy()
             self.pending_map.pop(block_id)
 
     # Check in committed_blocks if the block_id is there
@@ -300,17 +294,10 @@ class Replica(process):
     # If the block_is in cache, it will return the relevant information.
     # else: it will return nothing
     def Ledger_committed_block(block_id):
-        a=None
         if block_id in self.commited_blocks :
-            a= self.commited_blocks[block_id]["block"]
-        return a
+            return self.commited_blocks[block_id]["block"]
+        return None
 
-    # This helper function is used to add block_id and its info into the Ledger Cache.
-    # It adds the data from pending_blocks to the committed_blocks map
-    def Ledger_add_committed_block_to_Q(block_id):
-        # if len(self.commited_blocks) == self.exclude_size:
-        #     self.commited_blocks.popleft()
-        self.commited_blocks[block_id]=self.pending_map[block_id].copy()
 
     # ====== methods of Safety ======
     # commit not to vote in rounds lower than round
@@ -645,13 +632,11 @@ class Replica(process):
         if (self.Main_can_send()):
             Logger.log("sending messages to all processes from replica "+str(replica_id),logfile)
             self.Main_process_new_round_event()
-            -- l2
 
 
         while (not self.terminate):  # keep replica always running
             if (self.LeaderElection_get_leader(self.current_round+1)):
                 -- handlemessages
-                #await(some( received( ('proposal',_,_))) and  (some( received( ('vote',_,_,rid) ),has =rid ==self.replica_id ) )  )
 
 
 
