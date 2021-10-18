@@ -76,7 +76,7 @@ class Client(process):
                 if cmds_pending[cmd_] >= 2*f+1:
                     cnt = cnt + 1
                     #return
-        Logger.log('Received transactions cnt :'+str(cnt)+','+str(number_of_requests),logfile)
+        Logger.log('Transactions committed count :'+str(cnt)+','+str(number_of_requests),logfile)
         if (cnt == (number_of_requests-2)) and  not req_root :
             Logger.log('Request root to send dummy txns to replicas',logfile)
             send(('send dummy txns',logical_clock()),to=parent())

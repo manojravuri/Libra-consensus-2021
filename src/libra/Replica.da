@@ -656,7 +656,6 @@ class Replica(process):
     def run():
         # handle first round
         Logger.log("Replica started "+str(replica_id),logfile)
-        time.sleep(5)
         if (self.Main_can_send()):
             Logger.log("sending messages to all processes from replica "+str(replica_id),logfile)
             self.Main_process_new_round_event()
