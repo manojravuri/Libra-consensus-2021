@@ -223,7 +223,7 @@ class Replica(process):
                 self.commit_state_id=hash(str(self.commit_state_id)+str(txn))
                 file.write("block-author:"+str(inv_map[block.author])+" , block-round: "+str(block.round)+" , payload: "+txn+"\n")
                 file.close()
-                Logger.log("Commited txn : "+str(txn)+" to ledger",logfile)
+                Logger.log("Committed txn : "+str(txn)+" to ledger",logfile)
                 send(('committed',txn,replica_id),to=request_map[txn])
             self.Ledger_add_committed_block_to_Q(block_id)
             self.pending_map.pop(block_id)
@@ -472,13 +472,25 @@ class Replica(process):
 
 
     def receive(msg=('request', cmd, c, p,signature)):
-        Logger.log("Received Client Request from "+str(c),logfile)
+        Logger.log("Received Client Request from "+str(p),logfile)
         if(self.Safety_verify_signature(signature.id, signature.message, signature.type)):
             M = ('request', cmd, c)
 
             request_map[cmd]=client_map[p]
             send( ('request_ack',self.replica_id),to=client_map[p])
             self.Main_add_to_Mempool(M)
+
+    def receive(msg=('request', cmd, c, p)):
+        Logger.log("Received dummy txn Request from Root",logfile)
+        print(p,parent())
+        if(p==parent()):
+            M = ('request', cmd, c)
+
+            #request_map[cmd]=client_map[p]
+            Logger.log("Sending ack back to Root",logfile)
+            send(('request_ack',self.replica_id),to=parent())
+            self.Main_add_to_Mempool(M)
+
 
     def receive(msg=('time_out_msg', timeout_msg,c)):
         Logger.log("Received local timeout",logfile)

@@ -17,7 +17,7 @@ class Client(process):
 
         self.client_id=client_id
         self.logfile="Client_"+str(client_id)+".log"
-        Logger.log("creating client "+str(client_id),logfile)
+        Logger.log("Creating client "+str(client_id),logfile)
         self.replicas=replicas
         self.number_of_requests = number_of_requests
         self.request_gap = request_gap
@@ -28,6 +28,7 @@ class Client(process):
         self.rep_map=rep_map
         self.rep_keys=rep_map.keys()
         self.private_key=client_private_key
+        self.req_root=False
 
     def broadcast_request(cmd,reps):
         c=logical_clock()
@@ -43,12 +44,21 @@ class Client(process):
 
     def receive(msg=('committed', cmd,replica_id)):
         Logger.log('Received transaction :'+str(cmd)+' committed message from replica '+str(replica_id),logfile)
+        cnt=0
         if 'dummy_txn' not in cmd :
             cmds_pending[cmd]+=1
             for cmd_ in cmds_pending:
-                if cmds_pending[cmd_] <= 2*f:
-                    return
+                if cmds_pending[cmd_] >= 2*f+1:
+                    cnt = cnt + 1
+                    #return
+        Logger.log('Received transactions cnt :'+str(cnt)+','+str(number_of_requests),logfile)
+        if (cnt == (number_of_requests-2)) and  not req_root :
+            Logger.log('Request root to send dummy txns to replicas',logfile)
+            send(('send dummy txns',logical_clock()),to=parent())
+            req_root=True
+        elif cnt == number_of_requests:
             self.terminate=True
+
 
 
     def run():
@@ -57,9 +67,7 @@ class Client(process):
             cmd=str(client_id)+"----->"+str(i)
             cmds_pending[cmd]=0
             broadcast_request(cmd,replicas)
-        if client_id==0:
-            broadcast_request(str(client_id) + "----->" + str(0),replicas)
-            broadcast_request(str(client_id) + "--->" + 'dummy_txn1',replicas)
-            broadcast_request(str(client_id) + "--->" + 'dummy_txn2',replicas)
         await(self.terminate)
+        Logger.log("Terminating client "+str(client_id),logfile)
         send(('client_done',client_id,logical_clock()),to=parent())
+
