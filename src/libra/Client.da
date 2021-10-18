@@ -50,7 +50,7 @@ class Client(process):
         if not self.faulty_client:
             return Signature(self.client_id, self.private_key.sign(cmd.encode('utf-8')), 'client',None)
         else:
-            #logging.log("Sending bad signature from faulty client",logfile)
+            Logger.log("Sending bad signature from faulty client",logfile)
             self.faulty_client=False
             faulty_private_key=SigningKey.generate()
             faulty_public_key=faulty_private_key.verify_key

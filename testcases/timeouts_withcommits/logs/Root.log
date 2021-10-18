@@ -1,0 +1,5 @@
+2021-10-17 23:08:35.702426: Main process started
+2021-10-17 23:08:43.895952: All clients requested to send replicas empty block
+2021-10-17 23:08:43.896101: Root is sending :2--->dummy_txn0 to all replicas
+2021-10-17 23:08:43.916613: Root is sending :2--->dummy_txn1 to all replicas
+2021-10-17 23:08:44.010500: Main function is terminating

@@ -143,6 +143,7 @@ class Replica(process):
         self.PaceMaker_advance_round_tc(M.last_round_tc)
         tc = self.PaceMaker_process_remote_timeout(M)
         if (tc):
+            Logger.log("Generating a timeout certificate",logfile)
             self.PaceMaker_advance_round_tc(tc)
             self.Main_process_new_round_event(tc)
 
@@ -287,6 +288,7 @@ class Replica(process):
         try:
             v_key.verify(message)
         except BadSignatureError:
+            Logger.log("Bad signature from"+type+" "+str(id),logfile)
             return False
         except:
             return False
@@ -468,14 +470,14 @@ class Replica(process):
 
     def receive(msg=('request', cmd, c, p,signature)):
         Logger.log("Received Client Request from "+str(p),logfile)
-        if(self.Safety_verify_signature(signature.id, signature.message, signature.type)):
-            M = ('request', cmd, c)
-            if cmd in request_map:
-                Logger.log("Received duplicate "+str(cmd)+" which has been dropped",logfile)
-                send( ('request_ack',self.replica_id),to=client_map[p])
-            else:
-                request_map[cmd]=client_map[p]
-                send( ('request_ack',self.replica_id),to=client_map[p])
+        M = ('request', cmd, c)
+        if cmd in request_map:
+            Logger.log("Received duplicate "+str(cmd)+" which has been dropped",logfile)
+            send( ('request_ack',self.replica_id),to=client_map[p])
+        else:
+            request_map[cmd]=client_map[p]
+            send( ('request_ack',self.replica_id),to=client_map[p])
+            if (self.Safety_verify_signature(signature.id, signature.message, signature.type)):
                 self.Main_add_to_Mempool(M)
 
     def receive(msg=('request', cmd, c, p)):

@@ -1,0 +1,58 @@
+2021-10-17 23:08:35.866806: creating replica 0
+2021-10-17 23:08:35.873609: Replica started 0
+2021-10-17 23:08:40.875988: sending messages to all processes from replica 0
+2021-10-17 23:08:40.879894: Received Client Request from 1
+2021-10-17 23:08:40.882395: Received Client Request from 0
+2021-10-17 23:08:40.884368: Sending Proposal message to all replicas containing block ->Block Author :0 Transactions :1----->0
+2021-10-17 23:08:40.887089: Received local timeout
+2021-10-17 23:08:40.887820: Received proposal message from 0 containing block ->Block Author :0 Transactions :1----->0
+2021-10-17 23:08:40.888917: Sending vote message to : 0
+2021-10-17 23:08:40.936142: Received proposal message from 1 containing block ->Block Author :1 Transactions :0----->0
+2021-10-17 23:08:40.936751: Sending vote message to : 1
+2021-10-17 23:08:41.897047: Received Client Request from 1
+2021-10-17 23:08:41.898125: Received proposal message from 2 containing block ->Block Author :2 Transactions :1----->1
+2021-10-17 23:08:41.898461: Committed txn : 1----->0 to ledger
+2021-10-17 23:08:41.899863: Sending vote message to : 2
+2021-10-17 23:08:41.900266: Received Client Request from 0
+2021-10-17 23:08:41.925326: Received proposal message from 3 containing block ->Block Author :3 Transactions :0----->1
+2021-10-17 23:08:41.925753: Committed txn : 0----->0 to ledger
+2021-10-17 23:08:41.927188: Sending vote message to : 3
+2021-10-17 23:08:41.928304: Received vote message from 3
+2021-10-17 23:08:41.928752: Received vote message from 1
+2021-10-17 23:08:41.929201: Received vote message from 0
+2021-10-17 23:08:41.929675: Committed txn : 1----->1 to ledger
+2021-10-17 23:08:41.932934: Received vote message from 2
+2021-10-17 23:08:42.887774: Received Client Request from 1
+2021-10-17 23:08:42.888444: Sending Proposal message to all replicas containing block ->Block Author :0 Transactions :1----->2
+2021-10-17 23:08:42.889626: Received proposal message from 0 containing block ->Block Author :0 Transactions :1----->2
+2021-10-17 23:08:42.891044: Sending vote message to : 0
+2021-10-17 23:08:42.891430: Received Client Request from 0
+2021-10-17 23:08:42.927433: Received proposal message from 1 containing block ->Block Author :1 Transactions :0----->2
+2021-10-17 23:08:42.927780: Committed txn : 0----->1 to ledger
+2021-10-17 23:08:42.929093: Sending vote message to : 1
+2021-10-17 23:08:43.912358: Received Client Request from 0
+2021-10-17 23:08:43.913538: Received Client Request from 1
+2021-10-17 23:08:43.914116: Received dummy txn Request from Root
+2021-10-17 23:08:43.914334: Sending ack back to Root
+2021-10-17 23:08:43.914771: Received proposal message from 2 containing block ->Block Author :2 Transactions :0----->3
+2021-10-17 23:08:43.915022: Committed txn : 1----->2 to ledger
+2021-10-17 23:08:43.916650: Sending vote message to : 2
+2021-10-17 23:08:43.917983: Received dummy txn Request from Root
+2021-10-17 23:08:43.918242: Sending ack back to Root
+2021-10-17 23:08:43.936341: Received proposal message from 3 containing block ->Block Author :3 Transactions :1----->3
+2021-10-17 23:08:43.936675: Committed txn : 0----->2 to ledger
+2021-10-17 23:08:43.938065: Sending vote message to : 3
+2021-10-17 23:08:43.938526: Received vote message from 3
+2021-10-17 23:08:43.938969: Received vote message from 1
+2021-10-17 23:08:43.939888: Received vote message from 2
+2021-10-17 23:08:43.940403: Committed txn : 0----->3 to ledger
+2021-10-17 23:08:43.940990: Sending Proposal message to all replicas containing block ->Block Author :0 Transactions :2--->dummy_txn0
+2021-10-17 23:08:43.941732: Received vote message from 0
+2021-10-17 23:08:43.942610: Received proposal message from 0 containing block ->Block Author :0 Transactions :2--->dummy_txn0
+2021-10-17 23:08:43.943695: Sending vote message to : 0
+2021-10-17 23:08:43.982479: Received proposal message from 1 containing block ->Block Author :1 Transactions :2--->dummy_txn1
+2021-10-17 23:08:43.982748: Committed txn : 1----->3 to ledger
+2021-10-17 23:08:43.984123: Sending vote message to : 1
+2021-10-17 23:08:44.009867: Received Terminate signal from Root
+2021-10-17 23:08:44.010267: Terminate replica :0
+2021-10-17 23:08:44.010492: Replica 0 is terminated
