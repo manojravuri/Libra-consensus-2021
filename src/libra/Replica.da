@@ -108,6 +108,7 @@ class Replica(process):
 
     #All messages will go through this function. Based on the type, the appropriate functions are called.
     def Main_start_event_processing(message, type):
+        Logger.log("Started event processing for message " + str(message) + " of type " + str(type) ,logfile)
         if (type == 'local_timeout'):
             self.PaceMaker_local_timeout_round()
         if (type == 'proposal_message'):
@@ -123,6 +124,7 @@ class Replica(process):
     # LeaderElection.update leaders(qc)
     # Pacemaker.advance round(qc.vote info.round)
     def Main_process_certificate_qc(qc):
+        Logger.log("Started process certificate qc" ,logfile)
         self.BlockTree_process_qc(qc)
         self.LeaderElection_update_leader(qc)
         self.PaceMaker_advance_round_qc(qc)
@@ -141,6 +143,7 @@ class Replica(process):
     #     if vote msg 6= ⊥ then
     #     send vote msg to LeaderElection.get leader(current round + 1)
     def Main_process_proposal_msg(P):
+        Logger.log("Started event processing for message " + str(message.block.payload), logfile)
         if  P.sender!=curr_pr:
             t = self.MemPool_get_transactions(P.block.payload)
         self.Main_process_certificate_qc(P.block.qc)
@@ -167,6 +170,7 @@ class Replica(process):
         # Pacemaker.advance round(tc)
         # process new round event(tc)
     def Main_process_timeout_message(M):
+        Logger.log("Started processing timeout message." ,logfile)
         self.Main_process_certificate_qc(M.tmo_info.high_qc)
         self.Main_process_certificate_qc(M.high_commit_qc)
         self.PaceMaker_advance_round_tc(M.last_round_tc)
@@ -184,12 +188,14 @@ class Replica(process):
             # Pacemaker.current round )
             # broadcast ProposalMsghb, last tc, Block-Tree.high_commit_qc
     def Main_process_new_round_event(last_tc=None):
+        Logger.log("Started processing new round event ",logfile)
         u = self.LeaderElection_get_leader(self.current_round)
         if self.curr_pr == u:
             b = self.BlockTree_generate_block(u, self.MemPool_get_transactions(), self.current_round)
             p=ProposalMsg(b, last_tc, self.high_commit_qc, u)
             Logger.log("Sending Proposal message to all replicas containing block ->"
         +"Block Author :"+str(inv_map[p.block.author])+" Transactions :"+str(p.block.payload),logfile)
+            Logger.log("Sending new round event ",logfile)
             send(('proposal', p,logical_clock(),replica_id), to=replicas)
 
     # Process VoteMsg object recieved by the Leader. The below code is in correspondence with the commented pesudocode.
@@ -199,6 +205,7 @@ class Replica(process):
         # process certificate qc(qc)
         # process new round event(⊥)
     def Main_process_vote_msg(M):
+        Logger.log("Started processing vote message ",logfile)
         qc = self.BlockTree_process_vote(M)
         if qc:
             self.Main_process_certificate_qc(qc)
@@ -251,7 +258,7 @@ class Replica(process):
     # apply txns speculatively
     # // Make a mapping in speculate to store the block data with block_id as key
     def Ledger_speculate(prev_block_id, block_id, block):
-
+        Logger.log("Adding block with " + str(block_id) + " in ledger pending_map",logfile)
         self.pending_map[block_id] = {
             "prev_block_id": prev_block_id,
             "block": block
@@ -378,6 +385,8 @@ class Replica(process):
         qc_round = block.qc.vote_info.round
         if (self.Safety_valid_signatures(high_commit_qc, last_tc) and self.__Safety_safe_to_vote(block.round, qc_round,
                                                                                                last_tc)):
+
+            Logger.log("Verified Signatures for proposal." ,logfile)
             self.__Safety_update_highest_qc_round(qc_round) # Protect qc round
             self.__Safety_increase_highest_vote_round(block.round) # Don’t vote again in this (or lower) round
             # VoteInfo carries the potential QC info with ids and rounds of the parent QC

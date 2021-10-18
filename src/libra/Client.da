@@ -44,7 +44,9 @@ class Client(process):
         send(('request',cmd,c,client_id,signature),to=reps)
         #re-transmit
         if await(each( id in rep_keys, has=received(('request_ack', id)) ) ): pass
-        elif timeout(replica_timeout): broadcast_request(cmd,reps)
+        elif timeout(replica_timeout):
+            Logger.log("Retransmitting request because we didn't get enough acks for "+str(cmd),logfile)
+            broadcast_request(cmd,reps)
 
     def sign_cmd(cmd):
         if not self.faulty_client:
@@ -87,4 +89,3 @@ class Client(process):
         await(self.terminate)
         Logger.log("Terminating client "+str(client_id),logfile)
         send(('client_done',client_id,logical_clock()),to=parent())
-
