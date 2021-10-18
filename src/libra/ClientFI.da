@@ -1,0 +1,18 @@
+from libra.Client import Client
+
+config(clock='Lamport')
+config(handling='all')
+
+TIMEOUT = 1
+
+class ClientFI(Client):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.terminate=False
+
+    def setup(self, *args):
+        super().setup(*args,duplicate_requests=True,faulty_client=True)
+
+
+

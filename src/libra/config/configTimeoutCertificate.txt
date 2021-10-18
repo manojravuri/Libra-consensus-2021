@@ -8,16 +8,16 @@
 
 
 
-test_case_name = test2
+test_case_name = test4
 
 number_of_procs = 4
-client_reqs = 10
+client_reqs = 4
 number_of_clients = 2
 request_gap = 1
 
 time_out_commit=False
 
-time_out_TC=False
+time_out_TC=True
 
 
 

@@ -17,6 +17,7 @@ import multiprocessing
 from nacl.signing import SigningKey
 from nacl.signing import VerifyKey
 from nacl.encoding import HexEncoder
+from nacl.exceptions import BadSignatureError
 from libra.Logger import Logger
 import heapq
 
@@ -29,7 +30,7 @@ TIMEOUT = 1
 
 
 class Replica(process):
-    def setup(replica_id: int, curr_pr, ps: list,rep_map:dict,cl_map:dict, f: int, replica_public_keys=None,client_public_keys=None,replica_private_key=None):
+    def setup(replica_id: int, curr_pr, ps: list,rep_map:dict,cl_map:dict, f: int, replica_public_keys=None,client_public_keys=None,replica_private_key=None,message_delay=False):
         # ====== attributes of Replica ======
 
         self.replica_id = replica_id
@@ -45,6 +46,7 @@ class Replica(process):
         self.client_map=cl_map
         self.request_map={}
         self.terminate=False
+        self.message_delay=message_delay
         random.seed(6)
         # ====== attributes of Main ======
 
@@ -124,10 +126,6 @@ class Replica(process):
             msg = self.Main_process_vote_msg(message)
         if (type == 'timeout_message'):
             msg = self.Main_process_timeout_message(message)
-            if msg:
-                return msg
-            else:
-                return None, None
 
     def Main_process_certificate_qc(qc):
         self.BlockTree_process_qc(qc)
@@ -173,8 +171,8 @@ class Replica(process):
         self.Main_process_certificate_qc(M.high_commit_qc)
         self.PaceMaker_advance_round_tc(M.last_round_tc)
         tc = self.PaceMaker_process_remote_timeout(M)
-        output("tc",tc)
         if (tc):
+            print("Time out certificate generated")
             self.PaceMaker_advance_round_tc(tc)
             # return self.Main_process_new_round_event(tc), self.LeaderElection_get_leader(self.current_round)
             self.Main_process_new_round_event(tc)
@@ -379,8 +377,8 @@ class Replica(process):
             v_key.verify(message)
         except BadSignatureError:
             return False
-        except:
-            return False
+        # except:
+        #     return False
         #Logger.log("Signature of "+ type+ " verified",logfile)
         return True
 
@@ -408,6 +406,7 @@ class Replica(process):
     def Safety_make_timeout(round, high_qc, last_tc):
         qc_round = high_qc.vote_info.round
         if (self.Safety_valid_signatures(high_qc, last_tc) and self.Safety_safe_to_timeout(round, qc_round, last_tc)):
+            self.Safety_increase_highest_vote_round(round)
             return TimeoutInfo(round, high_qc, self.curr_pr, Signature(self.replica_id, self.private_key.sign(
                 str((round, high_qc.vote_info.round)).encode('utf-8')), 'replica', self.curr_pr))
         return None
@@ -592,13 +591,12 @@ class Replica(process):
 
 
     def receive(msg=('request', cmd, c, p,signature)):
-        if(self.Safety_verify_signature(signature.id, signature.message, signature.type)):
-            #Logger.log("message received " + str(cmd) + " from " + str(p) + " at " + str(replica_id))
-            M = ('request', cmd, c)
-
-            request_map[cmd]=client_map[p]
-            send( ('request_ack',self.replica_id),to=client_map[p])
-            ##Logger.log("sent ack to client",p)
+        #Logger.log("message received " + str(cmd) + " from " + str(p) + " at " + str(replica_id))
+        M = ('request', cmd, c)
+        request_map[cmd]=client_map[p]
+        send( ('request_ack',self.replica_id),to=client_map[p])
+        ##Logger.log("sent ack to client",p)
+        if (self.Safety_verify_signature(signature.id, signature.message, signature.type)):
             self.Main_add_to_Mempool(M)
 
     def receive(msg=('time_out_msg', timeout_msg,c)):
