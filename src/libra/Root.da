@@ -79,21 +79,21 @@ def main():
 
     if(config['time_out_commit']=="True"):
         #logging.log("Running replicas with f timeout replicas",logfile)
-        ps = new(Replica, num=number_of_procs - f)
+        replicas = new(Replica, num=number_of_procs - f)
 
-        ps2 = new(ReplicaFI, num=f)
+        faulty_replicas = new(ReplicaFI, num=f)
 
-        ps.update(ps2)
+        replicas.update(faulty_replicas)
     elif(config['time_out_TC']=="True"):
         #logging.log("Running replicas with f+1 timeout replicas",logfile)
-        ps = new(Replica, num=number_of_procs - f-1)
+        replicas = new(Replica, num=number_of_procs - f-1)
 
-        ps2 = new(ReplicaFI, num=f+1)
+        faulty_replicas = new(ReplicaFI, num=f+1)
 
-        ps.update(ps2)
+        replicas.update(faulty_replicas)
     else:
         #logging.log("Running replicas without faulty replicas",logfile)
-        ps = new(Replica, num=number_of_procs)
+        replicas = new(Replica, num=number_of_procs)
 
     rep_map={}
     cl_map={}
