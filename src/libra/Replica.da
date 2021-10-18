@@ -23,7 +23,7 @@ TIMEOUT = 1
 
 
 class Replica(process):
-    def setup(replica_id: int, curr_pr, ps: list,rep_map:dict,cl_map:dict, f: int, replica_public_keys=None,client_public_keys=None,replica_private_key=None,message_delay=False):
+    def setup(replica_id: int, curr_pr, ps: list,rep_map:dict,cl_map:dict, f: int, replica_public_keys=None,client_public_keys=None,replica_private_key=None,message_delay=False,message_loss=False):
         # ====== attributes of Replica ======
 
         self.replica_id = replica_id
@@ -36,6 +36,7 @@ class Replica(process):
         self.client_map=cl_map
         self.request_map={}
         self.terminate=False
+        self.message_loss=message_loss
         self.message_delay=message_delay
         
         self.attr="Attributes of Replica "+str(replica_id)+":\n"
@@ -156,9 +157,17 @@ class Replica(process):
         self.BlockTree_execute_and_insert(P)
         vote_msg = self.Safety_make_vote(P.block, P.last_round_tc, P.high_commit_qc)
         if (vote_msg is not None):
-                Logger.log("Sending vote message to : "+str(inv_map[leader]),logfile)
-                leader=self.LeaderElection_get_leader(round+1)
-                send( ('vote',vote_msg,logical_clock(),replica_id),to=leader)
+            Logger.log("Sending vote message to : "+str(inv_map[leader]),logfile)
+            leader=self.LeaderElection_get_leader(round+1)
+            if(self.message_loss):
+                Logger.log("Message loss in replica",logfile)
+                #send( ('vote',vote_msg,logical_clock(),replica_id),to=leader)
+            elif(self.message_delay):
+                Logger.log("Message delay in replica",logfile)
+                time.sleep(2)
+                send(('vote', vote_msg, logical_clock(), replica_id), to=leader)
+            else:
+                send(('vote', vote_msg, logical_clock(), replica_id), to=leader)
 
     # The below code will be used to process timeout messages.
     # Procedure process timeout msg(M)

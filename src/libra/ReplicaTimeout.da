@@ -5,7 +5,7 @@ config(handling='all')
 
 TIMEOUT = 1
 
-class ReplicaFI(Replica):
+class ReplicaTimeout(Replica):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -16,12 +16,12 @@ class ReplicaFI(Replica):
 
 
     def run(self):
-        #print("Starting faulty replica,", dir(self))
+        print("Starting faulty replica,", dir(self))
         runDone=False
         while(not runDone and not self.terminate):
             if(await(runDone)):
                 pass
-            elif timeout(5):
+            elif timeout(1):
                 self.PaceMaker_local_timeout_round()
 
         while (not self.terminate):  # keep replica always running

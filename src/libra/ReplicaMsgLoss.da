@@ -1,0 +1,15 @@
+from libra.Replica import Replica
+
+config(clock='Lamport')
+config(handling='all')
+
+TIMEOUT = 1
+
+class ReplicaMsgLoss(Replica):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.terminate=False
+
+    def setup(self, *args, **kwargs):
+        super().setup(*args, **kwargs,message_delay=False,message_loss=True)

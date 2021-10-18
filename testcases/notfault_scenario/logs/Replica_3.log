@@ -1,118 +1,638 @@
-2021-10-17 23:10:50.797931: creating replica 3
-2021-10-17 23:10:50.799242: Replica started 3
-2021-10-17 23:10:55.803317: Received Client Request from 0
-2021-10-17 23:10:55.806970: Received Client Request from 1
-2021-10-17 23:10:55.838924: Received proposal message from 0 containing block ->Block Author :0 Transactions :0----->0
-2021-10-17 23:10:55.839847: Sending vote message to : 0
-2021-10-17 23:10:55.867363: Received proposal message from 1 containing block ->Block Author :1 Transactions :1----->0
-2021-10-17 23:10:55.868006: Sending vote message to : 1
-2021-10-17 23:10:56.827404: Received Client Request from 0
-2021-10-17 23:10:56.828067: Received Client Request from 1
-2021-10-17 23:10:56.828644: Received proposal message from 2 containing block ->Block Author :2 Transactions :0----->1
-2021-10-17 23:10:56.828942: Committed txn : 0----->0 to ledger
-2021-10-17 23:10:56.830404: Sending vote message to : 2
-2021-10-17 23:10:56.830868: Received vote message from 2
-2021-10-17 23:10:56.831340: Received vote message from 1
-2021-10-17 23:10:56.832974: Received vote message from 3
-2021-10-17 23:10:56.833514: Committed txn : 1----->0 to ledger
-2021-10-17 23:10:56.834060: Sending Proposal message to all replicas containing block ->Block Author :3 Transactions :1----->1
-2021-10-17 23:10:56.835160: Received vote message from 0
-2021-10-17 23:10:56.835613: Received proposal message from 3 containing block ->Block Author :3 Transactions :1----->1
-2021-10-17 23:10:56.836625: Sending vote message to : 3
-2021-10-17 23:10:57.823746: Received Client Request from 1
-2021-10-17 23:10:57.824372: Received Client Request from 0
-2021-10-17 23:10:57.825156: Received proposal message from 0 containing block ->Block Author :0 Transactions :1----->2
-2021-10-17 23:10:57.825429: Committed txn : 0----->1 to ledger
-2021-10-17 23:10:57.826753: Sending vote message to : 0
-2021-10-17 23:10:57.857350: Received proposal message from 1 containing block ->Block Author :1 Transactions :0----->2
-2021-10-17 23:10:57.857621: Committed txn : 1----->1 to ledger
-2021-10-17 23:10:57.859082: Sending vote message to : 1
-2021-10-17 23:10:58.841007: Received Client Request from 1
-2021-10-17 23:10:58.844003: Received Client Request from 0
-2021-10-17 23:10:58.844857: Received proposal message from 2 containing block ->Block Author :2 Transactions :1----->3
-2021-10-17 23:10:58.845120: Committed txn : 1----->2 to ledger
-2021-10-17 23:10:58.846589: Sending vote message to : 2
-2021-10-17 23:10:58.847001: Received vote message from 2
-2021-10-17 23:10:58.847435: Received vote message from 1
-2021-10-17 23:10:58.847866: Received vote message from 0
-2021-10-17 23:10:58.848348: Committed txn : 0----->2 to ledger
-2021-10-17 23:10:58.848911: Sending Proposal message to all replicas containing block ->Block Author :3 Transactions :0----->3
-2021-10-17 23:10:58.849999: Received vote message from 3
-2021-10-17 23:10:58.850448: Received proposal message from 3 containing block ->Block Author :3 Transactions :0----->3
-2021-10-17 23:10:58.851450: Sending vote message to : 3
-2021-10-17 23:10:59.845793: Received Client Request from 1
-2021-10-17 23:10:59.846626: Received Client Request from 0
-2021-10-17 23:10:59.847488: Received proposal message from 0 containing block ->Block Author :0 Transactions :1----->4
-2021-10-17 23:10:59.847771: Committed txn : 1----->3 to ledger
-2021-10-17 23:10:59.849119: Sending vote message to : 0
-2021-10-17 23:10:59.849488: Received proposal message from 1 containing block ->Block Author :1 Transactions :0----->4
-2021-10-17 23:10:59.849722: Committed txn : 0----->3 to ledger
-2021-10-17 23:10:59.851034: Sending vote message to : 1
-2021-10-17 23:11:00.836340: Received Client Request from 1
-2021-10-17 23:11:00.837028: Received proposal message from 2 containing block ->Block Author :2 Transactions :1----->5
-2021-10-17 23:11:00.837284: Committed txn : 1----->4 to ledger
-2021-10-17 23:11:00.838657: Sending vote message to : 2
-2021-10-17 23:11:00.839070: Received Client Request from 0
-2021-10-17 23:11:00.840079: Received vote message from 2
-2021-10-17 23:11:00.840514: Received vote message from 3
-2021-10-17 23:11:00.866257: Received vote message from 1
-2021-10-17 23:11:00.866838: Committed txn : 0----->4 to ledger
-2021-10-17 23:11:00.867809: Sending Proposal message to all replicas containing block ->Block Author :3 Transactions :0----->5
-2021-10-17 23:11:00.868565: Received vote message from 0
-2021-10-17 23:11:00.869244: Received proposal message from 3 containing block ->Block Author :3 Transactions :0----->5
-2021-10-17 23:11:00.870281: Sending vote message to : 3
-2021-10-17 23:11:01.858533: Received Client Request from 1
-2021-10-17 23:11:01.859135: Received proposal message from 0 containing block ->Block Author :0 Transactions :1----->6
-2021-10-17 23:11:01.859387: Committed txn : 1----->5 to ledger
-2021-10-17 23:11:01.860663: Sending vote message to : 0
-2021-10-17 23:11:01.861038: Received Client Request from 0
-2021-10-17 23:11:01.871474: Received proposal message from 1 containing block ->Block Author :1 Transactions :0----->6
-2021-10-17 23:11:01.871732: Committed txn : 0----->5 to ledger
-2021-10-17 23:11:01.873514: Sending vote message to : 1
-2021-10-17 23:11:02.859174: Received Client Request from 1
-2021-10-17 23:11:02.860051: Received proposal message from 2 containing block ->Block Author :2 Transactions :1----->7
-2021-10-17 23:11:02.860354: Committed txn : 1----->6 to ledger
-2021-10-17 23:11:02.861754: Sending vote message to : 2
-2021-10-17 23:11:02.862169: Received vote message from 2
-2021-10-17 23:11:02.863219: Received Client Request from 0
-2021-10-17 23:11:02.863776: Received vote message from 1
-2021-10-17 23:11:02.864278: Received vote message from 3
-2021-10-17 23:11:02.864764: Committed txn : 0----->6 to ledger
-2021-10-17 23:11:02.865428: Sending Proposal message to all replicas containing block ->Block Author :3 Transactions :0----->7
-2021-10-17 23:11:02.866294: Received proposal message from 3 containing block ->Block Author :3 Transactions :0----->7
-2021-10-17 23:11:02.867454: Sending vote message to : 3
-2021-10-17 23:11:02.868082: Received vote message from 0
-2021-10-17 23:11:03.856062: Received Client Request from 1
-2021-10-17 23:11:03.857002: Received proposal message from 0 containing block ->Block Author :0 Transactions :1----->8
-2021-10-17 23:11:03.857287: Committed txn : 1----->7 to ledger
-2021-10-17 23:11:03.858671: Sending vote message to : 0
-2021-10-17 23:11:03.859029: Received Client Request from 0
-2021-10-17 23:11:03.879025: Received proposal message from 1 containing block ->Block Author :1 Transactions :0----->8
-2021-10-17 23:11:03.879359: Committed txn : 0----->7 to ledger
-2021-10-17 23:11:03.880703: Sending vote message to : 1
-2021-10-17 23:11:04.853500: Received Client Request from 1
-2021-10-17 23:11:04.856108: Received proposal message from 2 containing block ->Block Author :2 Transactions :1----->9
-2021-10-17 23:11:04.856373: Committed txn : 1----->8 to ledger
-2021-10-17 23:11:04.858328: Sending vote message to : 2
-2021-10-17 23:11:04.858755: Received vote message from 2
-2021-10-17 23:11:04.859215: Received Client Request from 0
-2021-10-17 23:11:04.860225: Received dummy txn Request from Root
-2021-10-17 23:11:04.860450: Sending ack back to Root
-2021-10-17 23:11:04.860839: Received vote message from 3
-2021-10-17 23:11:04.881236: Received vote message from 0
-2021-10-17 23:11:04.881792: Committed txn : 0----->8 to ledger
-2021-10-17 23:11:04.882366: Sending Proposal message to all replicas containing block ->Block Author :3 Transactions :0----->9
-2021-10-17 23:11:04.883929: Received vote message from 1
-2021-10-17 23:11:04.884379: Received dummy txn Request from Root
-2021-10-17 23:11:04.884580: Sending ack back to Root
-2021-10-17 23:11:04.884888: Received proposal message from 3 containing block ->Block Author :3 Transactions :0----->9
-2021-10-17 23:11:04.885901: Sending vote message to : 3
-2021-10-17 23:11:04.914429: Received proposal message from 0 containing block ->Block Author :0 Transactions :2--->dummy_txn0
-2021-10-17 23:11:04.914696: Committed txn : 1----->9 to ledger
-2021-10-17 23:11:04.916561: Sending vote message to : 0
-2021-10-17 23:11:04.934582: Received proposal message from 1 containing block ->Block Author :1 Transactions :2--->dummy_txn1
-2021-10-17 23:11:04.934878: Committed txn : 0----->9 to ledger
-2021-10-17 23:11:04.936251: Sending vote message to : 1
-2021-10-17 23:11:04.962898: Received Terminate signal from Root
-2021-10-17 23:11:04.963259: Terminate replica :3
-2021-10-17 23:11:04.963480: Replica 3 is terminated
+2021-10-18 01:57:54.021729: Creating Replica 3
+2021-10-18 01:57:54.022401: Attributes of Replica 3:
+window_size :1
+delta :2
+exclude_size :1
+commit_state_id :0
+2021-10-18 01:57:54.024617: Replica started 3
+2021-10-18 01:57:55.056135: Received Client Request from 0
+2021-10-18 01:57:55.058510: verified client signature for cmd 0----->0
+2021-10-18 01:57:55.060795: Received Client Request from 1
+2021-10-18 01:57:55.061945: verified client signature for cmd 1----->0
+2021-10-18 01:57:55.062786: Received proposal message from 0 containing block ->Block Author :0 Transactions :0----->0
+2021-10-18 01:57:55.063693: Started event processing for message <libra.Objects.ProposalMsg object at 0x10dffab10> of type proposal_message
+2021-10-18 01:57:55.064379: Started event processing
+2021-10-18 01:57:55.065164: Started process certificate qc
+2021-10-18 01:57:55.066106: Advancing round based on qc
+2021-10-18 01:57:55.066723: Started process certificate qc
+2021-10-18 01:57:55.067237: Advancing round based on qc
+2021-10-18 01:57:55.067718: Advancing round based on tc
+2021-10-18 01:57:55.068214: Executing and Inserting
+2021-10-18 01:57:55.068690: Adding block with 3963674096021229322 in ledger pending_map
+2021-10-18 01:57:55.069167: Started make vote
+2021-10-18 01:57:55.069977: Verified Signatures for proposal.
+2021-10-18 01:57:55.071200: Generated signature to make vote 
+2021-10-18 01:57:55.071977: Finished make vote 
+2021-10-18 01:57:55.072808: Sending vote message to : 0
+2021-10-18 01:57:55.113969: Received proposal message from 1 containing block ->Block Author :1 Transactions :1----->0
+2021-10-18 01:57:55.114813: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0b5890> of type proposal_message
+2021-10-18 01:57:55.115533: Started event processing
+2021-10-18 01:57:55.116288: Started process certificate qc
+2021-10-18 01:57:55.116954: Advancing round based on qc
+2021-10-18 01:57:55.117683: Stopping round in PaceMaker
+2021-10-18 01:57:55.118252: Started round in PaceMaker
+2021-10-18 01:57:55.119881: Started process certificate qc
+2021-10-18 01:57:55.120765: Advancing round based on qc
+2021-10-18 01:57:55.121631: Advancing round based on tc
+2021-10-18 01:57:55.122288: Executing and Inserting
+2021-10-18 01:57:55.122784: Adding block with -3621983742295794180 in ledger pending_map
+2021-10-18 01:57:55.123332: Started make vote
+2021-10-18 01:57:55.123848: Verified Signatures for proposal.
+2021-10-18 01:57:55.124663: Generated signature to make vote 
+2021-10-18 01:57:55.125188: Fetching pending state for block_id -3621983742295794180
+2021-10-18 01:57:55.125668: Finished make vote 
+2021-10-18 01:57:55.126146: Sending vote message to : 1
+2021-10-18 01:57:56.090330: Received Client Request from 0
+2021-10-18 01:57:56.091990: verified client signature for cmd 0----->1
+2021-10-18 01:57:56.094707: Received Client Request from 1
+2021-10-18 01:57:56.096264: verified client signature for cmd 1----->1
+2021-10-18 01:57:56.098007: Received proposal message from 2 containing block ->Block Author :2 Transactions :0----->1
+2021-10-18 01:57:56.099225: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0b5810> of type proposal_message
+2021-10-18 01:57:56.099839: Started event processing
+2021-10-18 01:57:56.100451: Started process certificate qc
+2021-10-18 01:57:56.101204: Committed txn : 0----->0 to ledger
+2021-10-18 01:57:56.101935: Updated commited-blocks cache
+2021-10-18 01:57:56.102423: Pruned pending state tree.
+2021-10-18 01:57:56.102860: Advancing round based on qc
+2021-10-18 01:57:56.103499: Stopping round in PaceMaker
+2021-10-18 01:57:56.104856: Started round in PaceMaker
+2021-10-18 01:57:56.105727: Started process certificate qc
+2021-10-18 01:57:56.106214: Advancing round based on qc
+2021-10-18 01:57:56.106621: Advancing round based on tc
+2021-10-18 01:57:56.106999: Executing and Inserting
+2021-10-18 01:57:56.107397: Adding block with -456351002273104620 in ledger pending_map
+2021-10-18 01:57:56.107790: Started make vote
+2021-10-18 01:57:56.109572: Verified Signatures for proposal.
+2021-10-18 01:57:56.110160: Generated signature to make vote 
+2021-10-18 01:57:56.110859: Fetching pending state for block_id -456351002273104620
+2021-10-18 01:57:56.111310: Finished make vote 
+2021-10-18 01:57:56.111765: Sending vote message to : 2
+2021-10-18 01:57:56.112737: Received vote message from 2
+2021-10-18 01:57:56.113218: Started event processing for message <libra.Objects.VoteMsg object at 0x10dffa990> of type vote_message
+2021-10-18 01:57:56.113725: Started processing vote message 
+2021-10-18 01:57:56.114185: Processing Vote
+2021-10-18 01:57:56.115217: Signature verified to process vote. 
+2021-10-18 01:57:56.117946: Received vote message from 1
+2021-10-18 01:57:56.118434: Started event processing for message <libra.Objects.VoteMsg object at 0x10e09ec10> of type vote_message
+2021-10-18 01:57:56.118893: Started processing vote message 
+2021-10-18 01:57:56.119329: Processing Vote
+2021-10-18 01:57:56.120340: Signature verified to process vote. 
+2021-10-18 01:57:56.120806: Received vote message from 0
+2021-10-18 01:57:56.121244: Started event processing for message <libra.Objects.VoteMsg object at 0x10e0b5a50> of type vote_message
+2021-10-18 01:57:56.121679: Started processing vote message 
+2021-10-18 01:57:56.122112: Processing Vote
+2021-10-18 01:57:56.123095: Signature verified to process vote. 
+2021-10-18 01:57:56.123564: Started process certificate qc
+2021-10-18 01:57:56.124098: Committed txn : 1----->0 to ledger
+2021-10-18 01:57:56.124974: Updated commited-blocks cache
+2021-10-18 01:57:56.125412: Pruned pending state tree.
+2021-10-18 01:57:56.125849: Advancing round based on qc
+2021-10-18 01:57:56.126278: Stopping round in PaceMaker
+2021-10-18 01:57:56.126875: Started round in PaceMaker
+2021-10-18 01:57:56.127847: Started processing new round event 
+2021-10-18 01:57:56.129089: Generating Block
+2021-10-18 01:57:56.129823: Sending Proposal message to all replicas containing block ->Block Author :3 Transactions :1----->1
+2021-10-18 01:57:56.130405: Sending new round event 
+2021-10-18 01:57:56.132155: Received vote message from 3
+2021-10-18 01:57:56.132662: Started event processing for message <libra.Objects.VoteMsg object at 0x10e0b5810> of type vote_message
+2021-10-18 01:57:56.133113: Started processing vote message 
+2021-10-18 01:57:56.133553: Processing Vote
+2021-10-18 01:57:56.134668: Signature verified to process vote. 
+2021-10-18 01:57:56.135687: Received proposal message from 3 containing block ->Block Author :3 Transactions :1----->1
+2021-10-18 01:57:56.136131: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0c3f90> of type proposal_message
+2021-10-18 01:57:56.136562: Started event processing
+2021-10-18 01:57:56.136992: Started process certificate qc
+2021-10-18 01:57:56.137447: Advancing round based on qc
+2021-10-18 01:57:56.137880: Started process certificate qc
+2021-10-18 01:57:56.138323: Advancing round based on qc
+2021-10-18 01:57:56.139136: Advancing round based on tc
+2021-10-18 01:57:56.139767: Executing and Inserting
+2021-10-18 01:57:56.140251: Adding block with 5204980527113006617 in ledger pending_map
+2021-10-18 01:57:56.140749: Started make vote
+2021-10-18 01:57:56.143398: Verified Signatures for proposal.
+2021-10-18 01:57:56.144157: Generated signature to make vote 
+2021-10-18 01:57:56.144649: Fetching pending state for block_id 5204980527113006617
+2021-10-18 01:57:56.145134: Finished make vote 
+2021-10-18 01:57:56.145582: Sending vote message to : 3
+2021-10-18 01:57:57.090191: Received Client Request from 0
+2021-10-18 01:57:57.091959: verified client signature for cmd 0----->2
+2021-10-18 01:57:57.094242: Received Client Request from 1
+2021-10-18 01:57:57.095517: verified client signature for cmd 1----->2
+2021-10-18 01:57:57.096458: Received proposal message from 0 containing block ->Block Author :0 Transactions :0----->2
+2021-10-18 01:57:57.097130: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0c3f50> of type proposal_message
+2021-10-18 01:57:57.097686: Started event processing
+2021-10-18 01:57:57.098177: Started process certificate qc
+2021-10-18 01:57:57.099005: Committed txn : 0----->1 to ledger
+2021-10-18 01:57:57.100276: Updated commited-blocks cache
+2021-10-18 01:57:57.100841: Pruned pending state tree.
+2021-10-18 01:57:57.101470: Advancing round based on qc
+2021-10-18 01:57:57.101986: Stopping round in PaceMaker
+2021-10-18 01:57:57.102601: Started round in PaceMaker
+2021-10-18 01:57:57.103329: Started process certificate qc
+2021-10-18 01:57:57.103929: Advancing round based on qc
+2021-10-18 01:57:57.104422: Advancing round based on tc
+2021-10-18 01:57:57.105213: Executing and Inserting
+2021-10-18 01:57:57.105713: Adding block with -4942612921416018456 in ledger pending_map
+2021-10-18 01:57:57.106191: Started make vote
+2021-10-18 01:57:57.108318: Verified Signatures for proposal.
+2021-10-18 01:57:57.109048: Generated signature to make vote 
+2021-10-18 01:57:57.109539: Fetching pending state for block_id -4942612921416018456
+2021-10-18 01:57:57.110022: Finished make vote 
+2021-10-18 01:57:57.110745: Sending vote message to : 0
+2021-10-18 01:57:57.164806: Received proposal message from 1 containing block ->Block Author :1 Transactions :1----->2
+2021-10-18 01:57:57.165432: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0c94d0> of type proposal_message
+2021-10-18 01:57:57.165904: Started event processing
+2021-10-18 01:57:57.166380: Started process certificate qc
+2021-10-18 01:57:57.167262: Committed txn : 1----->1 to ledger
+2021-10-18 01:57:57.168138: Updated commited-blocks cache
+2021-10-18 01:57:57.168615: Pruned pending state tree.
+2021-10-18 01:57:57.169111: Advancing round based on qc
+2021-10-18 01:57:57.170129: Stopping round in PaceMaker
+2021-10-18 01:57:57.171094: Started round in PaceMaker
+2021-10-18 01:57:57.171877: Started process certificate qc
+2021-10-18 01:57:57.172375: Advancing round based on qc
+2021-10-18 01:57:57.173017: Advancing round based on tc
+2021-10-18 01:57:57.173525: Executing and Inserting
+2021-10-18 01:57:57.174015: Adding block with -7360686149134093358 in ledger pending_map
+2021-10-18 01:57:57.174930: Started make vote
+2021-10-18 01:57:57.177744: Verified Signatures for proposal.
+2021-10-18 01:57:57.178527: Generated signature to make vote 
+2021-10-18 01:57:57.179093: Fetching pending state for block_id -7360686149134093358
+2021-10-18 01:57:57.180012: Finished make vote 
+2021-10-18 01:57:57.180525: Sending vote message to : 1
+2021-10-18 01:57:58.104834: Received Client Request from 1
+2021-10-18 01:57:58.105949: verified client signature for cmd 1----->3
+2021-10-18 01:57:58.109648: Received Client Request from 0
+2021-10-18 01:57:58.111444: verified client signature for cmd 0----->3
+2021-10-18 01:57:58.112393: Received proposal message from 2 containing block ->Block Author :2 Transactions :1----->3
+2021-10-18 01:57:58.112874: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0ccf90> of type proposal_message
+2021-10-18 01:57:58.113347: Started event processing
+2021-10-18 01:57:58.113865: Started process certificate qc
+2021-10-18 01:57:58.115259: Committed txn : 0----->2 to ledger
+2021-10-18 01:57:58.116019: Updated commited-blocks cache
+2021-10-18 01:57:58.116492: Pruned pending state tree.
+2021-10-18 01:57:58.117101: Advancing round based on qc
+2021-10-18 01:57:58.118060: Stopping round in PaceMaker
+2021-10-18 01:57:58.118770: Started round in PaceMaker
+2021-10-18 01:57:58.119732: Started process certificate qc
+2021-10-18 01:57:58.121938: Advancing round based on qc
+2021-10-18 01:57:58.122856: Advancing round based on tc
+2021-10-18 01:57:58.123362: Executing and Inserting
+2021-10-18 01:57:58.123821: Adding block with -5403446749323215814 in ledger pending_map
+2021-10-18 01:57:58.124272: Started make vote
+2021-10-18 01:57:58.126376: Verified Signatures for proposal.
+2021-10-18 01:57:58.127098: Generated signature to make vote 
+2021-10-18 01:57:58.127548: Fetching pending state for block_id -5403446749323215814
+2021-10-18 01:57:58.127999: Finished make vote 
+2021-10-18 01:57:58.128442: Sending vote message to : 2
+2021-10-18 01:57:58.129435: Received vote message from 2
+2021-10-18 01:57:58.129911: Started event processing for message <libra.Objects.VoteMsg object at 0x10e000d10> of type vote_message
+2021-10-18 01:57:58.130575: Started processing vote message 
+2021-10-18 01:57:58.131318: Processing Vote
+2021-10-18 01:57:58.132365: Signature verified to process vote. 
+2021-10-18 01:57:58.134439: Received vote message from 0
+2021-10-18 01:57:58.134913: Started event processing for message <libra.Objects.VoteMsg object at 0x10e0cf610> of type vote_message
+2021-10-18 01:57:58.135361: Started processing vote message 
+2021-10-18 01:57:58.136033: Processing Vote
+2021-10-18 01:57:58.137576: Signature verified to process vote. 
+2021-10-18 01:57:58.138101: Received vote message from 1
+2021-10-18 01:57:58.138712: Started event processing for message <libra.Objects.VoteMsg object at 0x10e0c3850> of type vote_message
+2021-10-18 01:57:58.139936: Started processing vote message 
+2021-10-18 01:57:58.141839: Processing Vote
+2021-10-18 01:57:58.143582: Signature verified to process vote. 
+2021-10-18 01:57:58.144561: Started process certificate qc
+2021-10-18 01:57:58.145170: Committed txn : 1----->2 to ledger
+2021-10-18 01:57:58.146091: Updated commited-blocks cache
+2021-10-18 01:57:58.146571: Pruned pending state tree.
+2021-10-18 01:57:58.147037: Advancing round based on qc
+2021-10-18 01:57:58.147516: Stopping round in PaceMaker
+2021-10-18 01:57:58.147989: Started round in PaceMaker
+2021-10-18 01:57:58.148976: Started processing new round event 
+2021-10-18 01:57:58.149748: Generating Block
+2021-10-18 01:57:58.150753: Sending Proposal message to all replicas containing block ->Block Author :3 Transactions :0----->3
+2021-10-18 01:57:58.151627: Sending new round event 
+2021-10-18 01:57:58.153339: Received vote message from 3
+2021-10-18 01:57:58.153859: Started event processing for message <libra.Objects.VoteMsg object at 0x10e0cfa90> of type vote_message
+2021-10-18 01:57:58.154707: Started processing vote message 
+2021-10-18 01:57:58.155417: Processing Vote
+2021-10-18 01:57:58.156858: Signature verified to process vote. 
+2021-10-18 01:57:58.157966: Received proposal message from 3 containing block ->Block Author :3 Transactions :0----->3
+2021-10-18 01:57:58.158438: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0c9690> of type proposal_message
+2021-10-18 01:57:58.158954: Started event processing
+2021-10-18 01:57:58.159770: Started process certificate qc
+2021-10-18 01:57:58.160737: Advancing round based on qc
+2021-10-18 01:57:58.161483: Started process certificate qc
+2021-10-18 01:57:58.162475: Advancing round based on qc
+2021-10-18 01:57:58.163570: Advancing round based on tc
+2021-10-18 01:57:58.164539: Executing and Inserting
+2021-10-18 01:57:58.165122: Adding block with 6745260476089982594 in ledger pending_map
+2021-10-18 01:57:58.165697: Started make vote
+2021-10-18 01:57:58.168281: Verified Signatures for proposal.
+2021-10-18 01:57:58.169722: Generated signature to make vote 
+2021-10-18 01:57:58.170562: Fetching pending state for block_id 6745260476089982594
+2021-10-18 01:57:58.171073: Finished make vote 
+2021-10-18 01:57:58.171581: Sending vote message to : 3
+2021-10-18 01:57:59.105437: Received Client Request from 1
+2021-10-18 01:57:59.107121: verified client signature for cmd 1----->4
+2021-10-18 01:57:59.110410: Received Client Request from 0
+2021-10-18 01:57:59.111633: verified client signature for cmd 0----->4
+2021-10-18 01:57:59.112591: Received proposal message from 0 containing block ->Block Author :0 Transactions :1----->4
+2021-10-18 01:57:59.113128: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0c9450> of type proposal_message
+2021-10-18 01:57:59.113912: Started event processing
+2021-10-18 01:57:59.114765: Started process certificate qc
+2021-10-18 01:57:59.115394: Committed txn : 1----->3 to ledger
+2021-10-18 01:57:59.117401: Updated commited-blocks cache
+2021-10-18 01:57:59.118280: Pruned pending state tree.
+2021-10-18 01:57:59.119252: Advancing round based on qc
+2021-10-18 01:57:59.119888: Stopping round in PaceMaker
+2021-10-18 01:57:59.120570: Started round in PaceMaker
+2021-10-18 01:57:59.122275: Started process certificate qc
+2021-10-18 01:57:59.123129: Advancing round based on qc
+2021-10-18 01:57:59.123691: Advancing round based on tc
+2021-10-18 01:57:59.124192: Executing and Inserting
+2021-10-18 01:57:59.124991: Adding block with -8911146423065787007 in ledger pending_map
+2021-10-18 01:57:59.125608: Started make vote
+2021-10-18 01:57:59.128078: Verified Signatures for proposal.
+2021-10-18 01:57:59.129338: Generated signature to make vote 
+2021-10-18 01:57:59.130041: Fetching pending state for block_id -8911146423065787007
+2021-10-18 01:57:59.130720: Finished make vote 
+2021-10-18 01:57:59.131239: Sending vote message to : 0
+2021-10-18 01:57:59.199805: Received proposal message from 1 containing block ->Block Author :1 Transactions :0----->4
+2021-10-18 01:57:59.200848: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0cf310> of type proposal_message
+2021-10-18 01:57:59.201502: Started event processing
+2021-10-18 01:57:59.201985: Started process certificate qc
+2021-10-18 01:57:59.202557: Committed txn : 0----->3 to ledger
+2021-10-18 01:57:59.203407: Updated commited-blocks cache
+2021-10-18 01:57:59.203950: Pruned pending state tree.
+2021-10-18 01:57:59.204650: Advancing round based on qc
+2021-10-18 01:57:59.205236: Stopping round in PaceMaker
+2021-10-18 01:57:59.206243: Started round in PaceMaker
+2021-10-18 01:57:59.207060: Started process certificate qc
+2021-10-18 01:57:59.207774: Advancing round based on qc
+2021-10-18 01:57:59.208496: Advancing round based on tc
+2021-10-18 01:57:59.209569: Executing and Inserting
+2021-10-18 01:57:59.210178: Adding block with -5808086342559690356 in ledger pending_map
+2021-10-18 01:57:59.210719: Started make vote
+2021-10-18 01:57:59.212995: Verified Signatures for proposal.
+2021-10-18 01:57:59.213776: Generated signature to make vote 
+2021-10-18 01:57:59.214256: Fetching pending state for block_id -5808086342559690356
+2021-10-18 01:57:59.214745: Finished make vote 
+2021-10-18 01:57:59.215182: Sending vote message to : 1
+2021-10-18 01:58:00.118707: Received Client Request from 0
+2021-10-18 01:58:00.120150: verified client signature for cmd 0----->5
+2021-10-18 01:58:00.121976: Received Client Request from 1
+2021-10-18 01:58:00.123054: verified client signature for cmd 1----->5
+2021-10-18 01:58:00.124023: Received proposal message from 2 containing block ->Block Author :2 Transactions :0----->5
+2021-10-18 01:58:00.124526: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0cf750> of type proposal_message
+2021-10-18 01:58:00.125067: Started event processing
+2021-10-18 01:58:00.126047: Started process certificate qc
+2021-10-18 01:58:00.127477: Committed txn : 1----->4 to ledger
+2021-10-18 01:58:00.128546: Updated commited-blocks cache
+2021-10-18 01:58:00.129257: Pruned pending state tree.
+2021-10-18 01:58:00.129919: Advancing round based on qc
+2021-10-18 01:58:00.130600: Stopping round in PaceMaker
+2021-10-18 01:58:00.131224: Started round in PaceMaker
+2021-10-18 01:58:00.132270: Started process certificate qc
+2021-10-18 01:58:00.132841: Advancing round based on qc
+2021-10-18 01:58:00.133323: Advancing round based on tc
+2021-10-18 01:58:00.133812: Executing and Inserting
+2021-10-18 01:58:00.134307: Adding block with -7198483743964556162 in ledger pending_map
+2021-10-18 01:58:00.134793: Started make vote
+2021-10-18 01:58:00.136900: Verified Signatures for proposal.
+2021-10-18 01:58:00.137702: Generated signature to make vote 
+2021-10-18 01:58:00.138192: Fetching pending state for block_id -7198483743964556162
+2021-10-18 01:58:00.138670: Finished make vote 
+2021-10-18 01:58:00.139420: Sending vote message to : 2
+2021-10-18 01:58:00.142314: Received vote message from 2
+2021-10-18 01:58:00.142822: Started event processing for message <libra.Objects.VoteMsg object at 0x10e0d3850> of type vote_message
+2021-10-18 01:58:00.143253: Started processing vote message 
+2021-10-18 01:58:00.143679: Processing Vote
+2021-10-18 01:58:00.144687: Signature verified to process vote. 
+2021-10-18 01:58:00.145363: Received vote message from 1
+2021-10-18 01:58:00.145902: Started event processing for message <libra.Objects.VoteMsg object at 0x10e0d3b10> of type vote_message
+2021-10-18 01:58:00.146513: Started processing vote message 
+2021-10-18 01:58:00.147243: Processing Vote
+2021-10-18 01:58:00.150031: Signature verified to process vote. 
+2021-10-18 01:58:00.152217: Received vote message from 3
+2021-10-18 01:58:00.152709: Started event processing for message <libra.Objects.VoteMsg object at 0x10e0d3910> of type vote_message
+2021-10-18 01:58:00.153152: Started processing vote message 
+2021-10-18 01:58:00.153728: Processing Vote
+2021-10-18 01:58:00.155152: Signature verified to process vote. 
+2021-10-18 01:58:00.156014: Started process certificate qc
+2021-10-18 01:58:00.156608: Committed txn : 0----->4 to ledger
+2021-10-18 01:58:00.157483: Updated commited-blocks cache
+2021-10-18 01:58:00.157929: Pruned pending state tree.
+2021-10-18 01:58:00.158376: Advancing round based on qc
+2021-10-18 01:58:00.158820: Stopping round in PaceMaker
+2021-10-18 01:58:00.160180: Started round in PaceMaker
+2021-10-18 01:58:00.161150: Started processing new round event 
+2021-10-18 01:58:00.161926: Generating Block
+2021-10-18 01:58:00.162616: Sending Proposal message to all replicas containing block ->Block Author :3 Transactions :1----->5
+2021-10-18 01:58:00.163095: Sending new round event 
+2021-10-18 01:58:00.165673: Received vote message from 0
+2021-10-18 01:58:00.166148: Started event processing for message <libra.Objects.VoteMsg object at 0x10e0c3a90> of type vote_message
+2021-10-18 01:58:00.166622: Started processing vote message 
+2021-10-18 01:58:00.167065: Processing Vote
+2021-10-18 01:58:00.168791: Signature verified to process vote. 
+2021-10-18 01:58:00.169519: Received proposal message from 3 containing block ->Block Author :3 Transactions :1----->5
+2021-10-18 01:58:00.170057: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0d2510> of type proposal_message
+2021-10-18 01:58:00.170516: Started event processing
+2021-10-18 01:58:00.171409: Started process certificate qc
+2021-10-18 01:58:00.172222: Advancing round based on qc
+2021-10-18 01:58:00.172760: Started process certificate qc
+2021-10-18 01:58:00.173244: Advancing round based on qc
+2021-10-18 01:58:00.173696: Advancing round based on tc
+2021-10-18 01:58:00.174747: Executing and Inserting
+2021-10-18 01:58:00.175228: Adding block with 1452669405004699999 in ledger pending_map
+2021-10-18 01:58:00.175703: Started make vote
+2021-10-18 01:58:00.177804: Verified Signatures for proposal.
+2021-10-18 01:58:00.178570: Generated signature to make vote 
+2021-10-18 01:58:00.179440: Fetching pending state for block_id 1452669405004699999
+2021-10-18 01:58:00.180160: Finished make vote 
+2021-10-18 01:58:00.181298: Sending vote message to : 3
+2021-10-18 01:58:01.136821: Received Client Request from 0
+2021-10-18 01:58:01.138321: verified client signature for cmd 0----->6
+2021-10-18 01:58:01.139921: Received Client Request from 1
+2021-10-18 01:58:01.140973: verified client signature for cmd 1----->6
+2021-10-18 01:58:01.141784: Received proposal message from 0 containing block ->Block Author :0 Transactions :0----->6
+2021-10-18 01:58:01.142289: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e17ed10> of type proposal_message
+2021-10-18 01:58:01.142787: Started event processing
+2021-10-18 01:58:01.143521: Started process certificate qc
+2021-10-18 01:58:01.144310: Committed txn : 0----->5 to ledger
+2021-10-18 01:58:01.145522: Updated commited-blocks cache
+2021-10-18 01:58:01.146063: Pruned pending state tree.
+2021-10-18 01:58:01.146661: Advancing round based on qc
+2021-10-18 01:58:01.147214: Stopping round in PaceMaker
+2021-10-18 01:58:01.147935: Started round in PaceMaker
+2021-10-18 01:58:01.149115: Started process certificate qc
+2021-10-18 01:58:01.149680: Advancing round based on qc
+2021-10-18 01:58:01.150374: Advancing round based on tc
+2021-10-18 01:58:01.150925: Executing and Inserting
+2021-10-18 01:58:01.151417: Adding block with 4349688984815994089 in ledger pending_map
+2021-10-18 01:58:01.151961: Started make vote
+2021-10-18 01:58:01.154046: Verified Signatures for proposal.
+2021-10-18 01:58:01.154763: Generated signature to make vote 
+2021-10-18 01:58:01.155277: Fetching pending state for block_id 4349688984815994089
+2021-10-18 01:58:01.155739: Finished make vote 
+2021-10-18 01:58:01.156321: Sending vote message to : 0
+2021-10-18 01:58:01.196256: Received proposal message from 1 containing block ->Block Author :1 Transactions :1----->6
+2021-10-18 01:58:01.196761: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e17e7d0> of type proposal_message
+2021-10-18 01:58:01.197324: Started event processing
+2021-10-18 01:58:01.198128: Started process certificate qc
+2021-10-18 01:58:01.198762: Committed txn : 1----->5 to ledger
+2021-10-18 01:58:01.199596: Updated commited-blocks cache
+2021-10-18 01:58:01.200085: Pruned pending state tree.
+2021-10-18 01:58:01.200565: Advancing round based on qc
+2021-10-18 01:58:01.201047: Stopping round in PaceMaker
+2021-10-18 01:58:01.201666: Started round in PaceMaker
+2021-10-18 01:58:01.202956: Started process certificate qc
+2021-10-18 01:58:01.203486: Advancing round based on qc
+2021-10-18 01:58:01.203945: Advancing round based on tc
+2021-10-18 01:58:01.204591: Executing and Inserting
+2021-10-18 01:58:01.205061: Adding block with -4141147217158065209 in ledger pending_map
+2021-10-18 01:58:01.205577: Started make vote
+2021-10-18 01:58:01.207878: Verified Signatures for proposal.
+2021-10-18 01:58:01.209089: Generated signature to make vote 
+2021-10-18 01:58:01.210525: Fetching pending state for block_id -4141147217158065209
+2021-10-18 01:58:01.211058: Finished make vote 
+2021-10-18 01:58:01.211960: Sending vote message to : 1
+2021-10-18 01:58:02.139992: Received Client Request from 1
+2021-10-18 01:58:02.141125: verified client signature for cmd 1----->7
+2021-10-18 01:58:02.143254: Received Client Request from 0
+2021-10-18 01:58:02.144631: verified client signature for cmd 0----->7
+2021-10-18 01:58:02.146144: Received proposal message from 2 containing block ->Block Author :2 Transactions :1----->7
+2021-10-18 01:58:02.146671: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e17e490> of type proposal_message
+2021-10-18 01:58:02.147699: Started event processing
+2021-10-18 01:58:02.148217: Started process certificate qc
+2021-10-18 01:58:02.148949: Committed txn : 0----->6 to ledger
+2021-10-18 01:58:02.149801: Updated commited-blocks cache
+2021-10-18 01:58:02.150278: Pruned pending state tree.
+2021-10-18 01:58:02.150759: Advancing round based on qc
+2021-10-18 01:58:02.151384: Stopping round in PaceMaker
+2021-10-18 01:58:02.152065: Started round in PaceMaker
+2021-10-18 01:58:02.153622: Started process certificate qc
+2021-10-18 01:58:02.154676: Advancing round based on qc
+2021-10-18 01:58:02.155307: Advancing round based on tc
+2021-10-18 01:58:02.155767: Executing and Inserting
+2021-10-18 01:58:02.156227: Adding block with 5603357240522462409 in ledger pending_map
+2021-10-18 01:58:02.156727: Started make vote
+2021-10-18 01:58:02.159437: Verified Signatures for proposal.
+2021-10-18 01:58:02.160252: Generated signature to make vote 
+2021-10-18 01:58:02.160724: Fetching pending state for block_id 5603357240522462409
+2021-10-18 01:58:02.161195: Finished make vote 
+2021-10-18 01:58:02.161680: Sending vote message to : 2
+2021-10-18 01:58:02.164401: Received vote message from 2
+2021-10-18 01:58:02.165836: Started event processing for message <libra.Objects.VoteMsg object at 0x10e17eb10> of type vote_message
+2021-10-18 01:58:02.166864: Started processing vote message 
+2021-10-18 01:58:02.168038: Processing Vote
+2021-10-18 01:58:02.170052: Signature verified to process vote. 
+2021-10-18 01:58:02.170730: Received vote message from 0
+2021-10-18 01:58:02.171490: Started event processing for message <libra.Objects.VoteMsg object at 0x10e180d10> of type vote_message
+2021-10-18 01:58:02.172410: Started processing vote message 
+2021-10-18 01:58:02.173179: Processing Vote
+2021-10-18 01:58:02.174464: Signature verified to process vote. 
+2021-10-18 01:58:02.175260: Received vote message from 3
+2021-10-18 01:58:02.175778: Started event processing for message <libra.Objects.VoteMsg object at 0x10e180b50> of type vote_message
+2021-10-18 01:58:02.176356: Started processing vote message 
+2021-10-18 01:58:02.177156: Processing Vote
+2021-10-18 01:58:02.178654: Signature verified to process vote. 
+2021-10-18 01:58:02.179496: Started process certificate qc
+2021-10-18 01:58:02.180317: Committed txn : 1----->6 to ledger
+2021-10-18 01:58:02.181264: Updated commited-blocks cache
+2021-10-18 01:58:02.181756: Pruned pending state tree.
+2021-10-18 01:58:02.182245: Advancing round based on qc
+2021-10-18 01:58:02.182719: Stopping round in PaceMaker
+2021-10-18 01:58:02.183238: Started round in PaceMaker
+2021-10-18 01:58:02.184144: Started processing new round event 
+2021-10-18 01:58:02.184928: Generating Block
+2021-10-18 01:58:02.185778: Sending Proposal message to all replicas containing block ->Block Author :3 Transactions :0----->7
+2021-10-18 01:58:02.186403: Sending new round event 
+2021-10-18 01:58:02.190831: Received vote message from 1
+2021-10-18 01:58:02.191630: Started event processing for message <libra.Objects.VoteMsg object at 0x10e0d2d90> of type vote_message
+2021-10-18 01:58:02.192359: Started processing vote message 
+2021-10-18 01:58:02.193092: Processing Vote
+2021-10-18 01:58:02.195073: Signature verified to process vote. 
+2021-10-18 01:58:02.195629: Received proposal message from 3 containing block ->Block Author :3 Transactions :0----->7
+2021-10-18 01:58:02.196151: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0d2550> of type proposal_message
+2021-10-18 01:58:02.196808: Started event processing
+2021-10-18 01:58:02.197560: Started process certificate qc
+2021-10-18 01:58:02.198263: Advancing round based on qc
+2021-10-18 01:58:02.201221: Started process certificate qc
+2021-10-18 01:58:02.201744: Advancing round based on qc
+2021-10-18 01:58:02.202233: Advancing round based on tc
+2021-10-18 01:58:02.202732: Executing and Inserting
+2021-10-18 01:58:02.203204: Adding block with -5036322103248239416 in ledger pending_map
+2021-10-18 01:58:02.203722: Started make vote
+2021-10-18 01:58:02.205838: Verified Signatures for proposal.
+2021-10-18 01:58:02.206851: Generated signature to make vote 
+2021-10-18 01:58:02.207629: Fetching pending state for block_id -5036322103248239416
+2021-10-18 01:58:02.208276: Finished make vote 
+2021-10-18 01:58:02.208936: Sending vote message to : 3
+2021-10-18 01:58:03.150375: Received Client Request from 1
+2021-10-18 01:58:03.151599: verified client signature for cmd 1----->8
+2021-10-18 01:58:03.154184: Received Client Request from 0
+2021-10-18 01:58:03.155250: verified client signature for cmd 0----->8
+2021-10-18 01:58:03.156159: Received proposal message from 0 containing block ->Block Author :0 Transactions :1----->8
+2021-10-18 01:58:03.156728: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e0c9e10> of type proposal_message
+2021-10-18 01:58:03.157279: Started event processing
+2021-10-18 01:58:03.157774: Started process certificate qc
+2021-10-18 01:58:03.158552: Committed txn : 1----->7 to ledger
+2021-10-18 01:58:03.159799: Updated commited-blocks cache
+2021-10-18 01:58:03.160318: Pruned pending state tree.
+2021-10-18 01:58:03.160793: Advancing round based on qc
+2021-10-18 01:58:03.161262: Stopping round in PaceMaker
+2021-10-18 01:58:03.161890: Started round in PaceMaker
+2021-10-18 01:58:03.162765: Started process certificate qc
+2021-10-18 01:58:03.163442: Advancing round based on qc
+2021-10-18 01:58:03.163939: Advancing round based on tc
+2021-10-18 01:58:03.164556: Executing and Inserting
+2021-10-18 01:58:03.165102: Adding block with -5296923568753070321 in ledger pending_map
+2021-10-18 01:58:03.165613: Started make vote
+2021-10-18 01:58:03.167782: Verified Signatures for proposal.
+2021-10-18 01:58:03.168879: Generated signature to make vote 
+2021-10-18 01:58:03.169885: Fetching pending state for block_id -5296923568753070321
+2021-10-18 01:58:03.170841: Finished make vote 
+2021-10-18 01:58:03.171644: Sending vote message to : 0
+2021-10-18 01:58:03.223373: Received proposal message from 1 containing block ->Block Author :1 Transactions :0----->8
+2021-10-18 01:58:03.224407: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e185bd0> of type proposal_message
+2021-10-18 01:58:03.224896: Started event processing
+2021-10-18 01:58:03.225419: Started process certificate qc
+2021-10-18 01:58:03.226492: Committed txn : 0----->7 to ledger
+2021-10-18 01:58:03.227452: Updated commited-blocks cache
+2021-10-18 01:58:03.228146: Pruned pending state tree.
+2021-10-18 01:58:03.228632: Advancing round based on qc
+2021-10-18 01:58:03.229161: Stopping round in PaceMaker
+2021-10-18 01:58:03.230094: Started round in PaceMaker
+2021-10-18 01:58:03.231311: Started process certificate qc
+2021-10-18 01:58:03.231876: Advancing round based on qc
+2021-10-18 01:58:03.232354: Advancing round based on tc
+2021-10-18 01:58:03.232797: Executing and Inserting
+2021-10-18 01:58:03.233258: Adding block with 6888976888872913690 in ledger pending_map
+2021-10-18 01:58:03.233784: Started make vote
+2021-10-18 01:58:03.235928: Verified Signatures for proposal.
+2021-10-18 01:58:03.236792: Generated signature to make vote 
+2021-10-18 01:58:03.237551: Fetching pending state for block_id 6888976888872913690
+2021-10-18 01:58:03.238124: Finished make vote 
+2021-10-18 01:58:03.238850: Sending vote message to : 1
+2021-10-18 01:58:04.158136: Received Client Request from 0
+2021-10-18 01:58:04.159545: verified client signature for cmd 0----->9
+2021-10-18 01:58:04.161634: Received Client Request from 1
+2021-10-18 01:58:04.162730: verified client signature for cmd 1----->9
+2021-10-18 01:58:04.164048: Received proposal message from 2 containing block ->Block Author :2 Transactions :0----->9
+2021-10-18 01:58:04.164831: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e182650> of type proposal_message
+2021-10-18 01:58:04.171220: Started event processing
+2021-10-18 01:58:04.171785: Started process certificate qc
+2021-10-18 01:58:04.172453: Committed txn : 1----->8 to ledger
+2021-10-18 01:58:04.173941: Updated commited-blocks cache
+2021-10-18 01:58:04.174908: Pruned pending state tree.
+2021-10-18 01:58:04.175887: Advancing round based on qc
+2021-10-18 01:58:04.176835: Stopping round in PaceMaker
+2021-10-18 01:58:04.177473: Started round in PaceMaker
+2021-10-18 01:58:04.178637: Started process certificate qc
+2021-10-18 01:58:04.179578: Advancing round based on qc
+2021-10-18 01:58:04.180316: Advancing round based on tc
+2021-10-18 01:58:04.180779: Executing and Inserting
+2021-10-18 01:58:04.181225: Adding block with 8680743808671348364 in ledger pending_map
+2021-10-18 01:58:04.181681: Started make vote
+2021-10-18 01:58:04.183882: Verified Signatures for proposal.
+2021-10-18 01:58:04.184598: Generated signature to make vote 
+2021-10-18 01:58:04.185309: Fetching pending state for block_id 8680743808671348364
+2021-10-18 01:58:04.186059: Finished make vote 
+2021-10-18 01:58:04.187052: Sending vote message to : 2
+2021-10-18 01:58:04.189219: Received dummy txn Request from Root
+2021-10-18 01:58:04.189946: Sending ack back to Root
+2021-10-18 01:58:04.193259: Received vote message from 2
+2021-10-18 01:58:04.194055: Started event processing for message <libra.Objects.VoteMsg object at 0x10e180d10> of type vote_message
+2021-10-18 01:58:04.194526: Started processing vote message 
+2021-10-18 01:58:04.195066: Processing Vote
+2021-10-18 01:58:04.196340: Signature verified to process vote. 
+2021-10-18 01:58:04.196886: Received vote message from 1
+2021-10-18 01:58:04.197426: Started event processing for message <libra.Objects.VoteMsg object at 0x10e185f90> of type vote_message
+2021-10-18 01:58:04.198010: Started processing vote message 
+2021-10-18 01:58:04.198469: Processing Vote
+2021-10-18 01:58:04.199502: Signature verified to process vote. 
+2021-10-18 01:58:04.199994: Received vote message from 0
+2021-10-18 01:58:04.200434: Started event processing for message <libra.Objects.VoteMsg object at 0x10e182050> of type vote_message
+2021-10-18 01:58:04.201035: Started processing vote message 
+2021-10-18 01:58:04.201813: Processing Vote
+2021-10-18 01:58:04.203090: Signature verified to process vote. 
+2021-10-18 01:58:04.203738: Started process certificate qc
+2021-10-18 01:58:04.204365: Committed txn : 0----->8 to ledger
+2021-10-18 01:58:04.205201: Updated commited-blocks cache
+2021-10-18 01:58:04.205740: Pruned pending state tree.
+2021-10-18 01:58:04.206311: Advancing round based on qc
+2021-10-18 01:58:04.206823: Stopping round in PaceMaker
+2021-10-18 01:58:04.207428: Started round in PaceMaker
+2021-10-18 01:58:04.208401: Started processing new round event 
+2021-10-18 01:58:04.209181: Generating Block
+2021-10-18 01:58:04.209934: Sending Proposal message to all replicas containing block ->Block Author :3 Transactions :1----->9
+2021-10-18 01:58:04.210448: Sending new round event 
+2021-10-18 01:58:04.213101: Received vote message from 3
+2021-10-18 01:58:04.213927: Started event processing for message <libra.Objects.VoteMsg object at 0x10e1855d0> of type vote_message
+2021-10-18 01:58:04.214424: Started processing vote message 
+2021-10-18 01:58:04.214891: Processing Vote
+2021-10-18 01:58:04.215958: Signature verified to process vote. 
+2021-10-18 01:58:04.217254: Received dummy txn Request from Root
+2021-10-18 01:58:04.217804: Sending ack back to Root
+2021-10-18 01:58:04.218758: Received proposal message from 3 containing block ->Block Author :3 Transactions :1----->9
+2021-10-18 01:58:04.219426: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e180d50> of type proposal_message
+2021-10-18 01:58:04.220074: Started event processing
+2021-10-18 01:58:04.221016: Started process certificate qc
+2021-10-18 01:58:04.221840: Advancing round based on qc
+2021-10-18 01:58:04.222384: Started process certificate qc
+2021-10-18 01:58:04.222910: Advancing round based on qc
+2021-10-18 01:58:04.224173: Advancing round based on tc
+2021-10-18 01:58:04.224721: Executing and Inserting
+2021-10-18 01:58:04.225200: Adding block with 6126200345779313396 in ledger pending_map
+2021-10-18 01:58:04.225671: Started make vote
+2021-10-18 01:58:04.228069: Verified Signatures for proposal.
+2021-10-18 01:58:04.228814: Generated signature to make vote 
+2021-10-18 01:58:04.229387: Fetching pending state for block_id 6126200345779313396
+2021-10-18 01:58:04.230066: Finished make vote 
+2021-10-18 01:58:04.230589: Sending vote message to : 3
+2021-10-18 01:58:04.268650: Received proposal message from 0 containing block ->Block Author :0 Transactions :2--->dummy_txn0
+2021-10-18 01:58:04.269177: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e18c910> of type proposal_message
+2021-10-18 01:58:04.269667: Started event processing
+2021-10-18 01:58:04.270141: Started process certificate qc
+2021-10-18 01:58:04.270680: Committed txn : 0----->9 to ledger
+2021-10-18 01:58:04.271439: Updated commited-blocks cache
+2021-10-18 01:58:04.271883: Pruned pending state tree.
+2021-10-18 01:58:04.272386: Advancing round based on qc
+2021-10-18 01:58:04.272859: Stopping round in PaceMaker
+2021-10-18 01:58:04.273361: Started round in PaceMaker
+2021-10-18 01:58:04.274282: Started process certificate qc
+2021-10-18 01:58:04.275034: Advancing round based on qc
+2021-10-18 01:58:04.275528: Advancing round based on tc
+2021-10-18 01:58:04.275984: Executing and Inserting
+2021-10-18 01:58:04.276431: Adding block with 1556802315206516747 in ledger pending_map
+2021-10-18 01:58:04.276880: Started make vote
+2021-10-18 01:58:04.279012: Verified Signatures for proposal.
+2021-10-18 01:58:04.279804: Generated signature to make vote 
+2021-10-18 01:58:04.280318: Fetching pending state for block_id 1556802315206516747
+2021-10-18 01:58:04.280776: Finished make vote 
+2021-10-18 01:58:04.281260: Sending vote message to : 0
+2021-10-18 01:58:04.343233: Received proposal message from 1 containing block ->Block Author :1 Transactions :2--->dummy_txn1
+2021-10-18 01:58:04.344226: Started event processing for message <libra.Objects.ProposalMsg object at 0x10e18cbd0> of type proposal_message
+2021-10-18 01:58:04.344851: Started event processing
+2021-10-18 01:58:04.345380: Started process certificate qc
+2021-10-18 01:58:04.346188: Committed txn : 1----->9 to ledger
+2021-10-18 01:58:04.347149: Updated commited-blocks cache
+2021-10-18 01:58:04.347742: Pruned pending state tree.
+2021-10-18 01:58:04.349189: Advancing round based on qc
+2021-10-18 01:58:04.350032: Stopping round in PaceMaker
+2021-10-18 01:58:04.351123: Started round in PaceMaker
+2021-10-18 01:58:04.352959: Started process certificate qc
+2021-10-18 01:58:04.354132: Advancing round based on qc
+2021-10-18 01:58:04.355837: Advancing round based on tc
+2021-10-18 01:58:04.357004: Executing and Inserting
+2021-10-18 01:58:04.357886: Adding block with 1845622368850126624 in ledger pending_map
+2021-10-18 01:58:04.358551: Started make vote
+2021-10-18 01:58:04.361341: Verified Signatures for proposal.
+2021-10-18 01:58:04.362129: Generated signature to make vote 
+2021-10-18 01:58:04.362631: Fetching pending state for block_id 1845622368850126624
+2021-10-18 01:58:04.363363: Finished make vote 
+2021-10-18 01:58:04.364192: Sending vote message to : 1
+2021-10-18 01:58:04.366131: Received Terminate signal from Root
+2021-10-18 01:58:04.367090: Terminate replica :3
+2021-10-18 01:58:04.367581: Stopping round in PaceMaker
+2021-10-18 01:58:04.368156: Replica 3 is terminated

@@ -1,5 +1,7 @@
 from libra.Replica import Replica
-from libra.ReplicaFI import ReplicaFI
+from libra.ReplicaTimeout import ReplicaTimeout
+from libra.ReplicaMsgLoss import ReplicaMsgLoss
+from libra.ReplicaMsgDelay import ReplicaMsgDelay
 from libra.Client import Client
 from libra.ClientFI import ClientFI
 
@@ -78,21 +80,35 @@ def main():
 
 
     if(config['time_out_commit']=="True"):
-        #logging.log("Running replicas with f timeout replicas",logfile)
+        Logger.log("Running replicas with f timeout replicas",logfile)
         replicas = new(Replica, num=number_of_procs - f)
 
-        faulty_replicas = new(ReplicaFI, num=f)
+        faulty_replicas = new(ReplicaTimeout, num=f)
 
         replicas.update(faulty_replicas)
     elif(config['time_out_TC']=="True"):
-        #logging.log("Running replicas with f+1 timeout replicas",logfile)
+        Logger.log("Running replicas with f+1 timeout replicas",logfile)
         replicas = new(Replica, num=number_of_procs - f-1)
 
-        faulty_replicas = new(ReplicaFI, num=f+1)
+        faulty_replicas = new(ReplicaTimeout, num=f+1)
+
+        replicas.update(faulty_replicas)
+    elif ('message_loss' in config and config['message_loss'] == "True"):
+        Logger.log("Running replicas with f message loss replicas", logfile)
+        replicas = new(Replica, num=number_of_procs - f)
+
+        faulty_replicas = new(ReplicaMsgLoss, num=f)
+
+        replicas.update(faulty_replicas)
+    elif ('message_delay' in config and config['message_delay'] == "True"):
+        Logger.log("Running replicas with f message delay replicas", logfile)
+        replicas = new(Replica, num=number_of_procs - f)
+
+        faulty_replicas = new(ReplicaMsgDelay, num=f)
 
         replicas.update(faulty_replicas)
     else:
-        #logging.log("Running replicas without faulty replicas",logfile)
+        Logger.log("Running replicas without faulty replicas",logfile)
         replicas = new(Replica, num=number_of_procs)
 
     rep_map={}
